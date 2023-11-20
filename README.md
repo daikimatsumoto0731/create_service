@@ -32,3 +32,12 @@
 * アドバイス機能
 * スケジュールの自動調整機能(雨が予測されている日だけ水やりをスキップできる)
 * OpenWeatherMap APIを使用予定
+
+## 考えている使う技術
+* Ruby(最新ver使用)
+* Rails(v7系で実装)
+* Deviseなどの認証 gem を使用
+* LINEのAPIを使用
+* JavaScript
+* Chat GPT API
+* Python
