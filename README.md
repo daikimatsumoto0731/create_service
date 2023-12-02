@@ -43,5 +43,5 @@
 * Python
 
 
-### 画面遷移図
+## 画面遷移図
 https://www.figma.com/file/woDOrmHhrxtdRX12DIeaUk/runteq?type=design&node-id=11%3A2&mode=design&t=Gz7Qx3PhRUqhrevu-1
