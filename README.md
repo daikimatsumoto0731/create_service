@@ -43,4 +43,4 @@
 
 
 ## 画面遷移図
-https://www.figma.com/file/woDOrmHhrxtdRX12DIeaUk/runteq?type=design&node-id=11%3A2&mode=design&t=Gz7Qx3PhRUqhrevu-1
+https://www.figma.com/file/woDOrmHhrxtdRX12DIeaUk/runteq?type=design&node-id=11-2&mode=design&t=RIakFql3zCVVbvcY-0
