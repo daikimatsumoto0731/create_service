@@ -45,6 +45,3 @@
 
 ### 画面遷移図
 https://www.figma.com/file/woDOrmHhrxtdRX12DIeaUk/runteq?type=design&node-id=11%3A2&mode=design&t=Gz7Qx3PhRUqhrevu-1
-
-### ER図
-https://app.diagrams.net/#G1mNkToPK4zo5tOyz9ez82GEXSROGErfln

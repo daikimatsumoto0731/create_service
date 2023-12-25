@@ -1,0 +1,15 @@
+current directory: /Users/matsumotodaiki/vegetable_service/vendor/bundle/ruby/3.1.0/gems/racc-1.7.3/ext/racc/cparse
+/Users/matsumotodaiki/.rbenv/versions/3.1.4/bin/ruby -I /Users/matsumotodaiki/.rbenv/versions/3.1.4/lib/ruby/3.1.0 extconf.rb
+creating Makefile
+
+current directory: /Users/matsumotodaiki/vegetable_service/vendor/bundle/ruby/3.1.0/gems/racc-1.7.3/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20231225-91929-dybug8 sitelibdir\=./.gem.20231225-91929-dybug8 clean
+
+current directory: /Users/matsumotodaiki/vegetable_service/vendor/bundle/ruby/3.1.0/gems/racc-1.7.3/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20231225-91929-dybug8 sitelibdir\=./.gem.20231225-91929-dybug8
+compiling cparse.c
+linking shared-object racc/cparse.bundle
+
+current directory: /Users/matsumotodaiki/vegetable_service/vendor/bundle/ruby/3.1.0/gems/racc-1.7.3/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20231225-91929-dybug8 sitelibdir\=./.gem.20231225-91929-dybug8 install
+/usr/bin/install -c -m 0755 cparse.bundle ./.gem.20231225-91929-dybug8/racc
