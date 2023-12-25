@@ -24,13 +24,12 @@
 * 会員登録
 * ログイン
 * スケジュール管理
-* 通知機能(LINE)
+* 水やり通知機能(LINE)
 * 買った野菜と育てた野菜を比較できる機能
 
 ### その後の機能(現段階で考えている)
-* 天気情報を連携できる機能
+* 天気情報を表示
 * アドバイス機能
-* スケジュールの自動調整機能(雨が予測されている日だけ水やりをスキップできる)
 * OpenWeatherMap APIを使用予定
 
 ## 考えている使う技術
@@ -43,5 +42,5 @@
 * Python
 
 
-### 画面遷移図
-https://www.figma.com/file/woDOrmHhrxtdRX12DIeaUk/runteq?type=design&node-id=11%3A2&mode=design&t=Gz7Qx3PhRUqhrevu-1
+## 画面遷移図
+https://www.figma.com/file/woDOrmHhrxtdRX12DIeaUk/runteq?type=design&node-id=11-2&mode=design&t=dmm76l53LGGcNAv3-0
