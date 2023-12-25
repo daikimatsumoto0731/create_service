@@ -1,0 +1,15 @@
+current directory: /Users/matsumotodaiki/vegetable_service/vendor/bundle/ruby/3.1.0/gems/bindex-0.8.1/ext/skiptrace
+/Users/matsumotodaiki/.rbenv/versions/3.1.4/bin/ruby -I /Users/matsumotodaiki/.rbenv/versions/3.1.4/lib/ruby/3.1.0 extconf.rb
+creating Makefile
+
+current directory: /Users/matsumotodaiki/vegetable_service/vendor/bundle/ruby/3.1.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= sitearchdir\=./.gem.20231225-91929-1pudiy sitelibdir\=./.gem.20231225-91929-1pudiy clean
+
+current directory: /Users/matsumotodaiki/vegetable_service/vendor/bundle/ruby/3.1.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= sitearchdir\=./.gem.20231225-91929-1pudiy sitelibdir\=./.gem.20231225-91929-1pudiy
+compiling cruby.c
+linking shared-object skiptrace/internal/cruby.bundle
+
+current directory: /Users/matsumotodaiki/vegetable_service/vendor/bundle/ruby/3.1.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= sitearchdir\=./.gem.20231225-91929-1pudiy sitelibdir\=./.gem.20231225-91929-1pudiy install
+/usr/bin/install -c -m 0755 cruby.bundle ./.gem.20231225-91929-1pudiy/skiptrace/internal

@@ -1,0 +1,19 @@
+current directory: /Users/matsumotodaiki/vegetable_service/vendor/bundle/ruby/3.1.0/gems/bootsnap-1.17.0/ext/bootsnap
+/Users/matsumotodaiki/.rbenv/versions/3.1.4/bin/ruby -I /Users/matsumotodaiki/.rbenv/versions/3.1.4/lib/ruby/3.1.0 extconf.rb
+creating Makefile
+
+current directory: /Users/matsumotodaiki/vegetable_service/vendor/bundle/ruby/3.1.0/gems/bootsnap-1.17.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20231225-91929-iki87a sitelibdir\=./.gem.20231225-91929-iki87a clean
+
+current directory: /Users/matsumotodaiki/vegetable_service/vendor/bundle/ruby/3.1.0/gems/bootsnap-1.17.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20231225-91929-iki87a sitelibdir\=./.gem.20231225-91929-iki87a
+compiling bootsnap.c
+bootsnap.c:822:10: warning: unused variable 'contents' [-Wunused-variable]
+  char * contents = NULL;
+         ^
+1 warning generated.
+linking shared-object bootsnap/bootsnap.bundle
+
+current directory: /Users/matsumotodaiki/vegetable_service/vendor/bundle/ruby/3.1.0/gems/bootsnap-1.17.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20231225-91929-iki87a sitelibdir\=./.gem.20231225-91929-iki87a install
+/usr/bin/install -c -m 0755 bootsnap.bundle ./.gem.20231225-91929-iki87a/bootsnap
