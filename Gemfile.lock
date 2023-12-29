@@ -99,6 +99,8 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.12.0)
+      devise (>= 4.9.0)
     erubi (1.12.0)
     execjs (2.9.1)
     ffi (1.16.3)
@@ -253,6 +255,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   coffee-rails (~> 4.2)
   devise (~> 4.8)
+  devise-i18n
   jbuilder (~> 2.5)
   listen (~> 3.5)
   puma (~> 5.0)
