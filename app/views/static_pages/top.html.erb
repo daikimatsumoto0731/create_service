@@ -3,8 +3,8 @@
     <div class="logo-circle"></div>
     <div class="service-name">無NO薬〜野菜栽培〜</div>
     <div class="auth-buttons">
-      <button class="signup-button">会員登録</button>
-      <button class="login-button">ログイン</button>
+      <%= link_to '会員登録', new_user_registration_path, class: 'signup-button' %>
+      <%= link_to 'ログイン', new_user_session_path, class: 'login-button' %>
     </div>
   </div>
 
