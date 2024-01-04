@@ -1,4 +1,41 @@
-ja: 
-  device:
+ja:
+  devise:
+    registrations:
+      new:
+        sign_up: "登録"
+      edit:
+        sign_up: "アカウント編集"
     sessions:
+      new:
+        sign_in: "ログイン"
+    confirmations:
+      new:
+        resend_confirmation_instructions: "確認メール再送信"
+    shared:
+      links:
+        sign_in: "ログイン"
+        sign_up: "登録"
+        forgot_your_password: "パスワードを忘れましたか？"
+  activerecord:
+    attributes:
+      user:
+        email: "メールアドレス"
+        username: "ユーザー名"
+        prefecture: "都道府県"
+        password: "パスワード"
+        password_confirmation: "パスワード確認"
+  helpers:
+    submit:
+      create: "登録する"
+      update: "更新する"
+  errors:
+    messages:
+      expired: "期限切れです。新しいリクエストをしてください。"
+      not_found: "見つかりませんでした。"
+      already_confirmed: "はすでに確認済みです。"
+      not_locked: "はロックされていません。"
+      not_saved:
+        one: "1つのエラーが発生したため %{resource} を保存できませんでした。"
+        other: "%{count}個のエラーが発生したため %{resource} を保存できませんでした。"
+
     
