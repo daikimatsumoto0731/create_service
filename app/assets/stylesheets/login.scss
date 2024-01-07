@@ -1,0 +1,85 @@
+.login-form-container {
+    // ログインフォームのスタイル
+    h2 {
+      text-align: center;
+      color: #09f409;
+      margin-bottom: 20px;
+    }
+    
+    .field {
+      margin-bottom: 15px;
+  
+      label {
+        display: block;
+        margin-bottom: 5px;
+        color: #333333;
+      }
+  
+      input[type="email"], input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+    }
+  
+    .actions {
+      text-align: center;
+  
+      input[type="submit"] {
+        font-size: 20px;
+        padding: 10px 20px;
+        background-color: #09f409;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+  
+        &:hover {
+          background-color: darken(#09f409, 10%);
+        }
+      }
+    }
+  }
+  
+  // ヘッダーとフッターのスタイルはログインフォームの外に配置
+  .header {
+    background-color: #09f409;
+    display: flex;
+    align-items: center;
+    padding: 30px;
+    
+    // 会員登録ボタンとパスワードリセットボタンのスタイル
+    a {
+      font-size: 16px;
+      padding: 10px 15px;
+      margin-left: 10px;
+      background-color: white;
+      color: #09f409;
+      text-decoration: none;
+      border-radius: 5px;
+  
+      &:hover {
+        background-color: lighten(white, 10%);
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .footer {
+    font-size: 20px;
+    background-color: #09f409;
+    padding: 30px;
+    text-align: right;
+  
+    a {
+      color: white;
+      margin-right: 10px;
+      text-decoration: none;
+  
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  
