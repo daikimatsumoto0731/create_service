@@ -6,6 +6,4 @@ class User < ApplicationRecord
   # バリデーションの追加
   validates :username, presence: true
   validates :prefecture, presence: true
-  validates :first_name, presence: true, length: { maximum: 255 }
-  validates :last_name, presence: true, length: { maximum: 255 }
 end
