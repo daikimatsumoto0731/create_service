@@ -1,7 +1,9 @@
 <div class="header">
 <h1>ようこそ<%= @user.username %>さん</h1>
+<%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'logout-link' %>
 </div>
 <p>今日の天気</p>
 
-
-<%= link_to '野菜を作る', class: 'btn btn-primary' %>
+<div class="button-container">
+  <%= link_to '野菜を作る', class: 'btn btn-vegetable' %>
+</div>
