@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   get 'privacy_policy', to: 'static_pages#privacy_policy', as: :privacy_policy
   # 野菜選択画面へのルーティング
   get 'vegetables', to: 'vegetables#index'
+  # スケジュール画面へのルーティング
+  get 'schedule', to: 'schedule#index', as: :schedule
 end
