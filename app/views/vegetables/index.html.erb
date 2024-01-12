@@ -16,9 +16,9 @@
     </div>
 
     <div class="submit-button-container">
-      <%= submit_tag '選択', class: 'submit-button' %>
+      <%= submit_tag '選択', class: 'submit-button', disabled: true %>
     </div>
   <% end %>
-</div>
 
-<%= javascript_pack_tag 'vegetables' %>
+  <div id="selection-message" style="display: none; color: red; text-align: center;">選択してください。</div>
+</div>
