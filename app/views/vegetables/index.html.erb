@@ -1,24 +1,17 @@
-<div class="header">
-  <h1>野菜を選択してください</h1>
-</div>
-
-<div class="vegetable-selection-container">
-  <%= form_with(url: schedule_path, method: :get, local: true) do %>
-    <div class="vegetable-selection">
-      <%= label_tag :vegetable_carrot, 'ニンジン', id: 'vegetable_carrot' %>
-      <%= radio_button_tag 'vegetable', 'carrot', false, class: 'vegetable-radio' %>
-
-      <%= label_tag :vegetable_tomato, 'トマト', id: 'vegetable_tomato' %>
-      <%= radio_button_tag 'vegetable', 'tomato', false, class: 'vegetable-radio' %>
-
-      <%= label_tag :vegetable_basil, 'バジル', id: 'vegetable_basil' %>
-      <%= radio_button_tag 'vegetable', 'basil', false, class: 'vegetable-radio' %>
-    </div>
-
-    <div class="submit-button-container">
-      <%= submit_tag '選択', class: 'submit-button', disabled: true %>
-    </div>
-  <% end %>
-
-  <div id="selection-message" style="display: none; color: red; text-align: center;">選択してください。</div>
-</div>
+<%= form_with url: schedule_path, method: :get, local: true do |form| %>
+  <div class="vegetable-buttons">
+    <label>
+      <input type="radio" name="selected-vegetable" value="carrot" class="vegetable-radio" />
+      ニンジン
+    </label>
+    <label>
+      <input type="radio" name="selected-vegetable" value="tomato" class="vegetable-radio" />
+      トマト
+    </label>
+    <label>
+      <input type="radio" name="selected-vegetable" value="basil" class="vegetable-radio" />
+      バジル
+    </label>
+  </div>
+  <button type="submit" class="select-button">選択</button>
+<% end %>
