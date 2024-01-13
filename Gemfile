@@ -40,6 +40,7 @@ gem 'devise', '~> 4.8'
 
 gem 'devise-i18n'
 gem 'webpacker'
+gem 'bootstrap', '~> 5.0'
 
 
 group :development, :test do

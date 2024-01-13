@@ -1,56 +1,45 @@
-// ヘッダーのスタイル
-.header {
-    background-color: #09f409; // 背景色
-    display: flex;
-    align-items: center;
-    padding: 30px;
-    border-bottom: 3px solid blue;
-    justify-content: center; // 中央揃え
-  
-    h1 {
-      color: white; // テキスト色
-      font-size: 24px; // フォントサイズ
+.vegetable-buttons {
+  .vegetable-button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+
+    &.carrot {
+      background-color: orange;
+    }
+
+    &.tomato {
+      background-color: red;
+    }
+
+    &.basil {
+      background-color: green;
+    }
+
+    &.active {
+      border: 3px solid yellow; // 選択されたボタンのスタイル
     }
   }
-  
-  // 野菜選択ボタンのスタイル
-  .vegetable-selection-container {
-    text-align: center; // 全体を中央揃えにする
-    .vegetable-selection {
-      display: inline-block; // インラインブロック要素として表示
-      margin: 0 auto; // 上下の余白と自動的に中央揃え
-  
-      label {
-        display: inline-block; // インラインブロック要素として表示
-        margin: 0 10px; // 左右の余白
-        padding: 10px 15px; // 内部の余白
-        border-radius: 4px; // 角を丸くする
-        font-weight: bold; // 太字
-  
-        // 各野菜の色
-        &#vegetable_carrot { background-color: orange; }
-        &#vegetable_tomato { background-color: red; }
-        &#vegetable_basil { background-color: green; }
-  
-        // テキスト色
-        color: black;
-      }
-    }
-  }
-  
-  // 「選択」ボタンのスタイル
-  .submit-button-container {
-    text-align: center; // 中央揃え
-    margin-top: 20px; // 上の余白
-  
-    input[type="submit"] {
-      background-color: blue; // 背景色
-      color: white; // テキスト色
-      padding: 10px 20px; // 内部の余白
-      border: none; // 境界線を削除
-      border-radius: 5px; // 角を丸くする
-      font-weight: bold; // 太字
-      display: inline-block; // インラインブロック要素として表示
-    }
-  }
-  
+}
+
+.select-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.alert {
+  background-color: #ffcccc;
+  border: 1px solid red;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  text-align: center;
+}
