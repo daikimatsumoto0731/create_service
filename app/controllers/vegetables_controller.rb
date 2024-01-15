@@ -1,18 +1,20 @@
 class VegetablesController < ApplicationController
   def index
-    # 他の必要な処理をここに追加
   end
 
   def schedule
-    if params[:selected_vegetable].blank?
-      flash[:alert] = '選択してください'
-      redirect_to vegetables_path
+    if params[:'selected-vegetable'].blank?
+      flash[:alert] = '野菜を選択してください'
+      render :index
     else
-      redirect_to schedule_path
+      # 選択された野菜を取得
+      selected_vegetable = params[:'selected-vegetable']
+      
+      # スケジュール画面にリダイレクトし、選択した野菜をパラメータとして渡す
+      redirect_to schedule_path(selected_vegetable: selected_vegetable)
     end
   end
 
   def custom_schedule
-    redirect_to vegetables_path
   end
 end

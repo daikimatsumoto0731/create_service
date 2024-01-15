@@ -1,17 +1,22 @@
-<%= form_with url: schedule_path, method: :get, local: true do |form| %>
+<%= form_with url: schedule_path, method: :post, local: true do |form| %>
   <div class="vegetable-buttons">
-    <label>
-      <input type="radio" name="selected-vegetable" value="carrot" class="vegetable-radio" />
-      ニンジン
-    </label>
-    <label>
-      <input type="radio" name="selected-vegetable" value="tomato" class="vegetable-radio" />
-      トマト
-    </label>
-    <label>
-      <input type="radio" name="selected-vegetable" value="basil" class="vegetable-radio" />
-      バジル
-    </label>
+    <%= form.button 'ニンジン', class: 'vegetable-button carrot', data: { value: 'carrot' } %>
+    <%= form.button 'トマト', class: 'vegetable-button tomato', data: { value: 'tomato' } %>
+    <%= form.button 'バジル', class: 'vegetable-button basil', data: { value: 'basil' } %>
   </div>
-  <button type="submit" class="select-button">選択</button>
+  <%= form.hidden_field :selected_vegetable, value: nil, id: 'selected-vegetable-field' %>
+  <%= form.submit '選択', class: 'select-button' %>
 <% end %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var vegetableButtons = document.querySelectorAll('.vegetable-button');
+    var selectedVegetableField = document.getElementById('selected-vegetable-field');
+
+    vegetableButtons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        selectedVegetableField.value = this.getAttribute('data-value');
+      });
+    });
+  });
+</script>
