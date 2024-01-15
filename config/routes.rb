@@ -14,8 +14,8 @@ Rails.application.routes.draw do
   get 'vegetables', to: 'vegetables#index'
 
   # スケジュール画面へのルーティング
-  get 'schedule', to: 'schedule#index', as: :schedule
+  post 'schedule', to: 'vegetables#schedule', as: :schedule
 
   # /schedule パスの場合、custom_schedule アクションを呼び出す
-  get '/schedule', to: 'vegetables#custom_schedule', as: 'custom_schedule'
+  get 'custom_schedule', to: 'vegetables#custom_schedule', as: 'custom_schedule'
 end
