@@ -11,11 +11,11 @@ Rails.application.routes.draw do
   get 'privacy_policy', to: 'static_pages#privacy_policy', as: :privacy_policy
 
   # 野菜選択画面へのルーティング
-  get 'vegetables', to: 'vegetables#index'
+  get 'vegetables', to: 'vegetables#index', as: :vegetables
 
-  # スケジュール画面へのルーティング
-  post 'schedule', to: 'vegetables#schedule', as: :schedule
+  # 選択ボタンを押した先のルーティング
+  post 'vegetables', to: 'vegetables#schedule', as: :schedule
 
-  # /schedule パスの場合、custom_schedule アクションを呼び出す
+  # スケジュール画面のルーティング
   get 'custom_schedule', to: 'vegetables#custom_schedule', as: 'custom_schedule'
 end

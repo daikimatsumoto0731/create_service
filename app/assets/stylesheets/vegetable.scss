@@ -1,27 +1,48 @@
+/* ヘッダー */
+header {
+  background-color: limegreen; /* ヘッダーを黄緑色に */
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+/* フッター */
+footer {
+  background-color: limegreen; /* フッターを黄緑色に */
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
 .vegetable-buttons {
-  .vegetable-button {
-    margin: 10px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
+  display: flex;
+  justify-content: center; /* 野菜ボタンを中央に配置 */
+}
 
-    &.carrot {
-      background-color: orange;
-    }
+.vegetable-button {
+  margin: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: transparent; /* 背景色を透明に */
+  color: black; /* 野菜ボタンのテキストカラー */
 
-    &.tomato {
-      background-color: red;
-    }
+  &.carrot {
+    color: orange;
+  }
 
-    &.basil {
-      background-color: green;
-    }
+  &.tomato {
+    color: red;
+  }
 
-    &.active {
-      border: 3px solid yellow; // 選択されたボタンのスタイル
-    }
+  &.basil {
+    color: green;
+  }
+
+  &.active {
+    border: 3px solid yellow; /* 選択されたボタンのスタイル */
   }
 }
 
@@ -33,6 +54,8 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  display: block;
+  margin: 0 auto; /* 選択ボタンを中央に配置 */
 }
 
 .alert {
