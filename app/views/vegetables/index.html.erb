@@ -10,15 +10,22 @@
     <h1>野菜選択画面</h1>
   </header>
   
-  <div class="vegetable-buttons">
-    <%= form_with url: schedule_path, method: :post, local: true do |form| %>
-      <%= form.button 'ニンジン', class: 'vegetable-button carrot', data: { value: 'carrot' } %>
-      <%= form.button 'トマト', class: 'vegetable-button tomato', data: { value: 'tomato' } %>
-      <%= form.button 'バジル', class: 'vegetable-button basil', data: { value: 'basil' } %>
-      <%= form.hidden_field :selected_vegetable, value: nil, id: 'selected-vegetable-field' %>
-      <button type="button" class="select-button" id="select-vegetable-button">選択</button>
-    <% end %>
-  </div>
+<div class="vegetable-buttons">
+  <%= form_with url: schedule_path, method: :post, local: true do |form| %>
+    <%= form.button 'ニンジン', class: 'vegetable-button carrot', data: { value: 'carrot' } %>
+    <%= form.button 'トマト', class: 'vegetable-button tomato', data: { value: 'tomato' } %>
+    <%= form.button 'バジル', class: 'vegetable-button basil', data: { value: 'basil' } %>
+    <%= form.hidden_field :selected_vegetable, value: nil, id: 'selected-vegetable-field' %>
+    <%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
+  <% end %>
+</div>
+
+
+  <form action="<%= schedule_path %>" method="post">
+    <button type="button" class="select-button" id="select-vegetable-button">選択</button>
+  </form>
+</div>
+
 
   <footer>
     <p>Copyright &copy; 2024 Vegetable Service</p>
