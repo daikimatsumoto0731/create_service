@@ -8,8 +8,8 @@ $(document).ready(function() {
         // hidden_fieldに選択された野菜を設定
         $('#selected-vegetable-field').val(selectedVegetable);
 
-        // フォームを送信
-        $('form').submit();
+        // スケジュール画面へのリダイレクトを手動で実行
+        window.location.href = '<%= custom_schedule_path %>?selected_vegetable=' + selectedVegetable;
     });
 
     $('#select-vegetable-button').click(function() {
