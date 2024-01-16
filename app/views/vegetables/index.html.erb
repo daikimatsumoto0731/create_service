@@ -1,22 +1,27 @@
-<%= form_with url: schedule_path, method: :post, local: true do |form| %>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>野菜選択画面</title>
+  <%= stylesheet_link_tag 'vegetable' %>
+  <%= javascript_include_tag 'vegetable_selection.js' %>
+</head>
+<body>
+  <header>
+    <h1>野菜選択画面</h1>
+  </header>
+  
   <div class="vegetable-buttons">
-    <%= form.button 'ニンジン', class: 'vegetable-button carrot', data: { value: 'carrot' } %>
-    <%= form.button 'トマト', class: 'vegetable-button tomato', data: { value: 'tomato' } %>
-    <%= form.button 'バジル', class: 'vegetable-button basil', data: { value: 'basil' } %>
+    <%= form_with url: schedule_path, method: :post, local: true do |form| %>
+      <%= form.button 'ニンジン', class: 'vegetable-button carrot', data: { value: 'carrot' } %>
+      <%= form.button 'トマト', class: 'vegetable-button tomato', data: { value: 'tomato' } %>
+      <%= form.button 'バジル', class: 'vegetable-button basil', data: { value: 'basil' } %>
+      <%= form.hidden_field :selected_vegetable, value: nil, id: 'selected-vegetable-field' %>
+      <button type="button" class="select-button" id="select-vegetable-button">選択</button>
+    <% end %>
   </div>
-  <%= form.hidden_field :selected_vegetable, value: nil, id: 'selected-vegetable-field' %>
-  <%= form.submit '選択', class: 'select-button' %>
-<% end %>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    var vegetableButtons = document.querySelectorAll('.vegetable-button');
-    var selectedVegetableField = document.getElementById('selected-vegetable-field');
-
-    vegetableButtons.forEach(function(button) {
-      button.addEventListener('click', function() {
-        selectedVegetableField.value = this.getAttribute('data-value');
-      });
-    });
-  });
-</script>
+  <footer>
+    <p>Copyright &copy; 2024 Vegetable Service</p>
+  </footer>
+</body>
+</html>
