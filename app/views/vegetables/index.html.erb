@@ -1,24 +1,37 @@
-<div class="header">
-  <h1>野菜を選択してください</h1>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>野菜選択画面</title>
+  <%= stylesheet_link_tag 'vegetable' %>
+  <%= javascript_include_tag 'vegetable_selection.js' %>
+</head>
+<body>
+  <header>
+    <h1>野菜選択画面</h1>
+  </header>
+  
+  <!-- 野菜ボタンの集まり -->
+  <div class="vegetable-buttons">
+    <%= form_with url: schedule_path, method: :post, local: true do |form| %>
+      <%= form.button 'ニンジン', class: 'vegetable-button carrot', data: { value: 'carrot' } %>
+      <%= form.button 'トマト', class: 'vegetable-button tomato', data: { value: 'tomato' } %>
+      <%= form.button 'バジル', class: 'vegetable-button basil', data: { value: 'basil' } %>
+      <%= form.hidden_field :selected_vegetable, value: nil, id: 'selected-vegetable-field' %>
+      <%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
+    <% end %>
+  </div>
 
-<div class="vegetable-selection-container">
-  <%= form_with(url: schedule_path, method: :get, local: true) do %>
-    <div class="vegetable-selection">
-      <%= label_tag :vegetable_carrot, 'ニンジン', id: 'vegetable_carrot' %>
-      <%= radio_button_tag 'vegetable', 'carrot', false, class: 'vegetable-radio' %>
+  <!-- 選択された野菜を表示する領域 -->
+  <div id="display-selected-vegetable" class="selected-vegetable">
+    選択された野菜: なし
+  </div>
 
-      <%= label_tag :vegetable_tomato, 'トマト', id: 'vegetable_tomato' %>
-      <%= radio_button_tag 'vegetable', 'tomato', false, class: 'vegetable-radio' %>
+  <form action="<%= schedule_path %>" method="post">
+    <button type="button" class="select-button" id="select-vegetable-button">選択</button>
+  </form>
 
-      <%= label_tag :vegetable_basil, 'バジル', id: 'vegetable_basil' %>
-      <%= radio_button_tag 'vegetable', 'basil', false, class: 'vegetable-radio' %>
-    </div>
-
-    <div class="submit-button-container">
-      <%= submit_tag '選択', class: 'submit-button' %>
-    </div>
-  <% end %>
-</div>
-
-<%= javascript_pack_tag 'vegetables' %>
+  <footer>
+    <p>Copyright &copy; 2024 Vegetable Service</p>
+  </footer>
+</body>
+</html>
