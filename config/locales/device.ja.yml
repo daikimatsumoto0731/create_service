@@ -25,6 +25,8 @@ ja:
         password: "パスワード"
         password_confirmation: "パスワード確認"
     errors:
+      messages:
+        select_option: "選択してください"
       models:
         user:
           attributes:
