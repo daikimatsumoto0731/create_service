@@ -7,7 +7,6 @@ class VegetablesController < ApplicationController
     selected_vegetable = params[:selected_vegetable]
 
     if selected_vegetable.blank?
-      flash[:alert] = '野菜を選択してください'
       redirect_to vegetables_path  # 選択されていない場合は野菜選択画面にリダイレクト
     else
       # 選択された野菜をスケジュール画面に渡す

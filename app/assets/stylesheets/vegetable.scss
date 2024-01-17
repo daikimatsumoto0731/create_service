@@ -1,68 +1,77 @@
 /* ヘッダー */
 header {
-  background-color: limegreen; /* ヘッダーを黄緑色に */
+  background-color: limegreen;
   padding: 10px;
   text-align: center;
   color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
 }
 
-/* フッター */
-footer {
-  background-color: limegreen; /* フッターを黄緑色に */
-  padding: 10px;
-  text-align: center;
-  color: white;
-}
-
+/* 野菜ボタンを中央に配置 */
 .vegetable-buttons {
   display: flex;
-  justify-content: center; /* 野菜ボタンを中央に配置 */
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+  padding-top: 20px;
 }
 
 .vegetable-button {
-  margin: 10px;
-  padding: 10px 20px;
+  margin: 265px 45px;
+  padding: 20px 30px;
   border: none;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 18px;
   cursor: pointer;
-  background-color: transparent; /* 背景色を透明に */
-  color: black; /* 野菜ボタンのテキストカラー */
+  color: white;
 
   &.carrot {
-    color: orange;
+    background-color: orange;
   }
 
   &.tomato {
-    color: red;
+    background-color: red;
   }
 
   &.basil {
-    color: green;
-  }
-
-  &.active {
-    border: 3px solid yellow; /* 選択されたボタンのスタイル */
+    background-color: green;
   }
 }
 
+/* 選択された野菜を表示する領域のスタイル */
+.selected-vegetable {
+  margin-top: -10px;
+  text-align: center;
+  font-size: 20px;
+  color: black;
+}
+
+/* 選択ボタンを野菜ボタンの下に配置 */
 .select-button {
-  margin-top: 20px;
-  padding: 10px 20px;
+  padding: 20px 40px;
   background-color: blue;
   color: white;
   border: none;
   border-radius: 5px;
+  font-size: 18px;
   cursor: pointer;
   display: block;
-  margin: 0 auto; /* 選択ボタンを中央に配置 */
+  margin: 0px auto 0;
 }
 
-.alert {
-  background-color: #ffcccc;
-  border: 1px solid red;
+/* フッター */
+footer {
+  background-color: limegreen;
   padding: 10px;
-  margin: 10px 0;
-  border-radius: 5px;
   text-align: center;
+  color: white;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
 }
