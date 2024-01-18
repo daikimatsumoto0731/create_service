@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
     sessions: 'user_sessions',
+    passwords: 'users/passwords'
   }
 
   resources :users, only: [:show]
