@@ -38,9 +38,7 @@
 * Deviseなどの認証 gem を使用
 * LINEのAPIを使用
 * JavaScript
-* Chat GPT API
 * Python
-
 
 ## 画面遷移図
 https://www.figma.com/file/woDOrmHhrxtdRX12DIeaUk/runteq?type=design&node-id=11-2&mode=design&t=dmm76l53LGGcNAv3-0
