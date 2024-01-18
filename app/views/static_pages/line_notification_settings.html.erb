@@ -1,5 +1,23 @@
-<h1>LINE通知設定</h1>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>LINE通知設定</title>
+  <%= stylesheet_link_tag 'application' %> <!-- スタイルシートのリンク -->
+  <%= javascript_include_tag 'application' %> <!-- JavaScriptファイルのリンク -->
+</head>
+<body>
+  <header class="header">
+    <h1>LINE通知設定</h1>
+  </header>
+  
+  <div class="content">
+    <%= link_to 'トップページへ', root_path, class: 'btn-back' %>
 
-<p>ここからLINE通知の設定ができます。以下のボタンをクリックして、LINEとの連携を許可してください。</p>
+    <%= link_to 'マイページへ', user_path(@user), class: 'btn-back' %>
+  </div>
 
-<%= button_to 'LINEで通知を受け取る', '#', method: :post, class: 'btn btn-primary' %>
+  <footer class="footer">
+    <!-- フッターの内容 -->
+  </footer>
+</body>
+</html>
