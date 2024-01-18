@@ -9,7 +9,7 @@ class UserController < ApplicationController
       # サインアップ後、ユーザーをログインさせる(オプション)
       sign_in(@user)
       # サインアップ後のリダイレクト先
-      redirect_to new_user_sessions_path, notice: '登録されました'
+      redirect_to new_user_sessions_path, flash[:notice] =  '登録されました'
     else
       render :new
     end
