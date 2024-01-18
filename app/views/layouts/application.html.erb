@@ -11,7 +11,7 @@
 
   <body>
     <% flash.each do |key, message| %>
-      <div class="<%= key %>"><%= message %></div>
+      <div class="alert <%= 'alert-success' if key == 'notice' %> <%= 'alert-danger' if key == 'alert' %>"> <%= message %></div>
     <% end %>
     <%= yield %>
   </body>
