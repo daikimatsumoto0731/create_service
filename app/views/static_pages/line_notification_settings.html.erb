@@ -16,13 +16,24 @@
         <%= f.label :receive_notifications, "LINE通知を受け取る" %>
         <%= f.check_box :receive_notifications %>
       </div>
+      <!-- frequencyフィールドを削除 -->
+
+      <!-- 通知時間を設定するための時刻選択フィールドを追加 -->
       <div class="field">
-        <%= f.label :frequency, "通知頻度" %>
-        <%= f.select :frequency, options_for_select(['daily', 'weekly', 'monthly'], @user.line_notification_setting.try(:frequency) || 'daily') %>
+        <%= f.label :notification_time, "通知時間" %>
+        <%= f.time_select :notification_time, ignore_date: true %>
       </div>
+
+      <!-- 以下にLINEのAPIキーとユーザーIDのフィールドを追加 -->
+      <div class="field">
+        <%= f.label :line_auth_info, "LINEの認証情報" %>
+        <%= f.text_field :line_auth_info_api_key, placeholder: "APIキーを入力" %>
+        <%= f.text_field :line_auth_info_user_id, placeholder: "ユーザーIDを入力" %>
+      </div>
+
       <%= f.submit "設定を保存", class: 'btn-save' %>
     <% end %>
-    
+
     <div class="devise-links">
       <%= link_to 'トップページへ', root_path, class: 'btn-back' %>
       <%= link_to 'マイページへ', user_path(@user), class: 'btn-back' %>
