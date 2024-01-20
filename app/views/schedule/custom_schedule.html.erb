@@ -1,0 +1,9 @@
+<div class="schedule">
+  <h1>スケジュール画面</h1>
+  <p>選択された野菜: <%= params[:selected_vegetable] %></p>
+  <% @schedules.each do |schedule| %>
+    <div class="schedule-details">
+      <%= schedule.details %>
+    </div>
+  <% end %>
+</div>

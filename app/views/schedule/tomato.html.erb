@@ -1,0 +1,9 @@
+<div class="schedule">
+  <h1>トマトのスケジュール</h1>
+  <% @schedules.each do |schedule| %>
+    <div class="schedule-details">
+      <%= schedule.details %>
+    </div>
+  <% end %>
+  <!-- トマト特有の情報やスタイルをここに追加 -->
+</div>

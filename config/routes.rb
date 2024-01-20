@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   patch 'line_notification_settings', to: 'static_pages#line_notification_settings'
 
   # スケジュール画面へのルーティング
-  get 'custom_schedule', to: 'vegetables#custom_schedule', as: 'custom_schedule'
+  get 'custom_schedule', to: 'schedule#custom_schedule', as: 'custom_schedule'
 
   # 選択ボタンを押した先のルーティング
   post 'schedule', to: 'vegetables#schedule'

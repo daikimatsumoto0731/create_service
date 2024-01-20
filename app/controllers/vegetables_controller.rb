@@ -3,7 +3,6 @@ class VegetablesController < ApplicationController
   end
 
   def schedule
-    # 選択された野菜を取得
     selected_vegetable = params[:selected_vegetable]
 
     if selected_vegetable.blank?
@@ -12,10 +11,5 @@ class VegetablesController < ApplicationController
       # 選択された野菜をスケジュール画面に渡す
       redirect_to custom_schedule_path(selected_vegetable: selected_vegetable)
     end
-  end
-
-  def custom_schedule
-    # スケジュール画面で選択した野菜を取得
-    @selected_vegetable = params[:selected_vegetable]
   end
 end
