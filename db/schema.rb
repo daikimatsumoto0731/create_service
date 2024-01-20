@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_19_104408) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_20_014608) do
   create_table "line_notification_settings", force: :cascade do |t|
     t.integer "user_id", null: false
     t.boolean "receive_notifications", default: false
@@ -18,6 +18,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_19_104408) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.time "notification_time"
+    t.string "line_auth_info_api_key"
+    t.string "line_auth_info_user_id"
     t.index ["user_id"], name: "index_line_notification_settings_on_user_id"
   end
 
