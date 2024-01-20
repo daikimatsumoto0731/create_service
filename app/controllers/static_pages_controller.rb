@@ -16,7 +16,15 @@ class StaticPagesController < ApplicationController
         if @line_notification_setting.line_auth_info_api_key.present? && @line_notification_setting.line_auth_info_user_id.present?
           # LINE通知を送信するコードを追加
           if @line_notification_setting.receive_notifications
-            send_line_notification("水やりの時間です！")
+            # LINEのIDを取得
+            line_user_id = params[:line_notification_setting][:line_auth_info_user_id]
+            # ユーザーごとのLINEのIDをデータベースに保存（例: @user.update(line_user_id: line_user_id)）
+            @user.update(line_user_id: line_user_id)
+            # 通知メッセージをログに出力
+            notification_message = "水やりの時間です！"
+            Rails.logger.info("通知メッセージ: #{notification_message}")
+            # LINE通知を送信
+            send_line_notification(notification_message)
           end
         end
 
@@ -51,9 +59,11 @@ class StaticPagesController < ApplicationController
   
     # LINE Notify APIのアクセストークン（APIキー）
     api_key = ENV['LINE_NOTIFY_API_KEY'] # 環境変数からアクセストークンを取得
+    Rails.logger.info("LINE_NOTIFY_API_KEY: #{api_key}")
   
     # 通知するメッセージ
     notification_message = message
+    Rails.logger.info("通知メッセージ: #{notification_message}")
   
     # 通知を送信
     response = HTTParty.post(
