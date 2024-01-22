@@ -1,10 +1,6 @@
-<div class="header">
-  <h1><%= @selected_vegetable_name %>のスケジュール</h1>
-</div>
-
 <div class="schedule">
-  <div id="calendar"></div>
-  
+  <h1><%= @selected_vegetable_name %>のスケジュール</h1>
+
   <% if @schedules.present? %>
     <% @schedules.each do |schedule| %>
       <div class="schedule-details">
@@ -14,8 +10,6 @@
   <% else %>
     <p>スケジュールはまだ登録されていません。</p>
   <% end %>
-</div>
 
-<div class="footer">
-  <p>Copyright &copy; 2024 Vegetable Service</p>
+  <!-- ここに選択された野菜に特有の情報やスタイルを追加することができます -->
 </div>
