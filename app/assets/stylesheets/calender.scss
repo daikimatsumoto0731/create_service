@@ -1,43 +1,32 @@
-// ヘッダーとフッターのスタイル
-.header, .footer {
-    background-color: green;
+.header {
+    background-color: red;
     color: white;
     padding: 10px;
     text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
 }
 
-// カレンダーとスケジュール詳細のスタイル
-.schedule {
-    width: 80%;
-    margin: 0 auto;
+.content {
+    flex: 1;
+    padding: 10px; // コンテンツエリアの内側のスペース
+    overflow: auto; // コンテンツが多い場合はスクロールを有効に
+    margin-top: 290px; // ヘッダーの高さを考慮してmargin-topに変更
+    margin-bottom: 300px;
+}
+
+.footer {
+    background-color: red;
+    padding: 10px;
     text-align: center;
-
-    // カレンダーのスタイル
-    #calendar {
-        max-width: 100%;
-        margin: 20px auto;
-    }
-
-    // スケジュール詳細のスタイル
-    .schedule-details {
-        background-color: #f9f9f9;
-        margin: 10px 0;
-        padding: 10px;
-        border: 1px solid #ddd;
-    }
-}
-
-// FullCalendarの収穫ボタンのスタイル
-.fc-harvestButton-button {
-    background-color: #4CAF50;
     color: white;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-
-    &:hover {
-        background-color: #45a049;
-    }
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
 }
+
