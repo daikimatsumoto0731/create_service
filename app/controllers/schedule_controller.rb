@@ -15,4 +15,8 @@ class ScheduleController < ApplicationController
       render template: "schedule/#{@selected_vegetable}"
     end
   end
+
+  def planting_advice; end
+
+  def thinning_advise; end
 end
