@@ -4,11 +4,15 @@
 
 <div class="content">
   <div class="schedule">
-    <!-- FullCalendarのコンテナ -->
-    <div id="calendar" data-schedules='<%= @schedules.to_json.html_safe %>'></div>
+    <div id="calendar"></div>
+    <% if @schedules.present? %>
+      <% @schedules.each do |schedule| %>
+        <div class="schedule-details">
+          <%= schedule.details %>
+        </div>
+      <% end %>
+    <% else %>
+      <p>スケジュールはまだ登録されていません。</p>
+    <% end %>
   </div>
-</div>
-
-<div class="footer">
-  <p>Copyright &copy; 2024 Vegetable Service</p>
 </div>

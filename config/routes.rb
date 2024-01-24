@@ -23,4 +23,8 @@ Rails.application.routes.draw do
 
   # 野菜選択画面へのルーティング
   get 'vegetables', to: 'vegetables#index', as: :vegetables
+
+  # アドバイスアクションへのルーティング
+  get 'planting_advice', to: 'schedule#planting_advice'
+  get 'thinning_advice', to: 'schedule#thinning_advice'
 end

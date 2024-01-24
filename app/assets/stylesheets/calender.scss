@@ -12,21 +12,15 @@
 
 .content {
     flex: 1;
-    padding: 10px; // コンテンツエリアの内側のスペース
-    overflow: auto; // コンテンツが多い場合はスクロールを有効に
-    margin-top: 290px; // ヘッダーの高さを考慮してmargin-topに変更
-    margin-bottom: 300px;
-}
-
-.footer {
-    background-color: red;
     padding: 10px;
-    text-align: center;
-    color: white;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1;
+    overflow: auto;
+    /* ヘッダーの高さに応じてmargin-topを調整します。ヘッダーの高さ＋希望する余白 */
+    margin-top: 250px; // この値はヘッダーの実際の高さによって調整する必要があります。
+    /* フッターがある場合は、同様にmargin-bottomも調整します。 */
+    margin-bottom: 50px; // この値もフッターの高さに応じて調整します。
 }
 
+.schedule {
+  margin-top: 20px;
+  height: 600px;
+}
