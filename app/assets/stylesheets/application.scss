@@ -6,4 +6,7 @@
 @import "password_reset";
 @import "reset_password_form";
 @import "line_setting";
+@import "fullcalendar";
 @import "calender";
+@import '@fullcalendar/core/main.css';
+@import '@fullcalendar/daygrid/main.css';

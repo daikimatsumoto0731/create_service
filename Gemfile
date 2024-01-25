@@ -49,7 +49,7 @@ gem 'httparty'
 gem 'whenever', require: false
 
 gem 'fullcalendar-rails'
-gem 'momentjs-rails'
+gem 'webpacker'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

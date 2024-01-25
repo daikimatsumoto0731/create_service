@@ -4,15 +4,27 @@
 
 <div class="content">
   <div class="schedule">
-    <div id="calendar"></div>
-    <% if @schedules.present? %>
-      <% @schedules.each do |schedule| %>
-        <div class="schedule-details">
-          <%= schedule.details %>
-        </div>
-      <% end %>
-    <% else %>
-      <p>スケジュールはまだ登録されていません。</p>
-    <% end %>
+    <div class="calendar-buttons">
+      <button id="sowingBtn">種まき</button>
+      <button id="maintenanceBtn">間引き・雑草抜き・害虫駆除</button>
+      <button id="harvestPeriodBtn">収穫期間</button>
+    </div>
+    <button id="harvestBtn" disabled>収穫</button>
+    <div id='calendar'></div>
   </div>
 </div>
+<div>
+  <div>
+    <p>種まきについてのアドバイス...</p>
+  </div>
+</div>
+
+<% if @schedules.present? %>
+  <div class="schedule-details">
+    <% @schedules.each do |schedule| %>
+      <p><%= schedule.details %></p>
+    <% end %>
+  </div>
+<% else %>
+  <p>スケジュールはまだ登録されていません。</p>
+<% end %>

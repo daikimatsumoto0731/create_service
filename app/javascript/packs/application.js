@@ -15,4 +15,20 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
+import { Calendar } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+
+document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar');
+
+  var calendar = new Calendar(calendarEl, {
+    plugins: [ dayGridPlugin ]
+    // その他のオプション
+  });
+
+  calendar.render();
+});
+
+import 'stylesheets/application.scss'
+
 console.log('Hello World from Webpacker')

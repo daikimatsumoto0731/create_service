@@ -314,7 +314,6 @@ DEPENDENCIES
   jquery-rails
   letter_opener
   listen (~> 3.5)
-  momentjs-rails
   pg (~> 1.5)
   puma (~> 5.0)
   rails (~> 7.0.8)
