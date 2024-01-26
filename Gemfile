@@ -41,6 +41,7 @@ gem 'devise-i18n'
 gem 'webpacker'
 gem 'bootstrap', '~> 5.0'
 gem 'jquery-rails'
+gem 'line-bot-api', '~> 1.28'
 
 # HTTPリクエストを簡単に扱うためのgem
 gem 'httparty'
@@ -70,7 +71,6 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'webdrivers', '~> 4.0'
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

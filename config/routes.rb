@@ -12,8 +12,9 @@ Rails.application.routes.draw do
   get 'privacy_policy', to: 'static_pages#privacy_policy', as: :privacy_policy
 
   # LINE通知設定へのルーティング
-  get 'line_notification_settings', to: 'static_pages#line_notification_settings', as: 'line_notification_settings'
-  patch 'line_notification_settings', to: 'static_pages#line_notification_settings'
+  get 'line_notification_settings', to: 'line_notifications#edit', as: 'line_notification_settings'
+  patch 'line_notification_settings', to: 'line_notifications#update'
+  post 'notify_callback', to: 'line_notifications#notify_callback'
 
   # スケジュール画面へのルーティング
   get 'custom_schedule', to: 'vegetables#custom_schedule', as: 'custom_schedule'
