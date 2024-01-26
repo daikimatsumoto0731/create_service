@@ -2,40 +2,43 @@ class LineNotifier
   include HTTParty
   base_uri 'https://notify-api.line.me'
   
-  def initialize(user)
-    @user = user
+  def initialize(access_token)
+    @access_token = access_token
   end
   
   def send_message(message)
-    return unless @user.line_notification_setting&.receive_notifications
-  
-    # アクセストークンを環境変数から取得
-    api_key = ENV['LINE_NOTIFY_API_KEY']
-    unless api_key
-      Rails.logger.error("LINE_NOTIFY_API_KEY is not set.")
-      return
-    end
-  
-    response = self.class.post('/api/notify',
-      body: {
-        message: message
-      }.to_json,
-      headers: {
-        'Content-Type' => 'application/json',
-        'Authorization' => "Bearer #{api_key}"
-      }
-    )
-  
+    # リクエストヘッダにAuthorizationを設定
+    headers = {
+      'Content-Type' => 'application/x-www-form-urlencoded',
+      'Authorization' => "Bearer #{@access_token}"
+    }
+    
+    # 通知メッセージを設定
+    body = {
+      message: message
+    }
+    
+    # LINE Notify APIにPOSTリクエストを送信
+    response = self.class.post('/api/notify', headers: headers, body: body)
+    
+    # レスポンスの処理
     handle_response(response)
   end
   
   private
   
   def handle_response(response)
-    if response.code == 200
+    case response.code
+    when 200
       Rails.logger.info("LINE notification sent successfully.")
+    when 400
+      Rails.logger.error("Bad Request: #{response.body}")
+    when 401
+      Rails.logger.error("Unauthorized: #{response.body}")
+    when 500
+      Rails.logger.error("Internal Server Error: #{response.body}")
     else
-      Rails.logger.error("LINE API Error: Status: #{response.code}, Response: #{response.body}")
+      Rails.logger.error("Unknown Error: #{response.body}")
     end
   end
 end
