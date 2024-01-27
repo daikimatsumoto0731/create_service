@@ -13,6 +13,8 @@ module VegetableService
 
     config.i18n.default_locale = :ja
 
+    config.active_record.sqlite3_production_warning = false
+
     config.time_zone = 'Asia/Tokyo'
 
     # Settings in config/environments/* take precedence over those specified here.
