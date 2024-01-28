@@ -36,6 +36,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'devise', '~> 4.8'
+gem 'omniauth-line'
+gem 'omniauth-rails_csrf_protection'
 
 gem 'devise-i18n'
 gem 'webpacker'
