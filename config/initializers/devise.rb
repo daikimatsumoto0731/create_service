@@ -305,6 +305,7 @@ Devise.setup do |config|
   config.responder.error_status = :unprocessable_entity
   config.responder.redirect_status = :see_other
   config.sign_in_after_reset_password = false
+  config.omniauth :line, ENV['LINE_KEY'], ENV['LINE_SECRET']
 
   # ==> Configuration for :registerable
 
