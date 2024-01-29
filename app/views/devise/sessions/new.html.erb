@@ -23,6 +23,12 @@
       <%= f.submit "ログイン", class: "login-button" %>
     </div>
   <% end %>
+
+  <!= --LINEでのサインボタン -->
+  <form class="button_to" method="post" action="/users/auth/line">
+    <button data-turbo="false" type="submit">Sign in with Line</button>
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" authcomplete="off" />
+  </form><br>
 </div>
 
 <div class="footer">
