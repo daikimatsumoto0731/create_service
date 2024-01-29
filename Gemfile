@@ -44,6 +44,7 @@ gem 'webpacker'
 gem 'bootstrap', '~> 5.0'
 gem 'jquery-rails'
 gem 'line-bot-api', '~> 1.28'
+gem 'dotenv-rails'
 
 # HTTPリクエストを簡単に扱うためのgem
 gem 'httparty'
