@@ -27,7 +27,7 @@
   <!= --LINEでのサインボタン -->
   <form class="button_to" method="post" action="/users/auth/line">
     <button data-turbo="false" type="submit">Sign in with Line</button>
-    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" authcomplete="off" />
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" autocomplete="off" />
   </form><br>
 </div>
 
