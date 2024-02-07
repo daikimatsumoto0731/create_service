@@ -41,6 +41,7 @@ gem 'devise-i18n'
 gem 'webpacker'
 gem 'bootstrap', '~> 5.0'
 gem 'jquery-rails'
+gem 'momentjs-rails'
 
 # HTTPリクエストを簡単に扱うためのgem
 gem 'httparty'
