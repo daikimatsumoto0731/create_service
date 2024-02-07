@@ -1,30 +1,38 @@
-<div class="header">
-  <h1><%= @selected_vegetable_name %>のスケジュール</h1>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>VegetableService</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+</head>
+<body>
+  <div class="header">
+    <h1><%= @selected_vegetable_name %>のスケジュール</h1>
+  </div>
 
-<div class="content">
-  <div class="schedule">
-    <div class="calendar-buttons">
-      <button id="sowingBtn">種まき</button>
-      <button id="maintenanceBtn">間引き・雑草抜き・害虫駆除</button>
-      <button id="harvestPeriodBtn">収穫期間</button>
+  <div class="content">
+    <div class="schedule">
+      <div class="calendar-buttons">
+        <button id="sowingBtn">種まき</button>
+        <button id="maintenanceBtn">間引き・雑草抜き・害虫駆除</button>
+        <button id="harvestPeriodBtn">収穫期間</button>
+      </div>
+      <button id="harvestBtn" disabled>収穫</button>
+      <div id="calendar"></div>
     </div>
-    <button id="harvestBtn" disabled>収穫</button>
-    <div id='calendar'></div>
   </div>
-</div>
-<div>
-  <div>
-    <p>種まきについてのアドバイス...</p>
-  </div>
-</div>
 
-<% if @schedules.present? %>
+  <div class="advice">
+  </div>
+
   <div class="schedule-details">
-    <% @schedules.each do |schedule| %>
-      <p><%= schedule.details %></p>
+    <% if @schedules.present? %>
+      <% @schedules.each do |schedule| %>
+        <p><%= schedule.details %></p>
+      <% end %>
     <% end %>
   </div>
-<% else %>
-  <p>スケジュールはまだ登録されていません。</p>
-<% end %>
+</body>
+</html>

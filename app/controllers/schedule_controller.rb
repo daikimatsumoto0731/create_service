@@ -10,9 +10,16 @@ class ScheduleController < ApplicationController
                                 when "carrot" then "ニンジン"
                                 when "basil" then "バジル"
                                 end
-
-    if vegetable.present?  # 野菜が存在する場合のみ該当のビューをレンダリング
-      render template: "schedule/#{@selected_vegetable}"
+    respond_to do |format|
+      format.html do
+        if vegetable.present?  # 野菜が存在する場合のみ該当のビューをレンダリング
+          render template: "schedule/#{@selected_vegetable}"
+        else
+          # 野菜が存在しない場合の処理
+          redirect_to vegetables_path, alert: "指定された野菜は存在しません"
+        end
+      end
+      format.json { render json: @schedules }
     end
   end
 
