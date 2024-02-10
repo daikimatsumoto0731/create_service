@@ -1,13 +1,13 @@
 $(document).ready(function() {
     var selectedVegetable = null;
-    var authenticityToken = $('meta[name="csrf-token"]').attr('content');
-    var alertShown = false;
+
+    console.log("野菜選択画面のスクリプトが読み込まれました。");
 
     $('.vegetable-button').click(function(e) {
         e.preventDefault();
-
         selectedVegetable = $(this).data('value');
-        console.log('選択された野菜: ' + selectedVegetable);
+
+        console.log('野菜ボタンがクリックされました: ' + selectedVegetable);
 
         // 選択された野菜を表示領域に表示
         $('#display-selected-vegetable').text('選択された野菜: ' + $(this).text());
@@ -16,30 +16,15 @@ $(document).ready(function() {
     $('#select-vegetable-button').click(function(e) {
         e.preventDefault();
 
+        console.log('選択ボタンがクリックされました。選択された野菜: ' + selectedVegetable);
+
         if (selectedVegetable) {
-            console.log('選択ボタンがクリックされました');
-            $('#selected-vegetable-field').val(selectedVegetable);
-
-            var form = $('<form>', {
-                'action': '/schedule',
-                'method': 'post'
-            }).append(
-                $('<input>', {
-                    'type': 'hidden',
-                    'name': 'authenticity_token',
-                    'value': authenticityToken
-                }),
-                $('<input>', {
-                    'type': 'hidden',
-                    'name': 'selected_vegetable',
-                    'value': selectedVegetable
-                })
-            ).appendTo('body');
-
-            form.submit();
-        } else if (!alertShown) {
+            // 正しいアクションへ遷移するURLを生成
+            console.log('リダイレクト先のURL: /events?selected_vegetable=' + selectedVegetable);
+            window.location.href = `/events?selected_vegetable=${selectedVegetable}`;
+        } else {
+            console.log('選択された野菜がありません。アラートが表示されます。');
             alert('野菜を選択してください');
-            alertShown = true;
         }
     });
 });

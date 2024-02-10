@@ -1,3 +1,3 @@
 class Vegetable < ApplicationRecord
-  has_many :schedules, dependent: :destroy
+  has_many :events, dependent: :destroy
 end

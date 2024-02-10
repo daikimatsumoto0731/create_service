@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_20_065406) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_10_135357) do
+  create_table "events", force: :cascade do |t|
+    t.string "name"
+    t.date "start_date"
+    t.date "end_date"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "vegetable_id"
+    t.index ["vegetable_id"], name: "index_events_on_vegetable_id"
+  end
+
   create_table "line_notification_settings", force: :cascade do |t|
     t.integer "user_id", null: false
     t.boolean "receive_notifications", default: false
@@ -21,17 +32,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_20_065406) do
     t.string "line_auth_info_api_key"
     t.string "line_auth_info_user_id"
     t.index ["user_id"], name: "index_line_notification_settings_on_user_id"
-  end
-
-  create_table "schedules", force: :cascade do |t|
-    t.string "title", null: false
-    t.text "body"
-    t.datetime "start_date", null: false
-    t.datetime "end_date", null: false
-    t.integer "vegetable_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["vegetable_id"], name: "index_schedules_on_vegetable_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -58,5 +58,4 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_20_065406) do
   end
 
   add_foreign_key "line_notification_settings", "users"
-  add_foreign_key "schedules", "vegetables"
 end

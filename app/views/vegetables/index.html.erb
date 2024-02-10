@@ -3,7 +3,8 @@
 <head>
   <title>野菜選択画面</title>
   <%= stylesheet_link_tag 'vegetable' %>
-  <%= javascript_include_tag 'vegetable_selection.js' %>
+  <%= javascript_include_tag 'vegetable_selection' %>
+  <%= csrf_meta_tags %>
 </head>
 <body>
   <header>
@@ -12,23 +13,18 @@
   
   <!-- 野菜ボタンの集まり -->
   <div class="vegetable-buttons">
-    <%= form_with url: schedule_path, method: :post, local: true do |form| %>
-      <%= form.button 'ニンジン', class: 'vegetable-button carrot', data: { value: 'carrot' } %>
-      <%= form.button 'トマト', class: 'vegetable-button tomato', data: { value: 'tomato' } %>
-      <%= form.button 'バジル', class: 'vegetable-button basil', data: { value: 'basil' } %>
-      <%= form.hidden_field :selected_vegetable, value: nil, id: 'selected-vegetable-field' %>
-      <%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
-    <% end %>
+    <button class='vegetable-button carrot' data-value='carrot'>ニンジン</button>
+    <button class='vegetable-button tomato' data-value='tomato'>トマト</button>
+    <button class='vegetable-button basil' data-value='basil'>バジル</button>
   </div>
+
+  <!-- "選択" ボタン -->
+  <button id="select-vegetable-button">選択</button>
 
   <!-- 選択された野菜を表示する領域 -->
   <div id="display-selected-vegetable" class="selected-vegetable">
     選択された野菜: なし
   </div>
-
-  <form action="<%= schedule_path %>" method="post">
-    <button type="button" class="select-button" id="select-vegetable-button">選択</button>
-  </form>
 
   <footer>
     <p>Copyright &copy; 2024 Vegetable Service</p>
