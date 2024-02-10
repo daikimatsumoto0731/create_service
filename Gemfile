@@ -49,7 +49,6 @@ gem 'httparty'
 # Cronジョブをスケジュールするためのgem
 gem 'whenever', require: false
 
-gem 'fullcalendar-rails'
 gem 'webpacker'
 
 group :development, :test do

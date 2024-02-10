@@ -15,16 +15,16 @@ Rails.application.routes.draw do
   get 'line_notification_settings', to: 'static_pages#line_notification_settings', as: 'line_notification_settings'
   patch 'line_notification_settings', to: 'static_pages#line_notification_settings'
 
-  # スケジュール画面へのルーティング
-  get 'custom_schedule', to: 'schedule#custom_schedule', as: 'custom_schedule'
-
-  # 選択ボタンを押した先のルーティング
-  post 'schedule', to: 'vegetables#schedule'
-
   # 野菜選択画面へのルーティング
   get 'vegetables', to: 'vegetables#index', as: :vegetables
+  
+  # 野菜選択後のスケジュール表示アクションへのルーティング
+  get 'vegetables/schedule', to: 'vegetables#schedule', as: :vegetable_schedule
 
-  # アドバイスアクションへのルーティング
-  get 'planting_advice', to: 'schedule#planting_advice'
-  get 'thinning_advice', to: 'schedule#thinning_advice'
-end
+  # Eventsに関するルーティング
+  resources :events, only: [:index, :show] do
+    member do
+      get 'advice'
+    end
+  end
+end  
