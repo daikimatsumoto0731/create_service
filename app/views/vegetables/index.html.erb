@@ -2,8 +2,8 @@
 <html>
 <head>
   <title>野菜選択画面</title>
-  <%= stylesheet_link_tag 'vegetable' %>
-  <%= javascript_include_tag 'vegetable_selection' %>
+  <%= stylesheet_link_tag 'vegetable', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'vegetable_selection', 'data-turbolinks-track': 'reload' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -18,13 +18,13 @@
     <button class='vegetable-button basil' data-value='basil'>バジル</button>
   </div>
 
-  <!-- "選択" ボタン -->
-  <button id="select-vegetable-button">選択</button>
-
   <!-- 選択された野菜を表示する領域 -->
   <div id="display-selected-vegetable" class="selected-vegetable">
     選択された野菜: なし
   </div>
+
+  <!-- "選択" ボタン -->
+  <button id="select-vegetable-button">選択</button>
 
   <footer>
     <p>Copyright &copy; 2024 Vegetable Service</p>
