@@ -3,7 +3,12 @@ class EventsController < ApplicationController
     # 選択された野菜をparamsから取得
     @selected_vegetable = params[:selected_vegetable]
 
-    @events = Event.all
+    # 選択された野菜に基づいてイベントをフィルタリング
+    if @selected_vegetable.present?
+      @events = Event.joins(:vegetable).where(vegetables: { name: @selected_vegetable })
+    else
+      @events = Event.all
+    end
 
     # 選択された野菜に応じて異なるビューをレンダリング
     case @selected_vegetable
@@ -14,7 +19,7 @@ class EventsController < ApplicationController
     when 'basil'
       render 'basil'
     else
-      redirect_to vegerables_path, alert: '選択された野菜が無効です'
+      redirect_to vegetables_path, alert: '選択された野菜が無効です'
     end
   end
 

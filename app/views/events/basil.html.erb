@@ -1,10 +1,33 @@
 <h1>バジルのスケジュール</h1>
 
-<% @events.each do |event| %>
-  <div>
-    <h2><%= event.name %></h2>
-    <p><%= event.start_date %> から <%= event.end_date %> まで</p>
-    <p><%= event.description %></p>
-    <%= link_to 'アドバイスを見る', advice_event_path(event) %>
-  </div>
-<% end %>
+<div class="schedule-buttons">
+  <% {
+    '種まき' => 'seed_sowing',
+    '発芽期間' => 'germination_period',
+    '間引き・雑草抜き・害虫駆除' => 'thinning_weeding_pest_control',
+    '収穫期間' => 'harvesting_period'
+  }.each_with_index do |(stage, key), index| %>
+    <%= button_tag stage, type: 'button', class: 'btn btn-info stage-button', data: { toggle: 'modal', target: "#modal#{index}", stage: key } %>
+
+    <!-- モーダル -->
+    <div class="modal fade" id="modal<%= index %>" tabindex="-1" role="dialog" aria-labelledby="modalLabel<%= index %>">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalLabel<%= index %>"><%= stage %>のアドバイス</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- 各ステージに応じたアドバイスを動的に挿入 -->
+            <%= render partial: "events/advice_#{key}", locals: { index: index } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<!-- 既存の収穫ボタン -->
+<%= link_to '収穫する', harvest_path, class: 'btn btn-success' %>

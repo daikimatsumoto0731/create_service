@@ -21,6 +21,9 @@ Rails.application.routes.draw do
   # 野菜選択後のスケジュール表示アクションへのルーティング
   get 'vegetables/schedule', to: 'vegetables#schedule', as: :vegetable_schedule
 
+  # 収穫アクションへのルーティング
+  get 'events/harvest', to: 'events#harvest', as: :harvest
+
   # Eventsに関するルーティング
   resources :events, only: [:index, :show] do
     member do
