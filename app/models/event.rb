@@ -6,7 +6,7 @@ class Event < ApplicationRecord
   validates :end_date, presence: true
 
   # カスタムバリデーションメソッド :end_date_after_start_date を使用して終了日が開始日より後であることを確認
-  validates :end_date_after_start_date
+  validate :end_date_after_start_date
 
   private
 
