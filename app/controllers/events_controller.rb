@@ -29,8 +29,11 @@ class EventsController < ApplicationController
 
   # モーダルでアドバイスを表示するためのアクション
   def advice
-    @event = Event.find(params[:id])
-    # ビューを通してモーダルに表示する情報をレンダリング
-    render 'advice', layout: false
-  end
+    @event = Event.find_by(id: params[:id])
+    if @event
+      render partial: "events/advice", locals: { event: @event }, layout: false
+    else
+      render json: { error: "Event not found" }, status: :not_found
+    end
+  end  
 end
