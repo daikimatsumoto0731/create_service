@@ -1,17 +1,14 @@
 $(document).ready(function() {
   $('.stage-button').on('click', function() {
-    var eventId = $(this).data('event-id'); // イベントIDを取得
-    var targetModal = $(this).data('target'); // モーダルのIDを取得
-  
+    var eventId = $(this).data('event-id'); // 正しくイベントIDを取得
+    var targetModalId = $(this).data('target');
+    
     $.ajax({
-      url: `/events/${eventId}/advice`, // イベントIDに基づくアドバイスを取得するURL
+      url: `/events/${eventId}/advice`, // 正しいURLを使用
       method: "GET",
       success: function(data) {
-        $(`#${targetModal}`).find('.modal-body').html(data); // モーダルの内容を更新
-        $(`#${targetModal}`).modal('show'); // モーダルを表示
-      },
-      error: function() {
-        alert('アドバイスの取得に失敗しました。');
+        $(targetModalId).find('.modal-body').html(data);
+        $(targetModalId).modal('show');
       }
     });
   });

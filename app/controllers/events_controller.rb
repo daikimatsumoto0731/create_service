@@ -31,7 +31,9 @@ class EventsController < ApplicationController
   def advice
     @event = Event.find_by(id: params[:id])
     if @event
-      render partial: "events/advice", locals: { event: @event }, layout: false
+      # イベント名に応じたパーシャル名を動的に生成
+      partial_name = "advice_" + @event.name.downcase.gsub(/\s+/, "_")
+      render partial: "events/#{partial_name}", locals: { event: @event }, layout: false
     else
       render json: { error: "Event not found" }, status: :not_found
     end
