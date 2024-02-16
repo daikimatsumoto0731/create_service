@@ -1,27 +1,28 @@
 <h1>バジルのスケジュール</h1>
 
 <div class="schedule-buttons">
-  <% {
-    '種まき' => 'seed_sowing',
-    '発芽期間' => 'germination_period',
-    '間引き・雑草抜き・害虫駆除' => 'thinning_weeding_pest_control',
-    '収穫期間' => 'harvesting_period'
-  }.each_with_index do |(stage, key), index| %>
-    <%= button_tag stage, type: 'button', class: 'btn btn-info stage-button', data: { toggle: 'modal', target: "#modal#{index}" } %>
-
-    <!-- モーダル -->
-    <div class="modal fade" id="modal<%= index %>" tabindex="-1" role="dialog" aria-labelledby="modalLabel<%= index %>">
+  <% events = {
+    '種まき' => 1, 
+    '発芽期間' => 2, 
+    '間引き・雑草抜き・害虫駆除' => 3, 
+    '収穫期間' => 4
+  } %>
+  
+  <% events.each do |name, id| %>
+    <%= button_tag name, type: 'button', class: 'btn btn-info stage-button', data: { toggle: 'modal', target: "##{name}_modal", 'event-id': id } %>
+    
+    <!-- モーダル定義 -->
+    <div class="modal fade" id="<%= "#{name}_modal" %>" tabindex="-1" role="dialog" aria-labelledby="<%= "#{name}_label" %>">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="modalLabel<%= index %>"><%= stage %>のアドバイス</h5>
+            <h5 class="modal-title" id="<%= "#{name}_label" %>"><%= "#{name}のアドバイス" %></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <!-- 各ステージに応じたアドバイスを動的に挿入 -->
-            <%= render partial: "events/advice_#{key}", locals: { index: index } %>
+            <!-- ここに動的にアドバイスを挿入するためのコンテンツが追加されます -->
           </div>
         </div>
       </div>

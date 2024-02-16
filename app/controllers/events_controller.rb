@@ -11,31 +11,33 @@ class EventsController < ApplicationController
     end
 
     # 選択された野菜に応じて異なるビューをレンダリング
-    case @selected_vegetable
-    when 'tomato'
-      render 'tomato'
-    when 'carrot'
-      render 'carrot'
-    when 'basil'
-      render 'basil'
-    else
-      redirect_to vegetables_path, alert: '選択された野菜が無効です'
-    end
+    render @selected_vegetable || 'default'
   end
 
-  def show
-    @event = Event.find(params[:id])
-  end
-
-  # モーダルでアドバイスを表示するためのアクション
   def advice
     @event = Event.find_by(id: params[:id])
     if @event
-      # イベント名に応じたパーシャル名を動的に生成
-      partial_name = "advice_" + @event.name.downcase.gsub(/\s+/, "_")
+      partial_name = map_event_name_to_partial(@event.name)
       render partial: "events/#{partial_name}", locals: { event: @event }, layout: false
     else
       render json: { error: "Event not found" }, status: :not_found
     end
-  end  
+  end
+
+  private
+
+  def map_event_name_to_partial(name)
+    case name
+    when "種まき"
+      "advice_seed_sowing"
+    when "発芽期間"
+      "advice_germination_period"
+    when "間引き・雑草抜き・害虫駆除"
+      "advice_thinning_weeding_pest_control"
+    when "収穫期間"
+      "advice_harvesting_period"
+    else
+      "advice_default" # デフォルトのパーシャルを指定
+    end
+  end
 end
