@@ -1,10 +1,27 @@
 <h1>にんじんのスケジュール</h1>
 
-<% @events.each do |event| %>
-  <div>
-    <h2><%= event.name %></h2>
-    <p><%= event.start_date %> から <%= event.end_date %> まで</p>
-    <p><%= event.description %></p>
-    <%= link_to 'アドバイスを見る', advice_event_path(event) %>
-  </div>
-<% end %>
+<div class="schedule-buttons">
+  <% @events.each do |event| %>
+    <%= button_tag event.name, type: 'button', class: 'btn btn-info stage-button', data: { toggle: 'modal', target: "#event#{event.id}_modal", 'event-id': event.id } %>
+
+    <!-- モーダル定義 -->
+    <div class="modal fade" id="event<%= event.id %>_modal" tabindex="-1" aria-labelledby="event<%= event.id %>_label" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="event<%= event.id %>_label"><%= event.name %>のアドバイス</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- AJAXでアドバイスを動的に挿入 -->
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<!-- 既存の収穫ボタン -->
+<%= link_to '収穫する', harvest_path, class: 'btn btn-success' %>
