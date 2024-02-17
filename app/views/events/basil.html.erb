@@ -1,28 +1,21 @@
 <h1>バジルのスケジュール</h1>
 
 <div class="schedule-buttons">
-  <% events = {
-    '種まき' => 1, 
-    '発芽期間' => 2, 
-    '間引き・雑草抜き・害虫駆除' => 3, 
-    '収穫期間' => 4
-  } %>
-  
-  <% events.each do |name, id| %>
-    <%= button_tag name, type: 'button', class: 'btn btn-info stage-button', data: { toggle: 'modal', target: "##{name}_modal", 'event-id': id } %>
-    
+  <% @events.each do |event| %>
+    <%= button_tag event.name, type: 'button', class: 'btn btn-info stage-button', data: { toggle: 'modal', target: "#event#{event.id}_modal", 'event-id': event.id } %>
+
     <!-- モーダル定義 -->
-    <div class="modal fade" id="<%= "#{name}_modal" %>" tabindex="-1" role="dialog" aria-labelledby="<%= "#{name}_label" %>">
+    <div class="modal fade" id="event<%= event.id %>_modal" tabindex="-1" aria-labelledby="event<%= event.id %>_label" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="<%= "#{name}_label" %>"><%= "#{name}のアドバイス" %></h5>
+            <h5 class="modal-title" id="event<%= event.id %>_label"><%= event.name %>のアドバイス</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <!-- ここに動的にアドバイスを挿入するためのコンテンツが追加されます -->
+            <!-- AJAXでアドバイスを動的に挿入 -->
           </div>
         </div>
       </div>
