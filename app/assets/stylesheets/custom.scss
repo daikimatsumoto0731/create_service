@@ -4,15 +4,51 @@
     margin: 0 10px 10px 0;
   }
 }
-
-.modal-header {
-  background-color: #5cb85c;
+  
+// バジル用のボタン
+.btn-basil {
+  background-color: #98fb98; // バジルの色
   color: white;
 }
-
-.modal-footer {
-  button {
-    background-color: #5cb85c;
-    color: white;
+  
+// にんじん用のボタン
+.btn-carrot {
+  background-color: #ffa500; // にんじんの色
+  color: white;
+}
+  
+// トマト用のボタン
+.btn-tomato {
+  background-color: #ff6347; // トマトの色
+  color: white;
+}
+  
+.modal-header-basil,
+.modal-footer-basil {
+  background-color: #98fb98; // バジルのモーダルヘッダーとフッター
+  color: white;
+}
+  
+.modal-header-carrot,
+.modal-footer-carrot {
+  background-color: #ffa500; // にんじんのモーダルヘッダーとフッター
+  color: white;
+}
+  
+.modal-header-tomato,
+.modal-footer-tomato {
+  background-color: #ff6347; // トマトのモーダルヘッダーとフッター
+  color: white;
+}
+  
+.modal-dialog {
+  display: flex;
+  align-items: center;
+  min-height: calc(100% - (1rem * 2));
+    
+  @media (min-width: 576px) {
+    min-width: 500px;
+    margin: 1.75rem auto;
   }
 }
+  
