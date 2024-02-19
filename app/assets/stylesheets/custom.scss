@@ -1,0 +1,111 @@
+// ページ全体の設定
+body, html {
+  min-height: 100%; // 画面の全高さを使用
+  height: 100%; // 追加: bodyとhtmlの高さを100%に設定
+  margin: 0; // デフォルトマージンを削除
+}
+
+// コンテンツラッパーの設定
+.content-wrapper {
+  min-height: 100vh; // ビューポートの高さに基づく最小高さを設定
+  position: relative;
+  padding-bottom: 60px; // フッターの高さに応じて調整
+  box-sizing: border-box; // paddingを含む高さ計算に変更
+}
+
+.header {
+  background-color: #ff6347; // トマトの赤色
+  color: white;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.header-basil {
+  background-color: #31f331; // バジルの緑色
+  color: white;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.footer, .footer-basil, .footer-carrot {
+  color: white;
+  position: absolute; // フッターをコンテンツの最下部に配置
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.header-carrot {
+  background-color: #ffa500; // にんじんのオレンジ色
+  color: white;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.footer {
+  background-color: #ff6347; // トマトの赤色
+}
+
+.footer-basil {
+  background-color: #31f331; // バジルの緑色
+}
+
+.footer-carrot {
+  background-color: #ffa500; // にんじんのオレンジ色
+}
+
+.schedule-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 20px 0;
+  margin-top: 200px;
+  .btn {
+    margin: 25px;
+  }
+}
+
+.harvest-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+// モーダル関連のスタイル
+.modal-header-basil,
+.modal-footer-basil {
+  background-color: #98fb98; // バジルのモーダルヘッダーとフッター
+  color: white;
+}
+
+.modal-header-carrot,
+.modal-footer-carrot {
+  background-color: #ffa500; // にんじんのモーダルヘッダーとフッター
+  color: white;
+}
+
+.modal-header-tomato,
+.modal-footer-tomato {
+  background-color: #ff6347; // トマトのモーダルヘッダーとフッター
+  color: white;
+}
+
+.modal-dialog {
+  display: flex;
+  align-items: center;
+  min-height: calc(100% - (.5rem * 2));
+  @media (min-width: 576px) {
+    min-width: 500px;
+    margin: 1.75rem auto;
+  }
+}
+
+.modal-footer {
+  button {
+    background-color: #5cb85c;
+    color: white;
+  }
+}

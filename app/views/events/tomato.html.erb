@@ -1,0 +1,34 @@
+<div class="content-wrapper">
+  <div class="header">
+    <h1>トマトのスケジュール</h1>
+  </div>
+
+  <div class="schedule-buttons">
+    <% @events.each do |event| %>
+      <%= button_tag event.name, type: 'button', class: 'btn btn-info stage-button', data: { toggle: 'modal', target: "#event#{event.id}_modal", 'event-id': event.id } %>
+      <div class="modal fade" id="event<%= event.id %>_modal" tabindex="-1" role="dialog" aria-labelledby="event<%= event.id %>_label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header modal-header-tomato">
+              <h5 class="modal-title" id="event<%= event.id %>_label"><%= event.name %>のアドバイス</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <!-- AJAXでアドバイスを動的に挿入 -->
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="harvest-button-container">
+    <%= link_to '収穫する', harvest_path, class: 'btn btn-success' %>
+  </div>
+
+  <div class="footer">
+    <p>© 2024 Tomato Scheduler</p>
+  </div>
+</div>

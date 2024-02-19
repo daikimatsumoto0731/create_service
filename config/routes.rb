@@ -11,12 +11,23 @@ Rails.application.routes.draw do
   get 'terms', to: 'static_pages#terms', as: :terms
   get 'privacy_policy', to: 'static_pages#privacy_policy', as: :privacy_policy
 
-  # スケジュール画面へのルーティング
-  get 'custom_schedule', to: 'vegetables#custom_schedule', as: 'custom_schedule'
-
-  # 選択ボタンを押した先のルーティング
-  post 'schedule', to: 'vegetables#schedule'
+  # LINE通知設定へのルーティング
+  get 'line_notification_settings', to: 'static_pages#line_notification_settings', as: 'line_notification_settings'
+  patch 'line_notification_settings', to: 'static_pages#line_notification_settings'
 
   # 野菜選択画面へのルーティング
   get 'vegetables', to: 'vegetables#index', as: :vegetables
-end
+  
+  # 野菜選択後のスケジュール表示アクションへのルーティング
+  get 'vegetables/schedule', to: 'vegetables#schedule', as: :vegetable_schedule
+
+  # 収穫アクションへのルーティング
+  get 'events/harvest', to: 'events#harvest', as: :harvest
+
+  # Eventsに関するルーティング
+  resources :events, only: [:index, :show] do
+    member do
+      get 'advice'
+    end
+  end
+end  
