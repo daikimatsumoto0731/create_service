@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_17_141339) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_20_140656) do
   create_table "events", force: :cascade do |t|
     t.string "name"
     t.date "start_date"
@@ -55,6 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_17_141339) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "sowing_date"
   end
 
   add_foreign_key "line_notification_settings", "users"
