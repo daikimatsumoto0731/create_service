@@ -30,4 +30,6 @@ Rails.application.routes.draw do
       get 'advice'
     end
   end
+
+  patch '/events/update_sowing_date', to: 'events#update_sowing_date', as: 'update_sowing_date_events'
 end  

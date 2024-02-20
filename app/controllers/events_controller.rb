@@ -1,7 +1,9 @@
 class EventsController < ApplicationController
+  before_action :set_vegetable, only: [:update_sowing_date]
   def index
     @selected_vegetable = params[:selected_vegetable]
     if @selected_vegetable.present?
+      @vegetable = Vegetable.find_by(name: @selected_vegetable.capitalize)
       @events = Event.joins(:vegetable).where(vegetables: { name: @selected_vegetable })
     else
       @events = Event.all
@@ -20,7 +22,22 @@ class EventsController < ApplicationController
     end
   end
 
+  def update_sowing_date
+    sowing_date = params[:sowing_date]
+    # 文字列の日付をDateオブジェクトに変換する処理が必要な場合はここで実施
+    if @vegetable.update(sowing_date: sowing_date)
+      @vegetable.update_related_event_dates
+      redirect_to events_path(selected_vegetable: @vegetable.name), notice: '種まき日を更新しました。'
+    else
+      redirect_to events_path(selected_vegetable: @vegetable.name), alert: '種まき日の更新に失敗しました。'
+    end
+  end  
+
   private
+
+  def set_vegetable
+    @vegetable = Vegetable.find(params[:vegetable_id])
+  end
 
   def map_event_name_to_partial(event_name, vegetable_name)
     event_key = case event_name

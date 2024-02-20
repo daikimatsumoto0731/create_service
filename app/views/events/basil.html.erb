@@ -3,6 +3,10 @@
     <h1>バジルのスケジュール</h1>
   </div>
 
+  <!-- 種まき日更新フォームのパーシャルをレンダリング -->
+  <%= render 'events/sowing_form', vegetable: @vegetable %>
+
+  <!-- 既存のモーダル表示機能 -->
   <div class="schedule-buttons">
     <% @events.each do |event| %>
       <%= button_tag event.name, type: 'button', class: 'btn btn-info stage-button', data: { toggle: 'modal', target: "#event#{event.id}_modal", 'event-id': event.id } %>
@@ -20,6 +24,19 @@
             </div>
           </div>
         </div>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- 新しいイベント期間表示機能 -->
+  <div class="event-periods">
+    <h2>イベント期間</h2>
+    <% @events.each do |event| %>
+      <div class="event-period-details">
+        <strong><%= event.name %>:</strong>
+        <span>開始日：<%= event.start_date %></span>,
+        <span>終了日：<%= event.end_date %></span>,
+        <span>期間：<%= (event.end_date - event.start_date).to_i %> 日間</span>
       </div>
     <% end %>
   </div>
