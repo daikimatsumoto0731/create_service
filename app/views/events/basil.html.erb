@@ -34,9 +34,9 @@
     <% @events.each do |event| %>
       <div class="event-period-details">
         <strong><%= event.name %>:</strong>
-        <span>開始日：<%= event.start_date %></span>,
-        <span>終了日：<%= event.end_date %></span>,
-        <span>期間：<%= (event.end_date - event.start_date).to_i %> 日間</span>
+        <span>開始日：<%= event.start_date || '未定' %></span>,
+        <span>終了日：<%= event.end_date || '未定' %></span>,
+        <span>期間：<%= event.start_date && event.end_date ? (event.end_date - event.start_date).to_i : '未定' %> 日間</span>
       </div>
     <% end %>
   </div>
