@@ -3,6 +3,8 @@
     <h1>トマトのスケジュール</h1>
   </div>
 
+  <%= render 'events/sowing_form', vegetable: @vegetable %>
+  
   <div class="schedule-buttons">
     <% @events.each do |event| %>
       <%= button_tag event.name, type: 'button', class: 'btn btn-info stage-button', data: { toggle: 'modal', target: "#event#{event.id}_modal", 'event-id': event.id } %>
@@ -20,6 +22,18 @@
             </div>
           </div>
         </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="event-periods">
+    <h2>イベント期間</h2>
+    <% @events.each do |event| %>
+      <div class="event-period-details">
+        <strong><%= event.name %>:</strong>
+        <span>開始日：<%= event.start_date || '未定' %></span>,
+        <span>終了日：<%= event.end_date || '未定' %></span>,
+        <span>期間：<%= event.start_date && event.end_date ? (event.end_date - event.start_date).to_i : '未定' %> 日間</span>
       </div>
     <% end %>
   </div>

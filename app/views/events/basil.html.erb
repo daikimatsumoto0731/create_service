@@ -3,32 +3,31 @@
     <h1>バジルのスケジュール</h1>
   </div>
 
-  <!-- 種まき日更新フォームのパーシャルをレンダリング -->
   <%= render 'events/sowing_form', vegetable: @vegetable %>
 
-  <!-- 既存のモーダル表示機能 -->
   <div class="schedule-buttons">
     <% @events.each do |event| %>
-      <%= button_tag event.name, type: 'button', class: 'btn btn-info stage-button', data: { toggle: 'modal', target: "#event#{event.id}_modal", 'event-id': event.id } %>
-      <div class="modal fade" id="event<%= event.id %>_modal" tabindex="-1" role="dialog" aria-labelledby="event<%= event.id %>_label" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header modal-header-basil">
-              <h5 class="modal-title" id="event<%= event.id %>_label"><%= event.name %>のアドバイス</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <!-- AJAXでアドバイスを動的に挿入 -->
+      <% unless event.name == 'Button' %>
+        <%= button_tag event.name, type: 'button', class: 'btn btn-info stage-button', data: { toggle: 'modal', target: "#event#{event.id}_modal", 'event-id': event.id } %>
+        <div class="modal fade" id="event<%= event.id %>_modal" tabindex="-1" role="dialog" aria-labelledby="event<%= event.id %>_label" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header modal-header-basil">
+                <h5 class="modal-title" id="event<%= event.id %>_label"><%= event.name %>のアドバイス</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <!-- AJAXでアドバイスを動的に挿入 -->
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
 
-  <!-- 新しいイベント期間表示機能 -->
   <div class="event-periods">
     <h2>イベント期間</h2>
     <% @events.each do |event| %>
