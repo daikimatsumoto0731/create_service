@@ -5,13 +5,16 @@ class EventsController < ApplicationController
     @selected_vegetable = params[:selected_vegetable]&.downcase
     if @selected_vegetable.present?
       @vegetable = Vegetable.find_by('lower(name) = ?', @selected_vegetable)
-      @events = @vegetable&.events || Event.none
+      # 「Button」という名前のイベントを除外
+      @events = @vegetable.events.where.not(name: 'Button')
     else
-      @events = Event.all
+      # すべてのイベントから「Button」という名前を除外
+      @events = Event.where.not(name: 'Button')
     end
-
+  
     render template: "events/#{@selected_vegetable || 'default'}"
   end
+  
 
   def advice
     @event = Event.find_by(id: params[:id])
