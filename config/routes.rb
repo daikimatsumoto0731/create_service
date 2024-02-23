@@ -31,5 +31,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :events, only: [:index, :show] do
+    member do
+      get 'advice'
+      patch 'complete'
+    end
+  end
+
   patch '/events/update_sowing_date', to: 'events#update_sowing_date', as: 'update_sowing_date_events'
 end  
