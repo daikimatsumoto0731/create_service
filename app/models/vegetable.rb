@@ -1,55 +1,65 @@
 class Vegetable < ApplicationRecord
   has_many :events, dependent: :destroy
 
-  # 種まき日を基にして関連するイベントの日付を更新するメソッド
+  # 関連するイベントの日付を更新するメソッド
   def update_related_event_dates
     events.each do |event|
-      start_date, end_date = calculate_event_dates(event.name)
+      # 各野菜のイベントごとの新しい日付を計算
+      new_dates = case name.downcase
+                  when "basil"
+                    calculate_basil_event_dates(event.name)
+                  when "carrot"
+                    calculate_carrot_event_dates(event.name)
+                  when "tomato"
+                    calculate_tomato_event_dates(event.name)
+                  end
 
-      if end_date < start_date
-        puts "Validation Error for #{event.name}: End date (#{end_date}) is before start date (#{start_date})"
-      else
-        event.update!(start_date: start_date, end_date: end_date)
-      end
+      # 定義した新しい日付でイベントを更新
+      event.update(start_date: new_dates[:start_date], end_date: new_dates[:end_date]) if new_dates
     end
   end
 
   private
 
-  # イベント名に基づいて開始日と終了日を計算するメソッド
-  def calculate_event_dates(event_name)
+  # バジルのイベント日付を計算
+  def calculate_basil_event_dates(event_name)
     case event_name
     when "種まき"
-      [sowing_date, sowing_date + duration_days(event_name)]
-    else
-      [sowing_date + duration_days(event_name, :start), sowing_date + duration_days(event_name, :end)]
+      { start_date: sowing_date, end_date: sowing_date }
+    when "発芽期間"
+      { start_date: sowing_date, end_date: sowing_date + 20.days }
+    when "間引き・雑草抜き・害虫駆除"
+      { start_date: sowing_date + 20.days, end_date: sowing_date + 60.days }
+    when "収穫期間"
+      { start_date: sowing_date + 60.days, end_date: sowing_date + 100.days }
     end
   end
 
-  # イベント名とフェーズ（:start または :end）に基づいて適切な日数を返すメソッド
-  def duration_days(event_name, phase = nil)
-    case name
-    when "バジル"
-      case event_name
-      when "種まき" then 5.days
-      when "発芽期間" then phase == :start ? 5.days : 25.days
-      when "間引き・雑草抜き・害虫駆除" then phase == :start ? 25.days : 65.days
-      when "収穫期間" then phase == :start ? 65.days : 105.days
-      end
-    when "にんじん"
-      case event_name
-      when "種まき" then 10.days
-      when "発芽期間" then phase == :start ? 10.days : 40.days
-      when "間引き・雑草抜き・害虫駆除" then phase == :start ? 40.days : 90.days
-      when "収穫期間" then phase == :start ? 90.days : 170.days
-      end
-    when "トマト"
-      case event_name
-      when "種まき" then 5.days
-      when "発芽期間" then phase == :start ? 5.days : 35.days
-      when "間引き・雑草抜き・害虫駆除" then phase == :start ? 35.days : 95.days
-      when "収穫期間" then phase == :start ? 95.days : 175.days
-      end
+  # にんじんのイベント日付を計算
+  def calculate_carrot_event_dates(event_name)
+    case event_name
+    when "種まき"
+      { start_date: sowing_date, end_date: sowing_date }
+    when "発芽期間"
+      { start_date: sowing_date, end_date: sowing_date + 30.days }
+    when "間引き・雑草抜き・害虫駆除"
+      { start_date: sowing_date + 30.days, end_date: sowing_date + 80.days }
+    when "収穫期間"
+      { start_date: sowing_date + 80.days, end_date: sowing_date + 160.days }
+    end
+  end
+
+  # トマトのイベント日付を計算
+  def calculate_tomato_event_dates(event_name)
+    case event_name
+    when "種まき"
+      { start_date: sowing_date, end_date: sowing_date }
+    when "発芽期間"
+      { start_date: sowing_date, end_date: sowing_date + 30.days }
+    when "間引き・雑草抜き・害虫駆除"
+      { start_date: sowing_date + 30.days, end_date: sowing_date + 90.days }
+    when "収穫期間"
+      { start_date: sowing_date + 90.days, end_date: sowing_date + 170.days }
     end
   end
 end
