@@ -1,0 +1,9 @@
+<h1>節約額の計算結果</h1>
+
+<p>
+  <%= @harvest.vegetable_type %>の収穫量: <%= @harvest.amount %> kg<br>
+  市場価格: <%= @harvest.price_per_kg %> 円/kg<br>
+  <strong>節約額: <%= number_to_currency(@savings) %> 円</strong>
+</p>
+
+<%= link_to '新しい計算をする', root_path, class: 'btn btn-primary' %>
