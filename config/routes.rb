@@ -28,15 +28,12 @@ Rails.application.routes.draw do
   resources :events, only: [:index, :show] do
     member do
       get 'advice'
-    end
-  end
-
-  resources :events, only: [:index, :show] do
-    member do
-      get 'advice'
       patch 'complete'
     end
   end
 
   patch '/events/update_sowing_date', to: 'events#update_sowing_date', as: 'update_sowing_date_events'
+
+  # 収穫量の入力フォームと節約額の計算結果表示のルーティング
+  resources :harvests, only: [:new, :create]
 end  
