@@ -1,13 +1,20 @@
 class EventsController < ApplicationController
+  before_action :set_vegetable, only: [:update_sowing_date]
+
   def index
-    @selected_vegetable = params[:selected_vegetable]
+    @selected_vegetable = params[:selected_vegetable]&.downcase
     if @selected_vegetable.present?
-      @events = Event.joins(:vegetable).where(vegetables: { name: @selected_vegetable })
+      @vegetable = Vegetable.find_by('lower(name) = ?', @selected_vegetable)
+      # 「Button」という名前のイベントを除外
+      @events = @vegetable.events.where.not(name: 'Button')
     else
-      @events = Event.all
+      # すべてのイベントから「Button」という名前を除外
+      @events = Event.where.not(name: 'Button')
     end
-    render @selected_vegetable || 'default'
+  
+    render template: "events/#{@selected_vegetable || 'default'}"
   end
+  
 
   def advice
     @event = Event.find_by(id: params[:id])
@@ -20,7 +27,27 @@ class EventsController < ApplicationController
     end
   end
 
+  def update_sowing_date
+    sowing_date = Date.parse(params[:sowing_date])
+    @vegetable = Vegetable.find(params[:vegetable_id])
+  
+    ActiveRecord::Base.transaction do
+      if @vegetable.update(sowing_date: sowing_date)
+        @vegetable.update_related_event_dates
+        redirect_to events_path(selected_vegetable: @vegetable.name.downcase), notice: '種まき日を更新しました。'
+      else
+        redirect_to events_path(selected_vegetable: @vegetable.name.downcase), alert: '種まき日の更新に失敗しました。'
+      end
+    end
+  rescue => e
+    redirect_to events_path(selected_vegetable: @vegetable.name.downcase), alert: "更新中にエラーが発生しました: #{e.message}"
+  end
+
   private
+
+  def set_vegetable
+    @vegetable = Vegetable.find(params[:vegetable_id])
+  end
 
   def map_event_name_to_partial(event_name, vegetable_name)
     event_key = case event_name
@@ -28,9 +55,7 @@ class EventsController < ApplicationController
                 when "発芽期間" then "germination_period"
                 when "間引き・雑草抜き・害虫駆除" then "thinning_weeding_pest_control"
                 when "収穫期間" then "harvesting_period"
-                else "default"
                 end
-
     "advice_#{vegetable_name}_#{event_key}"
   end
 end
