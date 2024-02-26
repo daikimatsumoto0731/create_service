@@ -4,6 +4,11 @@
 </div>
 <p>今日の天気</p>
 
+<!-- ここに収穫情報を表示 -->
+<% @user.harvests.each do |harvest| %>
+  <p><%= harvest.vegetable_type %>の収穫量: <%= harvest.amount %> kg, 節約額: <%= harvest.amount * harvest.price_per_kg %> 円</p>
+<% end %>
+
 <div class="button-container">
   <%= link_to '野菜を作る', vegetables_path, class: 'btn-vegetable' %>
 </div>
