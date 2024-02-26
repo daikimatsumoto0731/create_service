@@ -9,4 +9,7 @@ class User < ApplicationRecord
 
   # LINE通知設定モデルへの関連付け
   has_one :line_notification_setting, dependent: :destroy
+
+  # Harvestモデルへの関連付け
+  has_many :harvests, dependent: :destroy
 end
