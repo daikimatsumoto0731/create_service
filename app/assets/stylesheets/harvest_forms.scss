@@ -1,0 +1,60 @@
+// 基本の色定義
+$base-color: #333; // ヘッダーとフッターの色（基本色、使用しないかもしれませんが、残しておきます）
+$tomato-color: #ff6347; // トマト用の色
+$carrot-color: #ffa500; // にんじん用の色
+$basil-color: #4caf50; // バジル用の色
+
+body {
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header, .footer {
+  text-align: center;
+  color: white;
+  padding: 10px;
+}
+
+// 各野菜ごとにヘッダーとフッターの色を設定
+.tomato .header, .tomato .footer { background-color: $tomato-color; }
+.carrot .header, .carrot .footer { background-color: $carrot-color; }
+.basil .header, .basil .footer { background-color: $basil-color; }
+
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.vegetable-section {
+  width: 100%; // 必要に応じて調整
+  max-width: 600px; // コンテンツの幅を調整
+  margin: 20px;
+  padding: 20px;
+  border-radius: 5px;
+  box-sizing: border-box;
+
+  h1 {
+    color: #fff;
+  }
+
+  .field, .actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  label, input[type="number"], input[type="submit"] {
+    width: 100%; // 入力フィールドとボタンの幅を調整
+    max-width: 300px; // これも必要に応じて調整
+  }
+
+  input[type="submit"] {
+    margin-top: 20px; // 送信ボタンとその他の要素との間隔
+  }
+}
