@@ -1,19 +1,29 @@
-<h1>トマトの収穫量を入力してください</h1>
+<body class="tomato">
+  <div class="container">
+    <header class="header">
+      <h1>トマトの収穫量を入力してください</h1>
+    </header>
 
-<%= form_with model: @harvest, url: harvests_path, local: true do |form| %>
-  <%= form.hidden_field :vegetable_type, value: "トマト" %>
+    <%= form_with model: @harvest, url: harvests_path, local: true, html: { class: "vegetable-section tomato" } do |form| %>
+      <%= form.hidden_field :vegetable_type, value: "トマト" %>
 
-  <div class="field">
-    <%= form.label :amount, "収穫量 (kg)" %>
-    <%= form.number_field :amount, step: 0.1 %>
+      <div class="field">
+        <%= form.label :amount, "収穫量 (kg)", class: "label" %>
+        <%= form.number_field :amount, step: 0.1, class: "input" %>
+      </div>
+
+      <div class="field">
+        <%= form.label :price_per_kg, "市場価格 (1kgあたり)", class: "label" %>
+        <%= form.number_field :price_per_kg, step: 0.1, class: "input" %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit "計算する", class: "button" %>
+      </div>
+    <% end %>
+
+    <footer class="footer">
+      © 2024 Vegetable Calculator
+    </footer>
   </div>
-
-  <div class="field">
-    <%= form.label :price_per_kg, "市場価格 (1kgあたり)" %>
-    <%= form.number_field :price_per_kg, step: 0.1, value: @price_per_kg %> <!-- コントローラで設定された価格 -->
-  </div>
-
-  <div class="actions">
-    <%= form.submit "計算する" %>
-  </div>
-<% end %>
+</body>
