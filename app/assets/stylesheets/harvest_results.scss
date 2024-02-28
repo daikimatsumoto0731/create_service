@@ -1,0 +1,37 @@
+.show-harvest-background {
+  background-image: image-url('result.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.harvest-results {
+  max-width: 800px;
+  padding: 40px;
+  background-color: rgba(255, 255, 255, 0.9); // 背景を半透明にしてテキストを読みやすくする
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}  
+
+h1 {
+  color: #333;
+  margin-bottom: 30px; // タイトルの下のマージンを増やす
+  font-size: 24px; // タイトルのフォントサイズを大きく
+}
+
+p {
+  line-height: 1.8;
+  margin-bottom: 30px; // 段落の下のマージンを増やす
+  font-size: 18px; // テキストのフォントサイズを大きく
+}
+
+.btn-primary {
+  padding: 15px 30px; // ボタンのパディングを増やして大きく
+  font-size: 18px; // ボタンのフォントサイズを大きく
+}
