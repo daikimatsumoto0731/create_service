@@ -1,18 +1,18 @@
-// ページ全体の設定
+/* ページ全体の設定 */
 body, html {
   height: 100%;
   margin: 0;
 }
 
-// コンテンツラッパーの設定
+/* コンテンツラッパーの設定 */
 .content-wrapper {
-  min-height: 100vh;
+  min-height: 100vh; /* ビューポートの高さに合わせて最小高さを設定 */
   position: relative;
-  padding-bottom: 60px;
-  box-sizing: border-box;
+  padding-bottom: 60px; /* フッターの高さに応じて調整 */
+  box-sizing: border-box; /* ボックスサイズの計算方法を指定 */
 }
 
-// ヘッダーとフッターの設定
+/* ヘッダーとフッターの設定 */
 .header-tomato, .header-basil, .header-carrot {
   color: white;
   padding: 5px 0;
@@ -22,31 +22,17 @@ body, html {
   &.header-carrot { background-color: #ffa500; }
 }
 
-.footer-tomato, .footer-basil, .footer-carrot {
-  color: white;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  text-align: center;
-  width: 100%;
-  padding: 5px 0;
-  &.footer-tomato { background-color: #ff6347; }
-  &.footer-basil { background-color: #31f331; }
-  &.footer-carrot { background-color: #ffa500; }
-}
-
-// イベント期間のスタイル
+/* イベント期間のスタイル */
 .event-periods {
   background: #f0f0f0;
   border-radius: 8px;
-  margin: 20px;
-  padding: 20px;
+  margin: 10px;
+  padding: 10px;
   .event-period-details {
     background: white;
     border-radius: 8px;
-    margin-bottom: 10px;
-    padding: 15px;
+    margin-bottom: 5px;
+    padding: 10px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     &:last-child { margin-bottom: 0; }
     strong { font-size: 18px; }
@@ -57,7 +43,7 @@ body, html {
   }
 }
 
-// スケジュールボタンのスタイル
+/* スケジュールボタンのスタイル */
 .schedule-buttons {
   display: flex;
   justify-content: center;
@@ -72,14 +58,15 @@ body, html {
   }
 }
 
-// ハーベストボタンコンテナのスタイル
+/* ハーベストボタンコンテナのスタイル */
 .harvest-button-container {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 10px; /* 余白を減らす */
+  overflow: auto; /* 必要に応じてスクロール可能に */
 }
 
-// モーダル関連のスタイル
+/* モーダル関連のスタイル */
 .modal-header, .modal-footer {
   &.modal-header-tomato, &.modal-header-basil, &.modal-header-carrot {
     color: white;

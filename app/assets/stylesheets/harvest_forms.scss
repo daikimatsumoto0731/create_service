@@ -1,5 +1,5 @@
 // 基本の色定義
-$base-color: #333; // ヘッダーとフッターの色（基本色、使用しないかもしれませんが、残しておきます）
+$base-color: #333; // 基本色（ここでは使用しませんが残しておきます）
 $tomato-color: #ff6347; // トマト用の色
 $carrot-color: #ffa500; // にんじん用の色
 $basil-color: #4caf50; // バジル用の色
@@ -15,12 +15,31 @@ body {
   text-align: center;
   color: white;
   padding: 10px;
+  font-size: 18px; // ヘッダーの文字サイズを小さく調整
 }
 
-// 各野菜ごとにヘッダーとフッターの色を設定
-.tomato .header, .tomato .footer { background-color: $tomato-color; }
-.carrot .header, .carrot .footer { background-color: $carrot-color; }
-.basil .header, .basil .footer { background-color: $basil-color; }
+.footer {
+  display: flex;
+  justify-content: center;
+  width: 100%; // フッターの幅を全体に設定
+  font-size: 16px; // フッターのフォントサイズ調整
+}
+
+// 各野菜ごとにヘッダーとフッターの色、および背景画像を設定
+.tomato {
+  background-image: image-url('tomato-background.webp');
+  .header, .footer { background-color: $tomato-color; }
+}
+
+.carrot {
+  background-image: image-url('carrot-background.webp');
+  .header, .footer { background-color: $carrot-color; }
+}
+
+.basil {
+  background-image: image-url('basil-background.webp');
+  .header, .footer { background-color: $basil-color; }
+}
 
 .container {
   flex: 1;
@@ -28,33 +47,26 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: 20px 0;
 }
 
 .vegetable-section {
-  width: 100%; // 必要に応じて調整
-  max-width: 600px; // コンテンツの幅を調整
-  margin: 20px;
+  width: 100%;
+  max-width: 600px;
   padding: 20px;
   border-radius: 5px;
   box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.8);
+  margin-bottom: 30px;
+}
 
-  h1 {
-    color: #fff;
-  }
+.field, .actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
 
-  .field, .actions {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
-
-  label, input[type="number"], input[type="submit"] {
-    width: 100%; // 入力フィールドとボタンの幅を調整
-    max-width: 300px; // これも必要に応じて調整
-  }
-
-  input[type="submit"] {
-    margin-top: 20px; // 送信ボタンとその他の要素との間隔
-  }
+input[type="submit"] {
+  margin-top: 20px;
 }
