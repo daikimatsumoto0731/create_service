@@ -24,17 +24,17 @@
     </div>
   <% end %>
 
-  <!= --LINEでのサインボタン -->
-  <form class="button_to" method="post" action="/users/auth/line">
-    <button data-turbo="false" type="submit">Sign in with Line</button>
-    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" autocomplete="off" />
-  </form><br>
+  <div class="line-login-action">
+    <%= form_tag("/users/auth/line", method: "post", class: "button_to") do %>
+      <%= button_tag(type: 'submit', class: "line-login-button") do %>
+        LINEログインはこちらから
+      <% end %>
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <% end %>
+  </div><br>
 </div>
 
 <div class="footer">
   <%= link_to '利用規約', terms_path %>
   <%= link_to 'プライバシーポリシー', privacy_policy_path %>
 </div>
-
-<!-- 以下の行を削除またはコメントアウト -->
-<!-- <%= render "devise/shared/links" %> -->

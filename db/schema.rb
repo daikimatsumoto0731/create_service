@@ -52,15 +52,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_28_124932) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-<<<<<<< HEAD
   end
 
-=======
     t.date "sowing_date"
   end
 
   add_foreign_key "harvests", "users"
->>>>>>> main
   add_foreign_key "line_notification_settings", "users"
   add_foreign_key "schedules", "vegetables"
 end
