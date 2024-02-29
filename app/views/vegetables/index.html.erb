@@ -5,6 +5,20 @@
   <%= stylesheet_link_tag 'vegetable', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'vegetable_selection', 'data-turbolinks-track': 'reload' %>
   <%= csrf_meta_tags %>
+  <style>
+    /* 野菜ボタンの背景色を指定 */
+    .vegetable-button.carrot {
+      background-color: orange;
+    }
+
+    .vegetable-button.tomato {
+      background-color: red;
+    }
+
+    .vegetable-button.basil {
+      background-color: green;
+    }
+  </style>
 </head>
 <body>
   <header>

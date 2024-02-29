@@ -2,7 +2,6 @@
   <h1>ようこそ<%= @user.username %>さん</h1>
   <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'logout-link' %>
 </div>
-<p>今日の天気</p>
 
 <!-- 集計された収穫情報を表示 -->
 <% @aggregated_harvests.each do |harvest| %>
