@@ -9,14 +9,16 @@
 }
 
 .header h1 {
-  color: black;
+  color: white; /* 文字の色を白に設定 */
   margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 文字に立体感を与える影を追加 */
 }
 
 .header .weather {
-  color: black;
+  color: white; /* 文字の色を白に設定 */
   margin: 0;
   text-align: left;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 文字に立体感を与える影を追加 */
 }
 
 /* 野菜を選択ボタンのスタイル */
@@ -41,7 +43,7 @@
   justify-content: center; /* 中央寄せ */
   align-items: center; /* 縦方向の中央寄せ */
   position: relative; /* 絶対位置から相対位置に変更 */
-  margin-top: 450px;
+  margin-top: 250px;
   width: 100%;
 }
 

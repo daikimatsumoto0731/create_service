@@ -1,0 +1,77 @@
+/* ページ全体の設定 */
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+/* コンテンツラッパーの設定 */
+.content-wrapper {
+  min-height: 100vh; /* ビューポートの高さに合わせて最小高さを設定 */
+  position: relative;
+  padding-bottom: 60px; /* フッターの高さに応じて調整 */
+  box-sizing: border-box; /* ボックスサイズの計算方法を指定 */
+}
+
+/* ヘッダーとフッターの設定 */
+.header-tomato, .header-basil, .header-carrot {
+  color: white;
+  padding: 5px 0;
+  text-align: center;
+  &.header-tomato { background-color: #ff6347; }
+  &.header-basil { background-color: #31f331; }
+  &.header-carrot { background-color: #ffa500; }
+}
+
+/* イベント期間のスタイル */
+.event-periods {
+  background: #f0f0f0;
+  border-radius: 8px;
+  margin: 10px;
+  padding: 10px;
+  .event-period-details {
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    &:last-child { margin-bottom: 0; }
+    strong { font-size: 18px; }
+    p {
+      margin: 5px 0;
+      &:last-child { margin-bottom: 0; }
+    }
+  }
+}
+
+/* スケジュールボタンのスタイル */
+.schedule-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 20px 0;
+  .btn {
+    margin: 10px;
+    &:hover {
+      transform: scale(1.05);
+      transition: transform 0.2s ease-in-out;
+    }
+  }
+}
+
+/* ハーベストボタンコンテナのスタイル */
+.harvest-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px; /* 余白を減らす */
+  overflow: auto; /* 必要に応じてスクロール可能に */
+}
+
+/* モーダル関連のスタイル */
+.modal-header, .modal-footer {
+  &.modal-header-tomato, &.modal-header-basil, &.modal-header-carrot {
+    color: white;
+  }
+  &.modal-header-tomato { background-color: #ff6347; }
+  &.modal-header-basil { background-color: #31f331; }
+  &.modal-header-carrot { background-color: #ffa500; }
+}

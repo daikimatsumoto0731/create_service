@@ -1,8 +1,14 @@
 <div class="header">
-<h1>ようこそ<%= @user.username %>さん</h1>
-<%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'logout-link' %>
+  <h1>ようこそ<%= @user.username %>さん</h1>
+  <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'logout-link' %>
 </div>
-<p>今日の天気</p>
+
+<!-- 集計された収穫情報を表示 -->
+<% @aggregated_harvests.each do |harvest| %>
+  <p><%= harvest.vegetable_type %>の累計収穫量: <%= harvest.total_amount %> kg, 累計節約額: <%= number_with_precision(harvest.total_savings, precision: 2) %> 円</p>
+  <!-- 特定の野菜のデータを削除するリンク -->
+  <%= link_to 'この野菜のデータを全て削除', destroy_by_vegetable_type_harvests_path(vegetable_type: harvest.vegetable_type), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+<% end %>
 
 <div class="button-container">
   <%= link_to '野菜を作る', vegetables_path, class: 'btn-vegetable' %>
