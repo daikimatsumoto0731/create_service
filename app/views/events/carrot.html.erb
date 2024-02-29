@@ -42,10 +42,6 @@
   </div>
 
   <div class="harvest-button-container">
-    <%= link_to '収穫する', harvest_path, class: 'btn btn-success' %>
-  </div>
-
-  <div class="footer-carrot">
-    <p>© 2024 Carrot Scheduler</p>
+    <%= link_to '収穫する', new_harvest_path(vegetable_type: 'にんじん'), class: 'btn btn-success' %>
   </div>
 </div>

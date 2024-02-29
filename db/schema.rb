@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_20_140656) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_26_141057) do
   create_table "events", force: :cascade do |t|
     t.string "name"
     t.date "start_date"
@@ -20,6 +20,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_20_140656) do
     t.datetime "updated_at", null: false
     t.integer "vegetable_id"
     t.index ["vegetable_id"], name: "index_events_on_vegetable_id"
+  end
+
+  create_table "harvests", force: :cascade do |t|
+    t.decimal "amount"
+    t.string "vegetable_type"
+    t.decimal "price_per_kg"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_harvests_on_user_id"
   end
 
   create_table "line_notification_settings", force: :cascade do |t|
@@ -58,5 +68,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_20_140656) do
     t.date "sowing_date"
   end
 
+  add_foreign_key "harvests", "users"
   add_foreign_key "line_notification_settings", "users"
 end

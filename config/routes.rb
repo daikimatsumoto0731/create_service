@@ -22,15 +22,9 @@ Rails.application.routes.draw do
   get 'vegetables/schedule', to: 'vegetables#schedule', as: :vegetable_schedule
 
   # 収穫アクションへのルーティング
-  get 'events/harvest', to: 'events#harvest', as: :harvest
+  
 
   # Eventsに関するルーティング
-  resources :events, only: [:index, :show] do
-    member do
-      get 'advice'
-    end
-  end
-
   resources :events, only: [:index, :show] do
     member do
       get 'advice'
@@ -39,4 +33,14 @@ Rails.application.routes.draw do
   end
 
   patch '/events/update_sowing_date', to: 'events#update_sowing_date', as: 'update_sowing_date_events'
+
+  # 収穫量の入力フォームと節約額の計算結果表示のルーティング
+  resources :harvests, only: [:new, :create, :show]
+
+  # データを削除するための機能
+  resources :harvests do
+    collection do
+      delete 'destroy_by_vegetable_type'
+    end
+  end
 end  
