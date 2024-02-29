@@ -160,6 +160,8 @@ GEM
     mini_mime (1.1.5)
     mini_portile2 (2.8.5)
     minitest (5.20.0)
+    momentjs-rails (2.29.4.1)
+      railties (>= 3.1)
     msgpack (1.7.2)
     multi_xml (0.6.0)
     net-http (0.4.1)
@@ -345,8 +347,12 @@ DEPENDENCIES
   letter_opener
   line-bot-api (~> 1.28)
   listen (~> 3.5)
+<<<<<<< HEAD
   omniauth-line
   omniauth-rails_csrf_protection
+=======
+  momentjs-rails
+>>>>>>> main
   pg (~> 1.5)
   puma (~> 5.0)
   rails (~> 7.0.8)

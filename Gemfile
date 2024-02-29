@@ -43,14 +43,20 @@ gem 'devise-i18n'
 gem 'webpacker'
 gem 'bootstrap', '~> 5.0'
 gem 'jquery-rails'
+<<<<<<< HEAD
 gem 'line-bot-api', '~> 1.28'
 gem 'dotenv-rails'
+=======
+gem 'momentjs-rails'
+>>>>>>> main
 
 # HTTPリクエストを簡単に扱うためのgem
 gem 'httparty'
 
 # Cronジョブをスケジュールするためのgem
 gem 'whenever', require: false
+
+gem 'webpacker'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
