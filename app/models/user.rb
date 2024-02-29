@@ -11,7 +11,6 @@ class User < ApplicationRecord
   # LINE通知設定モデルへの関連付け
   has_one :line_notification_setting, dependent: :destroy
 
-<<<<<<< HEAD
   def social_profile(provider)
     social_profiles.select { |sp| sp.provider == provider.to_s }.first
   end
@@ -32,8 +31,6 @@ class User < ApplicationRecord
     self.raw_info = raw_info.to_json
     self.save!
   end
-=======
   # Harvestモデルへの関連付け
   has_many :harvests, dependent: :destroy
->>>>>>> main
 end
