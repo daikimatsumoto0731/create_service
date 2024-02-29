@@ -335,7 +335,7 @@ DEPENDENCIES
   line-bot-api (~> 1.28)
   listen (~> 3.5)
   momentjs-rails
-  omniauth-line
+  omniauth-line (<= 2.1.2)
   omniauth-rails_csrf_protection
   pg (~> 1.5)
   puma (~> 5.0)

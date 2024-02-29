@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     sessions: 'user_sessions',
     passwords: 'users/passwords',
-    omniauth_callbacks: "omniauth_callbacks"
+    omniauth_callbacks: "users/omniauth_callbacks"
   }
 
   resources :users, only: [:show]
@@ -21,10 +21,7 @@ Rails.application.routes.draw do
   get 'vegetables', to: 'vegetables#index', as: :vegetables
   
   # 野菜選択後のスケジュール表示アクションへのルーティング
-  get 'vegetables/schedule', to: 'vegetables#schedule', as: :vegetable_schedule
-
-  # 収穫アクションへのルーティング
-  
+  get 'vegetables/schedule', to: 'vegetables#schedule', as: :vegetable_schedule  
 
   # Eventsに関するルーティング
   resources :events, only: [:index, :show] do
@@ -45,4 +42,4 @@ Rails.application.routes.draw do
       delete 'destroy_by_vegetable_type'
     end
   end
-end  
+end

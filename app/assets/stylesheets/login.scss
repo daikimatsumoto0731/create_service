@@ -83,3 +83,22 @@
     }
   }
   
+  /* 既存のスタイルはそのままに、LINEログインボタンのスタイルを追加 */
+.line-login-action {
+  text-align: center;
+  margin-top: 20px; /* フォームとの間隔 */
+}
+
+.line-login-button {
+  font-size: 16px;
+  color: #FFFFFF;
+  background-color: #00C300;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken(#00C300, 10%);
+  }
+}

@@ -41,5 +41,10 @@
         <%= f.submit "会員登録" %>
       </div>
     <% end %>
+
+    <!-- LINEでの会員登録ボタンを追加 -->
+    <div class="actions">
+      <%= link_to "LINEで会員登録", user_line_omniauth_authorize_path, method: :post, class: "line-sign-up-button" %>
+    </div>
   </div>
 </div>
