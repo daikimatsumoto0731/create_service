@@ -1,9 +1,12 @@
 /* ヘッダー */
 header {
   background-color: limegreen;
-  padding: 10px;
+  padding: 20px 10px; /* 上下のパディングを増やしてテキストに余裕を持たせる */
   text-align: center;
   color: white;
+  font-size: 24px; /* フォントサイズを大きくする */
+  font-weight: bold; /* フォントを太くする */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* テキストに影を追加して読みやすくする */
   position: fixed;
   top: 0;
   left: 0;
@@ -22,25 +25,28 @@ header {
 }
 
 .vegetable-button {
-  margin: 10px 50px; /* ボタン間の余白を適切に設定 */
+  margin: 10px 50px; 
   padding: 20px 30px;
   border: none;
   border-radius: 5px;
   font-size: 18px;
   cursor: pointer;
   color: white;
-  
-  &.carrot {
-    background-color: orange;
-  }
+}
 
-  &.tomato {
-    background-color: red;
-  }
+/* キャロットのボタン */
+.vegetable-button.carrot {
+  background-color: orange;
+}
 
-  &.basil {
-    background-color: green;
-  }
+/* トマトのボタン */
+.vegetable-button.tomato {
+  background-color: red;
+}
+
+/* バジルのボタン */
+.vegetable-button.basil {
+  background-color: green;
 }
 
 /* 選択ボタンを野菜ボタンの下に配置 */
