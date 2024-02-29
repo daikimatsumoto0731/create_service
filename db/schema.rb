@@ -10,32 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema[7.0].define(version: 2024_01_28_124932) do
-=======
-ActiveRecord::Schema[7.0].define(version: 2024_02_26_141057) do
-  create_table "events", force: :cascade do |t|
-    t.string "name"
-    t.date "start_date"
-    t.date "end_date"
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "vegetable_id"
-    t.index ["vegetable_id"], name: "index_events_on_vegetable_id"
-  end
-
-  create_table "harvests", force: :cascade do |t|
-    t.decimal "amount"
-    t.string "vegetable_type"
-    t.decimal "price_per_kg"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "user_id"
-    t.index ["user_id"], name: "index_harvests_on_user_id"
-  end
-
->>>>>>> main
   create_table "line_notification_settings", force: :cascade do |t|
     t.integer "user_id", null: false
     t.boolean "receive_notifications", default: false
