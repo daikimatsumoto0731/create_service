@@ -4,7 +4,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.1.4'
 
 gem 'rails', '~> 7.0.8'
-gem 'sqlite3'
+# SQLiteは開発とテストでのみ使用
+# gem 'sqlite3' # この行を削除
 gem 'puma', '~> 5.0'
 gem 'sassc-rails', '~> 2.1'
 gem 'uglifier', '>= 1.3.0'
@@ -22,11 +23,12 @@ gem 'line-bot-api', '~> 1.28'
 gem 'momentjs-rails'
 gem 'httparty'
 gem 'whenever', require: false
-gem 'pg', "~> 1.5"
+# gem 'pg', "~> 1.5" # この行を移動
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'dotenv-rails' # dotenv-rails はここでのみ必要と仮定
+  gem 'sqlite3', '~> 1.4' # SQLiteをここに移動
 end
 
 group :development do
@@ -42,6 +44,10 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   gem 'webdrivers', '~> 4.0'
+end
+
+group :production do
+  gem 'pg', '~> 1.5' # PostgreSQLを本番環境用にここに追加
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
