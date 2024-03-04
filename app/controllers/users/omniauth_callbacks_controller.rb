@@ -19,6 +19,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     state = SecureRandom.hex(15)
     disable_auto_login_url = "https://access.line.me/oauth2/v2.1/authorize?disable_auto_login=true&response_type=code&client_id=#{client_id}&redirect_uri=#{redirect_uri}&state=#{state}&scope=profile%20openid&nonce=#{SecureRandom.hex(10)}"
     
-    redirect_to disable_auto_login_url, alert: message
+    redirect_to disable_auto_login_url, alert: message, allow_other_host: true
   end
 end
