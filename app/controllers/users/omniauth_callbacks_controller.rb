@@ -15,8 +15,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     # ユーザーを自動ログインが無効な認可URLへリダイレクト
     message = "LINEでの認証に失敗しました。再度ログインを試みてください。"
     client_id = ENV['LINE_CHANNEL_ID']
-    redirect_uri = CGI.escape(" 
-    https://vegetable-services-3fae4f23ca19.herokuapp.com/users/auth/line/callback")
+    redirect_uri = CGI.escape("https://vegetable-services-3fae4f23ca19.herokuapp.com/users/auth/line/callback")
     state = SecureRandom.hex(15)
     disable_auto_login_url = "https://access.line.me/oauth2/v2.1/authorize?disable_auto_login=true&response_type=code&client_id=#{client_id}&redirect_uri=#{redirect_uri}&state=#{state}&scope=profile%20openid&nonce=#{SecureRandom.hex(10)}"
     
