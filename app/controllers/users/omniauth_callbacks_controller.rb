@@ -13,9 +13,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def failure
-    error_reason = env['omniauth.error.type']
-    error_message = env['omniauth.error']&.message
+    error_reason = request.env['omniauth.error.type'].to_s
+    error_message = request.env['omniauth.error']&.message
     Rails.logger.info "OmniAuth Failure, reason: #{error_reason}, message: #{error_message}"
-    redirect_to root_path, alert: "LINEでの認証に失敗しました。詳細: #{error_message}"
+    redirect_to root_path, alert: "LINEでの認証に失敗しました。理由: #{error_message}"
   end
 end
