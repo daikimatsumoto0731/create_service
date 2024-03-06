@@ -332,7 +332,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails
   letter_opener
-  line-bot-api (~> 1.28)
+  line-bot-api
   listen (~> 3.5)
   momentjs-rails
   omniauth-line (<= 2.1.2)

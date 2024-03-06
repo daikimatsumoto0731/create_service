@@ -13,13 +13,17 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise', '~> 4.8'
+
 gem 'omniauth-line', '<= 2.1.2'
 gem 'omniauth-rails_csrf_protection'
 gem 'devise-i18n'
 gem 'webpacker'
+gem 'dotenv-rails'
+
 gem 'bootstrap', '~> 5.0'
 gem 'jquery-rails'
-gem 'line-bot-api', '~> 1.28'
+gem 'line-bot-api'
+
 gem 'momentjs-rails'
 gem 'httparty'
 gem 'whenever', require: false
@@ -27,7 +31,6 @@ gem 'whenever', require: false
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'dotenv-rails' # dotenv-rails はここでのみ必要と仮定
   gem 'sqlite3', '~> 1.4' # SQLiteをここに移動
 end
 
