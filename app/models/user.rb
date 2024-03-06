@@ -5,19 +5,21 @@ class User < ApplicationRecord
 
   validates :username, presence: true
   validates :prefecture, presence: true
+   validates :line_user_id, presence: true, if: -> { provider == 'line' }
 
   has_one :line_notification_setting, dependent: :destroy
   has_many :harvests, dependent: :destroy
 
+  # OmniAuth認証データからユーザーを検索または作成します
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
+      user.email = auth.info.email.presence || user.email
       user.password = Devise.friendly_token[0, 20]
-      user.username = auth.info.name
-      # LINEから受け取る他のデータもここで設定する
-      # 例: user.name = auth.info.name
+      user.username = auth.info.name.presence || user.username
+      user.profile_image = auth.info.image
     end
   end
+<<<<<<< HEAD
   
   def social_profile(provider)
     social_profile.select { |sp| sp.provider == provider.to_s }.first
@@ -38,4 +40,6 @@ class User < ApplicationRecord
     self.raw_info = raw_info.to_json
     self.save!
   end
+=======
+>>>>>>> create_19
 end
