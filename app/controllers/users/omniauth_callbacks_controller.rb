@@ -25,15 +25,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 
-<<<<<<< HEAD
-  def failure
-    error_reason = request.env['omniauth.error.type'].to_s
-    error_message = request.env['omniauth.error']&.message
-    Rails.logger.info "OmniAuth Failure, reason: #{error_reason}, message: #{error_message}"
-    redirect_to root_path, alert: "LINEでの認証に失敗しました。理由: #{error_message}"
-=======
   def fake_email(uid, provider)
     "#{uid}-#{provider}-#{SecureRandom.hex(5)}@example.com"
->>>>>>> create_19
   end
 end
