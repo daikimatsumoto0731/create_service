@@ -20,12 +20,22 @@ class User < ApplicationRecord
   end
   
   def social_profile(provider)
-    # LINE認証時には、このメソッドのロジックが適用される場合があります。
-    # 必要に応じて、ここでの処理を実装してください。
+    social_profile.select { |sp| sp.provider == provider.to_s }.first
   end
 
   def set_values(omniauth)
-    # LINE認証からのデータを基に、必要なユーザー情報を設定するロジックをここに追加します。
-    # 上記のfrom_omniauthメソッドで大部分の処理が行われるため、このメソッドの使用が必要な場合は特に注意してください。
+    return if provider.to_s != omniauth["provider"].to_s || uid != omniauth["uid"]
+    credentials = omniauth["credentials"]
+    info = omniauth["info"]
+
+    access_token = credentials["refresh_token"]
+    access_secret = credentials["secret"]
+    credentials = credentials.to_json
+    name = info["name"]
+  end
+
+  def set_value_by_raw_info(raw_info)
+    self.raw_info = raw_info.to_json
+    self.save!
   end
 end
