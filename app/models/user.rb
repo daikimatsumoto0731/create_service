@@ -29,4 +29,10 @@ class User < ApplicationRecord
   def self.generate_email(auth)
     "#{auth.uid}@#{auth.provider}.example.com"
   end
+
+  def refresh_access_token(omniauth)
+    self.access_token = omniauth.credentials.token
+    self.token_expires_at = Time.at(omniauth.credentials.expires_at) if omniauth.credentials.expires_at
+    save!
+  end
 end
