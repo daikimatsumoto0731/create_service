@@ -1,15 +1,29 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
-  # バリデーションの追加
+         :recoverable, :rememberable, :validatable,
+         :omniauthable, omniauth_providers: %i[line]
+
   validates :username, presence: true
   validates :prefecture, presence: true
+  validates :line_user_id, presence: true, if: -> { provider == 'line' }
 
-  # LINE通知設定モデルへの関連付け
   has_one :line_notification_setting, dependent: :destroy
-
-  # Harvestモデルへの関連付け
   has_many :harvests, dependent: :destroy
+
+  # OmniAuth認証データからユーザーを検索または作成します
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email.presence || user.email
+      user.password = Devise.friendly_token[0, 20]
+      user.username = auth.info.name.presence || user.username
+      user.profile_image = auth.info.image
+    end
+  end
+
+  # アクセストークンと有効期限を更新
+  def refresh_access_token(auth)
+    self.access_token = auth.credentials.token
+    self.token_expires_at = Time.at(auth.credentials.expires_at) if auth.credentials.expires_at
+    save!
+  end
 end

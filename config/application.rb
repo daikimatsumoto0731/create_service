@@ -13,6 +13,8 @@ module VegetableService
 
     config.i18n.default_locale = :ja
 
+    config.active_record.sqlite3_production_warning = false
+
     config.time_zone = 'Asia/Tokyo'
 
     config.assets.paths << Rails.root.join("vendor", "assets", "javascripts")
