@@ -9,16 +9,16 @@
 }
 
 .header h1 {
-  color: white; /* 文字の色を白に設定 */
+  color: white;
   margin: 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 文字に立体感を与える影を追加 */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .header .weather {
-  color: white; /* 文字の色を白に設定 */
+  color: white;
   margin: 0;
   text-align: left;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 文字に立体感を与える影を追加 */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 /* 野菜を選択ボタンのスタイル */
@@ -37,12 +37,17 @@
   font-weight: bold;
 }
 
+.btn-vegetable:hover {
+  background-color: #d4e009;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
+}
+
 /* ボタンを囲む親要素のスタイル */
 .button-container {
   display: flex;
-  justify-content: center; /* 中央寄せ */
-  align-items: center; /* 縦方向の中央寄せ */
-  position: relative; /* 絶対位置から相対位置に変更 */
+  justify-content: center;
+  align-items: center;
+  position: relative;
   margin-top: 250px;
   width: 100%;
 }
@@ -78,5 +83,28 @@
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
-  margin-right: auto; /* フッター内で右寄せ */
+  margin-right: auto;
+}
+
+.line-notification-link:hover {
+  background-color: #f0f0f0;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* プロフィール編集ボタンのスタイル */
+.profile-edit-link {
+  background-color: white;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: auto;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.profile-edit-link:hover {
+  background-color: #f0f0f0;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
 }

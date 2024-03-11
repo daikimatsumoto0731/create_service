@@ -13,14 +13,14 @@ class User < ApplicationRecord
   # OmniAuth認証データからユーザーを検索または作成します
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email.presence || user.email
+      user.email = auth.info.email.presence || User.generate_email(auth)
       user.password = Devise.friendly_token[0, 20]
-      user.username = auth.info.name.presence || user.username
-      user.profile_image = auth.info.image
+      user.username = auth.info.name.presence || "LINE User"
+      user.line_user_id = auth.uid
+      user.prefecture = "未設定"
     end
   end
 
-  # アクセストークンと有効期限を更新
   def refresh_access_token(auth)
     self.access_token = auth.credentials.token
     self.token_expires_at = Time.at(auth.credentials.expires_at) if auth.credentials.expires_at
