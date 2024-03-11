@@ -3,9 +3,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[line]
 
-  # LINE認証のユーザーはusernameとprefectureのバリデーションをスキップ
-  validates :username, presence: true, unless: -> { provider == 'line' }
-  validates :prefecture, presence: true, unless: -> { provider == 'line' }
+  validates :username, presence: true
+  validates :prefecture, presence: true
   validates :line_user_id, presence: true, if: -> { provider == 'line' }
 
   has_one :line_notification_setting, dependent: :destroy
@@ -25,14 +24,10 @@ class User < ApplicationRecord
     end
   end
 
-  # LINE認証で取得したuidを元に仮のメールアドレスを生成
-  def self.generate_email(auth)
-    "#{auth.uid}@#{auth.provider}.example.com"
-  end
-
-  def refresh_access_token(omniauth)
-    self.access_token = omniauth.credentials.token
-    self.token_expires_at = Time.at(omniauth.credentials.expires_at) if omniauth.credentials.expires_at
+  # アクセストークンと有効期限を更新
+  def refresh_access_token(auth)
+    self.access_token = auth.credentials.token
+    self.token_expires_at = Time.at(auth.credentials.expires_at) if auth.credentials.expires_at
     save!
   end
 end
