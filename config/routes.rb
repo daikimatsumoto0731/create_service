@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   }
 
   resources :users, only: [:show, :edit, :update]
+  # ユーザー設定のルーティングを追加
+  resource :user_setting, only: [:edit, :update]
 
   root 'static_pages#top'
   
