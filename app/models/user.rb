@@ -9,6 +9,7 @@ class User < ApplicationRecord
 
   has_one :line_notification_setting, dependent: :destroy
   has_many :harvests, dependent: :destroy
+  has_many :notifications, dependent: :destroy
 
   # OmniAuth認証データからユーザーを検索または作成します
   def self.from_omniauth(auth)
