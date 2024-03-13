@@ -1,0 +1,27 @@
+# app/controllers/user_settings_controller.rb
+class UserSettingsController < ApplicationController
+  before_action :set_user_setting, only: [:edit, :update]
+  
+  def edit
+  end
+  
+  def update
+    if @user_setting.update(user_setting_params)
+      flash[:notice] = '設定が更新されました。'
+      render :edit
+    else
+      render :edit
+    end
+  end
+  
+  private
+  
+  def set_user_setting
+   @user_setting = current_user.user_setting || current_user.create_user_setting
+  end
+  
+  def user_setting_params
+    params.require(:user_setting).permit(:watering_time, :receive_notifications)
+  end
+end
+  

@@ -8,6 +8,7 @@ class User < ApplicationRecord
   validates :line_user_id, presence: true, if: -> { provider == 'line' }
 
   has_one :line_notification_setting, dependent: :destroy
+  has_one :user_setting, dependent: :destroy
   has_many :harvests, dependent: :destroy
   has_many :notifications, dependent: :destroy
 
