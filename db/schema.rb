@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_13_095853) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_13_123417) do
   create_table "events", force: :cascade do |t|
     t.string "name"
     t.date "start_date"
@@ -53,6 +53,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_13_095853) do
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
+  create_table "user_settings", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.time "watering_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "receive_notifications"
+    t.index ["user_id"], name: "index_user_settings_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -85,4 +94,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_13_095853) do
   add_foreign_key "harvests", "users"
   add_foreign_key "line_notification_settings", "users"
   add_foreign_key "notifications", "users"
+  add_foreign_key "user_settings", "users"
 end

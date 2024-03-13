@@ -1,0 +1,65 @@
+.header {
+  background-color: #09f409;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  color: white;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+  
+.user-settings-form {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  
+  .field {
+    margin-bottom: 20px;
+  }
+  
+  .actions {
+    margin-top: 20px;
+  
+    input[type="submit"] {
+      background-color: #09f409;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+  
+      &:hover {
+        background-color: darken(#09f409, 10%);
+      }
+    }
+  
+    a.back-link {
+      display: inline-block;
+      background-color: #09f409;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      margin-left: 10px;
+  
+      &:hover {
+        background-color: darken(#09f409, 10%);
+      }
+    }
+  }
+}
+  
+.footer {
+  background-color: #09f409;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: white;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 20px;
+}
+  
