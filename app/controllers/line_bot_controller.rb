@@ -18,11 +18,7 @@ class LineBotController < ApplicationController
       when Line::Bot::Event::Message
         case event.type
         when Line::Bot::Event::MessageType::Text
-          message = {
-            type: 'text',
-            text: '水やりの時間です！'
-          }
-          line_bot_client.reply_message(event['replyToken'], message)
+          reply_message(event['replyToken'], '水やりの時間です！')
         end
       end
     end
@@ -34,5 +30,14 @@ class LineBotController < ApplicationController
 
   def line_bot_client
     @line_bot_client ||= Rails.application.config.line_bot_client
+  end
+
+  # LINEメッセージを返信する処理
+  def reply_message(reply_token, text)
+    message = {
+      type: 'text',
+      text: text
+    }
+    line_bot_client.reply_message(reply_token, message)
   end
 end
