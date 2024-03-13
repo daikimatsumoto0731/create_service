@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  message: MyString
+  sent_at: 2024-03-13 18:58:53
+
+two:
+  user: two
+  message: MyString
+  sent_at: 2024-03-13 18:58:53

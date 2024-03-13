@@ -3,6 +3,17 @@
   <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'logout-link' %>
 </div>
 
+<!-- 通知履歴を表示 -->
+<div class="notifications-history">
+  <h2>最近の通知</h2>
+  <% @user.notifications.order(sent_at: :desc).limit(5).each do |notification| %>
+    <div class="notification">
+      <p><%= notification.message %></p>
+      <p><%= notification.sent_at.strftime("%Y-%m-%d %H:%M") %></p>
+    </div>
+  <% end %>
+</div>
+
 <!-- 集計された収穫情報を表示 -->
 <% @aggregated_harvests.each do |harvest| %>
   <p><%= harvest.vegetable_type %>の累計収穫量: <%= harvest.total_amount %> kg, 累計節約額: <%= number_with_precision(harvest.total_savings, precision: 2) %> 円</p>

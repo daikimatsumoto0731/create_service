@@ -24,6 +24,10 @@ gem 'bootstrap', '~> 5.0'
 gem 'jquery-rails'
 gem 'line-bot-api'
 
+gem 'sidekiq'
+gem 'sidekiq-scheduler'
+
+
 gem 'momentjs-rails'
 gem 'httparty'
 gem 'whenever', require: false
