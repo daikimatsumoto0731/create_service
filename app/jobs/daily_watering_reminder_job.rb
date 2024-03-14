@@ -16,5 +16,5 @@ class DailyWateringReminderJob
     end
     Rails.logger.info "DailyWateringReminderJob finished"
   end
-  end
+end
   
