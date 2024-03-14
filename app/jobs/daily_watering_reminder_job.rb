@@ -1,9 +1,9 @@
 class DailyWateringReminderJob
   include Sidekiq::Worker
-      
+        
   def perform
     Rails.logger.info "DailyWateringReminderJob started"
-    User.includes(:user_setting).find_each do |user|
+    User.joins(:user_setting).find_each do |user|
       if user.line_user_id.present? && user.user_setting&.should_receive_notifications?
         Rails.logger.info "Sending push message to user: #{user.id}"
         begin
