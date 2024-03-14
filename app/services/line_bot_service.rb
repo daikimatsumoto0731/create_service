@@ -2,7 +2,7 @@ class LineBotService
   def self.send_push_message(line_user_id, message_text)
     # LINEクライアントの設定
     client = Line::Bot::Client.new { |config|
-      config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
+      config.channel_secret = ENV["LINE_MESSAGING_API_CHANNEL_SECRET"]
       config.channel_token = ENV["LINE_CHANNEL_TOKEN"]
     }
     
