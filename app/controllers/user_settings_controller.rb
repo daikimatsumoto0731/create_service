@@ -7,8 +7,7 @@ class UserSettingsController < ApplicationController
   
   def update
     if @user_setting.update(user_setting_params)
-      flash[:notice] = '設定が更新されました。'
-      render :edit
+      redirect_to user_path(current_user), notice: '設定が更新されました。'
     else
       render :edit
     end
