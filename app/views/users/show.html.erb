@@ -3,9 +3,9 @@
   <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'logout-link' %>
 </div>
 
-<!-- 通知履歴を表示 -->
+<!-- 通知履歴を表示 --># 機能が出来次第表示予定
 <div class="notifications-history">
-  <h2>最近の通知</h2>
+  # この行に通知表示のタイトルを入れる
   <% @user.notifications.order(sent_at: :desc).limit(5).each do |notification| %>
     <div class="notification">
       <p><%= notification.message %></p>
