@@ -5,16 +5,20 @@ class EventsController < ApplicationController
     @selected_vegetable = params[:selected_vegetable]&.downcase
     if @selected_vegetable.present?
       @vegetable = Vegetable.find_by('lower(name) = ?', @selected_vegetable)
-      # 「Button」という名前のイベントを除外
-      @events = @vegetable.events.where.not(name: 'Button')
+      if @vegetable
+        # 「Button」という名前のイベントを除外
+        @events = @vegetable.events.where.not(name: 'Button')
+      else
+        redirect_to events_path, alert: "#{@selected_vegetable} に該当する野菜は見つかりませんでした。"
+      end
     else
       # すべてのイベントから「Button」という名前を除外
       @events = Event.where.not(name: 'Button')
     end
-  
-    render template: "events/#{@selected_vegetable || 'default'}"
+    
+    template_name = @vegetable ? @selected_vegetable : 'default'
+    render template: "events/#{template_name}"
   end
-  
 
   def advice
     @event = Event.find_by(id: params[:id])
@@ -46,7 +50,10 @@ class EventsController < ApplicationController
   private
 
   def set_vegetable
-    @vegetable = Vegetable.find(params[:vegetable_id])
+    @vegetable = Vegetable.find_by(id: params[:vegetable_id])
+    unless @vegetable
+      redirect_to events_path, alert: '指定された野菜は見つかりませんでした。'
+    end
   end
 
   def map_event_name_to_partial(event_name, vegetable_name)
