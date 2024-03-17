@@ -14,13 +14,6 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.header .weather {
-  color: white;
-  margin: 0;
-  text-align: left;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
 /* 野菜を選択ボタンのスタイル */
 .btn-vegetable {
   background-color: #e4f409;
@@ -57,7 +50,7 @@
   background-color: #09f409;
   display: flex;
   align-items: center;
-  padding: 30px;
+  padding: 20px;
   border-top: 3px solid #09f409;
   justify-content: flex-end;
 }
@@ -107,4 +100,41 @@
 .profile-edit-link:hover {
   background-color: #f0f0f0;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* ボタンのスタイル */
+.btn-delete {
+  background-color: #87ceed; /* 青色をより薄く調整 */
+  color: black;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-delete:hover {
+  background-color: #6ca6cd; /* ホバー時の色を調整 */
+  color: black;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* 修正された部分 */
+.delete-button {
+  text-align: center;
+  margin-bottom: 10px; /* ボタンの配置を調整 */
+}
+
+/* 累計節約額の横にボタンを配置するスタイル */
+.savings-with-button {
+  display: flex;
+  align-items: center;
+}
+
+/* 累計収穫量と累計節約額のスタイル */
+.harvest-info {
+  font-family: "Arial", sans-serif; /* ゴシック体に変更 */
+  font-size: 18px; /* フォントサイズを調整 */
+  font-weight: bold; /* 太字にする */
+  color: black; /* テキストの色を黒に設定 */
+  margin-right: 10px; /* 右側の余白を調整 */
 }
