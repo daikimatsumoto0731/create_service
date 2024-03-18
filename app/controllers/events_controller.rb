@@ -9,7 +9,7 @@ class EventsController < ApplicationController
         # 「Button」という名前のイベントを除外
         @events = @vegetable.events.where.not(name: 'Button')
       else
-        redirect_to events_path, alert: "#{@selected_vegetable} に該当する野菜は見つかりませんでした。"
+        redirect_to events_path, alert: "#{@selected_vegetable} に該当する野菜は見つかりませんでした。" and return
       end
     else
       # すべてのイベントから「Button」という名前を除外
@@ -18,7 +18,7 @@ class EventsController < ApplicationController
     
     template_name = @vegetable ? @selected_vegetable : 'default'
     render template: "events/#{template_name}"
-  end
+  end  
 
   def advice
     @event = Event.find_by(id: params[:id])
