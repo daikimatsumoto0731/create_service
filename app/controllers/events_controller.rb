@@ -3,6 +3,7 @@ class EventsController < ApplicationController
 
   def index
     @selected_vegetable = params[:selected_vegetable]&.downcase
+    logger.debug("Selected vegetable: #{@selected_vegetable}") # ログに値を出力する
     if @selected_vegetable.present?
       @vegetable = Vegetable.find_by('lower(name) = ?', @selected_vegetable)
       if @vegetable
@@ -19,7 +20,7 @@ class EventsController < ApplicationController
     template_name = @vegetable ? @selected_vegetable : 'default'
     render template: "events/#{template_name}"
   end  
-
+  
   def advice
     @event = Event.find_by(id: params[:id])
     if @event
