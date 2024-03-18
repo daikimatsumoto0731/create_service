@@ -2,7 +2,7 @@
   <!-- ヘッダー -->
   <div class="header">
     <div class="logo-circle"></div>
-    <div class="service-name">サービス名</div>
+    <div class="service-name">野菜栽培〜無No薬〜</div>
     <!-- 会員登録ページでは認証ボタンは不要 -->
   </div>
 
@@ -24,7 +24,7 @@
 
       <div class="field">
         <%= f.label :prefecture %><br />
-        <%= f.text_field :prefecture %>
+        <%= f.select :prefecture, PREFECTURES, include_blank: true %>
       </div>
 
       <div class="field">

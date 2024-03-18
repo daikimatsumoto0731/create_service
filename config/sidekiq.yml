@@ -1,18 +1,12 @@
-# Sidekiqのキュー設定
 :queues:
   - default
   - mailers
   - [high_priority, 2]
   - [low_priority, 1]
 
-# Sidekiqジョブのスケジュール設定
-:schedule:
-  # 毎日特定の時間に実行するジョブの設定
-  daily_watering_reminder:
-    cron: "0 10 * * *"   # 毎日10時に実行 (分 時 日 月 曜日)
-    class: "DailyWateringReminderJob" # 実行するジョブクラスの名前
-    queue: default # ジョブが実行されるキュー
-    # ジョブに渡す追加の引数がある場合は、argsキーを使用します（今回は使用しません）
-
-# この設定は、毎日10時に`DailyWateringReminderJob`クラスのジョブを`default`キューに対して実行するようSidekiqに指示します。
-# `cron`の設定は、分、時、日、月、曜日の順で指定し、"*"は「任意の」という意味です。
+:scheduler:
+  :schedule:
+    daily_watering_reminder:
+      cron: "0 10 * * *"
+      class: "DailyWateringReminderJob"
+      queue: default

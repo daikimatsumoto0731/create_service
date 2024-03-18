@@ -1,7 +1,7 @@
 <%= form_with(model: [vegetable, vegetable.events.build], url: update_sowing_date_events_path, method: :patch, local: true) do |form| %>
   <%= form.label :sowing_date, '種まき日' %>
-  <%= form.date_field :sowing_date, required: true, name: 'sowing_date' %>
+  <% selected_date = session[:selected_date] || Date.today %> <!-- 修正: セッションに保存された日付を取得 -->
+  <%= form.date_field :sowing_date, required: true, name: 'sowing_date', value: selected_date %> <!-- 修正: 初期値をセッションの日付に設定 -->
   <%= hidden_field_tag :vegetable_id, vegetable.id %>
   <%= form.submit "更新" %>
 <% end %>
-  

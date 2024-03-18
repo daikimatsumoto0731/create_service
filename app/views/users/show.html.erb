@@ -3,9 +3,9 @@
   <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'logout-link' %>
 </div>
 
-<!-- 通知履歴を表示 -->
+<!-- 通知履歴を表示 --> 
 <div class="notifications-history">
-  <h2>最近の通知</h2>
+  <!-- この行に通知表示のタイトルを入れる -->
   <% @user.notifications.order(sent_at: :desc).limit(5).each do |notification| %>
     <div class="notification">
       <p><%= notification.message %></p>
@@ -16,16 +16,32 @@
 
 <!-- 集計された収穫情報を表示 -->
 <% @aggregated_harvests.each do |harvest| %>
-  <p><%= harvest.vegetable_type %>の累計収穫量: <%= harvest.total_amount %> kg, 累計節約額: <%= number_with_precision(harvest.total_savings, precision: 2) %> 円</p>
-  <!-- 特定の野菜のデータを削除するリンク -->
-  <%= link_to 'この野菜のデータを全て削除', destroy_by_vegetable_type_harvests_path(vegetable_type: harvest.vegetable_type), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+  <div class="savings-with-button">
+    <p class="harvest-info" style="color: <%=
+      case harvest.vegetable_type
+      when 'にんじん'
+        'orange'
+      when 'トマト'
+        'red'
+      when 'バジル'
+        'green'
+      else
+        'black'
+      end %>;">
+      <%= harvest.vegetable_type %>の累計収穫量: <%= harvest.total_amount %> kg, 累計節約額: <%= number_with_precision(harvest.total_savings, precision: 2) %> 円
+    </p>
+    <!-- 特定の野菜のデータを削除するボタン -->
+    <div class="delete-button">
+      <%= button_to 'この野菜のデータを全て削除', destroy_by_vegetable_type_harvests_path(vegetable_type: harvest.vegetable_type), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn-delete' %>
+    </div>
+  </div>
 <% end %>
 
-<div class="button-container">
+<div class="button-container"> <!-- ここに野菜を作るボタンを追加 -->
   <%= link_to '野菜を作る', vegetables_path, class: 'btn-vegetable' %>
 </div>
 
 <footer class="footer">
-  <%= link_to 'LINE通知設定はこちらから', edit_user_setting_path, class: 'line-notification-link' %>
+  <!-- <%= link_to 'LINE通知設定はこちらから', edit_user_setting_path, class: 'line-notification-link' %> --> 
   <%= link_to 'プロフィールを編集', edit_user_path(@user), class: 'profile-edit-link' %>
 </footer>
