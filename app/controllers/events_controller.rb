@@ -3,14 +3,13 @@ class EventsController < ApplicationController
 
   def index
     @selected_vegetable = params[:selected_vegetable]&.downcase
-    logger.debug("Selected vegetable: #{@selected_vegetable}") # ログに値を出力する
     if @selected_vegetable.present?
       @vegetable = Vegetable.find_by('lower(name) = ?', @selected_vegetable)
       if @vegetable
         # 「Button」という名前のイベントを除外
         @events = @vegetable.events.where.not(name: 'Button')
       else
-        redirect_to events_path, alert: "#{@selected_vegetable} に該当する野菜は見つかりませんでした。" and return
+        redirect_to events_path, alert: "#{@selected_vegetable} に該当する野菜は見つかりませんでした。"
       end
     else
       # すべてのイベントから「Button」という名前を除外
@@ -19,8 +18,8 @@ class EventsController < ApplicationController
     
     template_name = @vegetable ? @selected_vegetable : 'default'
     render template: "events/#{template_name}"
-  end  
-  
+  end
+
   def advice
     @event = Event.find_by(id: params[:id])
     if @event
@@ -45,7 +44,6 @@ class EventsController < ApplicationController
       end
     end
   rescue => e
-    logger.error("Error occurred while updating sowing date: #{e.message}")
     redirect_to events_path(selected_vegetable: @vegetable.name.downcase), alert: "更新中にエラーが発生しました: #{e.message}"
   end
 
