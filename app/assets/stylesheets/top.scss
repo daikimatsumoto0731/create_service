@@ -3,11 +3,12 @@
     background-color: #09f409;
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 30px;
 
     .logo-circle {
-      height: 100px;
-      width: 100px;
+      height: 200px;
+      width: 200px;
       border-radius: 50%;
       margin-right: 10px;
       background-image: url('/assets/top-log.png');
@@ -16,7 +17,9 @@
 
     .service-name {
       font-size: 65px;
+      font-weight: bold;
       color: white;
+      text-shadow: 2px 2px 4px black; /* 黒い影を追加 */
       margin-right: auto;
     }
 
