@@ -11,7 +11,7 @@ class EventsController < ApplicationController
         # 「Button」という名前のイベントを除外
         @events = @vegetable.events.where.not(name: 'Button')
       else
-        redirect_to events_path, alert: "#{@selected_vegetable} に該当する野菜は見つかりませんでした。"
+        redirect_to events_path, alert: "#{@selected_vegetable} に該当する野菜は見つかりませんでした。" and return
       end
     else
       # すべてのイベントから「Button」という名前を除外
