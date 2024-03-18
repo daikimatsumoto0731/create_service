@@ -45,6 +45,7 @@ class EventsController < ApplicationController
       end
     end
   rescue => e
+    logger.error("Error occurred while updating sowing date: #{e.message}")
     redirect_to events_path(selected_vegetable: @vegetable.name.downcase), alert: "更新中にエラーが発生しました: #{e.message}"
   end
 
