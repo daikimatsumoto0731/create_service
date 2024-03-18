@@ -1,9 +1,7 @@
+# frozen_string_literal: true
+
 class UserSessionsController < Devise::SessionsController
-  def new
-    super
-  end
-    
-    # ユーザーのログイン処理
+  # ユーザーのログイン処理
   def create
     self.resource = warden.authenticate!(auth_options)
     if resource
@@ -15,9 +13,6 @@ class UserSessionsController < Devise::SessionsController
       render :new
     end
   end
-    
+
   # ユーザーのログアウト処理
-  def destroy
-    super
-  end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Vegetable < ApplicationRecord
   has_many :events, dependent: :destroy
 
@@ -6,11 +8,11 @@ class Vegetable < ApplicationRecord
     events.each do |event|
       # 各野菜のイベントごとの新しい日付を計算
       new_dates = case name.downcase
-                  when "basil"
+                  when 'basil'
                     calculate_basil_event_dates(event.name)
-                  when "carrot"
+                  when 'carrot'
                     calculate_carrot_event_dates(event.name)
-                  when "tomato"
+                  when 'tomato'
                     calculate_tomato_event_dates(event.name)
                   end
 
@@ -24,13 +26,13 @@ class Vegetable < ApplicationRecord
   # バジルのイベント日付を計算
   def calculate_basil_event_dates(event_name)
     case event_name
-    when "種まき"
+    when '種まき'
       { start_date: sowing_date, end_date: sowing_date }
-    when "発芽期間"
+    when '発芽期間'
       { start_date: sowing_date, end_date: sowing_date + 20.days }
-    when "間引き・雑草抜き・害虫駆除"
+    when '間引き・雑草抜き・害虫駆除'
       { start_date: sowing_date + 20.days, end_date: sowing_date + 60.days }
-    when "収穫期間"
+    when '収穫期間'
       { start_date: sowing_date + 60.days, end_date: sowing_date + 100.days }
     end
   end
@@ -38,13 +40,13 @@ class Vegetable < ApplicationRecord
   # にんじんのイベント日付を計算
   def calculate_carrot_event_dates(event_name)
     case event_name
-    when "種まき"
+    when '種まき'
       { start_date: sowing_date, end_date: sowing_date }
-    when "発芽期間"
+    when '発芽期間'
       { start_date: sowing_date, end_date: sowing_date + 30.days }
-    when "間引き・雑草抜き・害虫駆除"
+    when '間引き・雑草抜き・害虫駆除'
       { start_date: sowing_date + 30.days, end_date: sowing_date + 80.days }
-    when "収穫期間"
+    when '収穫期間'
       { start_date: sowing_date + 80.days, end_date: sowing_date + 160.days }
     end
   end
@@ -52,13 +54,13 @@ class Vegetable < ApplicationRecord
   # トマトのイベント日付を計算
   def calculate_tomato_event_dates(event_name)
     case event_name
-    when "種まき"
+    when '種まき'
       { start_date: sowing_date, end_date: sowing_date }
-    when "発芽期間"
+    when '発芽期間'
       { start_date: sowing_date, end_date: sowing_date + 30.days }
-    when "間引き・雑草抜き・害虫駆除"
+    when '間引き・雑草抜き・害虫駆除'
       { start_date: sowing_date + 30.days, end_date: sowing_date + 90.days }
-    when "収穫期間"
+    when '収穫期間'
       { start_date: sowing_date + 90.days, end_date: sowing_date + 170.days }
     end
   end

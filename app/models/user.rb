@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
@@ -17,9 +19,9 @@ class User < ApplicationRecord
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email.presence || User.generate_email(auth)
       user.password = Devise.friendly_token[0, 20]
-      user.username = auth.info.name.presence || "LINE User"
+      user.username = auth.info.name.presence || 'LINE User'
       user.line_user_id = auth.uid
-      user.prefecture = "未設定"
+      user.prefecture = '未設定'
     end
   end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'boot'
 
 require 'rails/all'
@@ -17,8 +19,7 @@ module VegetableService
 
     config.time_zone = 'Asia/Tokyo'
 
-    config.assets.paths << Rails.root.join("vendor", "assets", "javascripts")
-
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'javascripts')
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
