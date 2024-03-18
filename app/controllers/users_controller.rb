@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update]
+  before_action :set_user, only: %i[show edit update]
 
   def show
     @aggregated_harvests = Harvest.aggregate_by_vegetable_type(@user)
@@ -7,8 +9,7 @@ class UsersController < ApplicationController
     @notifications = @user.notifications.order(sent_at: :desc).limit(5)
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @user.update(user_params)
@@ -19,7 +20,7 @@ class UsersController < ApplicationController
   end
 
   private
-  
+
   def set_user
     @user = current_user
   end

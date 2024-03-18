@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
@@ -30,11 +32,11 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              'smtp.example.com',
-    port:                 587,
-    user_name:            'your_username',
-    password:             'your_password',
-    authentication:       'plain',
+    address: 'smtp.example.com',
+    port: 587,
+    user_name: 'your_username',
+    password: 'your_password',
+    authentication: 'plain',
     enable_starttls_auto: true
   }
   config.action_mailer.perform_deliveries = true
