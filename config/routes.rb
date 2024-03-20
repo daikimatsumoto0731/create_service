@@ -1,17 +1,19 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   get 'line_bot/callback'
   devise_for :users, controllers: {
     sessions: 'user_sessions',
     passwords: 'users/passwords',
-    omniauth_callbacks: "users/omniauth_callbacks"
+    omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: %i[show edit update]
   # ユーザー設定のルーティングを追加
-  resource :user_setting, only: [:edit, :update]
+  resource :user_setting, only: %i[edit update]
 
   root 'static_pages#top'
-  
+
   get 'terms', to: 'static_pages#terms', as: :terms
   get 'privacy_policy', to: 'static_pages#privacy_policy', as: :privacy_policy
 
@@ -23,12 +25,12 @@ Rails.application.routes.draw do
 
   # 野菜選択画面へのルーティング
   get 'vegetables', to: 'vegetables#index', as: :vegetables
-  
+
   # 野菜選択後のスケジュール表示アクションへのルーティング
-  get 'vegetables/schedule', to: 'vegetables#schedule', as: :vegetable_schedule  
+  get 'vegetables/schedule', to: 'vegetables#schedule', as: :vegetable_schedule
 
   # Eventsに関するルーティング
-  resources :events, only: [:index, :show] do
+  resources :events, only: %i[index show] do
     member do
       get 'advice'
       patch 'complete'
@@ -38,7 +40,7 @@ Rails.application.routes.draw do
   patch '/events/update_sowing_date', to: 'events#update_sowing_date', as: 'update_sowing_date_events'
 
   # 収穫量の入力フォームと節約額の計算結果表示のルーティング
-  resources :harvests, only: [:new, :create, :show]
+  resources :harvests, only: %i[new create show]
 
   # データを削除するための機能
   resources :harvests do

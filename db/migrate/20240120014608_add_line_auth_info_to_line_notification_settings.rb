@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddLineAuthInfoToLineNotificationSettings < ActiveRecord::Migration[7.0]
   def change
     add_column :line_notification_settings, :line_auth_info_api_key, :string
