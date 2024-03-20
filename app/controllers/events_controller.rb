@@ -11,25 +11,16 @@ class EventsController < ApplicationController
         # 「Button」という名前のイベントを除外
         @events = @vegetable.events.where.not(name: 'Button')
       else
-        redirect_to events_path, alert: "#{@selected_vegetable} に該当する野菜は見つかりませんでした。" and return
+        redirect_to events_path, alert: "#{@selected_vegetable} に該当する野菜は見つかりませんでした。"
       end
     else
       # すべてのイベントから「Button」という名前を除外
       @events = Event.where.not(name: 'Button')
     end
-  
+
     template_name = @vegetable ? @selected_vegetable : 'default'
-  
-    # ここでテンプレートの存在を確認
-    if lookup_context.exists?(template_name, 'events', true)
-      render template: "events/#{template_name}"
-    else
-      # テンプレートが存在しない場合の処理
-      # 例えば、デフォルトのテンプレートをレンダリングするなど
-      redirect_to events_path, alert: "指定されたテンプレートが見つかりませんでした。" and return
-    end
+    render template: "events/#{template_name}"
   end
-  
 
   def advice
     @event = Event.find_by(id: params[:id])
