@@ -1,0 +1,37 @@
+.header-terms {
+  background-color: #09f409; /* ヘッダーの背景色を適切に設定 */
+  padding: 10px 0; /* 適切な余白を設定 */
+  
+  .container-terms {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+    
+  .header-buttons-terms {
+    margin-right: 20px; /* ボタンを右側に余白を設定 */
+  }
+    
+  .header-text-terms {
+    text-align: center;
+    font-weight: bold; /* ヘッダーテキストを中央揃えにする */
+  }
+    
+  .back-button-terms {
+    /* バックボタンのスタイル */
+    padding: 8px 16px; /* 適切なパディングを設定 */
+    background-color: #5260f4; /* ボタンの背景色を適切に設定 */
+    color: #060606; /* ボタンのテキスト色を適切に設定 */
+    border: none; /* ボーダーをなしに設定 */
+    border-radius: 4px; /* ボタンの角丸を設定 */
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer; /* カーソルをポインターに設定 */
+    transition: background-color 0.3s, color 0.3s; /* ホバー時のトランジションを設定 */
+  
+    &:hover {
+      background-color: #0cc0e4; /* ホバー時の背景色を設定 */
+      color: #ffffff; /* ホバー時のテキスト色を設定 */
+    }
+  }
+}

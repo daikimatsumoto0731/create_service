@@ -1,4 +1,4 @@
-.login-form-container {
+.login-form-container-login {
     // ログインフォームのスタイル
     h2 {
       text-align: center;
@@ -6,7 +6,7 @@
       margin-bottom: 20px;
     }
     
-    .field {
+    .field-login {
       margin-bottom: 15px;
   
       label {
@@ -23,7 +23,7 @@
       }
     }
   
-    .actions {
+    .actions-login {
       text-align: center;
   
       input[type="submit"] {
@@ -43,7 +43,7 @@
   }
   
   // ヘッダーとフッターのスタイルはログインフォームの外に配置
-  .header {
+  .header-login {
     background-color: #09f409;
     display: flex;
     align-items: center;
@@ -66,7 +66,7 @@
     }
   }
 
-  .footer {
+  .footer-login {
     font-size: 20px;
     background-color: #09f409;
     padding: 30px;
@@ -84,12 +84,12 @@
   }
   
   /* 既存のスタイルはそのままに、LINEログインボタンのスタイルを追加 */
-.line-login-action {
+.line-login-action-login {
   text-align: center;
   margin-top: 20px; /* フォームとの間隔 */
 }
 
-.line-login-button {
+.line-login-button-login {
   font-size: 16px;
   color: #FFFFFF;
   background-color: #00C300;

@@ -1,10 +1,10 @@
 <!-- ヘッダー -->
-<div class="header">
+<div class="header-profile">
   <h1>プロフィール編集</h1>
 </div>
 
 <!-- プロフィール編集フォーム -->
-<div class="edit-profile-form">
+<div class="edit-profile-form-profile">
   <%= form_for(@user) do |f| %>
     <% if @user.errors.any? %>
       <div id="error_explanation">
@@ -17,27 +17,27 @@
       </div>
     <% end %>
 
-    <div class="field">
+    <div class="field-profile">
       <%= f.label :username %><br>
       <%= f.text_field :username %>
     </div>
 
-    <div class="field">
+    <div class="field-profile">
       <%= f.label :email %><br>
       <%= f.email_field :email %>
     </div>
 
-    <div class="field">
+    <div class="field-profile">
       <%= f.label :prefecture %><br>
       <%= f.select :prefecture, PREFECTURES, include_blank: true %>
     </div>
 
-    <div class="actions">
+    <div class="actions-profile">
       <%= f.submit "更新" %>
     </div>
   <% end %>
 </div>
 
 <!-- フッター -->
-<div class="footer">
+<div class="footer-profile">
 </div>

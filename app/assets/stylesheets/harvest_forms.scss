@@ -33,7 +33,7 @@ body {
 .carrot .header, .carrot .footer { background-color: $carrot-color; }
 .basil .header, .basil .footer { background-color: $basil-color; }
 
-.container {
+.container-harvest {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -44,7 +44,7 @@ body {
   width: 90%;
 }
 
-.vegetable-section {
+.vegetable-section-harvest {
   width: 100%;
   max-width: 800px;
   padding: 30px;
@@ -53,27 +53,27 @@ body {
   margin: 20px 0;
 }
 
-.field, .actions {
+.field-harvest, .actions-harvest {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 30px;
 }
 
-.label {
+.label-harvest {
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
-.input[type="number"] {
+.input-harvest[type="number"] {
   font-size: 18px;
   padding: 15px;
   width: 100%;
   border: 2px solid $base-color;
 }
 
-.button {
+.button-harvest {
   font-size: 20px;
   padding: 15px 30px;
   cursor: pointer;

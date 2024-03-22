@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 Rails.application.routes.draw do
   get 'line_bot/callback'
   devise_for :users, controllers: {
