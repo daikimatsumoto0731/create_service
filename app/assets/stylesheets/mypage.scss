@@ -1,5 +1,5 @@
 /* ヘッダーのスタイル */
-.header {
+.header-mypage {
   background-color: #09f409;
   display: flex;
   align-items: center;
@@ -8,14 +8,14 @@
   justify-content: space-between;
 }
 
-.header h1 {
+.header-mypage h1 {
   color: white;
   margin: 0;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 /* 野菜を選択ボタンのスタイル */
-.btn-vegetable {
+.btn-vegetable-mypage {
   background-color: #e4f409;
   border: none;
   padding: 10px 15px;
@@ -30,13 +30,13 @@
   font-weight: bold;
 }
 
-.btn-vegetable:hover {
+.btn-vegetable-mypage:hover {
   background-color: #d4e009;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
 }
 
 /* ボタンを囲む親要素のスタイル */
-.button-container {
+.button-container-mypage {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,7 +46,7 @@
 }
 
 /* フッターのスタイル */
-.footer {
+.footer-mypage {
   background-color: #09f409;
   display: flex;
   align-items: center;
@@ -55,18 +55,18 @@
   justify-content: flex-end;
 }
 
-.footer a, .header a {
+.footer-mypage a, .header-mypage a {
   color: black;
   text-decoration: none;
   margin: 0 10px;
 }
 
-.footer a:hover, .header a:hover {
+.footer-mypage a:hover, .header-mypage a:hover {
   text-decoration: underline;
 }
 
 /* LINE通知設定リンクのスタイル */
-.line-notification-link {
+.line-notification-link-mypage {
   background-color: white;
   border: none;
   padding: 10px 15px;
@@ -79,13 +79,13 @@
   margin-right: auto;
 }
 
-.line-notification-link:hover {
+.line-notification-link-mypage:hover {
   background-color: #f0f0f0;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
 }
 
 /* プロフィール編集ボタンのスタイル */
-.profile-edit-link {
+.profile-edit-link-mypage {
   background-color: white;
   color: white;
   padding: 10px 20px;
@@ -97,13 +97,13 @@
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.profile-edit-link:hover {
+.profile-edit-link-mypage:hover {
   background-color: #f0f0f0;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
 }
 
 /* ボタンのスタイル */
-.btn-delete {
+.btn-delete-mypage {
   background-color: #87ceed; /* 青色をより薄く調整 */
   color: black;
   padding: 8px 15px;
@@ -112,26 +112,26 @@
   cursor: pointer;
 }
 
-.btn-delete:hover {
+.btn-delete-mypage:hover {
   background-color: #6ca6cd; /* ホバー時の色を調整 */
   color: black;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
 }
 
 /* 修正された部分 */
-.delete-button {
+.delete-button-mypage {
   text-align: center;
   margin-bottom: 10px; /* ボタンの配置を調整 */
 }
 
 /* 累計節約額の横にボタンを配置するスタイル */
-.savings-with-button {
+.savings-with-button-mypage {
   display: flex;
   align-items: center;
 }
 
 /* 累計収穫量と累計節約額のスタイル */
-.harvest-info {
+.harvest-info-mypage {
   font-family: "Arial", sans-serif; /* ゴシック体に変更 */
   font-size: 18px; /* フォントサイズを調整 */
   font-weight: bold; /* 太字にする */

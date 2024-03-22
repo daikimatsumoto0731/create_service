@@ -11,7 +11,7 @@ body {
 }
 
 // ヘッダーのスタイル
-.header {
+.header-profile {
   background-color: $primary-color;
   padding: 20px;
   display: flex;
@@ -25,7 +25,7 @@ body {
 }
 
 // フッターのスタイル
-.footer {
+.footer-profile {
   background-color: $primary-color;
   padding: 20px;
   display: flex;
@@ -45,14 +45,14 @@ body {
 }
 
 // プロフィール編集フォームのスタイル
-.edit-profile-form {
+.edit-profile-form-profile {
   background-color: $light-grey;
   padding: 40px;
   border-radius: 5px;
   max-width: 500px;
   margin: 40px auto;
 
-  .field, .actions {
+  .field-profile, .actions-profile {
     margin-bottom: 20px;
 
     label {
@@ -86,7 +86,7 @@ body {
 
 // レスポンシブデザインのためのブレークポイント
 @media (max-width: 768px) {
-  .edit-profile-form {
+  .edit-profile-form-profile {
     padding: 20px;
   }
 }

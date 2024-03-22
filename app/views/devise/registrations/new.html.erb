@@ -1,50 +1,50 @@
-<div class="top-container">
+<div class="top-container-top">
   <!-- ヘッダー -->
-  <div class="header">
-    <div class="logo-circle"></div>
-    <div class="service-name">野菜栽培〜無No薬〜</div>
+  <div class="header-top">
+    <div class="logo-circle-top"></div>
+    <div class="service-name-top">野菜栽培〜無No薬〜</div>
     <!-- 会員登録ページでは認証ボタンは不要 -->
   </div>
 
   <!-- 会員登録フォーム -->
-  <div class="login-form-container">
+  <div class="login-form-container-top">
     <h2>会員登録</h2>
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
-      <div class="field">
+      <div class="field-top">
         <%= f.label :username %><br />
         <%= f.text_field :username %>
       </div>
 
-      <div class="field">
+      <div class="field-top">
         <%= f.label :email %><br />
         <%= f.email_field :email, autofocus: true %>
       </div>
 
-      <div class="field">
+      <div class="field-top">
         <%= f.label :prefecture %><br />
         <%= f.select :prefecture, PREFECTURES, include_blank: true %>
       </div>
 
-      <div class="field">
+      <div class="field-top">
         <%= f.label :password %>
         <%= f.password_field :password, autocomplete: "off" %>
       </div>
 
-      <div class="field">
+      <div class="field-top">
         <%= f.label :password_confirmation %><br />
         <%= f.password_field :password_confirmation, autocomplete: "off" %>
       </div>
 
-      <div class="actions">
+      <div class="actions-top">
         <%= f.submit "会員登録" %>
       </div>
     <% end %>
 
     <!-- LINEでの会員登録ボタンを追加 -->
-    <div class="actions">
-      <%= link_to "LINEで会員登録", user_line_omniauth_authorize_path, method: :post, class: "line-sign-up-button" %>
+    <div class="actions-top">
+      <%= link_to "LINEで会員登録", user_line_omniauth_authorize_path, method: :post, class: "line-sign-up-button-top" %>
     </div>
   </div>
 </div>
