@@ -12,6 +12,21 @@
   color: white;
   margin: 0;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-weight: bold;
+}
+
+.logout-link {
+  background-color: #e4f409;
+  color: black;
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.logout-link:hover {
+  background-color: #d4e009;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
 }
 
 /* 野菜を選択ボタンのスタイル */
@@ -53,6 +68,10 @@
   padding: 20px;
   border-top: 3px solid #09f409;
   justify-content: flex-end;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 }
 
 .footer-mypage a, .header-mypage a {
