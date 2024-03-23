@@ -1,31 +1,31 @@
 <%= stylesheet_link_tag 'user_settings', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-<div class="header">
+<div class="header-user-setting">
   <h2>LINE通知設定</h2>
 </div>
 
 <div class="user-settings-form">
   <%= form_with(model: @user_setting, url: user_setting_path, local: true, method: :patch) do |form| %>
-    <div class="field">
+    <div class="field-user-setting">
       <%= form.label :watering_time, "水やりの通知時間" %>
       <%= form.time_select :watering_time %>
     </div>
     
-    <div class="field">
+    <div class="field-user-setting">
       <%= form.label :receive_notifications, "通知を受け取る" %>
       <%= form.check_box :receive_notifications %>
     </div>
     
-    <div class="actions">
+    <div class="actions-user-setting">
       <%= form.submit "設定を保存" %>
     </div>  
   <% end %>
 </div>
 
-<div class="actions">
+<div class="actions-user-setting">
   <%= link_to 'マイページへ戻る', user_path(current_user), class: 'back-link' %>
 </div>
 
-<div class="footer">  
+<div class="footer-user-setting">  
   <p>Copyright &copy; 2024 Vegetable Service</p>
 </div>

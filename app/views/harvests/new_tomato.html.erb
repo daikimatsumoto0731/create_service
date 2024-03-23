@@ -1,24 +1,25 @@
+<%= stylesheet_link_tag 'harvest_forms', media: 'all', 'data-turbolinks-track': 'reload' %>
 <body class="tomato new_tomato">
-  <div class="container">
+  <div class="container-harvest">
     <header class="header">
       <h1>収穫量を入力してください</h1>
     </header>
 
-    <%= form_with model: @harvest, url: harvests_path, local: true, html: { class: "vegetable-section tomato" } do |form| %>
+    <%= form_with model: @harvest, url: harvests_path, local: true, html: { class: "vegetable-section-harvest tomato" } do |form| %>
       <%= form.hidden_field :vegetable_type, value: "トマト" %>
 
-      <div class="field">
-        <%= form.label :amount, "収穫量 (kg)", class: "label" %>
-        <%= form.number_field :amount, step: 0.1, class: "input" %>
+      <div class="field-harvest">
+        <%= form.label :amount, "収穫量 (kg)", class: "label-harvest" %>
+        <%= form.number_field :amount, step: 0.1, class: "input-harvest" %>
       </div>
 
-      <div class="field">
-        <%= form.label :price_per_kg, "市場価格 (1kgあたり)", class: "label" %>
-        <%= form.number_field :price_per_kg, step: 0.1, value: @price_per_kg, class: "input" %>
+      <div class="field-harvest">
+        <%= form.label :price_per_kg, "市場価格 (1kgあたり)", class: "label-harvest" %>
+        <%= form.number_field :price_per_kg, step: 0.1, value: @price_per_kg, class: "input-harvest" %>
       </div>
 
-      <div class="actions">
-        <%= form.submit "計算する", class: "button" %>
+      <div class="actions-harvest">
+        <%= form.submit "計算する", class: "button-harvest" %>
       </div>
     <% end %>
 

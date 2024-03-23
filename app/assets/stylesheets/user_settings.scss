@@ -1,4 +1,4 @@
-.header {
+.header-user-setting {
   background-color: #09f409;
   padding: 10px 20px;
   border-radius: 5px;
@@ -16,11 +16,11 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   
-  .field {
+  .field-user-setting {
     margin-bottom: 20px;
   }
   
-  .actions {
+  .actions-user-setting {
     margin-top: 20px;
   
     input[type="submit"] {
@@ -52,7 +52,7 @@
   }
 }
   
-.footer {
+.footer-user-setting {
   background-color: #09f409;
   padding: 10px 20px;
   border-radius: 5px;

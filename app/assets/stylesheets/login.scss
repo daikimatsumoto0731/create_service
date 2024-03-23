@@ -1,102 +1,119 @@
-.login-form-container {
-    // ログインフォームのスタイル
-    h2 {
-      text-align: center;
-      color: #09f409;
-      margin-bottom: 20px;
-    }
-    
-    .field {
-      margin-bottom: 15px;
-  
-      label {
-        display: block;
-        margin-bottom: 5px;
-        color: #333333;
-      }
-  
-      input[type="email"], input[type="password"] {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-      }
-    }
-  
-    .actions {
-      text-align: center;
-  
-      input[type="submit"] {
-        font-size: 20px;
-        padding: 10px 20px;
-        background-color: #09f409;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-  
-        &:hover {
-          background-color: darken(#09f409, 10%);
-        }
-      }
-    }
-  }
-  
-  // ヘッダーとフッターのスタイルはログインフォームの外に配置
-  .header {
-    background-color: #09f409;
-    display: flex;
-    align-items: center;
-    padding: 30px;
-    
-    // 会員登録ボタンとパスワードリセットボタンのスタイル
-    a {
-      font-size: 16px;
-      padding: 10px 15px;
-      margin-left: 10px;
-      background-color: yellow;
-      color: black;
-      text-decoration: none;
-      border-radius: 5px;
-  
-      &:hover {
-        background-color: lighten(white, 10%);
-        text-decoration: underline;
-      }
-    }
-  }
+.login-form-container-login {
+  text-align: center;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,.1);
+  border-radius: 8px;
+  background-color: #FFFFFF;
+  position: relative;
+  top: 50px;
+  margin-bottom: 60px;
+}
 
-  .footer {
-    font-size: 20px;
-    background-color: #09f409;
-    padding: 30px;
-    text-align: right;
+h2 {
+  color: #09f409;
+  margin-bottom: 20px;
+}
+    
+.field-login {
+  margin-bottom: 15px;
   
-    a {
-      color: white;
-      margin-right: 10px;
-      text-decoration: none;
-  
-      &:hover {
-        text-decoration: underline;
-      }
-    }
+  label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333333;
   }
   
-  /* 既存のスタイルはそのままに、LINEログインボタンのスタイルを追加 */
-.line-login-action {
+  input[type="email"], input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    }
+}
+  
+.actions-login {
+  text-align: center;
+  input[type="submit"] {
+    width: calc(100% - 20px);
+    font-size: 20px;
+    padding: 10px 20px;
+    background-color: #09f409;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  
+    &:hover {
+      background-color: darken(#09f409, 10%);
+    }
+  }
+}
+  
+// ヘッダーとフッターのスタイルはログインフォームの外に配置
+.header-login {
+  background-color: #09f409;
+  display: flex;
+  justify-content: flex-end; //ボタンを右寄せ
+  align-items: center;
+  padding: 30px;
+    
+  // 会員登録ボタンとパスワードリセットボタンのスタイル
+  a {
+    font-size: 16px;
+    padding: 10px 15px;
+    margin-left: 10px;
+    background-color: yellow;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+  
+    &:hover {
+      background-color: lighten(white, 10%);
+      text-decoration: underline;
+    }
+  }
+}
+
+.footer-login {
+  font-size: 20px;
+  background-color: #09f409;
+  padding: 30px;
+  text-align: right;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  
+  a {
+    color: white;
+    margin-right: 10px;
+    text-decoration: none;
+  
+     &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+  
+/* 既存のスタイルはそのままに、LINEログインボタンのスタイルを追加 */
+.line-login-action-login {
   text-align: center;
   margin-top: 20px; /* フォームとの間隔 */
 }
 
-.line-login-button {
-  font-size: 16px;
+.line-login-button-login {
+  font-size: 20px;
   color: #FFFFFF;
   background-color: #00C300;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
+  width: calc(100% - 40px);
   cursor: pointer;
+  display: block;
+  margin: 20px auto 0;
 
   &:hover {
     background-color: darken(#00C300, 10%);

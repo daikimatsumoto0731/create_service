@@ -1,12 +1,12 @@
-.top-container {
-  .header {
+.top-container-tops {
+  .header-top {
     background-color: #09f409;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 30px;
 
-    .logo-circle {
+    .logo-circle-top {
       height: 200px;
       width: 200px;
       border-radius: 50%;
@@ -15,7 +15,7 @@
       background-size: cover;
     }
 
-    .service-name {
+    .service-name-top {
       font-size: 65px;
       font-weight: bold;
       color: white;
@@ -23,25 +23,37 @@
       margin-right: auto;
     }
 
-    .auth-buttons {
+    .auth-buttons-top {
       button {
         font-size: 30px;
         padding: 10px 20px;
         margin-left: 10px;
+        background-color: yellow; /* ボタンの色を黄色に設定 */
+        color: black; /* テキストの色を黒に設定 */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: darken(yellow, 10%); /* ホバー時の色を微調整 */
+        }
       }
     }
   }
 
-  .main-content {
+  .main-content-top {
     background-color: #adff2f;
-    height: calc(100vh - 120px);
+    height: calc(100vh - 80px);
   }
 
-  .footer {
+  .footer-top {
     font-size: 20px;
     background-color: #09f409;
     padding: 30px;
     text-align: right;
+    position: fixed;
+    width: 100%;
     a {
       margin: 0 5px;
       color: black;
@@ -49,7 +61,7 @@
     }
   }
 
-  .line-sign-up-button {
+  .line-sign-up-button-top {
     font-size: 16px;
     color: #FFFFFF;
     background-color: #00C300;
@@ -64,7 +76,7 @@
   }
 }
 
-.login-form-container {
+.login-form-container-top {
   background-color: #ffffff; // 白の背景
   padding: 30px;
   border-radius: 8px;
@@ -78,7 +90,7 @@
     margin-bottom: 20px;
   }
 
-  .field {
+  .field-top {
     margin-bottom: 15px;
 
     label {
@@ -95,7 +107,7 @@
     }
   }
 
-  .actions {
+  .actions-top {
     text-align: center;
 
     input[type="submit"] {
