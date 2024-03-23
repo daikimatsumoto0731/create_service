@@ -1,3 +1,4 @@
+<%= stylesheet_link_tag 'login', media: 'all', 'data-turbolinks-track': 'reload' %>
 <div class="header-login">
   <%= link_to '会員登録', new_registration_path(resource_name), class: 'header-button' %>
   <%= link_to 'パスワードをお忘れの方はこちら', new_password_path(resource_name), class: 'header-button' %>
@@ -21,7 +22,7 @@
       <%= f.submit "ログイン", class: "login-button" %>
     </div>
   <% end %>
-  <%= link_to "LINEログインはこちらから", user_line_omniauth_authorize_path, method: :post, class: "line-login-button-login" %>
+  <%= link_to "LINEログイン", user_line_omniauth_authorize_path, method: :post, class: "line-login-button-login" %>
 </div>
 
 <div class="footer-login">
