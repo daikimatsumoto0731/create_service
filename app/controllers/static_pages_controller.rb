@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  before_action :authenticate_user!, except: [:terms, :privacy_policy]
+  before_action :authenticate_user!, except: [:top, :terms, :privacy_policy]
 
   def top; end
 
