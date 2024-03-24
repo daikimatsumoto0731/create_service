@@ -1,50 +1,62 @@
 .top-container-tops {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
   .header-top {
     background-color: #09f409;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 30px;
+    padding: 20px; // ヘッダーのパディングを小さくする
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
 
     .logo-circle-top {
-      height: 200px;
-      width: 200px;
+      height: 150px; // ロゴのサイズを小さくする
+      width: 150px; // ロゴのサイズを小さくする
       border-radius: 50%;
       margin-right: 10px;
-      background-image: url('/assets/top-log.png');
+      background-image: asset-url('top-log.png');
       background-size: cover;
     }
 
     .service-name-top {
-      font-size: 65px;
+      font-size: 50px; // サービス名のフォントサイズを小さくする
       font-weight: bold;
       color: white;
-      text-shadow: 2px 2px 4px black; /* 黒い影を追加 */
+      text-shadow: 2px 2px 4px black;
       margin-right: auto;
     }
 
     .auth-buttons-top {
-      button {
-        font-size: 30px;
-        padding: 10px 20px;
+      .signup-button, .login-button {
+        font-size: 24px; // ボタンのフォントサイズを小さくする
+        padding: 8px 16px; // ボタンのパディングを小さくする
         margin-left: 10px;
-        background-color: yellow; /* ボタンの色を黄色に設定 */
-        color: black; /* テキストの色を黒に設定 */
+        background-color: yellow;
+        color: black;
         border: none;
         border-radius: 5px;
         cursor: pointer;
         transition: background-color 0.3s ease;
 
         &:hover {
-          background-color: darken(yellow, 10%); /* ホバー時の色を微調整 */
+          background-color: darken(yellow, 10%);
         }
       }
     }
   }
 
   .main-content-top {
-    background-color: #adff2f;
-    height: calc(100vh - 80px);
+    flex-grow: 1;
+    padding-top: 200px; // ヘッダーの高さに合わせて上部の余白を調整
+    padding-bottom: 100px; // フッターの高さに合わせて下部の余白を調整
+    background-image: asset-url('top-picture.jpg');
+    background-size: cover;
+    background-position: center;
   }
 
   .footer-top {
@@ -53,7 +65,9 @@
     padding: 30px;
     text-align: right;
     position: fixed;
+    bottom: 0;
     width: 100%;
+    z-index: 10;
     a {
       margin: 0 5px;
       color: black;
@@ -65,10 +79,12 @@
     font-size: 16px;
     color: #FFFFFF;
     background-color: #00C300;
+    margin: 5px 0;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    display: block;
 
     &:hover {
       background-color: darken(#00C300, 10%);
@@ -78,11 +94,16 @@
 
 .login-form-container-top {
   background-color: #ffffff; // 白の背景
-  padding: 30px;
+  padding: 10px; // パディングを少し減らす
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-  margin: 40px auto;
+  width: 70%; // フォームの幅を調整
+  max-width: 350px; // 最大幅を小さくする
+  margin: 5% auto; // 上下左右中央に
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); // 中央に配置
 
   h2 {
     text-align: center;
@@ -91,7 +112,7 @@
   }
 
   .field-top {
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 
     label {
       display: block;
@@ -114,14 +135,72 @@
       font-size: 20px;
       padding: 10px 20px;
       background-color: #09f409;
+      margin: auto;
       color: white;
       border: none;
       border-radius: 5px; 
       cursor: pointer;
+      display: block;
 
       &:hover {
         background-color: darken(#09f409, 10%);
       }
+    }
+  }
+}
+
+// SCSSファイルに追加
+.devise-registrations-new .header-top {
+  padding: 5px; // ヘッダーのパディングをさらに小さくする
+  .logo-circle-top {
+    height: 50px; // ロゴのサイズをさらに小さくする
+    width: 50px; // ロゴのサイズをさらに小さくする
+    background-image: asset-url('top-log.png');
+    background-size: cover;
+  }
+  .service-name-top {
+    font-size: 40px; // サービス名のフォントサイズをさらに小さくする
+  }
+}
+
+
+@media (max-width: 768px) {
+  .top-container-tops {
+    position: relative; // 親要素に対して相対位置指定を追加
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+    justify-content: center;
+  }
+
+  .header-top, .footer-top {
+    padding: 15px;
+    position: fixed;
+  }
+
+  .header-top {
+    top: 0;
+  }
+
+  .footer-top {
+    bottom: 0;
+  }
+
+  .login-form-container-top {
+    margin: 0 auto;
+    width: 90%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); // 中央に配置するための設定
+    padding: 20px;
+    max-width: 90%;
+
+    h2, .field-top, .actions-top {
+      width: 100%;
+    }
+
+    .actions-top input[type="submit"], .actions-top .line-sign-up-button-top {
+      margin-top: 10px;
     }
   }
 }
