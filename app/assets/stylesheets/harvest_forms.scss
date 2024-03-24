@@ -46,9 +46,22 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center; /* 中央に配置 */
-  margin: 0 auto;
+  margin: 0;
   padding: 100px 20px; /* 上部と下部のパディングを調整 */
-  width: 90%;
+  width: 100%; /* 幅を全体に */
+  background-size: cover; /* 背景画像をカバーとして設定 */
+}
+
+.tomato .container-harvest {
+  background: asset-url('tomato-harvest.jpg') no-repeat center center; /* トマトの背景画像を設定 */
+}
+
+.carrot .container-harvest {
+  background: asset-url('carrot-harvest.jpg') no-repeat center center; /* にんじんの背景画像を設定 */
+}
+
+.basil .container-harvest {
+  background: asset-url('basil-harvest.jpg') no-repeat center center; /* バジルの背景画像を設定 */
 }
 
 .vegetable-section-harvest {
