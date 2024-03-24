@@ -6,20 +6,22 @@ class EventsController < ApplicationController
     if @selected_vegetable.present?
       @vegetable = Vegetable.find_by('lower(name) = ?', @selected_vegetable)
       if @vegetable
-        # 「Button」という名前のイベントを除外
-        @events = @vegetable.events.where.not(name: 'Button')
+        # 「種まき」イベントを最初に、残りは開始日に基づいてソート
+        @events = @vegetable.events
+                            .where.not(name: 'Button')
+                            .order(Arel.sql("CASE WHEN name = '種まき' THEN 0 ELSE 1 END, start_date ASC"))
       else
         redirect_to events_path, alert: "#{@selected_vegetable} に該当する野菜は見つかりませんでした。" and return
       end
     else
-      # すべてのイベントから「Button」という名前を除外
       @events = Event.where.not(name: 'Button')
+                     .order(Arel.sql("CASE WHEN name = '種まき' THEN 0 ELSE 1 END, start_date ASC"))
     end
-
+  
     template_name = @vegetable ? @selected_vegetable : 'default'
     render template: "events/#{template_name}"
   end
-
+  
   def advice
     @event = Event.find_by(id: params[:id])
     if @event
