@@ -58,6 +58,8 @@ Rails.application.configure do
   # Set the host for password reset emails
   config.action_mailer.default_url_options = { host: 'www.homegarden-harvest.com', protocol: 'https' }
 
+  # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
+  config.force_ssl = true
 
   # Prepend all log lines with the following tags.
   config.log_tags = [:request_id]
