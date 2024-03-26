@@ -15,34 +15,26 @@ module Users
         if @profile.new_record?
           email = @omniauth['info']['email'].presence || fake_email(@omniauth['uid'], @omniauth['provider'])
           username = @omniauth['info']['name'].presence || 'LINE User' # LINEからの名前をusernameに設定
+          
+          # `prefecture` フィールドにデフォルト値を追加
+          prefecture = '未設定' # ここに都道府県のデフォルト値を設定
 
           @profile.assign_attributes(
             email: email,
-            username: username, # username を更新
+            username: username,
             password: Devise.friendly_token[0, 20],
-            line_user_id: @omniauth['uid'] # line_user_id を保存
+            line_user_id: @omniauth['uid'],
+            prefecture: prefecture # この行を追加
           )
-          
-          # @profile.save! の代わりに以下の処理を行います
-          if @profile.save
-            @profile.refresh_access_token(@omniauth) if @profile.respond_to?(:refresh_access_token)
-            sign_in(:user, @profile)
-
-            # LINEメッセージを送信
-            send_line_message(@profile)
-
-            redirect_to user_path(current_user), notice: 'ログインしました'
-          else
-            # 保存に失敗した場合のエラーメッセージをログに出力
-            Rails.logger.error("User save failed: " + @profile.errors.full_messages.join(", "))
-            redirect_to new_user_session_path, alert: 'LINE認証に失敗しました'
-          end
-        else
-          # 以前に作成したプロファイルがある場合の処理はそのまま
-          @profile.refresh_access_token(@omniauth) if @profile.respond_to?(:refresh_access_token)
-          sign_in(:user, @profile)
-          redirect_to user_path(current_user), notice: 'ログインしました'
+          @profile.save!
         end
+        @profile.refresh_access_token(@omniauth) if @profile.respond_to?(:refresh_access_token)
+        sign_in(:user, @profile)
+
+        # LINEメッセージを送信
+        send_line_message(@profile)
+
+        redirect_to user_path(current_user), notice: 'ログインしました'
       else
         redirect_to new_user_session_path, alert: 'LINE認証に失敗しました'
       end
