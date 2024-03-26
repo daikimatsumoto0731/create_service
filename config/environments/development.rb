@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
@@ -38,10 +40,6 @@ Rails.application.configure do
     enable_starttls_auto: true
   }
   config.action_mailer.perform_deliveries = true
-
-  # Set default URL options for mailer
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-
   config.hosts.clear
 
   # Print deprecation notices to the Rails logger.
