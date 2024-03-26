@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'line/bot'
 
 class ApplicationController < ActionController::Base
