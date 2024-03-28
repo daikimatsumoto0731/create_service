@@ -54,9 +54,32 @@
     flex-grow: 1;
     padding-top: 200px; // ヘッダーの高さに合わせて上部の余白を調整
     padding-bottom: 100px; // フッターの高さに合わせて下部の余白を調整
-    background-image: asset-url('top-picture.jpg');
+    background-image: asset-url('top-vegetable.jpg');
     background-size: cover;
     background-position: center;
+
+    .visual-introduction {
+      color: white;
+      text-align: center;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.6); // オーバーレイの透明度を調整してテキストの読みやすさを向上
+      border-radius: 8px; // 角丸のデザインを追加
+
+      h2, p {
+        background-color: rgba(0, 0, 0, 0.2); // テキスト自体にも軽微な背景を追加して読みやすさをさらに向上
+        padding: 8px 16px; // テキストのパディングを調整
+        border-radius: 4px; // テキストの角を丸くする
+      }
+
+      h2 {
+        font-size: 36px;
+        margin-bottom: 20px;
+      }
+
+      p {
+        font-size: 24px;
+      }
+    }
   }
 
   .footer-top {
