@@ -15,12 +15,16 @@ module Users
         if @profile.new_record?
           email = @omniauth['info']['email'].presence || fake_email(@omniauth['uid'], @omniauth['provider'])
           username = @omniauth['info']['name'].presence || 'LINE User' # LINEからの名前をusernameに設定
+          
+          # `prefecture` フィールドにデフォルト値を追加
+          prefecture = '未設定' # ここに都道府県のデフォルト値を設定
 
           @profile.assign_attributes(
-            email:,
-            username:, # username を更新
+            email: email,
+            username: username,
             password: Devise.friendly_token[0, 20],
-            line_user_id: @omniauth['uid'] # line_user_id を保存
+            line_user_id: @omniauth['uid'],
+            prefecture: prefecture # この行を追加
           )
           @profile.save!
         end

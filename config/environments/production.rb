@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -56,6 +54,12 @@ Rails.application.configure do
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
   config.log_level = :debug
+
+  # Set the host for password reset emails
+  config.action_mailer.default_url_options = { host: 'www.homegarden-harvest.com', protocol: 'https' }
+
+  # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
+  config.force_ssl = true
 
   # Prepend all log lines with the following tags.
   config.log_tags = [:request_id]
