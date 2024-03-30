@@ -1,9 +1,16 @@
+<%= stylesheet_link_tag 'custom', media: 'all', 'data-turbolinks-track': 'reload' %>
 <div class="content-wrapper">
   <div class="header-basil">
-    <h1>バジルのスケジュール</h1>
+    <div class="title-container">
+      <h1>バジルのスケジュール</h1>
+      <div class="ghost-element"></div> <!-- スペーサーとして機能 -->
+    </div>
+    <%= link_to 'マイページに戻る', user_path(current_user), class: 'mypage-link' %>
   </div>
 
-  <%= render 'events/sowing_form', vegetable: @vegetable %>
+  <div class="page-content">
+    <%= render 'events/sowing_form', vegetable: @vegetable %>
+  </div>
 
   <div class="event-periods">
     <h2>イベント期間</h2>
