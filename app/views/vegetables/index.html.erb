@@ -21,9 +21,13 @@
   </style>
 </head>
 <body>
-  <header-vegetable>
-    <h1>野菜選択画面</h1>
-  </header-vegetable>
+  <header class="header-vegetable">
+    <div class="ghost-element"></div>
+    <div class="title-container">
+      <h1>育てる野菜を選択してください</h1>
+    </div>
+    <%= link_to 'マイページに戻る', user_path(current_user), class: 'mypage-link' %>
+  </header>
   
   <!-- 野菜ボタンの集まり -->
   <div class="vegetable-buttons">

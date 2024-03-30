@@ -1,17 +1,47 @@
-/* ヘッダー */
-header-vegetable {
-  background-color: limegreen;
-  padding: 20px 10px; /* 上下のパディングを増やしてテキストに余裕を持たせる */
-  text-align: center;
-  color: white;
-  font-size: 24px; /* フォントサイズを大きくする */
-  font-weight: bold; /* フォントを太くする */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* テキストに影を追加して読みやすくする */
+.header-vegetable {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 30px;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  z-index: 1;
+  right: 0;
+  z-index: 1000;
+  background-color: limegreen;
+
+  .ghost-element {
+    visibility: hidden;
+    width: 100px; // 「マイページに戻る」リンクと同じ幅に設定
+  }
+
+  .title-container {
+    flex-grow: 1;
+    text-align: center;
+
+    h1 {
+      font-size: 2em;
+      color: white;
+      font-weight: bold;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+      margin: 0;
+    }
+  }
+
+  .mypage-link {
+    font-size: 16px;
+    padding: 10px 15px;
+    font-weight: bold;
+    background-color: yellow;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    
+    &:hover {
+      background-color: lighten(yellow, 10%);
+      text-decoration: underline;
+    }
+  }
 }
 
 /* 野菜ボタンを中央に等間隔で横並びに配置 */
@@ -83,4 +113,81 @@ footer-vegetable {
   left: 0;
   width: 100%;
   z-index: 1;
+}
+
+/* スマートフォン向けスタイル */
+@media (max-width: 600px) {
+  .header-vegetable {
+    padding: 15px 20px;
+    .title-container h1 {
+      font-size: 1.5em; // フォントサイズを小さく
+    }
+    .mypage-link {
+      padding: 8px 12px; // ボタンのサイズを小さく
+      font-size: 14px; // フォントサイズを小さく
+    }
+  }
+
+  .vegetable-buttons {
+    padding-top: 150px; // ヘッダーとの間隔を調整
+  }
+
+  .vegetable-button {
+    margin: 5px 20px;
+    padding: 15px 20px; // ボタンサイズを調整
+  }
+
+  #select-vegetable-button {
+    padding: 15px 30px; // ボタンサイズを調整
+  }
+
+  .selected-vegetable {
+    font-size: 16px; // テキストサイズを調整
+  }
+}
+
+/* タブレット向けスタイル */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .header-vegetable {
+    padding: 20px 25px;
+    .title-container h1 {
+      font-size: 1.75em;
+    }
+    .mypage-link {
+      padding: 9px 14px;
+      font-size: 15px;
+    }
+  }
+
+  .vegetable-buttons {
+    padding-top: 200px;
+  }
+
+  .vegetable-button {
+    margin: 10px 30px;
+    padding: 18px 25px;
+  }
+
+  #select-vegetable-button {
+    padding: 18px 35px;
+  }
+
+  .selected-vegetable {
+    font-size: 18px;
+  }
+}
+
+/* デスクトップ向けスタイル */
+@media (min-width: 1025px) {
+  // デスクトップに特有のスタイルは必要に応じて調整
+  .header-vegetable {
+    padding: 20px 30px;
+    .title-container h1 {
+      font-size: 2em;
+    }
+    .mypage-link {
+      padding: 10px 15px;
+      font-size: 16px;
+    }
+  }
 }
