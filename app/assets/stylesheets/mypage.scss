@@ -136,3 +136,26 @@
     height: auto !important;
   }
 }
+
+.key-data-highlights {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.highlight-card {
+  width: 300px; /* カードの幅を設定 */
+  margin: 10px; /* カード間のマージン */
+  padding: 20px; /* カード内のパディング */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 影を追加 */
+  border-radius: 5px; /* 角の丸み */
+}
+
+.highlight-card .card-title {
+  font-size: 20px; /* タイトルのフォントサイズ */
+  margin-bottom: 15px; /* タイトルとテキストの間隔 */
+}
+
+.highlight-card .card-text {
+  font-size: 16px; /* テキストのフォントサイズ */
+}

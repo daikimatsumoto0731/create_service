@@ -1,9 +1,25 @@
 document.addEventListener('DOMContentLoaded', function() {
+  var graphContainer = document.getElementById('graphContainer');
+  var toggleGraphBtn = document.getElementById('toggleGraphBtn');
+  var graphVisible = false;
+
+  // グラフの初期表示を非表示にする
+  graphContainer.style.display = 'none';
+
+  // ボタンをクリックしたときの動作
+  toggleGraphBtn.addEventListener('click', function() {
+    // グラフの表示・非表示を切り替える
+    graphVisible = !graphVisible;
+    graphContainer.style.display = graphVisible ? 'block' : 'none';
+    toggleGraphBtn.textContent = graphVisible ? 'グラフを非表示' : 'グラフを表示';
+  });
+
+  // グラフの描画
   var ctx = document.getElementById('harvestChart').getContext('2d');
   var vegetableTypes = JSON.parse(ctx.canvas.getAttribute('data-vegetables'));
   var amounts = JSON.parse(ctx.canvas.getAttribute('data-amounts'));
   var savings = JSON.parse(ctx.canvas.getAttribute('data-savings'));
-  
+
   new Chart(ctx, {
     type: 'bar',
     data: {
@@ -40,4 +56,3 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
-  
