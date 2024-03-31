@@ -14,4 +14,5 @@
 //= require jquery3
 //= require bootstrap
 //= require custom
+//= require harvest_chart
 //= require_tree .
