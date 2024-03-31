@@ -15,6 +15,10 @@
   font-weight: bold;
 }
 
+.content-wrapper {
+  padding-bottom: 100px;
+}
+
 .logout-link {
   background-color: #e4f409;
   color: black;
@@ -56,7 +60,8 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  margin-top: 250px;
+  margin-top: 20px;
+  margin-bottom: 100px;
   width: 100%;
 }
 
@@ -71,6 +76,7 @@
   position: fixed;
   bottom: 0;
   left: 0;
+  right: 0;
   width: 100%;
 }
 
@@ -121,39 +127,12 @@
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
 }
 
-/* ボタンのスタイル */
-.btn-delete-mypage {
-  background-color: #87ceed; /* 青色をより薄く調整 */
-  color: black;
-  padding: 8px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.btn-delete-mypage:hover {
-  background-color: #6ca6cd; /* ホバー時の色を調整 */
-  color: black;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
-}
-
-/* 修正された部分 */
-.delete-button-mypage {
-  text-align: center;
-  margin-bottom: 10px; /* ボタンの配置を調整 */
-}
-
-/* 累計節約額の横にボタンを配置するスタイル */
-.savings-with-button-mypage {
-  display: flex;
-  align-items: center;
-}
-
-/* 累計収穫量と累計節約額のスタイル */
-.harvest-info-mypage {
-  font-family: "Arial", sans-serif; /* ゴシック体に変更 */
-  font-size: 18px; /* フォントサイズを調整 */
-  font-weight: bold; /* 太字にする */
-  color: black; /* テキストの色を黒に設定 */
-  margin-right: 10px; /* 右側の余白を調整 */
+/* グラフコンテナのスタイリング */
+.harvest-chart-container {
+  max-width: 600px;
+  margin: 20px auto;
+  canvas {
+    width: 100% !important;
+    height: auto !important;
+  }
 }
