@@ -5,6 +5,22 @@
     <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'logout-link' %>
   </div>
 
+  <!-- キーデータのハイライト -->
+  <div class="key-data-highlights">
+    <div class="card highlight-card">
+      <div class="card-body">
+        <h5 class="card-title">最も収穫量が多かった野菜</h5>
+        <p class="card-text"><%= @most_harvested_vegetable %> (合計収穫量: <%= @most_harvested_amount %>kg)</p>
+      </div>
+    </div>
+    <div class="card highlight-card">
+      <div class="card-body">
+        <h5 class="card-title">最大の節約が見られた月</h5>
+        <p class="card-text"><%= @max_savings_month %> (節約額: <%= @max_savings_amount %>円)</p>
+      </div>
+    </div>
+  </div>
+
   <!-- 通知履歴を表示 --> 
   <div class="notifications-history">
     <!-- この行に通知表示のタイトルを入れる -->
@@ -17,12 +33,15 @@
   </div>
 
   <!-- グラフ描画領域 -->
-  <div class="harvest-chart-container">
+  <div class="harvest-chart-container" id="graphContainer">
     <canvas id="harvestChart" 
             data-vegetables="<%= @aggregated_harvests.map(&:vegetable_type).to_json %>" 
             data-amounts="<%= @aggregated_harvests.map(&:total_amount).to_json %>"
             data-savings="<%= @aggregated_harvests.map(&:total_savings).to_json %>"></canvas>
   </div>
+
+  <!-- ボタンを追加 -->
+  <button id="toggleGraphBtn" class="btn-toggle-graph">グラフを表示</button>
 
   <!-- Chart.jsとカスタムJavaScriptの読み込み -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
