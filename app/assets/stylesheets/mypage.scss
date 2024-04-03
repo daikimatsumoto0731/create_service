@@ -180,3 +180,42 @@
 .highlight-card .card-text {
   font-size: 16px; /* テキストのフォントサイズ */
 }
+
+/* スマートフォンサイズ以下の場合 */
+@media screen and (max-width: 767px) {
+  .button-container-mypage {
+    position: fixed; /* ボタンを固定位置に配置する */
+    bottom: 500px; /* 下側から20pxの位置に配置する */
+    left: 50%; /* 左側から中央に配置する */
+    transform: translateX(-50%); /* 中央揃えにする */
+    width: calc(100% - 40px); /* 幅を左右に20pxのマージンを除いたものにする */
+    max-width: 320px; /* 最大幅を指定 */
+    z-index: 999; /* 他の要素よりも手前に表示 */
+  }
+
+  .btn-toggle-graph {
+    margin-top: 10px; /* 上のマージンを追加 */
+  }
+}
+
+/* タブレットサイズ（768px以上）の場合 */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .header-mypage {
+    padding: 20px; /* パディングを中サイズに調整 */
+  }
+
+  .header-mypage h1 {
+    font-size: 24px; /* タイトルのフォントサイズを大きくする */
+  }
+
+  .button-container-mypage {
+    flex-direction: row; /* ボタンを横並びにする */
+    justify-content: center; /* ボタンを中央に配置する */
+  }
+
+  .harvest-chart-container,
+  .savings-chart-container {
+    flex-direction: row; /* グラフを横並びにする */
+    justify-content: center; /* グラフを中央に配置する */
+  }
+}
