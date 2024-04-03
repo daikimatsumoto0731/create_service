@@ -15,6 +15,10 @@
   font-weight: bold;
 }
 
+.content-wrapper {
+  padding-bottom: 100px;
+}
+
 .logout-link {
   background-color: #e4f409;
   color: black;
@@ -56,8 +60,26 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  margin-top: 250px;
+  margin-top: 20px;
+  margin-bottom: 100px;
   width: 100%;
+}
+
+.btn-toggle-graph {
+  background-color: #e4f409; /* 背景色 */
+  border: none;
+  padding: 10px 15px; /* パディング */
+  margin-left: 20px; /* 野菜を作るボタンとの間隔 */
+  color: black; /* 文字色 */
+  text-decoration: none;
+  border-radius: 5px; /* 角丸 */
+  cursor: pointer; /* カーソル */
+  font-weight: bold; /* フォントの太さ */
+}
+
+.btn-toggle-graph:hover {
+  background-color: #d4e009; /* ホバー時の背景色 */
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7); /* ホバー時の影 */
 }
 
 /* フッターのスタイル */
@@ -71,6 +93,7 @@
   position: fixed;
   bottom: 0;
   left: 0;
+  right: 0;
   width: 100%;
 }
 
@@ -121,39 +144,78 @@
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
 }
 
-/* ボタンのスタイル */
-.btn-delete-mypage {
-  background-color: #87ceed; /* 青色をより薄く調整 */
-  color: black;
-  padding: 8px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+.harvest-chart-container,
+.savings-chart-container {
+  display: flex; // グラフコンテナをフレックスボックスに設定
+  justify-content: space-around; // グラフを均等に配置
+  max-width: 100%; // 最大幅を設定
+  margin: 20px auto; // 上下に20pxのマージンを設定して中央に配置
 }
 
-.btn-delete-mypage:hover {
-  background-color: #6ca6cd; /* ホバー時の色を調整 */
-  color: black;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
+.harvest-chart-container canvas,
+.savings-chart-container canvas {
+  max-width: calc(50% - 20px); // キャンバスの最大幅を50%に設定（マージンを考慮）
+  height: auto; // キャンバスの高さを自動に設定
 }
 
-/* 修正された部分 */
-.delete-button-mypage {
-  text-align: center;
-  margin-bottom: 10px; /* ボタンの配置を調整 */
-}
-
-/* 累計節約額の横にボタンを配置するスタイル */
-.savings-with-button-mypage {
+.key-data-highlights {
   display: flex;
-  align-items: center;
+  justify-content: space-around;
+  margin: 20px 0;
 }
 
-/* 累計収穫量と累計節約額のスタイル */
-.harvest-info-mypage {
-  font-family: "Arial", sans-serif; /* ゴシック体に変更 */
-  font-size: 18px; /* フォントサイズを調整 */
-  font-weight: bold; /* 太字にする */
-  color: black; /* テキストの色を黒に設定 */
-  margin-right: 10px; /* 右側の余白を調整 */
+.highlight-card {
+  width: 300px; /* カードの幅を設定 */
+  margin: 10px; /* カード間のマージン */
+  padding: 20px; /* カード内のパディング */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 影を追加 */
+  border-radius: 5px; /* 角の丸み */
+}
+
+.highlight-card .card-title {
+  font-size: 20px; /* タイトルのフォントサイズ */
+  margin-bottom: 15px; /* タイトルとテキストの間隔 */
+}
+
+.highlight-card .card-text {
+  font-size: 16px; /* テキストのフォントサイズ */
+}
+
+/* スマートフォンサイズ以下の場合 */
+@media screen and (max-width: 767px) {
+  .button-container-mypage {
+    position: fixed; /* ボタンを固定位置に配置する */
+    bottom: 500px; /* 下側から20pxの位置に配置する */
+    left: 50%; /* 左側から中央に配置する */
+    transform: translateX(-50%); /* 中央揃えにする */
+    width: calc(100% - 40px); /* 幅を左右に20pxのマージンを除いたものにする */
+    max-width: 320px; /* 最大幅を指定 */
+    z-index: 999; /* 他の要素よりも手前に表示 */
+  }
+
+  .btn-toggle-graph {
+    margin-top: 10px; /* 上のマージンを追加 */
+  }
+}
+
+/* タブレットサイズ（768px以上）の場合 */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .header-mypage {
+    padding: 20px; /* パディングを中サイズに調整 */
+  }
+
+  .header-mypage h1 {
+    font-size: 24px; /* タイトルのフォントサイズを大きくする */
+  }
+
+  .button-container-mypage {
+    flex-direction: row; /* ボタンを横並びにする */
+    justify-content: center; /* ボタンを中央に配置する */
+  }
+
+  .harvest-chart-container,
+  .savings-chart-container {
+    flex-direction: row; /* グラフを横並びにする */
+    justify-content: center; /* グラフを中央に配置する */
+  }
 }

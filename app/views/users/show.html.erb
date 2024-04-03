@@ -1,45 +1,63 @@
 <%= stylesheet_link_tag 'mypage', media: 'all', 'data-turbolinks-track': 'reload' %>
-<div class="header-mypage">
-  <h1>ようこそ<%= @user.username %>さん</h1>
-  <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'logout-link' %>
-</div>
+<div class="content-wrapper">
+  <div class="header-mypage">
+    <h1>ようこそ<%= @user.username %>さん</h1>
+    <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'logout-link' %>
+  </div>
 
-<!-- 通知履歴を表示 --> 
-<div class="notifications-history">
-  <!-- この行に通知表示のタイトルを入れる -->
-  <% @user.notifications.order(sent_at: :desc).limit(5).each do |notification| %>
-    <div class="notification">
-      <p><%= notification.message %></p>
-      <p><%= notification.sent_at.strftime("%Y-%m-%d %H:%M") %></p>
+  <!-- キーデータのハイライト -->
+  <div class="key-data-highlights">
+    <div class="card highlight-card">
+      <div class="card-body">
+        <h5 class="card-title">最も収穫量が多かった野菜</h5>
+        <p class="card-text"><%= @most_harvested_vegetable %> (合計収穫量: <%= @most_harvested_amount %>kg)</p>
+      </div>
     </div>
-  <% end %>
-</div>
-
-<!-- 集計された収穫情報を表示 -->
-<% @aggregated_harvests.each do |harvest| %>
-  <div class="savings-with-button-mypage">
-    <p class="harvest-info-mypage" style="color: <%=
-      case harvest.vegetable_type
-      when 'にんじん'
-        'orange'
-      when 'トマト'
-        'red'
-      when 'バジル'
-        'green'
-      else
-        'black'
-      end %>;">
-      <%= harvest.vegetable_type %>の累計収穫量: <%= harvest.total_amount %> kg, 累計節約額: <%= number_with_precision(harvest.total_savings, precision: 2) %> 円
-    </p>
-    <!-- 特定の野菜のデータを削除するボタン -->
-    <div class="delete-button-mypage">
-      <%= button_to 'この野菜のデータを全て削除', destroy_by_vegetable_type_harvests_path(vegetable_type: harvest.vegetable_type), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn-delete-mypage' %>
+    <div class="card highlight-card">
+      <div class="card-body">
+        <h5 class="card-title">最大の節約が見られた月</h5>
+        <p class="card-text"><%= @max_savings_month %> (節約額: <%= @max_savings_amount %>円)</p>
+      </div>
     </div>
   </div>
-<% end %>
+  
 
-<div class="button-container-mypage"> <!-- ここに野菜を作るボタンを追加 -->
-  <%= link_to '野菜を作る', vegetables_path, class: 'btn-vegetable-mypage' %>
+  <!-- 通知履歴を表示 --> 
+  <div class="notifications-history">
+    <!-- この行に通知表示のタイトルを入れる -->
+    <% @user.notifications.order(sent_at: :desc).limit(5).each do |notification| %>
+      <div class="notification">
+        <p><%= notification.message %></p>
+        <p><%= notification.sent_at.strftime("%Y-%m-%d %H:%M") %></p>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- グラフ描画領域 -->
+  <div class="chart-container" id="graphContainer" style="display: none;">
+    <!-- 収穫量の棒グラフのキャンバス -->
+    <canvas id="harvestChart"
+            data-vegetables="<%= @aggregated_harvests.map(&:vegetable_type).to_json %>"
+            data-amounts="<%= @aggregated_harvests.map(&:total_amount).to_json %>">
+    </canvas>
+    <!-- 節約額の棒グラフのキャンバス -->
+    <canvas id="savingsChart"
+            data-vegetables="<%= @aggregated_harvests.map(&:vegetable_type).to_json %>"
+            data-savings="<%= @aggregated_harvests.map(&:total_savings).to_json %>">
+    </canvas>
+  </div>
+
+  <!-- Chart.jsとカスタムJavaScriptの読み込み -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <%= javascript_include_tag 'harvest_chart' %>
+  
+  <div class="button-container-mypage"> <!-- ボタンを中央に配置 -->
+    <%= link_to '野菜を作る', vegetables_path, class: 'btn-vegetable-mypage' %>
+    <% if @aggregated_harvests.present? %>
+      <button id="toggleGraphBtn" class="btn-toggle-graph">グラフを表示</button>
+    <% end %>
+  </div>
+
 </div>
 
 <footer class="footer-mypage">
