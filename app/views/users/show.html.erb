@@ -20,6 +20,7 @@
       </div>
     </div>
   </div>
+  
 
   <!-- 通知履歴を表示 --> 
   <div class="notifications-history">
@@ -34,22 +35,24 @@
 
   <!-- グラフ描画領域 -->
   <div class="harvest-chart-container" id="graphContainer">
-    <canvas id="harvestChart" 
-            data-vegetables="<%= @aggregated_harvests.map(&:vegetable_type).to_json %>" 
+    <!-- 散布図グラフのキャンバス -->
+    <canvas id="relationshipChart"
+            data-vegetables="<%= @aggregated_harvests.map(&:vegetable_type).to_json %>"
             data-amounts="<%= @aggregated_harvests.map(&:total_amount).to_json %>"
             data-savings="<%= @aggregated_harvests.map(&:total_savings).to_json %>"></canvas>
   </div>
-
-  <!-- ボタンを追加 -->
-  <button id="toggleGraphBtn" class="btn-toggle-graph">グラフを表示</button>
 
   <!-- Chart.jsとカスタムJavaScriptの読み込み -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <%= javascript_include_tag 'harvest_chart' %>
   
-  <div class="button-container-mypage"> <!-- ここに野菜を作るボタンを追加 -->
-    <%= link_to '野菜を作る', vegetables_path, class: 'btn-vegetable-mypage' %>
+  <div class="button-container-mypage"> <!-- ボタンを中央に配置 -->
+     <%= link_to '野菜を作る', vegetables_path, class: 'btn-vegetable-mypage' %>
+    <% if @aggregated_harvests.present? %>
+      <button id="toggleGraphBtn" class="btn-toggle-graph">グラフを表示</button>
+    <% end %>
   </div>
+
 </div>
 
 <footer class="footer-mypage">

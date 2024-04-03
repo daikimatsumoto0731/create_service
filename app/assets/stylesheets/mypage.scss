@@ -65,6 +65,23 @@
   width: 100%;
 }
 
+.btn-toggle-graph {
+  background-color: #e4f409; /* 背景色 */
+  border: none;
+  padding: 10px 15px; /* パディング */
+  margin-left: 20px; /* 野菜を作るボタンとの間隔 */
+  color: black; /* 文字色 */
+  text-decoration: none;
+  border-radius: 5px; /* 角丸 */
+  cursor: pointer; /* カーソル */
+  font-weight: bold; /* フォントの太さ */
+}
+
+.btn-toggle-graph:hover {
+  background-color: #d4e009; /* ホバー時の背景色 */
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7); /* ホバー時の影 */
+}
+
 /* フッターのスタイル */
 .footer-mypage {
   background-color: #09f409;
