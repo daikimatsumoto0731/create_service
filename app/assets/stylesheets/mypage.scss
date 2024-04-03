@@ -144,14 +144,18 @@
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
 }
 
-/* グラフコンテナのスタイリング */
-.harvest-chart-container {
-  max-width: 600px;
-  margin: 20px auto;
-  canvas {
-    width: 100% !important;
-    height: auto !important;
-  }
+.harvest-chart-container,
+.savings-chart-container {
+  display: flex; // グラフコンテナをフレックスボックスに設定
+  justify-content: space-around; // グラフを均等に配置
+  max-width: 100%; // 最大幅を設定
+  margin: 20px auto; // 上下に20pxのマージンを設定して中央に配置
+}
+
+.harvest-chart-container canvas,
+.savings-chart-container canvas {
+  max-width: calc(50% - 20px); // キャンバスの最大幅を50%に設定（マージンを考慮）
+  height: auto; // キャンバスの高さを自動に設定
 }
 
 .key-data-highlights {
