@@ -5,9 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
   toggleGraphBtn.addEventListener('click', function() {
     graphVisible = !graphVisible;
     var graphContainer = document.getElementById('graphContainer'); // グラフのコンテナ要素を取得
-    var savingsContainer = document.getElementById('savingsContainer'); // 節約額のグラフのコンテナ要素を取得
     graphContainer.style.display = graphVisible ? 'block' : 'none';
-    savingsContainer.style.display = graphVisible ? 'block' : 'none';
     toggleGraphBtn.textContent = graphVisible ? 'グラフを非表示' : 'グラフを表示';
   });
 
@@ -57,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
     datasets: [{
       label: '節約額',
       data: savings,
-      backgroundColor: vegetableTypes.map(vegetable => vegetableColors[vegetable] || "rgba(153, 102, 255, 1)")
+      backgroundColor: vegetableTypes.map(vegetable => vegetableColors[vegetable] || "rgba(255, 205, 86, 1)")
     }]
   };
 
