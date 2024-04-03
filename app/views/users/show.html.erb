@@ -34,12 +34,17 @@
   </div>
 
   <!-- グラフ描画領域 -->
-  <div class="harvest-chart-container" id="graphContainer">
-    <!-- 散布図グラフのキャンバス -->
-    <canvas id="relationshipChart"
+  <div class="chart-container" id="graphContainer" style="display: none;">
+    <!-- 収穫量の棒グラフのキャンバス -->
+    <canvas id="harvestChart"
             data-vegetables="<%= @aggregated_harvests.map(&:vegetable_type).to_json %>"
-            data-amounts="<%= @aggregated_harvests.map(&:total_amount).to_json %>"
-            data-savings="<%= @aggregated_harvests.map(&:total_savings).to_json %>"></canvas>
+            data-amounts="<%= @aggregated_harvests.map(&:total_amount).to_json %>">
+    </canvas>
+    <!-- 節約額の棒グラフのキャンバス -->
+    <canvas id="savingsChart"
+            data-vegetables="<%= @aggregated_harvests.map(&:vegetable_type).to_json %>"
+            data-savings="<%= @aggregated_harvests.map(&:total_savings).to_json %>">
+    </canvas>
   </div>
 
   <!-- Chart.jsとカスタムJavaScriptの読み込み -->
@@ -47,7 +52,7 @@
   <%= javascript_include_tag 'harvest_chart' %>
   
   <div class="button-container-mypage"> <!-- ボタンを中央に配置 -->
-     <%= link_to '野菜を作る', vegetables_path, class: 'btn-vegetable-mypage' %>
+    <%= link_to '野菜を作る', vegetables_path, class: 'btn-vegetable-mypage' %>
     <% if @aggregated_harvests.present? %>
       <button id="toggleGraphBtn" class="btn-toggle-graph">グラフを表示</button>
     <% end %>

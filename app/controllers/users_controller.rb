@@ -11,6 +11,8 @@ class UsersController < ApplicationController
     @max_savings_amount = max_info[:max_savings_info][:total_savings]
     @most_harvested_vegetable = max_info[:max_harvest_info][:vegetable_type]
     @most_harvested_amount = max_info[:max_harvest_info][:total_amount]
+
+    @vegetable_types_json = @aggregated_harvests.map(&:vegetable_type).to_json
   end
 
   def edit; end
