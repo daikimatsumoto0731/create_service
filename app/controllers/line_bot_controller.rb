@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LineBotController < ApplicationController
   protect_from_forgery except: [:callback]
 

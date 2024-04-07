@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UpdateVegetableNames < ActiveRecord::Migration[7.0]
   def up
     # 野菜の名前を英語に更新

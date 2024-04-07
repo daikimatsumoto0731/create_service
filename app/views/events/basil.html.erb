@@ -8,6 +8,12 @@
     <%= link_to 'マイページに戻る', user_path(current_user), class: 'mypage-link' %>
   </div>
 
+  <% if flash[:notice].present? %>
+    <div class="alert alert-success"><%= flash[:notice] %></div>
+  <% elsif flash[:alert].present? %>
+    <div class="alert alert-danger"><%= flash[:alert] %></div>
+  <% end %>
+
   <div class="page-content">
     <%= render 'events/sowing_form', vegetable: @vegetable %>
   </div>
