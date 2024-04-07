@@ -67,6 +67,11 @@ body, html {
   }
 }
 
+.alert {
+  margin-bottom: 5px; /* 下部の余白を5pxに設定 */
+  padding-bottom: 5px; /* 下部のパディングを5pxに設定 */
+}
+
 .page-content {
   margin-top: 80px; /* ヘッダーの高さに合わせて調整 */
 }

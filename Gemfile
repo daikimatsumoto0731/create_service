@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -18,6 +20,7 @@ gem 'omniauth-line', '<= 2.1.2'
 gem 'omniauth-rails_csrf_protection'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 7.0.8'
+gem 'rubocop', require: false
 gem 'sassc-rails', '~> 2.1'
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
@@ -28,7 +31,6 @@ gem 'whenever', require: false
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
   gem 'sqlite3', '~> 1.4'
 end

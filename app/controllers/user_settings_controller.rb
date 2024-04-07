@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserSettingsController < ApplicationController
   before_action :set_user_setting, only: %i[edit update]
 
