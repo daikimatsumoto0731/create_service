@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 class HarvestsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_harvest, only: [:show]
 
   def new
     @harvest = Harvest.new
@@ -9,36 +12,42 @@ class HarvestsController < ApplicationController
   end
 
   def create
-    @harvest = current_user.harvests.new(harvest_params) # 現在のユーザーに関連付け
+    @harvest = current_user.harvests.new(harvest_params)
+
     if @harvest.save
-      redirect_to harvest_path(@harvest) # 単数形に修正
+      redirect_to harvest_path(@harvest), notice: t('.success')
     else
       @vegetable_type = @harvest.vegetable_type
       set_price_per_kg(@vegetable_type)
-      flash.now[:alert] = '入力に誤りがあります。'
+      flash.now[:alert] = t('.error')
       render_template(@vegetable_type)
     end
   end
 
   def show
-    @harvest = Harvest.find(params[:id])
     # 節約額の計算
     @savings = @harvest.amount * @harvest.price_per_kg
   end
 
   def destroy_by_vegetable_type
     @user = current_user
-    @user.harvests.where(vegetable_type: params[:vegetable_type]).destroy_all
-    redirect_to user_path(@user), notice: 'データを削除しました'
+    @harvests = @user.harvests.where(vegetable_type: params[:vegetable_type])
+    @harvests.destroy_all
+    redirect_to user_path(@user), notice: t('.success')
   end
 
   private
+
+  def set_harvest
+    @harvest = Harvest.find_by(id: params[:id])
+    redirect_to root_path, alert: t('.not_found') unless @harvest
+  end
 
   def harvest_params
     params.require(:harvest).permit(:amount, :vegetable_type, :price_per_kg)
   end
 
-  def set_price_per_kg(vegetable_type)
+  def price_per_kg(vegetable_type)
     @price_per_kg = case vegetable_type
                     when 'バジル' then 250
                     when 'にんじん' then 434

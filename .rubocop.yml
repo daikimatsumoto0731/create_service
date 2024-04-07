@@ -1,0 +1,24 @@
+# Rubyのバージョンを指定
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.1
+  Exclude:
+    - 'db/schema.rb'       # db/schema.rbは自動生成されるため、通常検査から除外されます
+    - 'bin/*'              # binディレクトリ下のファイルを検査から除外
+    - 'node_modules/**/*'  # node_modulesディレクトリは検査から除外
+    - 'vendor/**/*'        # vendorディレクトリも同様に検査から除外
+
+# Rails固有のCopを有効にする
+require: rubocop-rails
+
+# Layout/LineLength: 1行の最大文字数を120に設定
+Layout/LineLength:
+  Max: 120
+
+# Documentation Copを無効にする: すべてのクラスとモジュールにドキュメントコメントが必要かどうか
+Style/Documentation:
+  Enabled: false
+
+# IfUnlessModifier Copを無効にする: 条件式が1行の場合に修飾子を使用することを強制するかどうか
+Style/IfUnlessModifier:
+  Enabled: false

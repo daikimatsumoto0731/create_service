@@ -1,4 +1,7 @@
 ja:
+  errors:
+    vegetables:
+      not_found: "指定された野菜は見つかりませんでした"
   devise:
     registrations:
       new:
@@ -16,7 +19,7 @@ ja:
         sign_in: "ログイン"
         sign_up: "登録"
         forgot_your_password: "パスワードを忘れましたか？"
-    passwords: # 追加するセクション
+    passwords:
       user:
         password_changed: "パスワードが正常に変更されました。"
       password_changed: "パスワードが正常に変更されました。"
@@ -55,12 +58,9 @@ ja:
     submit:
       create: "登録する"
       update: "更新する"
-  errors:
-    messages:
-      expired: "期限切れです。新しいリクエストをしてください。"
-      not_found: "見つかりませんでした。"
-      already_confirmed: "はすでに確認済みです。"
-      not_locked: "はロックされていません。"
-      not_saved:
-        one: "1つのエラーが発生したため %{resource} を保存できませんでした。"
-        other: "%{count}個のエラーが発生したため %{resource} を保存できませんでした。"
+  harvests:
+    create:
+      success: "収穫が正常に登録されました。"
+      error: "入力に誤りがあります。"
+    destroy:
+      success: "データを削除しました"
