@@ -9,8 +9,8 @@
       <%= form.hidden_field :vegetable_type, value: "トマト" %>
 
       <div class="field-harvest">
-        <%= form.label :amount, "収穫量 (kg)", class: "label-harvest" %>
-        <%= form.number_field :amount, step: 0.1, class: "input-harvest" %>
+        <%= form.label :amount, "収穫量 (g)", class: "label-harvest" %>
+        <%= form.text_field :amount, class: "input-harvest" %>
       </div>
 
       <div class="field-harvest">

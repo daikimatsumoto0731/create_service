@@ -13,21 +13,29 @@ class HarvestsController < ApplicationController
 
   def create
     @harvest = current_user.harvests.new(harvest_params)
+    
+    # キログラムからグラムに変換
+    @harvest.amount *= 1000 if @harvest.amount.present?
   
     if @harvest.save
       redirect_to harvest_path(@harvest), notice: t('.success')
       Rails.logger.info("Redirected to: #{harvest_path(@harvest)}") # リダイレクト先のURLをログに出力
     else
-      @vegetable_type = @harvest.vegetable_type
+      @vegetable_type = params[:harvest][:vegetable_type]
       price_per_kg(@vegetable_type)
       flash.now[:alert] = t('.error')
       render_template(@vegetable_type)
     end
-  end  
+  end    
 
   def show
     # 節約額の計算
-    @savings = @harvest.amount * @harvest.price_per_kg
+    if @harvest.price_per_kg.present?
+      # グラムからキログラムに変換
+      @savings = (@harvest.amount / 1000.0) * @harvest.price_per_kg
+    else
+      @savings = 0
+    end
   end
 
   def destroy_by_vegetable_type
