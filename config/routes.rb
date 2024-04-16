@@ -12,9 +12,6 @@ Rails.application.routes.draw do
   # ユーザー設定のルーティングを追加
   resource :user_setting, only: %i[edit update]
 
-  # 未知のルートをキャッチしてカスタム404エラーページを表示
-  match '*path', to: 'application#render_404', via: :all
-
   root 'static_pages#top'
 
   get 'terms', to: 'static_pages#terms', as: :terms
@@ -51,4 +48,6 @@ Rails.application.routes.draw do
       delete 'destroy_by_vegetable_type'
     end
   end
+  # 未知のルートをキャッチしてカスタム404エラーページを表示
+  match '*path', to: 'application#render_404', via: :all
 end

@@ -31,12 +31,12 @@ class ApplicationController < ActionController::Base
 
   def render_404(exception = nil)
     log_error(exception)
-    render(file: 'public/404', status: :not_found, layout: false)  # ステータスコードを修正
+    render(file: "#{Rails.root}/public/404.html", status: :not_found, layout: false)
   end
 
   def render_500(exception = nil)
     log_error(exception)
-    render(file: 'public/500', status: :internal_server_error, layout: false)
+    render(file: "#{Rails.root}/public/500.html", status: :internal_server_error, layout: false)
   end
 
   def log_error(exception)
