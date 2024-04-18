@@ -48,4 +48,6 @@ Rails.application.routes.draw do
       delete 'destroy_by_vegetable_type'
     end
   end
+  # 未知のルートをキャッチしてカスタム404エラーページを表示
+  match '*path', to: 'application#render_404', via: :all
 end

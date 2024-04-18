@@ -9,13 +9,13 @@
       <%= form.hidden_field :vegetable_type, value: "にんじん" %>
 
       <div class="field-harvest">
-        <%= form.label :amount, "収穫量 (kg)", class: "label-harvest" %>
-        <%= form.number_field :amount, step: 0.1, class: "input-harvest" %>
+        <%= form.label :amount, "収穫量 (g)", class: "label-harvest" %>
+        <%= form.text_field :amount, class: "input-harvest" %>
       </div>
 
       <div class="field-harvest">
-        <%= form.label :price_per_kg, "市場価格 (1kgあたり)", class: "label-harvest" %>
-        <%= form.number_field :price_per_kg, step: 0.1, value: @price_per_kg, class: "input-harvest" %>
+        <label class="label-harvest">現在の市場価格 (1kgあたり):</label>
+        <span id="market_price"><%= @price_per_kg.round %> 円</span>
       </div>
 
       <div class="actions-harvest">
