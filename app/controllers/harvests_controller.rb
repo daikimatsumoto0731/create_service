@@ -7,24 +7,20 @@ class HarvestsController < ApplicationController
   def new
     @harvest = Harvest.new
     @vegetable_type = params[:vegetable_type] || 'バジル'
-    price_per_kg(@vegetable_type)
+    price_per_kg(@vegetable_type)  # メソッド名を変更
     render_template(@vegetable_type)
   end
 
   def create
     @harvest = current_user.harvests.new(harvest_params)
     
-    # キログラムからグラムに変換
-    @harvest.amount *= 1000 if @harvest.amount.present?
-
-    # 市場価格を設定
+    # 市場価格を設定（キログラム単位で）
     @vegetable_type = params[:harvest][:vegetable_type]
-    price_per_kg(@vegetable_type)
-    @harvest.price_per_kg = @price_per_kg
+    price_per_kg(@vegetable_type)  # メソッド名を変更
+    @harvest.price_per_kg = @price_per_kg  # グラム単位の変換を除去
 
     if @harvest.save
       redirect_to harvest_path(@harvest), notice: t('.success')
-      Rails.logger.info("Redirected to: #{harvest_path(@harvest)}")
     else
       flash.now[:alert] = t('.error')
       render_template(@vegetable_type)
@@ -32,21 +28,9 @@ class HarvestsController < ApplicationController
   end    
 
   def show
-    if @harvest.price_per_kg.present?
-      # グラムからキログラムに変換して計算
-      @savings = @harvest.amount * @harvest.price_per_kg / 1000.0
-    else
-      @savings = 0
-    end
-    # 市場価格をビューで表示用
-    @price_per_kg = @harvest.price_per_kg
-  end  
-
-  def destroy_by_vegetable_type
-    @user = current_user
-    @harvests = @user.harvests.where(vegetable_type: params[:vegetable_type])
-    @harvests.destroy_all
-    redirect_to user_path(@user), notice: t('.success')
+    # 節約額を計算
+    @savings = (@harvest.amount * @harvest.price_per_kg / 1000.0).round(2)
+    @price_per_kg = @harvest.price_per_kg  # 直接キログラム単位の価格を使用
   end
 
   private
@@ -66,7 +50,7 @@ class HarvestsController < ApplicationController
                     when 'にんじん' then 434
                     when 'トマト' then 791
                     else 0
-                    end
+                   end
   end
 
   def render_template(vegetable_type)
