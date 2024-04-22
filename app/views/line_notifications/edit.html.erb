@@ -28,6 +28,12 @@
         <%= f.time_select :notification_time, { ignore_date: true, minute_step: 30, time_separator: ":" }, { class: 'form-control' } %>
       </div>
 
+      <!-- タイムゾーン選択フィールドを追加 -->
+      <div class="form-group">
+        <%= f.label :time_zone, "タイムゾーン", class: 'control-label' %>
+        <%= f.time_zone_select :time_zone, nil, { default: "Tokyo" }, { class: 'form-control' } %>
+      </div>
+
       <%= f.submit "設定を保存", class: 'btn btn-primary' %>
     <% end %>
 
