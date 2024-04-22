@@ -30,6 +30,6 @@ class LineNotificationsController < ApplicationController
   end
 
   def line_notification_setting_params
-    params.require(:line_notification_setting).permit(:receive_notifications, :notification_time, :time_zone)
+    params.require(:line_notification_setting).permit(:receive_notifications, :notification_time)
   end
 end
