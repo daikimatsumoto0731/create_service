@@ -5,8 +5,6 @@ class UsersController < ApplicationController
 
   def show
     @aggregated_harvests = Harvest.aggregate_by_vegetable_type(@user)
-    # ユーザーに紐づく通知データをビューに渡すためのインスタンス変数を追加
-    @notifications = @user.notifications.order(sent_at: :desc).limit(5)
 
     max_info = Harvest.calculate_max_savings_month(current_user)
     @max_savings_month = max_info[:max_savings_info][:month]
@@ -26,7 +24,7 @@ class UsersController < ApplicationController
       @temperature_info = ''
     end
   end
-  
+
   def edit; end
 
   def update

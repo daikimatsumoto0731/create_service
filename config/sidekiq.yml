@@ -4,9 +4,10 @@
   - [high_priority, 2]
   - [low_priority, 1]
 
+# config/sidekiq.yml
 :scheduler:
   :schedule:
-    daily_watering_reminder:
-      cron: "0 15 * * *"
+    watering_reminder:
+      cron: "* * * * *"
       class: "DailyWateringReminderJob"
       queue: default
