@@ -181,6 +181,16 @@
   font-size: 16px; /* テキストのフォントサイズ */
 }
 
+.weather-info {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
+.weather-info h3 {
+  color: #333;
+}
+
 /* スマートフォンサイズ以下の場合 */
 @media screen and (max-width: 767px) {
   .button-container-mypage {
