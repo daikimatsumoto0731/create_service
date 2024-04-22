@@ -5,5 +5,4 @@ class LineNotificationSetting < ApplicationRecord
 
   validates :receive_notifications, inclusion: { in: [true, false] }
   validates :notification_time, presence: true, if: -> { receive_notifications }
-  validates :time_zone, presence: true, if: -> { receive_notifications && notification_time.present? }
 end

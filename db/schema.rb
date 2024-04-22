@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_22_062310) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_20_141742) do
   create_table "events", force: :cascade do |t|
     t.string "name"
     t.date "start_date"
@@ -41,7 +41,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_22_062310) do
     t.time "notification_time"
     t.string "line_auth_info_api_key"
     t.string "line_auth_info_user_id"
-    t.string "time_zone", default: "Asia/Tokyo"
     t.index ["user_id"], name: "index_line_notification_settings_on_user_id"
   end
 
