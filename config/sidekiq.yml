@@ -8,6 +8,6 @@
 :scheduler:
   :schedule:
     watering_reminder:
-      cron: "20 7 * * *"
+      cron: "17 7 * * *"
       class: "DailyWateringReminderJob"
       queue: default
