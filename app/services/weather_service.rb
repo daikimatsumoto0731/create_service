@@ -7,17 +7,17 @@ class WeatherService
   BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
   @@client = Net::HTTP.new(URI(BASE_URL).host, URI(BASE_URL).port)
   @@client.use_ssl = true
-
-  # 特定の都市の天気情報を取得するクラスメゾット
+  
+  # 特定の都市の天気情報を取得するクラスメソッド
   def self.fetch_weather(city)
     escaped_city = CGI.escape(city)
-    uri = URI("#{BASE_URL}?q=#{escaped_city}&appid=#{ENV['OPENWEATHER_API_KEY']}&units=metric")
-
+    uri = URI("#{BASE_URL}?q=#{escaped_city}&appid=#{ENV['OPENWEATHER_API_KEY']}&units=metric&lang=ja")  # 日本語のレスポンスを指定
+  
     # APIリクエストのエラーハンドリング
     begin
       request = Net::HTTP::Get.new(uri)
       request["Accept"] = "application/json"
-
+  
       response = @@client.request(request)
       case response
       when Net::HTTPSuccess then
@@ -32,3 +32,4 @@ class WeatherService
     end
   end
 end
+  

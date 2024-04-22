@@ -5,6 +5,16 @@
     <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'logout-link' %>
   </div>
 
+  <div class="weather-info">
+    <h3>天気情報</h3>
+    <% if @user.prefecture.present? %>
+      <p><%= @user.prefecture %>の現在の天気: <%= @weather_info %></p>
+      <p>気温: <%= @temperature_info %></p>
+    <% else %>
+      <p>都道府県が設定されていません。</p>
+    <% end %>
+  </div>
+
   <!-- キーデータのハイライト -->
   <div class="key-data-highlights">
     <div class="card highlight-card">

@@ -15,8 +15,18 @@ class UsersController < ApplicationController
     @most_harvested_amount = max_info[:max_harvest_info][:total_amount]
 
     @vegetable_types_json = @aggregated_harvests.map(&:vegetable_type).to_json
-  end
 
+    # ユーザーの選択した都道府県に基づく天気情報を取得
+    if @user.prefecture.present?
+      weather_response = WeatherService.fetch_weather(@user.prefecture)
+      @weather_info = weather_response['weather'] ? weather_response['weather'][0]['description'] : '情報が取得できませんでした'
+      @temperature_info = weather_response['main'] ? "#{weather_response['main']['temp']} ℃" : '情報が取得できませんでした'
+    else
+      @weather_info = '都道府県が設定されていません'
+      @temperature_info = ''
+    end
+  end
+  
   def edit; end
 
   def update
