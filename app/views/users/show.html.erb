@@ -8,7 +8,21 @@
   <div class="weather-info">
     <h3>天気情報</h3>
     <% if @user.prefecture.present? %>
-      <p><%= @user.prefecture %>の現在の天気: <%= @weather_info %></p>
+      <div class="weather-details">
+        <p><%= @user.prefecture %>の現在の天気: <%= @weather_info %></p>
+        <% case @weather_info %>
+          <% when /晴れ/ %>
+            <%= image_tag('sunny.png', alt: '晴れ', class: 'weather-icon') %>
+          <% when /曇り/ %>
+            <%= image_tag('cloudy.png', alt: '曇り', class: 'weather-icon') %>
+          <% when /雨/ %>
+            <%= image_tag('rain.png', alt: '雨', class: 'weather-icon') %>
+          <% when /雪/ %>
+            <%= image_tag('snow.png', alt: '雪', class: 'weather-icon') %>
+          <% else %>
+            <!-- その他の天気の場合はアイコンを表示しない -->
+        <% end %>
+      </div>
       <p>気温: <%= @temperature_info %></p>
     <% else %>
       <p>都道府県が設定されていません。</p>
