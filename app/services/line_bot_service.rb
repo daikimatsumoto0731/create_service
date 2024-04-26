@@ -16,25 +16,35 @@ class LineBotService
   end
 
   def self.determine_message(weather_data)
-    "今日の天気に関係なく、水やりの状況を確認してください。"
+    if weather_data["weather"] && weather_data["weather"][0]["main"] == "Rain"
+      "今日は雨が降っています。水やりは控えめにしてください。"
+    else
+      description = weather_data.dig("weather", 0, "description") || "晴れ"
+      "今日の天気は#{description}です。水やりをお忘れなく！"
+    end
   end  
 
   def self.send_push_message(line_user_id, message_text)
     message = { type: 'text', text: message_text }
     response = client.push_message(line_user_id, message)
-    Rails.logger.info "Response Code: #{response.code}"
-    Rails.logger.info "Response Body: #{response.body}"
+    Rails.logger.info "Sending message to user ID: #{line_user_id}, Message: #{message_text}"
+
     handle_response(response, line_user_id, message_text)
   end
 
   def self.handle_response(response, line_user_id, message_text)
     Rails.logger.info "Response Code: #{response.code}, Response Body: #{response.body}"
-    return unless response.code.to_s == '200'  # 応答コードの比較を文字列として行う
-  
-    if (user = User.find_by(line_user_id: line_user_id))
-      user.notifications.create(message: message_text, sent_at: Time.current)
+
+    if response.code.to_s == '200'
+      Rails.logger.info "Message sent successfully to user ID: #{line_user_id}"
+      
+      if (user = User.find_by(line_user_id: line_user_id))
+        user.notifications.create(message: message_text, sent_at: Time.current)
+      end
+    else
+      Rails.logger.error "Failed to send message to user ID: #{line_user_id}, Error: #{response.body}"
     end
   rescue => e
-    Rails.logger.error "Failed to send message: #{e.message}, Response Code: #{response.code}"
+    Rails.logger.error "Exception occurred while sending message to user ID: #{line_user_id}: #{e.message}"
   end
 end
