@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# app/jobs/daily_watering_reminder_job.rb
-
 class DailyWateringReminderJob
   include Sidekiq::Worker
 
