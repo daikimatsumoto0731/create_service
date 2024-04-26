@@ -38,7 +38,7 @@ class LineBotController < ApplicationController
   def reply_message(reply_token, text)
     message = {
       type: 'text',
-      text:
+      text: text
     }
     line_bot_client.reply_message(reply_token, message)
   end
