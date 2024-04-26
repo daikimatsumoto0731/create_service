@@ -5,16 +5,16 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[line]
 
-  validates :username, presence: true
-  validates :prefecture, presence: true
+  validates :username, presence: true, unless: -> { provider == 'line' }
+  validates :prefecture, presence: true, unless: -> { provider == 'line' }
   validates :line_user_id, presence: true, if: -> { provider == 'line' }
 
   has_one :line_notification_setting, dependent: :destroy
-  has_one :user_setting, dependent: :destroy
   has_many :harvests, dependent: :destroy
   has_many :notifications, dependent: :destroy
 
-  # OmniAuth認証データからユーザーを検索または作成します
+  after_create :create_default_notification_setting
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email.presence || User.generate_email(auth)
@@ -25,9 +25,13 @@ class User < ApplicationRecord
     end
   end
 
-  def refresh_access_token(auth)
-    self.access_token = auth.credentials.token
-    self.token_expires_at = Time.at(auth.credentials.expires_at) if auth.credentials.expires_at
-    save!
+  private
+
+  def create_default_notification_setting
+    build_line_notification_setting(receive_notifications: true).save!
+  end
+
+  def self.generate_email(auth)
+    "#{auth.uid}@example.com"
   end
 end
