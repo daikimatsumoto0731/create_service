@@ -6,12 +6,6 @@ class LineBotService
     send_push_message(line_user_id, message_text)
   end
 
-  # 新しいメソッドを追加
-  def self.send_friend_add_notification(line_user_id)
-    message_text = "友達追加ありがとうございます！"
-    send_push_message(line_user_id, message_text)
-  end
-  
   private
 
   def self.client
@@ -32,9 +26,8 @@ class LineBotService
 
   def self.send_push_message(line_user_id, message_text)
     message = { type: 'text', text: message_text }
-    response = client.push_message(line_user_id, message)
+    response = client.push_message({ to: line_user_id, messages: [message] })
     Rails.logger.info "Sending message to user ID: #{line_user_id}, Message: #{message_text}"
-
     handle_response(response, line_user_id, message_text)
   end
 
