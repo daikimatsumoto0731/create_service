@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'line_bot/callback'
   devise_for :users, controllers: {
     sessions: 'user_sessions',
     passwords: 'users/passwords',
@@ -19,6 +18,8 @@ Rails.application.routes.draw do
   get 'line_notification_settings', to: 'line_notifications#edit', as: 'line_notification_settings'
   patch 'line_notification_settings', to: 'line_notifications#update'
   post 'notify_callback', to: 'line_notifications#notify_callback'
+
+  # LINE Bot Webhook URL
   post '/callback', to: 'line_bot#callback'
 
   # 野菜選択画面へのルーティング
