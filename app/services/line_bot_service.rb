@@ -26,10 +26,10 @@ class LineBotService
 
   def self.send_push_message(line_user_id, message_text)
     message = { type: 'text', text: message_text }
-    response = client.push_message({ to: line_user_id, messages: [message] })
+    response = client.push_message(line_user_id, [message]) # 配列でメッセージを渡す
     Rails.logger.info "Sending message to user ID: #{line_user_id}, Message: #{message_text}"
     handle_response(response, line_user_id, message_text)
-  end
+  end  
 
   def self.handle_response(response, line_user_id, message_text)
     Rails.logger.info "Response Code: #{response.code}, Response Body: #{response.body}"
