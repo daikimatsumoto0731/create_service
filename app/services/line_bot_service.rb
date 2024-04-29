@@ -26,8 +26,7 @@ class LineBotService
 
   def self.send_push_message(line_user_id, message_text)
     message = { type: 'text', text: message_text }
-    messages = [message]
-    response = client.push_message(line_user_id, messages: messages) # メッセージをHashのキーとして渡す
+    response = client.push_message(line_user_id, [message])
     Rails.logger.info "Sending message to user ID: #{line_user_id}, Message: #{message_text}"
     handle_response(response, line_user_id, message_text)
   end  
