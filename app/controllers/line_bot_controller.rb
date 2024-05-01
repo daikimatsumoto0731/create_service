@@ -3,7 +3,6 @@
 class LineBotController < ApplicationController
   protect_from_forgery except: [:callback]
 
-  # LINE Botがメッセージを受信したときの処理
   def callback
     body = request.body.read
     signature = request.env['HTTP_X_LINE_SIGNATURE']
@@ -14,20 +13,21 @@ class LineBotController < ApplicationController
     end
 
     events = line_bot_client.parse_events_from(body)
-
-    events.each do |event|
-      case event
-      when Line::Bot::Event::Message
-        handle_message_event(event)
-      when Line::Bot::Event::Follow
-        handle_follow_event(event)
-      end
-    end
+    events.each { |event| process_event(event) }
 
     head :ok
   end
 
   private
+
+  def process_event(event)
+    case event
+    when Line::Bot::Event::Message
+      handle_message_event(event)
+    when Line::Bot::Event::Follow
+      handle_follow_event(event)
+    end
+  end
 
   def line_bot_client
     @line_bot_client ||= Line::Bot::Client.new do |config|
@@ -36,27 +36,38 @@ class LineBotController < ApplicationController
     end
   end
 
-  # LINEメッセージを受信したときの処理
+  def handle_follow_event(event)
+    user_id = event['source']['userId']
+    User.find_or_create_by(line_user_id: user_id)
+    prompt_prefecture_message(event['replyToken'])
+  end
+
+  def prompt_prefecture_message(reply_token)
+    message = {
+      type: 'text',
+      text: "登録ありがとうございます！都道府県を教えてください。例：東京都"
+    }
+    line_bot_client.reply_message(reply_token, message)
+  end
+
   def handle_message_event(event)
-    case event.type
-    when Line::Bot::Event::MessageType::Text
-      reply_message(event['replyToken'], '水やりの時間です！')
+    user_id = event['source']['userId']
+    text = event.message['text'].strip
+    handle_user_prefecture_input(text, user_id, event['replyToken'])
+  end
+
+  def handle_user_prefecture_input(text, user_id, reply_token)
+    user = User.find_by(line_user_id: user_id)
+    if PREFECTURES.include?(text)
+      user.update(prefecture: text)
+      reply_message(reply_token, "都道府県を「#{text}」として登録しました。")
+    else
+      reply_message(reply_token, "都道府県名が正しくありません。もう一度入力してください。")
     end
   end
 
-  # ユーザーが友達追加したときのイベントを処理する
-  def handle_follow_event(event)
-    user_id = event['source']['userId']
-    User.find_or_create_by(line_user_id: user_id)  # ユーザーIDをデータベースに保存する処理
-    reply_message(event['replyToken'], "友達登録ありがとうございます！")
-  end
-
-  # LINEメッセージを返信する処理
   def reply_message(reply_token, text)
-    message = {
-      type: 'text',
-      text: text
-    }
+    message = { type: 'text', text: text }
     line_bot_client.reply_message(reply_token, message)
   end
 end
