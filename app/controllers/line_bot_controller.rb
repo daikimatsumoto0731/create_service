@@ -23,7 +23,7 @@ class LineBotController < ApplicationController
   def process_event(event)
     case event
     when Line::Bot::Event::Message
-      handle_message_event(event)
+      # handle_message_event(event)  # 現在はこのイベントは処理しません。
     when Line::Bot::Event::Follow
       handle_follow_event(event)
     end
@@ -39,35 +39,6 @@ class LineBotController < ApplicationController
   def handle_follow_event(event)
     user_id = event['source']['userId']
     User.find_or_create_by(line_user_id: user_id)
-    prompt_prefecture_message(event['replyToken'])
-  end
-
-  def prompt_prefecture_message(reply_token)
-    message = {
-      type: 'text',
-      text: "登録ありがとうございます！都道府県を教えてください。例：東京都"
-    }
-    line_bot_client.reply_message(reply_token, message)
-  end
-
-  def handle_message_event(event)
-    user_id = event['source']['userId']
-    text = event.message['text'].strip
-    handle_user_prefecture_input(text, user_id, event['replyToken'])
-  end
-
-  def handle_user_prefecture_input(text, user_id, reply_token)
-    user = User.find_by(line_user_id: user_id)
-    if PREFECTURES.include?(text)
-      user.update(prefecture: text)
-      reply_message(reply_token, "都道府県を「#{text}」として登録しました。")
-    else
-      reply_message(reply_token, "都道府県名が正しくありません。もう一度入力してください。")
-    end
-  end
-
-  def reply_message(reply_token, text)
-    message = { type: 'text', text: text }
-    line_bot_client.reply_message(reply_token, message)
+    # prompt_prefecture_message(event['replyToken'])  # 都道府県を尋ねる処理を削除
   end
 end
