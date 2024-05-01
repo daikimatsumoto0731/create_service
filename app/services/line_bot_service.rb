@@ -18,7 +18,8 @@ class LineBotService
   private
 
   def self.fetch_weather_data(prefecture)
-    uri = URI("https://api.openweathermap.org/data/2.5/weather?q=#{URI.encode(prefecture)},JP&appid=#{OPENWEATHER_API_KEY}&units=metric")
+    encoded_prefecture = URI.encode_www_form_component(prefecture)
+    uri = URI("https://api.openweathermap.org/data/2.5/weather?q=#{encoded_prefecture},JP&appid=#{OPENWEATHER_API_KEY}&units=metric")
     response = Net::HTTP.get(uri)
     JSON.parse(response)
   end
