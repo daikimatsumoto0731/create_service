@@ -6,7 +6,7 @@
       <div class="ghost-element"></div>
     </div>
     <%= link_to 'マイページに戻る', user_path(current_user), class: 'mypage-link' %>
-    <%= link_to 'にんじんの状態を分析する', analyze_image_path(vegetable_type: 'にんじん'), class: 'btn btn-primary', remote: true, data: { toggle: 'modal', target: '#analyzeImageModal_carrot' } %>
+    <%= link_to 'ニンジンの状態を分析する', analyze_image_path(vegetable_type: 'ニンジン'), class: 'btn btn-primary', remote: true, data: { toggle: 'modal', target: '#analyzeImageModal' } %>
   </div>
 
   <!-- 画像アップロードフォームのモーダル -->
