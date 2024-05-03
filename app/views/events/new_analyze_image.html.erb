@@ -1,0 +1,18 @@
+<%= stylesheet_link_tag 'analyze_image', media: 'all', 'data-turbolinks-track': 'reload' %>
+<header>
+  <h1>画像分析</h1>
+</header>
+<div class="container">
+  <%= form_with(url: analyze_image_path, local: true, multipart: true) do |form| %>
+    <div class="field">
+      <%= form.label :image, "画像をアップロード" %>
+      <%= form.file_field :image, accept: "image/jpeg,image/png" %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit "分析する", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
+<footer>
+</footer>

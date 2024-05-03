@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
+require 'google/cloud/vision'
+
 class EventsController < ApplicationController
-  before_action :set_vegetable, only: [:update_sowing_date, :analyze_image]
+  before_action :set_vegetable, only: [:update_sowing_date]
 
   def index
     @selected_vegetable = params[:selected_vegetable]&.downcase
@@ -22,68 +24,56 @@ class EventsController < ApplicationController
     update_vegetable_sowing_date
   end
 
-  def analyze_image
-    require 'httparty'
-  
-    # 画像データにアクセス
-    image_data = params[:image]
-  
-    # OpenAIのAPIキーを環境変数から取得
-    api_key = ENV['OPENAI_API_KEY']
-    api_url = 'https://api.openai.com/v1/image/generations'
-  
-    # デバッグログ: APIリクエスト送信前
-    Rails.logger.debug("Sending request to OpenAI API with image data: #{image_data}")
-  
-    # APIリクエストを送信
-    response = HTTParty.post(
-      api_url,
-      headers: {
-        "Authorization" => "Bearer #{api_key}",
-        "Content-Type" => "application/json"
-      },
-      body: {
-        authenticity_token: form_authenticity_token, # CSRFトークンを含める
-        prompt: "Analyze this image and provide advice for growing better #{@selected_vegetable}",
-        image: Base64.strict_encode64(image_data.read),
-        n: 1
-      }.to_json
-    )
-  
-    # デバッグログ: APIレスポンス受信後
-    Rails.logger.debug("Received response from OpenAI API: #{response}")
-  
-    # APIレスポンスの処理
-    if response.success?
-      advice = response.parsed_response['choices'].first['data']['text']
-    else
-      advice = "Analysis failed: #{response.body}"
-    end
-  
-    # 画像分析の結果をビューに表示
-    render 'analyze_image', locals: { advice: advice }
+  def new_analyze_image
+    # ページの初期表示用
   end
-  
-  private
 
+  def analyze_image
+    # 画像データにアクセス
+    image_path = params[:image].tempfile.path
+  
+    # Google Cloud Vision APIクライアントの初期化
+    begin
+      vision = Google::Cloud::Vision.image_annotator do |config|
+        config.credentials = JSON.parse(File.read(ENV['GOOGLE_APPLICATION_CREDENTIALS']))
+      end
+  
+      # 画像の解析をリクエスト
+      response = vision.label_detection image: image_path
+      labels = response.responses[0].label_annotations.map(&:description)
+  
+      # 野菜の状態を取得
+      @vegetable_status = determine_vegetable_status(labels)
+  
+      # 解析結果をビューに表示
+      @labels = labels
+      render 'analyze_image'
+    rescue StandardError => e
+      logger.error "Failed to analyze image: #{e.message}"
+      flash[:alert] = "画像の分析に失敗しました。エラー: #{e.message}"
+      redirect_to new_analyze_image_path
+    end
+  end  
+  
   private
 
   def set_vegetable
     @vegetable = Vegetable.find_by(id: params[:vegetable_id])
-    redirect_to(events_path, alert: t('errors.vegetables.not_found')) unless @vegetable
+    unless @vegetable
+      redirect_to(events_path, alert: 'Vegetable not found')
+    end
   end
 
   def handle_vegetable_selection
-    return unless @selected_vegetable.present?
-
-    @vegetable = Vegetable.find_by('lower(name) = ?', @selected_vegetable)
-    unless @vegetable
-      flash[:alert] = "#{@selected_vegetable} に該当する野菜は見つかりませんでした。"
-      redirect_to events_path
-      return
+    if @selected_vegetable.present?
+      @vegetable = Vegetable.find_by('lower(name) = ?', @selected_vegetable)
+      unless @vegetable
+        flash[:alert] = "#{@selected_vegetable} に該当する野菜は見つかりませんでした。"
+        redirect_to events_path
+      else
+        @events = @vegetable.events.order(sort_events_query)
+      end
     end
-
-    @events = @vegetable.events.where.not(name: 'Button').order(sort_events_query)
   end
 
   def sort_events_query
@@ -116,15 +106,71 @@ class EventsController < ApplicationController
     ActiveRecord::Base.transaction do
       if @vegetable.update(sowing_date: sowing_date)
         @vegetable.update_related_event_dates
-        flash[:notice] = '種まき日を更新しました。' # メッセージをフラッシュに設定
+        flash[:notice] = '種まき日を更新しました。'
         redirect_to events_path(selected_vegetable: @vegetable.name.downcase)
       else
-        flash[:alert] = '種まき日の更新に失敗しました。' # エラーメッセージをフラッシュに設定
+        flash[:alert] = '種まき日の更新に失敗しました。'
         redirect_to events_path(selected_vegetable: @vegetable.name.downcase)
       end
+    rescue StandardError => e
+      flash[:alert] = "更新中にエラーが発生しました: #{e.message}"
+      redirect_to events_path(selected_vegetable: @vegetable.name.downcase)
     end
-  rescue StandardError => e
-    flash[:alert] = "更新中にエラーが発生しました: #{e.message}" # エラーメッセージをフラッシュに設定
-    redirect_to events_path(selected_vegetable: @vegetable.name.downcase)
+  end
+
+  # analyze_image メソッド内で直接処理を行う
+  def determine_vegetable_status(labels)
+    # 野菜の状態を初期化
+    vegetable_status = {}
+
+    # ラベルに含まれるキーワードを元に野菜の状態を推測
+    labels.each do |label|
+      if label.downcase.include?('healthy')
+        vegetable_status[:status] = '健康的な状態です'
+      elsif label.downcase.include?('disease') || label.downcase.include?('pest')
+        vegetable_status[:status] = '病気や害虫の影響を受けている可能性があります'
+      elsif label.downcase.include?('ripe') || label.downcase.include?('harvest')
+        vegetable_status[:status] = '収穫の時期に近づいています'
+      elsif label.downcase.include?('dry') || label.downcase.include?('wilting') || label.downcase.include?('yellowing')
+        vegetable_status[:status] = '水分不足の可能性があります。十分な水やりを行いましょう。'
+      elsif label.downcase.include?('overripe') || label.downcase.include?('rotten')
+        vegetable_status[:status] = '過熟や腐敗の可能性があります。早めに収穫しましょう。'
+      elsif label.downcase.include?('underripe') || label.downcase.include?('immature')
+        vegetable_status[:status] = '未熟な状態です。収穫の時期を待ちましょう。'
+      elsif label.downcase.include?('flowering') || label.downcase.include?('blossom')
+        vegetable_status[:status] = '花が咲いています。収穫の準備が進んでいます。'
+      elsif label.downcase.include?('fruiting') || label.downcase.include?('bearing fruit')
+        vegetable_status[:status] = '実がついています。収穫の時期です。'
+      elsif label.downcase.include?('weed') || label.downcase.include?('grass')
+        vegetable_status[:status] = '雑草が生えています。間引きや雑草取りを行いましょう。'
+      elsif label.downcase.include?('insect') || label.downcase.include?('bug')
+        vegetable_status[:status] = '害虫が見られます。害虫駆除を行いましょう。'
+      elsif label.downcase.include?('drought') || label.downcase.include?('dry soil')
+        vegetable_status[:status] = '干ばつの可能性があります。十分な水を与えましょう。'
+      elsif label.downcase.include?('fungal') || label.downcase.include?('mold')
+        vegetable_status[:status] = 'カビが生えています。風通しの良い環境を保ちましょう。'
+      elsif label.downcase.include?('nutrient deficiency') || label.downcase.include?('yellow leaves')
+        vegetable_status[:status] = '栄養不足の兆候が見られます。肥料を追加しましょう。'
+      elsif label.downcase.include?('overwatering') || label.downcase.include?('waterlogged')
+        vegetable_status[:status] = '過剰な水やりの影響が見られます。水はけを良くするために土を乾燥させましょう。'
+      elsif label.downcase.include?('stunted growth') || label.downcase.include?('small size')
+        vegetable_status[:status] = '成長が停滞しています。栄養不足や環境の問題が考えられます。'
+      elsif label.downcase.include?('sunburn') || label.downcase.include?('burnt leaves')
+        vegetable_status[:status] = '日焼けが見られます。直射日光を避け、日陰に移動させましょう。'
+      elsif label.downcase.include?('overgrown') || label.downcase.include?('too large')
+        vegetable_status[:status] = '過剰成長しています。間引きを行いましょう。'
+      elsif label.downcase.include?('undergrown') || label.downcase.include?('too small')
+        vegetable_status[:status] = '成長が遅れています。十分な日光や栄養を与えましょう。'
+      elsif label.downcase.include?('viral infection') || label.downcase.include?('virus')
+        vegetable_status[:status] = 'ウイルス感染の兆候が見られます。感染した植物を早めに隔離しましょう。'
+      elsif label.downcase.include?('inappropriate temperature') || label.downcase.include?('temperature stress')
+        vegetable_status[:status] = '温度が適切でない可能性があります。適切な温度設定を確認しましょう。'
+      else
+        vegetable_status[:status] = 'その他の状態です。詳細を確認してください。'
+      end
+    end
+
+    # 野菜の状態を返す
+    vegetable_status
   end
 end

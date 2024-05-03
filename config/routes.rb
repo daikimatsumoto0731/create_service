@@ -37,11 +37,11 @@ Rails.application.routes.draw do
   patch '/events/update_sowing_date', to: 'events#update_sowing_date', as: 'update_sowing_date_events'
 
   # 画像分析のアクションへのルート
+  get 'analyze_image/new', to: 'events#new_analyze_image', as: 'new_analyze_image'
   post 'analyze_image', to: 'events#analyze_image', as: 'analyze_image'
 
   # 収穫量の入力フォームと節約額の計算結果表示のルーティング
-  resources :harvests, only: %i[new create show]
-  resources :harvests do
+  resources :harvests, only: %i[new create show] do
     collection do
       delete 'destroy_by_vegetable_type'
     end
