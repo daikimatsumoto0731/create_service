@@ -3,7 +3,7 @@ require 'uri'
 require 'json'
 
 class LibreTranslate
-  BASE_URL = 'http://localhost:5001' # Dockerコンテナのポート
+  BASE_URL = ENV['LIBRETRANSLATE_URL'] || 'https://vegetable-services.herokuapp.com'
 
   def self.translate(text, source_lang = 'en', target_lang = 'ja')
     uri = URI("#{BASE_URL}/translate")
