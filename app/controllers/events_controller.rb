@@ -36,10 +36,7 @@ class EventsController < ApplicationController
       image_path = image.tempfile.path
       Rails.logger.info "Image path: #{image_path}"
   
-      vision = Google::Cloud::Vision.image_annotator do |config|
-        config.credentials = ENV['GOOGLE_APPLICATION_CREDENTIALS']
-      end
-  
+      vision = Google::Cloud::Vision.image_annotator
       response = vision.label_detection image: image_path
       if response && response.responses && !response.responses.empty?
         labels = response.responses[0].label_annotations.map(&:description)
@@ -51,12 +48,10 @@ class EventsController < ApplicationController
             if guide['section']
               guide['section'].each do |section|
                 if section['description']
-                  original_description = section['description']
-                  Rails.logger.info "Original text encoding: #{original_description.encoding}"
-                  translated_text = LibreTranslate.translate(original_description)
+                  translated_text = LibreTranslate.translate(section['description'])
+                  Rails.logger.info "Original text encoding: #{section['description'].encoding}"
                   Rails.logger.info "Translated text encoding: #{translated_text.encoding}"
-                  section['original_description'] = original_description.force_encoding('UTF-8')
-                  section['translated_description'] = translated_text.force_encoding('UTF-8')
+                  section['description'] = translated_text.force_encoding('UTF-8')
                 end
               end
             else
@@ -87,7 +82,7 @@ class EventsController < ApplicationController
     Rails.logger.error "Failed to analyze image: #{e.message}"
     flash[:alert] = "画像の分析に失敗しました。エラー: #{e.message}"
     redirect_to new_analyze_image_path
-  end 
+  end   
   
   private
 
