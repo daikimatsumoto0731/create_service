@@ -1,5 +1,7 @@
-require 'google/cloud/vision'
+require "google/cloud/vision"
 
-Google::Cloud::Vision.configure do |config|
-  config.credentials = JSON.parse(ENV['GOOGLE_APPLICATION_CREDENTIALS_JSON'])
+if ENV["GOOGLE_APPLICATION_CREDENTIALS_JSON"]
+  Google::Cloud::Vision.configure do |config|
+    config.credentials = JSON.parse(ENV["GOOGLE_APPLICATION_CREDENTIALS_JSON"])
+  end
 end

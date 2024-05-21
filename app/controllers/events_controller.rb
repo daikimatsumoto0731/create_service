@@ -37,6 +37,7 @@ class EventsController < ApplicationController
       Rails.logger.info "Image path: #{image_path}"
   
       vision = Google::Cloud::Vision.image_annotator
+  
       response = vision.label_detection image: image_path
       if response && response.responses && !response.responses.empty?
         labels = response.responses[0].label_annotations.map(&:description)
@@ -59,18 +60,18 @@ class EventsController < ApplicationController
             end
           end
           @labels = labels
-          @vegetable_status = determine_vegetable_status(labels) # 追加
+          @vegetable_status = determine_vegetable_status(labels)
         else
           Rails.logger.error "No 'data' key in care_guide: #{@care_guide}"
           @care_guide = nil
           @labels = []
-          @vegetable_status = nil # 追加
+          @vegetable_status = nil
         end
       else
         Rails.logger.error "No labels were detected."
         @labels = []
         @care_guide = nil
-        @vegetable_status = nil # 追加
+        @vegetable_status = nil
       end
     else
       flash[:alert] = "画像または野菜の名前が提供されていません。"
@@ -82,7 +83,7 @@ class EventsController < ApplicationController
     Rails.logger.error "Failed to analyze image: #{e.message}"
     flash[:alert] = "画像の分析に失敗しました。エラー: #{e.message}"
     redirect_to new_analyze_image_path
-  end   
+  end 
   
   private
 
