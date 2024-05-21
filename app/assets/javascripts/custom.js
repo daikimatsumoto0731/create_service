@@ -27,7 +27,6 @@ $(document).ready(function() {
     modal.find('.modal-body input').val('');
   });
 
-  // 画像分析フォームの送信処理
   $('#analyze_image_form').on('submit', function(e) {
     e.preventDefault(); // フォームのデフォルト送信を防ぐ
     var formData = new FormData(this);
@@ -45,5 +44,5 @@ $(document).ready(function() {
         alert('画像の分析に失敗しました: ' + textStatus);
       }
     });
-  });
+  });  
 });

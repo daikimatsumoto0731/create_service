@@ -1,6 +1,6 @@
 <%= stylesheet_link_tag 'analyze_image', media: 'all', 'data-turbolinks-track': 'reload' %>
 <header>
-  <h1>画像分析結果</h1>
+  <h1>画像分析結果 - <%= params[:vegetable_name] %></h1>
 </header>
 <div class="container">
   <% if @labels.present? %>
@@ -10,10 +10,30 @@
         <span><%= label %></span><br>
       <% end %>
     </div>
-    <div class="alert alert-success" role="alert">
-      <strong>野菜の状態：</strong>
-      <span><%= @vegetable_status[:status] %></span>
-    </div>
+    <% if @vegetable_status.present? %>
+      <div class="alert alert-success" role="alert">
+        <strong>野菜の状態：</strong>
+        <span><%= @vegetable_status[:status] %></span>
+      </div>
+    <% end %>
+    <% if @care_guide && @care_guide['data'].present? %>
+      <div class="alert alert-info" role="alert">
+        <strong>育て方のポイント：</strong>
+        <% @care_guide['data'].each do |guide| %>
+          <% if guide['section'].present? %>
+            <% guide['section'].each do |section| %>
+              <p><strong><%= section['type'].capitalize %>:</strong> <%= section['translated_description'] || "説明がありません" %></p>
+            <% end %>
+          <% else %>
+            <p>詳細なケア指南がありません。</p>
+          <% end %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="alert alert-warning" role="alert">
+        育て方のポイントが見つかりませんでした。
+      </div>
+    <% end %>
   <% else %>
     <div class="alert alert-warning" role="alert">
       分析結果が見つかりませんでした。
@@ -25,6 +45,3 @@
     <%= link_to 'スケジュールに戻る', vegetables_path, class: 'btn btn-secondary' %>
   </div>
 </div>
-<footer>
-  
-</footer>
