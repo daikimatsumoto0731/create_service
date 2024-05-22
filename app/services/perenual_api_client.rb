@@ -15,13 +15,13 @@ class PerenualApiClient
     query_param = vegetable_name ? "&q=#{URI.encode_www_form_component(vegetable_name)}" : ""
     url = "#{BASE_URL}/species-care-guide-list?key=#{api_key}#{query_param}"
     uri = URI(url)
-        
+      
     Rails.logger.info "Fetching care guide with URL: #{url}"
     response = Net::HTTP.get_response(uri)
-        
+      
     handle_response(response)
   end
-        
+    
   private
     
   def self.handle_response(response)
@@ -30,13 +30,13 @@ class PerenualApiClient
       begin
         care_guide = JSON.parse(response.body)
         Rails.logger.info "Care guide fetched successfully: #{care_guide}"
-    
+          
         if care_guide['data']
           Rails.logger.info "Data present in care guide: #{care_guide['data']}"
         else
           Rails.logger.error "No 'data' key in care_guide: #{care_guide}"
         end
-    
+          
         care_guide
       rescue JSON::ParserError => e
         log_error("JSON parsing error: #{e.message}")

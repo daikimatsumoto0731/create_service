@@ -50,9 +50,13 @@ class EventsController < ApplicationController
               guide['section'].each do |section|
                 if section['description']
                   translated_text = LibreTranslate.translate(section['description'])
-                  Rails.logger.info "Original text encoding: #{section['description'].encoding}"
-                  Rails.logger.info "Translated text encoding: #{translated_text.encoding}"
-                  section['description'] = translated_text.force_encoding('UTF-8')
+                  if translated_text
+                    Rails.logger.info "Original text encoding: #{section['description'].encoding}"
+                    Rails.logger.info "Translated text encoding: #{translated_text.encoding}"
+                    section['translated_description'] = translated_text.force_encoding('UTF-8')
+                  else
+                    Rails.logger.error "Failed to translate text: #{section['description']}"
+                  end
                 end
               end
             else
@@ -83,7 +87,7 @@ class EventsController < ApplicationController
     Rails.logger.error "Failed to analyze image: #{e.message}"
     flash[:alert] = "画像の分析に失敗しました。エラー: #{e.message}"
     redirect_to new_analyze_image_path
-  end 
+  end   
   
   private
 
