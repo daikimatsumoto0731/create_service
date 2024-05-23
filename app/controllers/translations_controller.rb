@@ -7,7 +7,7 @@ class TranslationsController < ApplicationController
     target_lang = params[:target] || 'ja'
   
     translated_text = LibreTranslate.translate(text, source_lang, target_lang)
-      
+  
     if translated_text
       render json: { translatedText: translated_text }, status: :ok
     else
