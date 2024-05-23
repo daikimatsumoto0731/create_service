@@ -11,10 +11,8 @@
     "bootstrap": "^5.3.2",
     "fullcalendar": "^6.1.10",
     "webpack": "^5.91.0",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^5.91.0"
   },
-  "devDependencies": {
-    "webpack-dev-server": "^3"
-  },
+  "devDependencies": {},
   "packageManager": "yarn@1.22.20"
 }
