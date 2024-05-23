@@ -47,9 +47,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # 翻訳用エンドポイント
-  post 'translate', to: 'translations#create'
-
   # 未知のルートをキャッチしてカスタム404エラーページを表示
   match '*path', to: 'application#render_404', via: :all
 end

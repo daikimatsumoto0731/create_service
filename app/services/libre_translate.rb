@@ -3,32 +3,24 @@ require 'uri'
 require 'json'
 
 class LibreTranslate
-  BASE_URL = ENV['LIBRETRANSLATE_URL'] || 'https://www.homegarden-harvest.com'
+  BASE_URL = ENV['LIBRETRANSLATE_URL'] || 'https://libretranslate.de' # 環境変数が設定されていない場合はデフォルトのURLを使用
 
   def self.translate(text, source_lang = 'en', target_lang = 'ja')
     uri = URI("#{BASE_URL}/translate")
     response = Net::HTTP.post_form(uri, {
-      'text' => text,
+      'q' => text,
       'source' => source_lang,
-      'target' => target_lang
+      'target' => target_lang,
+      'format' => 'text'
     })
 
-    response_body = response.body.force_encoding('UTF-8')
-
-    if response.is_a?(Net::HTTPSuccess)
-      result = JSON.parse(response_body)
-      translated_text = result['translatedText']
-      translated_text.force_encoding('UTF-8')
-      translated_text
-    else
-      Rails.logger.error "Translation API error: #{response.code} - #{response_body}"
-      nil
-    end
-  rescue JSON::ParserError => e
-    Rails.logger.error "JSON parse error: #{e.message} - Response body: #{response_body}"
-    nil
+    response.body.force_encoding('UTF-8') # レスポンスのエンコーディングをUTF-8に設定
+    result = JSON.parse(response.body)
+    translated_text = result['translatedText']
+    translated_text.force_encoding('UTF-8') # エンコーディングを明示的に設定
+    translated_text
   rescue StandardError => e
-    Rails.logger.error "Translation error: #{e.message}"
+    puts "Translation error: #{e.message}"
     nil
   end
 end

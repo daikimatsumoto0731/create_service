@@ -30,6 +30,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'webpacker'
 gem 'whenever', require: false
 gem 'activerecord-session_store'
+gem 'net-http'
+gem 'json'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

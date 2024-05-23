@@ -446,10 +446,12 @@ DEPENDENCIES
   httparty
   jbuilder (~> 2.5)
   jquery-rails
+  json
   letter_opener
   line-bot-api
   listen (~> 3.5)
   momentjs-rails
+  net-http
   omniauth-line (<= 2.1.2)
   omniauth-rails_csrf_protection
   pg (~> 1.5)
