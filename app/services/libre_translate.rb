@@ -3,7 +3,7 @@ require 'uri'
 require 'json'
 
 class LibreTranslate
-  BASE_URL = 'https://vegetable-services.herokuapp.com'
+  BASE_URL = 'https://www.homegarden-harvest.com'
 
   def self.translate(text, source_lang = 'en', target_lang = 'ja')
     uri = URI("#{BASE_URL}/translate")
