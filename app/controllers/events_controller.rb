@@ -31,22 +31,22 @@ class EventsController < ApplicationController
   def analyze_image
     image = params[:image]
     vegetable_name = params[:vegetable_name]
-  
+
     if image && vegetable_name.present?
       image_path = image.tempfile.path
       Rails.logger.info "Image path: #{image_path}"
-  
+
       begin
         vision = Google::Cloud::Vision.image_annotator
         Rails.logger.info "Google Cloud Vision initialized"
-        
+
         response = vision.label_detection image: image_path
         Rails.logger.info "Vision API response received"
-        
+
         if response.responses.present? && response.responses.first.label_annotations.present?
           labels = response.responses.first.label_annotations.map(&:description)
           Rails.logger.info "Labels detected: #{labels.join(', ')}"
-  
+
           @care_guide = PerenualApiClient.fetch_species_care_guide(vegetable_name)
           if @care_guide && @care_guide['data']
             @care_guide['data'].each do |guide|
@@ -94,9 +94,9 @@ class EventsController < ApplicationController
       flash[:alert] = "画像または野菜の名前が提供されていません。"
       redirect_to new_analyze_image_path and return
     end
-  
+
     render 'analyze_image'
-  end   
+  end 
   
   private
 
