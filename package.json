@@ -17,5 +17,8 @@
   "scripts": {
     "build": "webpack --mode production"
   },
-  "packageManager": "yarn@1.22.20"
+  "packageManager": "yarn@1.22.20",
+  "engines": {
+    "node": "21.7.1"
+  }
 }

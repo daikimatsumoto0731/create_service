@@ -1,30 +1,23 @@
 const path = require('path');
 
 module.exports = {
-  mode: 'production',
-  entry: './src/index.js', // エントリーポイントのパスを設定
+  entry: './app/javascript/packs/application.js', // RailsのWebpackerエントリポイント
   output: {
-    filename: 'bundle.js', // 出力ファイルの名前を設定
-    path: path.resolve(__dirname, 'dist'), // 出力先ディレクトリを設定
+    path: path.resolve(__dirname, 'public/packs'),
+    filename: 'bundle.js'
   },
   module: {
     rules: [
       {
-        test: /\.js$/, // JavaScript ファイルに対する処理を指定
-        exclude: /node_modules/, // node_modules ディレクトリ内のファイルは処理対象外
+        test: /\.js$/,
+        exclude: /node_modules/,
         use: {
-          loader: 'babel-loader', // Babel を使用して ECMAScript 新機能をトランスパイル
+          loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env'], // Babel のプリセットを指定
-          },
-        },
-      },
-    ],
-  },
-  // Node.js の機能を無効化する設定を追加
-  node: {
-    __dirname: false,
-    __filename: false,
-    global: true,
+            presets: ['@babel/preset-env']
+          }
+        }
+      }
+    ]
   }
 };
