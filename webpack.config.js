@@ -23,9 +23,5 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx']
   },
-  node: {
-    __dirname: true,
-    __filename: true,
-    global: true
-  }
+  node: false // この行を変更しました
 };
