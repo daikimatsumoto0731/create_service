@@ -1,10 +1,10 @@
 const path = require('path');
 
 module.exports = {
-  entry: './app/javascript/packs/application.js', // RailsのWebpackerエントリポイント
+  entry: './app/javascript/packs/application.js',
   output: {
-    path: path.resolve(__dirname, 'public/packs'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'public/assets')
   },
   module: {
     rules: [
@@ -19,5 +19,14 @@ module.exports = {
         }
       }
     ]
+  },
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
+  // ここを修正
+  node: {
+    __dirname: true,
+    __filename: true,
+    global: true
   }
 };
