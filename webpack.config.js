@@ -23,7 +23,6 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx']
   },
-  // ここを修正
   node: {
     __dirname: true,
     __filename: true,
