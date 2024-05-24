@@ -22,6 +22,5 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx']
-  },
-  node: false // この行を変更しました
+  }
 };
