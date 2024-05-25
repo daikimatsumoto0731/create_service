@@ -31,3 +31,10 @@ module VegetableService
     # the framework and any gems in your application.
   end
 end
+
+if ENV['GOOGLE_APPLICATION_CREDENTIALS_JSON']
+  temp_file = Tempfile.new('google_application_credentials')
+  temp_file.write(ENV['GOOGLE_APPLICATION_CREDENTIALS_JSON'])
+  temp_file.rewind
+  ENV['GOOGLE_APPLICATION_CREDENTIALS'] = temp_file.path
+end
