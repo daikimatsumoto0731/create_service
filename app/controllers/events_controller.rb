@@ -36,70 +36,58 @@ class EventsController < ApplicationController
       image_path = image.tempfile.path
       Rails.logger.info "Image path: #{image_path}"
 
-      begin
-        # 一時ファイルに認証情報を書き込む
-        credentials_path = "/tmp/google_application_credentials.json"
-        File.open(credentials_path, 'w') do |file|
-          file.write(ENV['GOOGLE_APPLICATION_CREDENTIALS_JSON'])
-        end
+      vision = Google::Cloud::Vision.image_annotator do |config|
+        config.credentials = ENV['GOOGLE_APPLICATION_CREDENTIALS']
+      end
 
-        # Google Cloud Vision APIのクライアントを作成
-        vision = Google::Cloud::Vision.image_annotator do |config|
-          config.credentials = credentials_path
-        end
+      response = vision.label_detection image: image_path
+      if response && response.responses && !response.responses.empty?
+        labels = response.responses[0].label_annotations.map(&:description)
+        Rails.logger.info "Labels detected: #{labels.join(', ')}"
 
-        response = vision.label_detection image: image_path
-        if response && response.responses && !response.responses.empty?
-          labels = response.responses[0].label_annotations.map(&:description)
-          Rails.logger.info "Labels detected: #{labels.join(', ')}"
-
-          @care_guide = PerenualApiClient.fetch_species_care_guide(vegetable_name)
-          if @care_guide && @care_guide['data']
-            @care_guide['data'].each do |guide|
-              if guide['section']
-                guide['section'].each do |section|
-                  if section['description']
-                    original_description = section['description']
-                    Rails.logger.info "Original text encoding: #{original_description.encoding}"
-                    translated_text = LibreTranslate.translate(original_description)
-                    Rails.logger.info "Translated text encoding: #{translated_text.encoding}"
-                    section['original_description'] = original_description.force_encoding('UTF-8')
-                    section['translated_description'] = translated_text.force_encoding('UTF-8')
-                  end
+        @care_guide = PerenualApiClient.fetch_species_care_guide(vegetable_name)
+        if @care_guide && @care_guide['data']
+          @care_guide['data'].each do |guide|
+            if guide['section']
+              guide['section'].each do |section|
+                if section['description']
+                  original_description = section['description']
+                  Rails.logger.info "Original text encoding: #{original_description.encoding}"
+                  translated_text = TranslationService.translate(original_description)
+                  Rails.logger.info "Translated text encoding: #{translated_text.encoding}"
+                  section['original_description'] = original_description.force_encoding('UTF-8')
+                  section['translated_description'] = translated_text.force_encoding('UTF-8')
                 end
-              else
-                Rails.logger.error "No 'section' key in guide: #{guide}"
               end
+            else
+              Rails.logger.error "No 'section' key in guide: #{guide}"
             end
-            @labels = labels
-            @vegetable_status = determine_vegetable_status(labels)
-          else
-            Rails.logger.error "No 'data' key in care_guide: #{@care_guide}"
-            @care_guide = nil
-            @labels = []
-            @vegetable_status = nil
           end
+          @labels = labels
+          @vegetable_status = determine_vegetable_status(labels)
         else
-          Rails.logger.error "No labels were detected."
-          @labels = []
+          Rails.logger.error "No 'data' key in care_guide: #{@care_guide}"
           @care_guide = nil
+          @labels = []
           @vegetable_status = nil
         end
-      rescue StandardError => e
-        Rails.logger.error "Failed to analyze image: #{e.message}"
-        flash[:alert] = "画像の分析に失敗しました。エラー: #{e.message}"
-        redirect_to new_analyze_image_path and return
-      ensure
-        # 一時ファイルを削除
-        File.delete(credentials_path) if File.exist?(credentials_path)
+      else
+        Rails.logger.error "No labels were detected."
+        @labels = []
+        @care_guide = nil
+        @vegetable_status = nil
       end
     else
       flash[:alert] = "画像または野菜の名前が提供されていません。"
-      redirect_to new_analyze_image_path and return
+      redirect_to new_analyze_image_path
     end
 
     render 'analyze_image'
-  end 
+  rescue StandardError => e
+    Rails.logger.error "Failed to analyze image: #{e.message}"
+    flash[:alert] = "画像の分析に失敗しました。エラー: #{e.message}"
+    redirect_to new_analyze_image_path
+  end  
 
   private
 
