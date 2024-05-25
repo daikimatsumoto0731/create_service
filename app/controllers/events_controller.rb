@@ -31,20 +31,21 @@ class EventsController < ApplicationController
   def analyze_image
     image = params[:image]
     vegetable_name = params[:vegetable_name]
-
+  
     if image && vegetable_name.present?
       image_path = image.tempfile.path
       Rails.logger.info "Image path: #{image_path}"
-
+  
+      credentials = JSON.parse(ENV['GOOGLE_APPLICATION_CREDENTIALS_JSON'])
       vision = Google::Cloud::Vision.image_annotator do |config|
-        config.credentials = ENV['GOOGLE_APPLICATION_CREDENTIALS']
+        config.credentials = credentials
       end
-
+  
       response = vision.label_detection image: image_path
       if response && response.responses && !response.responses.empty?
         labels = response.responses[0].label_annotations.map(&:description)
         Rails.logger.info "Labels detected: #{labels.join(', ')}"
-
+  
         @care_guide = PerenualApiClient.fetch_species_care_guide(vegetable_name)
         if @care_guide && @care_guide['data']
           @care_guide['data'].each do |guide|
@@ -54,9 +55,13 @@ class EventsController < ApplicationController
                   original_description = section['description']
                   Rails.logger.info "Original text encoding: #{original_description.encoding}"
                   translated_text = TranslationService.translate(original_description)
-                  Rails.logger.info "Translated text encoding: #{translated_text.encoding}"
-                  section['original_description'] = original_description.force_encoding('UTF-8')
-                  section['translated_description'] = translated_text.force_encoding('UTF-8')
+                  if translated_text
+                    Rails.logger.info "Translated text encoding: #{translated_text.encoding}"
+                    section['original_description'] = original_description.force_encoding('UTF-8')
+                    section['translated_description'] = translated_text.force_encoding('UTF-8')
+                  else
+                    Rails.logger.error "Translation failed for text: #{original_description}"
+                  end
                 end
               end
             else
@@ -81,13 +86,13 @@ class EventsController < ApplicationController
       flash[:alert] = "画像または野菜の名前が提供されていません。"
       redirect_to new_analyze_image_path
     end
-
+  
     render 'analyze_image'
   rescue StandardError => e
     Rails.logger.error "Failed to analyze image: #{e.message}"
     flash[:alert] = "画像の分析に失敗しました。エラー: #{e.message}"
     redirect_to new_analyze_image_path
-  end  
+  end   
 
   private
 
