@@ -2,8 +2,9 @@
 
 if ENV['GOOGLE_APPLICATION_CREDENTIALS_JSON']
   require 'tempfile'
+  require 'json'
   begin
-    temp_file = Tempfile.new('google_application_credentials')
+    temp_file = Tempfile.new(['google_application_credentials', '.json'])
     temp_file.write(ENV['GOOGLE_APPLICATION_CREDENTIALS_JSON'])
     temp_file.rewind
     ENV['GOOGLE_APPLICATION_CREDENTIALS'] = temp_file.path
@@ -15,8 +16,9 @@ if ENV['GOOGLE_APPLICATION_CREDENTIALS_JSON']
   
     # JSON形式の検証
     begin
-      JSON.parse(credentials_content)
+      parsed_credentials = JSON.parse(credentials_content)
       Rails.logger.info "Temporary credentials file is valid JSON"
+      Rails.logger.info "Parsed credentials: #{parsed_credentials}"
     rescue JSON::ParserError => e
       Rails.logger.error "Temporary credentials file is not valid JSON: #{e.message}"
     end
@@ -26,3 +28,4 @@ if ENV['GOOGLE_APPLICATION_CREDENTIALS_JSON']
 else
   Rails.logger.error "GOOGLE_APPLICATION_CREDENTIALS_JSON is not set."
 end
+  
