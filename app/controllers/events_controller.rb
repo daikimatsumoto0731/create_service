@@ -47,39 +47,12 @@ class EventsController < ApplicationController
         Rails.logger.info "Labels detected: #{labels.join(', ')}"
   
         @care_guide = PerenualApiClient.fetch_species_care_guide(vegetable_name)
-        if @care_guide && @care_guide['data']
-          @care_guide['data'].each do |guide|
-            if guide['section']
-              guide['section'].each do |section|
-                if section['description']
-                  original_description = section['description']
-                  Rails.logger.info "Original text encoding: #{original_description.encoding}"
-                  translated_text = TranslationService.translate(original_description)
-                  if translated_text
-                    Rails.logger.info "Translated text encoding: #{translated_text.encoding}"
-                    section['original_description'] = original_description.force_encoding('UTF-8')
-                    section['translated_description'] = translated_text.force_encoding('UTF-8')
-                  else
-                    Rails.logger.error "Translation failed for text: #{original_description}"
-                  end
-                end
-              end
-            else
-              Rails.logger.error "No 'section' key in guide: #{guide}"
-            end
-          end
-          @labels = labels
-          @vegetable_status = determine_vegetable_status(labels)
-        else
-          Rails.logger.error "No 'data' key in care_guide: #{@care_guide}"
-          @care_guide = nil
-          @labels = []
-          @vegetable_status = nil
-        end
+        @labels = labels
+        @vegetable_status = determine_vegetable_status(labels)
       else
         Rails.logger.error "No labels were detected."
         @labels = []
-        @care_guide = nil
+        @care_guide = {}
         @vegetable_status = nil
       end
     else
@@ -92,7 +65,7 @@ class EventsController < ApplicationController
     Rails.logger.error "Failed to analyze image: #{e.message}"
     flash[:alert] = "画像の分析に失敗しました。エラー: #{e.message}"
     redirect_to new_analyze_image_path
-  end   
+  end       
 
   private
 

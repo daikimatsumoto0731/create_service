@@ -33,19 +33,52 @@ class PerenualApiClient
 
         if care_guide['data']
           Rails.logger.info "Data present in care guide: #{care_guide['data']}"
+          first_watering, first_sunlight, first_pruning = nil, nil, nil
+
+          care_guide['data'].each do |guide|
+            if guide['section']
+              guide['section'].each do |section|
+                case section['type'].downcase
+                when 'watering'
+                  first_watering ||= translate_section(section)
+                when 'sunlight'
+                  first_sunlight ||= translate_section(section)
+                when 'pruning'
+                  first_pruning ||= translate_section(section)
+                end
+
+                # If we have all three sections, break the loop
+                break if first_watering && first_sunlight && first_pruning
+              end
+            end
+            # If we have all three sections, break the loop
+            break if first_watering && first_sunlight && first_pruning
+          end
+
+          return {
+            watering: first_watering,
+            sunlight: first_sunlight,
+            pruning: first_pruning
+          }
         else
           Rails.logger.error "No 'data' key in care_guide: #{care_guide}"
+          return {}
         end
 
-        care_guide
       rescue JSON::ParserError => e
         log_error("JSON parsing error: #{e.message}")
-        nil
+        return {}
       end
     else
       log_error("HTTP Error: #{response.code} - #{response.message}, Body: #{response.body}")
-      nil
+      return {}
     end
+  end
+
+  def self.translate_section(section)
+    original_description = section['description']
+    translated_text = TranslationService.translate(original_description)
+    translated_text || original_description
   end
 
   def self.log_error(message)
