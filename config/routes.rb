@@ -22,10 +22,13 @@ Rails.application.routes.draw do
   # LINE Bot Webhook URL
   post '/callback', to: 'line_bot#callback'
 
-  # 野菜選択画面へのルーティング
-  get 'vegetables', to: 'vegetables#index', as: :vegetables
-  get 'vegetables/schedule', to: 'vegetables#schedule', as: :vegetable_schedule
-
+  # 野菜関連のルーティング
+  resources :vegetables, only: %i[index create] do
+    collection do
+      get 'schedule', to: 'vegetables#schedule', as: :schedule
+    end
+  end
+  
   # Eventsに関するルーティング
   resources :events, only: %i[index show] do
     member do

@@ -1,30 +1,32 @@
-$(document).ready(function() {
-    var selectedVegetable = null;
-
-    console.log("野菜選択画面のスクリプトが読み込まれました。");
-
-    $('.vegetable-button').click(function(e) {
-        e.preventDefault();
-        selectedVegetable = $(this).data('value');
-
-        console.log('野菜ボタンがクリックされました: ' + selectedVegetable);
-
-        // 選択された野菜を表示領域に表示
-        $('#display-selected-vegetable').text('選択された野菜: ' + $(this).text());
-    });
-
-    $('#select-vegetable-button').click(function(e) {
-        e.preventDefault();
-
-        console.log('選択ボタンがクリックされました。選択された野菜: ' + selectedVegetable);
-
-        if (selectedVegetable) {
-            // 正しいアクションへ遷移するURLを生成
-            console.log('リダイレクト先のURL: /events?selected_vegetable=' + selectedVegetable);
-            window.location.href = `/events?selected_vegetable=${selectedVegetable}`;
-        } else {
-            console.log('選択された野菜がありません。アラートが表示されます。');
-            alert('野菜を選択してください');
-        }
-    });
+document.addEventListener("DOMContentLoaded", function() {
+  document.getElementById('save-vegetable-button').addEventListener('click', function(e) {
+    e.preventDefault();
+      
+    var vegetableName = document.getElementById('vegetable-name').value;
+    var sowingDate = document.getElementById('sowing-date').value;
+  
+    if (vegetableName && sowingDate) {
+      console.log('野菜が入力されました: ' + vegetableName + ', 播種日: ' + sowingDate);
+      document.getElementById('vegetable-form').submit();
+    } else {
+      console.log('野菜の名前または播種日が入力されていません。アラートが表示されます。');
+      alert('野菜の名前と播種日を入力してください');
+    }
+  });
+  
+  document.getElementById('register-vegetable-button').addEventListener('click', function(e) {
+    e.preventDefault();
+      
+    var vegetableName = document.getElementById('vegetable-name').value;
+    var sowingDate = document.getElementById('sowing-date').value;
+  
+    if (vegetableName && sowingDate) {
+      console.log('登録ボタンがクリックされました。次のページにリダイレクトします。');
+      window.location.href = `/events/show?selected_vegetable=${vegetableName}`;
+    } else {
+      console.log('野菜の名前または播種日が入力されていません。アラートが表示されます。');
+      alert('野菜の名前と播種日を入力してください');
+    }
+  });
 });
+  
