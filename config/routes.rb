@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'line_bot/callback'
   devise_for :users, controllers: {
     sessions: 'user_sessions',
     passwords: 'users/passwords',
@@ -9,11 +8,9 @@ Rails.application.routes.draw do
   }
 
   resources :users, only: %i[show edit update]
-  # ユーザー設定のルーティングを追加
   resource :user_setting, only: %i[edit update]
 
   root 'static_pages#top'
-
   get 'terms', to: 'static_pages#terms', as: :terms
   get 'privacy_policy', to: 'static_pages#privacy_policy', as: :privacy_policy
 
@@ -21,12 +18,12 @@ Rails.application.routes.draw do
   get 'line_notification_settings', to: 'line_notifications#edit', as: 'line_notification_settings'
   patch 'line_notification_settings', to: 'line_notifications#update'
   post 'notify_callback', to: 'line_notifications#notify_callback'
+
+  # LINE Bot Webhook URL
   post '/callback', to: 'line_bot#callback'
 
   # 野菜選択画面へのルーティング
   get 'vegetables', to: 'vegetables#index', as: :vegetables
-
-  # 野菜選択後のスケジュール表示アクションへのルーティング
   get 'vegetables/schedule', to: 'vegetables#schedule', as: :vegetable_schedule
 
   # Eventsに関するルーティング
@@ -39,15 +36,17 @@ Rails.application.routes.draw do
 
   patch '/events/update_sowing_date', to: 'events#update_sowing_date', as: 'update_sowing_date_events'
 
-  # 収穫量の入力フォームと節約額の計算結果表示のルーティング
-  resources :harvests, only: %i[new create show]
+  # 画像分析のアクションへのルート
+  get 'analyze_image/new', to: 'events#new_analyze_image', as: 'new_analyze_image'
+  post 'analyze_image', to: 'events#analyze_image', as: 'analyze_image'
 
-  # データを削除するための機能
-  resources :harvests do
+  # 収穫量の入力フォームと節約額の計算結果表示のルーティング
+  resources :harvests, only: %i[new create show] do
     collection do
       delete 'destroy_by_vegetable_type'
     end
   end
+
   # 未知のルートをキャッチしてカスタム404エラーページを表示
   match '*path', to: 'application#render_404', via: :all
 end

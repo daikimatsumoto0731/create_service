@@ -181,6 +181,31 @@
   font-size: 16px; /* テキストのフォントサイズ */
 }
 
+.weather-info {
+  margin-top: 20px;
+  padding: 20px; /* 余白を増やす */
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
+
+.weather-info h3 {
+  color: #333;
+}
+
+.weather-details {
+  display: flex;
+  align-items: center;
+}
+
+.weather-details p {
+  margin-bottom: 10px; /* 天気情報と気温情報の間隔を調整 */
+}
+
+.weather-icon {
+  width: 40px; /* アイコンのサイズを調整 */
+  height: auto; /* 高さを自動に設定 */
+}
+
 /* スマートフォンサイズ以下の場合 */
 @media screen and (max-width: 767px) {
   .button-container-mypage {
@@ -217,5 +242,9 @@
   .savings-chart-container {
     flex-direction: row; /* グラフを横並びにする */
     justify-content: center; /* グラフを中央に配置する */
+  }
+
+  .weather-details p {
+    margin-bottom: 0; /* タブレットサイズ以上では間隔をなくす */
   }
 }

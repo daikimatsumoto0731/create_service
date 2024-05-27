@@ -18,6 +18,7 @@ gem 'line-bot-api'
 gem 'momentjs-rails'
 gem 'omniauth-line', '<= 2.1.2'
 gem 'omniauth-rails_csrf_protection'
+gem 'google-cloud-vision'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 7.0.8'
 gem 'rubocop', require: false
@@ -28,6 +29,9 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'uglifier', '>= 1.3.0'
 gem 'webpacker'
 gem 'whenever', require: false
+gem 'activerecord-session_store'
+gem 'net-http'
+gem 'json'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

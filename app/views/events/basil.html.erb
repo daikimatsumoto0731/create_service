@@ -3,21 +3,44 @@
   <div class="header-basil">
     <div class="title-container">
       <h1>バジルのスケジュール</h1>
-      <div class="ghost-element"></div> <!-- スペーサーとして機能 -->
+      <div class="ghost-element"></div>
     </div>
-    <%= link_to 'マイページに戻る', user_path(current_user), class: 'mypage-link' %>
+    <div class="button-container">
+      <% if user_signed_in? %>
+        <%= link_to 'マイページに戻る', user_path(current_user), class: 'mypage-link' %>
+      <% end %>
+      <%= link_to 'バジルの状態を分析する', '#', class: 'btn btn-primary analyze-button', data: { toggle: 'modal', target: '#analyzeImageModal' } %>
+    </div>
   </div>
-
+  <!-- 画像アップロードフォームのモーダル -->
+  <div class="modal fade" id="analyzeImageModal" tabindex="-1" role="dialog" aria-labelledby="analyzeImageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="analyzeImageModalLabel">バジルの画像をアップロードして分析</h5>
+        </div>
+        <%= form_with(id: 'analyze_image_form', url: analyze_image_path, local: true, multipart: true) do |form| %>
+          <div class="modal-body">
+            <%= form.label :vegetable_name, "野菜名を入力" %>
+            <%= form.text_field :vegetable_name, placeholder: "例：トマト", required: true %><br>
+            <%= form.label :image, "画像をアップロード" %>
+            <%= form.file_field :image, accept: 'image/jpeg,image/png', required: true %>
+          </div>
+          <div class="modal-footer">
+            <%= form.submit "画像を分析する", class: 'btn btn-success' %>
+          </div>
+        <% end %>             
+      </div>
+    </div>
+  </div>
   <% if flash[:notice].present? %>
     <div class="alert alert-success"><%= flash[:notice] %></div>
   <% elsif flash[:alert].present? %>
     <div class="alert alert-danger"><%= flash[:alert] %></div>
   <% end %>
-
   <div class="page-content">
     <%= render 'events/sowing_form', vegetable: @vegetable %>
   </div>
-
   <div class="event-periods">
     <h2>イベント期間</h2>
     <% @events.each do |event| %>
@@ -30,7 +53,6 @@
       </div>
     <% end %>
   </div>
-
   <div class="schedule-buttons">
     <% @events.each do |event| %>
       <%= button_tag event.name, type: 'button', class: 'btn btn-info stage-button', data: { toggle: 'modal', target: "#event#{event.id}_modal", 'event-id': event.id } %>
@@ -39,19 +61,15 @@
           <div class="modal-content">
             <div class="modal-header modal-header-basil">
               <h5 class="modal-title" id="event<%= event.id %>_label"><%= event.name %>のアドバイス</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
             </div>
             <div class="modal-body">
-              <!-- ここにAJAXでロードされるアドバイスの内容が挿入されます -->
+              <!-- AJAXでアドバイスを動的に挿入 -->
             </div>
           </div>
         </div>
       </div>
     <% end %>
   </div>
-
   <div class="harvest-button-container">
     <%= link_to '収穫する', new_harvest_path(vegetable_type: 'バジル'), class: 'btn btn-success' %>
   </div>
