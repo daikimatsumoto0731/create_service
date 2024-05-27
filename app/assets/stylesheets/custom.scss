@@ -49,22 +49,43 @@ body, html {
     width: 100px; /* `.mypage-link`と同じ幅に設定 */
   }
   
-  .mypage-link {
+  .button-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* 右端に配置 */
     position: absolute;
-    right: 20px; /* 右端に配置 */
-    font-size: 14px; /* リンクのフォントサイズを小さくする */
-    font-weight: bold;
-    padding: 8px 12px; /* リンクのパディングを調整 */
-    background-color: yellow;
-    color: black;
-    text-decoration: none;
-    border-radius: 5px;
-
-    &:hover {
-      background-color: lighten(yellow, 10%);
-      text-decoration: underline;
+    right: 20px;
+    top: 20px; /* 適切な上部位置に調整 */
+  
+    .mypage-link, .analyze-button {
+      font-size: 14px; /* リンクとボタンのフォントサイズを小さくする */
+      font-weight: bold;
+      padding: 8px 12px; /* リンクとボタンのパディングを調整 */
+      text-decoration: none;
+      border-radius: 5px;
     }
-  }
+  
+    .mypage-link {
+      background-color: yellow;
+      color: black;
+      margin-right: 10px; /* 右側のマージンを追加して間隔を空ける */
+  
+      &:hover {
+        background-color: lighten(yellow, 10%);
+        text-decoration: underline;
+      }
+    }
+  
+    .analyze-button {
+      background-color: #007bff; /* ブートストラップのプライマリカラー */
+      color: white;
+  
+      &:hover {
+        background-color: darken(#007bff, 10%);
+        text-decoration: none;
+      }
+    }
+  }  
 }
 
 .alert {

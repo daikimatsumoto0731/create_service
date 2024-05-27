@@ -5,21 +5,19 @@
       <h1>バジルのスケジュール</h1>
       <div class="ghost-element"></div>
     </div>
-    <% if user_signed_in? %>
-      <%= link_to 'マイページに戻る', user_path(current_user), class: 'mypage-link' %>
-    <% end %>
-    <%= link_to 'バジルの状態を分析する', '#', class: 'btn btn-primary', data: { toggle: 'modal', target: '#analyzeImageModal' } %>
+    <div class="button-container">
+      <% if user_signed_in? %>
+        <%= link_to 'マイページに戻る', user_path(current_user), class: 'mypage-link' %>
+      <% end %>
+      <%= link_to 'バジルの状態を分析する', '#', class: 'btn btn-primary analyze-button', data: { toggle: 'modal', target: '#analyzeImageModal' } %>
+    </div>
   </div>
-
   <!-- 画像アップロードフォームのモーダル -->
   <div class="modal fade" id="analyzeImageModal" tabindex="-1" role="dialog" aria-labelledby="analyzeImageModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="analyzeImageModalLabel">バジルの画像をアップロードして分析</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
         </div>
         <%= form_with(id: 'analyze_image_form', url: analyze_image_path, local: true, multipart: true) do |form| %>
           <div class="modal-body">
@@ -30,7 +28,6 @@
           </div>
           <div class="modal-footer">
             <%= form.submit "画像を分析する", class: 'btn btn-success' %>
-            <button type="button", class="btn btn-secondary", data-dismiss="modal">閉じる</button>
           </div>
         <% end %>             
       </div>
@@ -64,9 +61,6 @@
           <div class="modal-content">
             <div class="modal-header modal-header-basil">
               <h5 class="modal-title" id="event<%= event.id %>_label"><%= event.name %>のアドバイス</h5>
-              <button type="button" the="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
             </div>
             <div class="modal-body">
               <!-- AJAXでアドバイスを動的に挿入 -->
