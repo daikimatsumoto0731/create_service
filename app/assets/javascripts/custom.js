@@ -44,5 +44,5 @@ $(document).ready(function() {
         alert('画像の分析に失敗しました: ' + textStatus);
       }
     });
-  });  
+  });
 });

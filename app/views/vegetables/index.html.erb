@@ -18,11 +18,11 @@
   <div class="form-container">
     <div class="description">
       <p>下記のフォームに育てる野菜の名前と種まき日を入力してください。</p>
-      <p>保存ボタンを押して野菜情報を保存し、登録ボタンを押して次のステップに進んでください。</p>
+      <p>登録ボタンを押して次のステップに進んでください。</p>
     </div>
 
-    <%= form_with(url: vegetables_path, local: true, id: 'vegetable-form') do |form| %>
-      <% if @vegetable&.errors&.any? %>
+    <%= form_with(model: @vegetable, local: true, id: 'vegetable-form') do |form| %>
+      <% if @vegetable.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@vegetable.errors.count, "error") %> prevented this vegetable from being saved:</h2>
           <ul>
@@ -44,11 +44,9 @@
       </div>
 
       <div class="actions">
-        <%= form.submit "保存", id: 'save-vegetable-button', class: 'button save-button' %>
+        <%= form.submit "登録", id: 'register-vegetable-button', class: 'button register-button' %>
       </div>
     <% end %>
-
-    <button id="register-vegetable-button" class="button register-button">登録</button>
   </div>
 
   <footer class="footer-vegetable">

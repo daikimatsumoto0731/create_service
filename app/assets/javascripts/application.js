@@ -14,6 +14,7 @@
 //= require jquery3
 //= require bootstrap
 //= require custom
+//= vegetable_selection
 //= require harvest_chart
 //= mypage_toggle
 //= require_tree .

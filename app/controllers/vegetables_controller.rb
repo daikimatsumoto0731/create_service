@@ -14,6 +14,15 @@ class VegetablesController < ApplicationController
     end
   end
 
+  def create_and_redirect
+    @vegetable = Vegetable.new(vegetable_params)
+    if @vegetable.save
+      redirect_to event_path(id: @vegetable.id, selected_vegetable: @vegetable.name.downcase, sowing_date: @vegetable.sowing_date)
+    else
+      render :index
+    end
+  end
+
   def schedule
     selected_vegetable = params[:selected_vegetable]
     selected_date = params[:sowing_date] # 修正: 選択された日付を取得

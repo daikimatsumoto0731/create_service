@@ -1,2 +1,43 @@
-<h1>Events#show</h1>
-<p>Find me in app/views/events/show.html.erb</p>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>野菜詳細</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+  <h1>野菜詳細</h1>
+  <p>選択された野菜: <%= @selected_vegetable %></p>
+  <p>種まき日: <%= @sowing_date %></p>
+
+  <!-- 画像アップロードフォームのモーダル -->
+  <div class="modal fade" id="analyzeImageModal" tabindex="-1" role="dialog" aria-labelledby="analyzeImageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="analyzeImageModalLabel">野菜の画像をアップロードして分析</h5>
+        </div>
+        <%= form_with(id: 'analyze_image_form', url: analyze_image_path, local: true, multipart: true) do |form| %>
+          <div class="modal-body">
+            <%= form.label :vegetable_name, "野菜名を入力" %>
+            <%= form.text_field :vegetable_name, placeholder: "例：トマト", required: true %><br>
+            <%= form.label :image, "画像をアップロード" %>
+            <%= form.file_field :image, accept: 'image/jpeg,image/png', required: true %>
+          </div>
+          <div class="modal-footer">
+            <%= form.submit "画像を分析する", class: 'btn btn-success' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <%= link_to '画像を分析する', '#', class: 'btn btn-primary analyze-button', data: { toggle: 'modal', target: '#analyzeImageModal' } %>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <%= javascript_include_tag 'custom', 'data-turbolinks-track': 'reload' %>
+</body>
+</html>

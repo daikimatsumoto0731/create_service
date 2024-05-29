@@ -1,32 +1,27 @@
 document.addEventListener("DOMContentLoaded", function() {
-  document.getElementById('save-vegetable-button').addEventListener('click', function(e) {
-    e.preventDefault();
-      
-    var vegetableName = document.getElementById('vegetable-name').value;
-    var sowingDate = document.getElementById('sowing-date').value;
+  var registerButton = document.getElementById('register-vegetable-button');
   
-    if (vegetableName && sowingDate) {
-      console.log('野菜が入力されました: ' + vegetableName + ', 播種日: ' + sowingDate);
-      document.getElementById('vegetable-form').submit();
-    } else {
-      console.log('野菜の名前または播種日が入力されていません。アラートが表示されます。');
-      alert('野菜の名前と播種日を入力してください');
-    }
-  });
-  
-  document.getElementById('register-vegetable-button').addEventListener('click', function(e) {
-    e.preventDefault();
-      
-    var vegetableName = document.getElementById('vegetable-name').value;
-    var sowingDate = document.getElementById('sowing-date').value;
-  
-    if (vegetableName && sowingDate) {
-      console.log('登録ボタンがクリックされました。次のページにリダイレクトします。');
-      window.location.href = `/events/show?selected_vegetable=${vegetableName}`;
-    } else {
-      console.log('野菜の名前または播種日が入力されていません。アラートが表示されます。');
-      alert('野菜の名前と播種日を入力してください');
-    }
-  });
+  if (registerButton) {
+    registerButton.addEventListener('click', function(e) {
+      e.preventDefault();
+    
+      var vegetableName = document.getElementById('vegetable-name').value;
+      var sowingDate = document.getElementById('sowing-date').value;
+    
+      if (vegetableName && sowingDate) {
+        console.log('登録ボタンがクリックされました。次のページにリダイレクトします。');
+        // 保存が成功した場合に次のページにリダイレクトする
+        var form = document.getElementById('vegetable-form');
+        form.action = "/vegetables/create_and_redirect";
+        form.method = "POST";
+        form.submit();
+      } else {
+        console.log('野菜の名前または種まき日が入力されていません。アラートが表示されます。');
+        alert('野菜の名前と種まき日を入力してください');
+      }
+    });
+  } else {
+    console.error('登録ボタンが見つかりませんでした。');
+  }
 });
   
