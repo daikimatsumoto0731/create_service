@@ -1,24 +1,21 @@
-/* ページ全体の設定 */
 body, html {
   height: 100%;
   margin: 0;
 }
 
-/* コンテンツラッパーの設定 */
 .content-wrapper {
-  min-height: 100vh; /* ビューポートの高さに合わせて最小高さを設定 */
+  min-height: 100vh; 
   position: relative;
-  padding-bottom: 60px; /* フッターの高さに応じて調整 */
-  box-sizing: border-box; /* ボックスサイズの計算方法を指定 */
+  padding-bottom: 60px; 
+  box-sizing: border-box; 
 }
 
-/* ヘッダーとフッターの設定 */
 .header-basil, .header-tomato, .header-carrot {
   display: flex;
-  justify-content: space-between; /* コンテンツを両端に配置 */
+  justify-content: space-between; 
   align-items: center;
   color: white;
-  padding: 20px 30px; /* パディングを小さくする */
+  padding: 20px 30px;
   text-align: center;
   position: fixed;
   top: 0;
@@ -40,27 +37,27 @@ body, html {
       color: white;
       font-weight: bold;
       text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-      margin: 0; /* 余計なマージンを取り除く */
+      margin: 0;
     }
   }
 
   .ghost-element {
     visibility: hidden;
-    width: 100px; /* `.mypage-link`と同じ幅に設定 */
+    width: 100px;
   }
   
   .button-container {
     display: flex;
     align-items: center;
-    justify-content: flex-end; /* 右端に配置 */
+    justify-content: flex-end; 
     position: absolute;
     right: 20px;
-    top: 20px; /* 適切な上部位置に調整 */
+    top: 20px; 
   
     .mypage-link, .analyze-button {
-      font-size: 14px; /* リンクとボタンのフォントサイズを小さくする */
+      font-size: 14px;
       font-weight: bold;
-      padding: 8px 12px; /* リンクとボタンのパディングを調整 */
+      padding: 8px 12px; 
       text-decoration: none;
       border-radius: 5px;
     }
@@ -68,7 +65,7 @@ body, html {
     .mypage-link {
       background-color: yellow;
       color: black;
-      margin-right: 10px; /* 右側のマージンを追加して間隔を空ける */
+      margin-right: 10px; 
   
       &:hover {
         background-color: lighten(yellow, 10%);
@@ -77,7 +74,7 @@ body, html {
     }
   
     .analyze-button {
-      background-color: #007bff; /* ブートストラップのプライマリカラー */
+      background-color: #007bff;
       color: white;
   
       &:hover {
@@ -89,15 +86,14 @@ body, html {
 }
 
 .alert {
-  margin-bottom: 5px; /* 下部の余白を5pxに設定 */
-  padding-bottom: 5px; /* 下部のパディングを5pxに設定 */
+  margin-bottom: 5px; 
+  padding-bottom: 5px; 
 }
 
 .page-content {
-  margin-top: 80px; /* ヘッダーの高さに合わせて調整 */
+  margin-top: 80px;
 }
 
-/* イベント期間のスタイル */
 .event-periods {
   background: #f0f0f0;
   border-radius: 8px;
@@ -118,7 +114,6 @@ body, html {
   }
 }
 
-/* スケジュールボタンのスタイル */
 .schedule-buttons {
   display: flex;
   justify-content: center;
@@ -133,15 +128,13 @@ body, html {
   }
 }
 
-/* ハーベストボタンコンテナのスタイル */
 .harvest-button-container {
   display: flex;
   justify-content: center;
-  margin-top: 10px; /* 余白を減らす */
-  overflow: auto; /* 必要に応じてスクロール可能に */
+  margin-top: 10px; 
+  overflow: auto; 
 }
 
-/* モーダル関連のスタイル */
 .modal-header, .modal-footer {
   &.modal-header-tomato, &.modal-header-basil, &.modal-header-carrot {
     color: white;
@@ -151,40 +144,43 @@ body, html {
   &.modal-header-carrot { background-color: #ffa500; }
 }
 
-/* スマートフォン */
 @media (max-width: 600px) {
   .header-basil, .header-tomato, .header-carrot, .header-vegetable {
-    justify-content: center; /* 中央揃え */
-    padding: 15px 20px; /* スマートフォン基準のパディング */
+    justify-content: center;
+    padding: 15px 20px;
     
     .title-container h1 {
-      font-size: 1.5em; /* スマートフォン基準のフォントサイズ */
+      font-size: 1.5em;
     }
     
     .mypage-link {
       font-size: 14px;
       padding: 8px 12px;
       position: absolute;
-      right: 20px; /* 右端に配置 */
+      right: 20px;
     }
   }
 }
 
-/* タブレット */
 @media (min-width: 601px) and (max-width: 1024px) {
   .header-basil, .header-tomato, .header-carrot, .header-vegetable {
-    justify-content: space-between; /* コンテンツを両端に配置 */
-    padding: 20px 30px; /* タブレット基準のパディング */
+    justify-content: space-between;
+    padding: 20px 30px;
     
     .title-container h1 {
-      font-size: 1.75em; /* タブレット基準のフォントサイズ */
+      font-size: 1.75em;
     }
     
     .mypage-link {
       font-size: 15px;
       padding: 9px 13px;
       position: absolute;
-      right: 25px; /* 右端に配置、スマートフォンより少し大きめ */
+      right: 25px;
     }
   }
+}
+
+#calendar {
+  max-width: 900px;
+  margin: 0 auto;
 }

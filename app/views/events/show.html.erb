@@ -1,22 +1,39 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>野菜詳細</title>
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-</head>
-<body>
-  <h1>野菜詳細</h1>
-  <p>選択された野菜: <%= @selected_vegetable %></p>
-  <p>種まき日: <%= @sowing_date %></p>
+<%= stylesheet_link_tag 'custom', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+<%= javascript_include_tag 'https://cdn.jsdelivr.net/npm/fullcalendar@6.1.13/index.global.min.js' %>
+<%= stylesheet_link_tag 'https://cdn.jsdelivr.net/npm/fullcalendar@6.1.13/index.global.min.css', media: 'all' %>
 
+<div class="content-wrapper">
+  <div class="header-<%= @selected_vegetable %>">
+    <div class="title-container">
+      <h1>野菜詳細</h1>
+    </div>
+    <div class="button-container">
+      <%= link_to 'ユーザー詳細', user_path(current_user), class: 'mypage-link' %>
+      <%= link_to '画像を分析する', '#', class: 'btn btn-primary analyze-button', data: { toggle: 'modal', target: '#analyzeImageModal' } %>
+    </div>
+  </div>
+
+  <div class="page-content">
+    <p>選択された野菜: <%= @selected_vegetable %></p>
+    <p>種まきの日付: <%= @sowing_date %></p>
+
+    <div id="calendar" data-selected-vegetable-id="<%= @selected_vegetable_id %>"></div>
+
+    <div class="stamp-selection">
+      <h3>今日の成長過程を選択してください</h3>
+      <button class="stamp-button" data-stamp="germination">発芽</button>
+      <button class="stamp-button" data-stamp="growing">成長中</button>
+      <button class="stamp-button" data-stamp="harvest">収穫</button>
+      <button class="stamp-button" data-stamp="watering">水やり</button>
+    </div>
+  </div>
+  
   <!-- 画像アップロードフォームのモーダル -->
   <div class="modal fade" id="analyzeImageModal" tabindex="-1" role="dialog" aria-labelledby="analyzeImageModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header modal-header-<%= @selected_vegetable %>">
           <h5 class="modal-title" id="analyzeImageModalLabel">野菜の画像をアップロードして分析</h5>
         </div>
         <%= form_with(id: 'analyze_image_form', url: analyze_image_path, local: true, multipart: true) do |form| %>
@@ -33,11 +50,4 @@
       </div>
     </div>
   </div>
-
-  <%= link_to '画像を分析する', '#', class: 'btn btn-primary analyze-button', data: { toggle: 'modal', target: '#analyzeImageModal' } %>
-
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-  <%= javascript_include_tag 'custom', 'data-turbolinks-track': 'reload' %>
-</body>
-</html>
+</div>
