@@ -4,7 +4,7 @@
 <%= stylesheet_link_tag 'https://cdn.jsdelivr.net/npm/fullcalendar@6.1.13/index.global.min.css', media: 'all' %>
 
 <div class="content-wrapper">
-  <div class="header-<%= @selected_vegetable %>">
+  <div class="header">
     <div class="title-container">
       <h1>野菜詳細</h1>
     </div>
@@ -18,22 +18,22 @@
     <p>選択された野菜: <%= @selected_vegetable %></p>
     <p>種まきの日付: <%= @sowing_date %></p>
 
-    <div id="calendar" data-selected-vegetable-id="<%= @selected_vegetable_id %>"></div>
-
     <div class="stamp-selection">
       <h3>今日の成長過程を選択してください</h3>
-      <button class="stamp-button" data-stamp="germination">発芽</button>
-      <button class="stamp-button" data-stamp="growing">成長中</button>
-      <button class="stamp-button" data-stamp="harvest">収穫</button>
-      <button class="stamp-button" data-stamp="watering">水やり</button>
+      <button class="stamp-button germination" data-stamp="germination">発芽</button>
+      <button class="stamp-button growing" data-stamp="growing">成長中</button>
+      <button class="stamp-button harvest" data-stamp="harvest">収穫</button>
+      <button class="stamp-button watering" data-stamp="watering">水やり</button>
     </div>
+
+    <div id="calendar" data-selected-vegetable-id="<%= @selected_vegetable_id %>"></div>
   </div>
   
   <!-- 画像アップロードフォームのモーダル -->
   <div class="modal fade" id="analyzeImageModal" tabindex="-1" role="dialog" aria-labelledby="analyzeImageModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
-        <div class="modal-header modal-header-<%= @selected_vegetable %>">
+        <div class="modal-header">
           <h5 class="modal-title" id="analyzeImageModalLabel">野菜の画像をアップロードして分析</h5>
         </div>
         <%= form_with(id: 'analyze_image_form', url: analyze_image_path, local: true, multipart: true) do |form| %>
