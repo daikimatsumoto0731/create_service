@@ -5,23 +5,29 @@ require 'google/cloud/vision'
 class EventsController < ApplicationController
   before_action :set_vegetable, only: [:update_sowing_date]
 
-  def index
-    @selected_vegetable = params[:selected_vegetable]&.downcase
-    handle_vegetable_selection
-    set_template
-  end
-
-  def advice
-    @event = Event.find_by(id: params[:id])
-    if @event
-      render_advice_partial
-    else
-      render json: { error: 'Event not found' }, status: :not_found
+  def show
+    @selected_vegetable = params[:selected_vegetable]
+    @selected_vegetable_id = Vegetable.find_by(name: @selected_vegetable).id
+    @sowing_date = params[:sowing_date]
+    
+    respond_to do |format|
+      format.html
+      format.json { render json: Event.where(vegetable_id: @selected_vegetable_id) }
     end
   end
+  
+  def index
+    events = Event.all
+    render json: events
+  end
 
-  def update_sowing_date
-    update_vegetable_sowing_date
+  def create
+    event = Event.new(event_params)
+    if event.save
+      render json: event, status: :created
+    else
+      render json: event.errors, status: :unprocessable_entity
+    end
   end
 
   def new_analyze_image
@@ -31,21 +37,21 @@ class EventsController < ApplicationController
   def analyze_image
     image = params[:image]
     vegetable_name = params[:vegetable_name]
-  
+
     if image && vegetable_name.present?
       image_path = image.tempfile.path
       Rails.logger.info "Image path: #{image_path}"
-  
+
       credentials = JSON.parse(ENV['GOOGLE_APPLICATION_CREDENTIALS_JSON'])
       vision = Google::Cloud::Vision.image_annotator do |config|
         config.credentials = credentials
       end
-  
+
       response = vision.label_detection image: image_path
       if response && response.responses && !response.responses.empty?
         labels = response.responses[0].label_annotations.map(&:description)
         Rails.logger.info "Labels detected: #{labels.join(', ')}"
-  
+
         @care_guide = PerenualApiClient.fetch_species_care_guide(vegetable_name)
         @labels = labels
         @vegetable_status = determine_vegetable_status(labels)
@@ -59,83 +65,27 @@ class EventsController < ApplicationController
       flash[:alert] = "画像または野菜の名前が提供されていません。"
       redirect_to new_analyze_image_path
     end
-  
+
     render 'analyze_image'
   rescue StandardError => e
     Rails.logger.error "Failed to analyze image: #{e.message}"
     flash[:alert] = "画像の分析に失敗しました。エラー: #{e.message}"
     redirect_to new_analyze_image_path
-  end       
+  end
 
   private
 
+  def event_params
+    params.require(:event).permit(:title, :start_date, :end_date, :vegetable_id)
+  end
+
   def set_vegetable
-    @vegetable = Vegetable.find_by(id: params[:vegetable_id])
-    unless @vegetable
-      redirect_to(events_path, alert: 'Vegetable not found')
-    end
+    @vegetable = Vegetable.find(params[:id])
   end
 
-  def handle_vegetable_selection
-    if @selected_vegetable.present?
-      @vegetable = Vegetable.find_by('lower(name) = ?', @selected_vegetable)
-      unless @vegetable
-        flash[:alert] = "#{@selected_vegetable} に該当する野菜は見つかりませんでした。"
-        redirect_to events_path
-      else
-        @events = @vegetable.events.order(sort_events_query)
-      end
-    end
-  end
-
-  def sort_events_query
-    Arel.sql("CASE WHEN name = '種まき' THEN 0 ELSE 1 END, start_date ASC")
-  end
-
-  def set_template
-    template_name = @vegetable ? @selected_vegetable : 'default'
-    render template: "events/#{template_name}"
-  end
-
-  def render_advice_partial
-    vegetable_name = @event.vegetable.name.downcase
-    partial_name = map_event_name_to_partial(@event.name, vegetable_name)
-    render partial: "events/#{partial_name}", locals: { event: @event }, layout: false
-  end
-
-  def map_event_name_to_partial(event_name, vegetable_name)
-    event_key = {
-      '種まき' => 'seed_sowing',
-      '発芽期間' => 'germination_period',
-      '間引き・雑草抜き・害虫駆除' => 'thinning_weeding_pest_control',
-      '収穫期間' => 'harvesting_period'
-    }[event_name]
-    "advice_#{vegetable_name}_#{event_key}"
-  end
-
-  def update_vegetable_sowing_date
-    sowing_date = Date.parse(params[:sowing_date])
-    ActiveRecord::Base.transaction do
-      if @vegetable.update(sowing_date: sowing_date)
-        @vegetable.update_related_event_dates
-        flash[:notice] = '種まき日を更新しました。'
-        redirect_to events_path(selected_vegetable: @vegetable.name.downcase)
-      else
-        flash[:alert] = '種まき日の更新に失敗しました。'
-        redirect_to events_path(selected_vegetable: @vegetable.name.downcase)
-      end
-    rescue StandardError => e
-      flash[:alert] = "更新中にエラーが発生しました: #{e.message}"
-      redirect_to events_path(selected_vegetable: @vegetable.name.downcase)
-    end
-  end
-
-  # analyze_image メソッド内で直接処理を行う
   def determine_vegetable_status(labels)
-    # 野菜の状態を初期化
     vegetable_status = {}
 
-    # ラベルに含まれるキーワードを元に野菜の状態を推測
     labels.each do |label|
       if label.downcase.include?('healthy')
         vegetable_status[:status] = '健康的な状態です'
@@ -182,7 +132,6 @@ class EventsController < ApplicationController
       end
     end
 
-    # 野菜の状態を返す
     vegetable_status
   end
 end

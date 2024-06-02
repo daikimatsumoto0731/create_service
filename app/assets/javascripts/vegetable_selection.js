@@ -1,30 +1,27 @@
-$(document).ready(function() {
-    var selectedVegetable = null;
-
-    console.log("野菜選択画面のスクリプトが読み込まれました。");
-
-    $('.vegetable-button').click(function(e) {
-        e.preventDefault();
-        selectedVegetable = $(this).data('value');
-
-        console.log('野菜ボタンがクリックされました: ' + selectedVegetable);
-
-        // 選択された野菜を表示領域に表示
-        $('#display-selected-vegetable').text('選択された野菜: ' + $(this).text());
+document.addEventListener("DOMContentLoaded", function() {
+  var registerButton = document.getElementById('register-vegetable-button');
+  
+  if (registerButton) {
+    registerButton.addEventListener('click', function(e) {
+      e.preventDefault();
+    
+      var vegetableName = document.getElementById('vegetable-name').value;
+      var sowingDate = document.getElementById('sowing-date').value;
+    
+      if (vegetableName && sowingDate) {
+        console.log('登録ボタンがクリックされました。次のページにリダイレクトします。');
+        // 保存が成功した場合に次のページにリダイレクトする
+        var form = document.getElementById('vegetable-form');
+        form.action = "/vegetables/create_and_redirect";
+        form.method = "POST";
+        form.submit();
+      } else {
+        console.log('野菜の名前または種まき日が入力されていません。アラートが表示されます。');
+        alert('野菜の名前と種まき日を入力してください');
+      }
     });
-
-    $('#select-vegetable-button').click(function(e) {
-        e.preventDefault();
-
-        console.log('選択ボタンがクリックされました。選択された野菜: ' + selectedVegetable);
-
-        if (selectedVegetable) {
-            // 正しいアクションへ遷移するURLを生成
-            console.log('リダイレクト先のURL: /events?selected_vegetable=' + selectedVegetable);
-            window.location.href = `/events?selected_vegetable=${selectedVegetable}`;
-        } else {
-            console.log('選択された野菜がありません。アラートが表示されます。');
-            alert('野菜を選択してください');
-        }
-    });
+  } else {
+    console.error('登録ボタンが見つかりませんでした。');
+  }
 });
+  

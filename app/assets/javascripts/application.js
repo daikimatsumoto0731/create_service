@@ -12,8 +12,11 @@
 //= require rails-ujs
 //= require activestorage
 //= require jquery3
+//= require moment
+//= require fullcalendar
 //= require bootstrap
 //= require custom
+//= vegetable_selection
 //= require harvest_chart
 //= mypage_toggle
 //= require_tree .

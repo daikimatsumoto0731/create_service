@@ -1,7 +1,27 @@
 # frozen_string_literal: true
 
 class VegetablesController < ApplicationController
-  def index; end
+  def index
+    @vegetable = Vegetable.new
+  end
+
+  def create
+    @vegetable = Vegetable.new(vegetable_params)
+    if @vegetable.save
+      redirect_to vegetables_path, notice: 'Vegetable was successfully created.'
+    else
+      render :index
+    end
+  end
+
+  def create_and_redirect
+    @vegetable = Vegetable.new(vegetable_params)
+    if @vegetable.save
+      redirect_to event_path(id: @vegetable.id, selected_vegetable: @vegetable.name.downcase, sowing_date: @vegetable.sowing_date)
+    else
+      render :index
+    end
+  end
 
   def schedule
     selected_vegetable = params[:selected_vegetable]
@@ -15,5 +35,11 @@ class VegetablesController < ApplicationController
       session[:selected_date] = selected_date
       redirect_to events_path(selected_vegetable:)
     end
+  end
+
+  private
+
+  def vegetable_params
+    params.require(:vegetable).permit(:name, :sowing_date)
   end
 end

@@ -1,51 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>野菜選択画面</title>
+  <title>野菜入力画面</title>
   <%= stylesheet_link_tag 'vegetable', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'vegetable_selection', 'data-turbolinks-track': 'reload' %>
   <%= csrf_meta_tags %>
-  <style>
-    /* 野菜ボタンの背景色を指定 */
-    .vegetable-button.carrot {
-      background-color: orange;
-    }
-
-    .vegetable-button.tomato {
-      background-color: red;
-    }
-
-    .vegetable-button.basil {
-      background-color: green;
-    }
-  </style>
 </head>
 <body>
   <header class="header-vegetable">
     <div class="ghost-element"></div>
     <div class="title-container">
-      <h1>育てる野菜を選択してください</h1>
+      <h1>育てる野菜を入力してください</h1>
     </div>
     <%= link_to 'マイページに戻る', user_path(current_user), class: 'mypage-link' %>
   </header>
-  
-  <!-- 野菜ボタンの集まり -->
-  <div class="vegetable-buttons">
-    <button class='vegetable-button carrot' data-value='carrot'>ニンジン</button>
-    <button class='vegetable-button tomato' data-value='tomato'>トマト</button>
-    <button class='vegetable-button basil' data-value='basil'>バジル</button>
+
+  <div class="form-container">
+    <div class="description">
+      <p>下記のフォームに育てる野菜の名前と種まき日を入力してください。</p>
+      <p>登録ボタンを押して次のステップに進んでください。</p>
+    </div>
+
+    <%= form_with(model: @vegetable, local: true, id: 'vegetable-form') do |form| %>
+      <% if @vegetable.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@vegetable.errors.count, "error") %> prevented this vegetable from being saved:</h2>
+          <ul>
+            <% @vegetable.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <%= form.label :name, "育てる野菜" %>
+        <%= form.text_field :name, id: 'vegetable-name' %>
+      </div>
+
+      <div class="field">
+        <%= form.label :sowing_date, "種まき日" %>
+        <%= form.date_field :sowing_date, id: 'sowing-date' %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit "登録", id: 'register-vegetable-button', class: 'button register-button' %>
+      </div>
+    <% end %>
   </div>
 
-  <!-- 選択された野菜を表示する領域 -->
-  <div id="display-selected-vegetable" class="selected-vegetable">
-    選択された野菜: なし
-  </div>
-
-  <!-- "選択" ボタン -->
-  <button id="select-vegetable-button">選択</button>
-
-  <footer-vegetable>
+  <footer class="footer-vegetable">
     <p>Copyright &copy; 2024 Vegetable Service</p>
-  </footer-vegetable>
+  </footer>
 </body>
 </html>
