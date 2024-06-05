@@ -43,6 +43,8 @@ Rails.application.routes.draw do
 
   patch '/events/update_sowing_date', to: 'events#update_sowing_date', as: 'update_sowing_date_events'
 
+  post 'translate', to: 'translate#translate'
+
   # 画像分析のアクションへのルート
   get 'analyze_image/new', to: 'events#new_analyze_image', as: 'new_analyze_image'
   post 'analyze_image', to: 'events#analyze_image', as: 'analyze_image'

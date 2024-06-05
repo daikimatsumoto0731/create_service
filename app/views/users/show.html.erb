@@ -29,7 +29,8 @@
     <% end %>
   </div>
 
-  <!-- キーデータのハイライト -->
+  <!-- キーデータのハイライトをコメントアウト -->
+  <!-- 
   <div class="key-data-highlights">
     <div class="card highlight-card">
       <div class="card-body">
@@ -44,9 +45,9 @@
       </div>
     </div>
   </div>
-  
+  -->
 
-  <!-- 通知履歴を表示 --> 
+  <!-- 通知履歴を表示 -->
   <div class="notifications-history">
     <!-- この行に通知表示のタイトルを入れる -->
     <% @user.notifications.order(sent_at: :desc).limit(5).each do |notification| %>
@@ -57,29 +58,30 @@
     <% end %>
   </div>
 
-  <!-- グラフ描画領域 -->
+  <!-- グラフ描画領域とボタンをコメントアウト -->
+  <!-- 
   <div class="chart-container" id="graphContainer" style="display: none;">
-    <!-- 収穫量の棒グラフのキャンバス -->
     <canvas id="harvestChart"
             data-vegetables="<%= @aggregated_harvests.map(&:vegetable_type).to_json %>"
             data-amounts="<%= @aggregated_harvests.map(&:total_amount).to_json %>">
     </canvas>
-    <!-- 節約額の棒グラフのキャンバス -->
     <canvas id="savingsChart"
             data-vegetables="<%= @aggregated_harvests.map(&:vegetable_type).to_json %>"
             data-savings="<%= @aggregated_harvests.map(&:total_savings).to_json %>">
     </canvas>
   </div>
 
-  <!-- Chart.jsとカスタムJavaScriptの読み込み -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <%= javascript_include_tag 'harvest_chart' %>
-  
+  <% if @aggregated_harvests.present? %>
+    <button id="toggleGraphBtn" class="btn-toggle-graph">グラフを表示</button>
+  <% end %>
+  -->
+
   <div class="button-container-mypage"> <!-- ボタンを中央に配置 -->
-    <%= link_to '野菜を作る', vegetables_path, class: 'btn-vegetable-mypage' %>
-    <% if @aggregated_harvests.present? %>
-      <button id="toggleGraphBtn" class="btn-toggle-graph">グラフを表示</button>
-    <% end %>
+    <p class="explanation-text">
+      ここで野菜を育てると、毎日の成長を記録し、天気情報や収穫量を確認できます。<br>
+      あなたの都道府県の天気情報も提供されるので、適切なタイミングで水やりや収穫が可能です。
+    </p>
+    <%= link_to '野菜を育てる', vegetables_path, class: 'btn-vegetable-mypage' %>
   </div>
 
 </div>
