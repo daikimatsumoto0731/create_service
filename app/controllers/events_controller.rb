@@ -42,6 +42,9 @@ class EventsController < ApplicationController
       image_path = image.tempfile.path
       Rails.logger.info "Image path: #{image_path}"
 
+      translated_vegetable_name = translate_vegetable_name(vegetable_name)
+      Rails.logger.info "Translated vegetable name: #{translated_vegetable_name}"
+
       credentials = JSON.parse(ENV['GOOGLE_APPLICATION_CREDENTIALS_JSON'])
       vision = Google::Cloud::Vision.image_annotator do |config|
         config.credentials = credentials
@@ -52,7 +55,7 @@ class EventsController < ApplicationController
         labels = response.responses[0].label_annotations.map(&:description)
         Rails.logger.info "Labels detected: #{labels.join(', ')}"
 
-        @care_guide = PerenualApiClient.fetch_species_care_guide(vegetable_name)
+        @care_guide = PerenualApiClient.fetch_species_care_guide(translated_vegetable_name)
         @labels = labels
         @vegetable_status = determine_vegetable_status(labels)
       else
@@ -81,6 +84,16 @@ class EventsController < ApplicationController
 
   def set_vegetable
     @vegetable = Vegetable.find(params[:id])
+  end
+
+  def translate_vegetable_name(name)
+    Rails.logger.info "Translating vegetable name: #{name}"
+    translated_name = AzureTranslationService.translate(name, 'EN')
+    Rails.logger.info "Translated vegetable name: #{translated_name}"
+    translated_name
+  rescue StandardError => e
+    Rails.logger.error "Failed to translate vegetable name: #{e.message}"
+    name # 翻訳に失敗した場合は元の名前を使用
   end
 
   def determine_vegetable_status(labels)
