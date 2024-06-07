@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   end
   
   # Eventsに関するルーティング
-  resources :events, only: %i[index show create] do
+  resources :events, only: %i[index show create destroy] do
     member do
       get 'advice'
       patch 'complete'
