@@ -29,61 +29,29 @@
     <% end %>
   </div>
 
-  <!-- キーデータのハイライトをコメントアウト -->
-  <!-- 
-  <div class="key-data-highlights">
-    <div class="card highlight-card">
-      <div class="card-body">
-        <h5 class="card-title">最も収穫量が多かった野菜</h5>
-        <p class="card-text"><%= @most_harvested_vegetable %> (合計収穫量: <%= @most_harvested_amount %>kg)</p>
-      </div>
-    </div>
-    <div class="card highlight-card">
-      <div class="card-body">
-        <h5 class="card-title">最大の節約が見られた月</h5>
-        <p class="card-text"><%= @max_savings_month %> (節約額: <%= @max_savings_amount %>円)</p>
-      </div>
-    </div>
-  </div>
-  -->
-
-  <!-- 通知履歴を表示 -->
-  <div class="notifications-history">
-    <!-- この行に通知表示のタイトルを入れる -->
-    <% @user.notifications.order(sent_at: :desc).limit(5).each do |notification| %>
-      <div class="notification">
-        <p><%= notification.message %></p>
-        <p><%= notification.sent_at.strftime("%Y-%m-%d %H:%M") %></p>
-      </div>
-    <% end %>
-  </div>
-
-  <!-- グラフ描画領域とボタンをコメントアウト -->
-  <!-- 
-  <div class="chart-container" id="graphContainer" style="display: none;">
-    <canvas id="harvestChart"
-            data-vegetables="<%= @aggregated_harvests.map(&:vegetable_type).to_json %>"
-            data-amounts="<%= @aggregated_harvests.map(&:total_amount).to_json %>">
-    </canvas>
-    <canvas id="savingsChart"
-            data-vegetables="<%= @aggregated_harvests.map(&:vegetable_type).to_json %>"
-            data-savings="<%= @aggregated_harvests.map(&:total_savings).to_json %>">
-    </canvas>
-  </div>
-
-  <% if @aggregated_harvests.present? %>
-    <button id="toggleGraphBtn" class="btn-toggle-graph">グラフを表示</button>
-  <% end %>
-  -->
-
+  <!-- 説明文 -->
   <div class="button-container-mypage"> <!-- ボタンを中央に配置 -->
     <p class="explanation-text">
       ここで野菜を育てると、毎日の成長を記録し、天気情報や収穫量を確認できます。<br>
       あなたの都道府県の天気情報も提供されるので、適切なタイミングで水やりや収穫が可能です。
+      プロフィールを編集するとその地域の天気情報が表示されます。
     </p>
+
+    <!-- 登録した野菜とスケジュール管理画面へのリンク -->
+    <div class="registered-vegetables">
+      <h3>登録した野菜</h3>
+      <% @vegetables.each do |vegetable| %>
+        <div class="vegetable-item">
+          <p><%= vegetable.name %> (種まき日: <%= vegetable.sowing_date %>)</p>
+          <%= link_to 'スケジュール画面へ', event_path(id: vegetable.id, selected_vegetable: vegetable.name.downcase, sowing_date: vegetable.sowing_date), class: 'btn btn-primary' %>
+          <%= link_to '削除', vegetable_path(vegetable), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- 野菜を育てるボタン -->
     <%= link_to '野菜を育てる', vegetables_path, class: 'btn-vegetable-mypage' %>
   </div>
-
 </div>
 
 <footer class="footer-mypage">

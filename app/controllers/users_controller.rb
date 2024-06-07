@@ -23,6 +23,9 @@ class UsersController < ApplicationController
       @weather_info = '都道府県が設定されていません'
       @temperature_info = ''
     end
+
+    # ユーザーが登録した野菜の一覧を取得
+    @vegetables = @user.vegetables
   end
 
   def edit; end

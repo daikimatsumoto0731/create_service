@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   post '/callback', to: 'line_bot#callback'
 
   # 野菜関連のルーティング
-  resources :vegetables, only: %i[index create] do
+  resources :vegetables, only: %i[index create destroy] do
     collection do
       get 'schedule', to: 'vegetables#schedule', as: :schedule
       post 'create_and_redirect', to: 'vegetables#create_and_redirect'
@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   end
   
   # Eventsに関するルーティング
-  resources :events, only: %i[index show create] do
+  resources :events, only: %i[index show create destroy] do
     member do
       get 'advice'
       patch 'complete'
@@ -39,8 +39,6 @@ Rails.application.routes.draw do
   end
 
   # 追加する必要があるルート
-  get 'events/show', to: 'events#show', as: 'event_show'
-
   patch '/events/update_sowing_date', to: 'events#update_sowing_date', as: 'update_sowing_date_events'
 
   post 'translate', to: 'translate#translate'

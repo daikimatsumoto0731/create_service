@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
 class VegetablesController < ApplicationController
+  before_action :set_vegetable, only: %i[destroy]
+
   def index
     @vegetable = Vegetable.new
   end
 
   def create
-    @vegetable = Vegetable.new(vegetable_params)
+    @vegetable = current_user.vegetables.build(vegetable_params)
     if @vegetable.save
       redirect_to vegetables_path, notice: 'Vegetable was successfully created.'
     else
@@ -15,12 +17,17 @@ class VegetablesController < ApplicationController
   end
 
   def create_and_redirect
-    @vegetable = Vegetable.new(vegetable_params)
+    @vegetable = current_user.vegetables.build(vegetable_params)
     if @vegetable.save
       redirect_to event_path(id: @vegetable.id, selected_vegetable: @vegetable.name.downcase, sowing_date: @vegetable.sowing_date)
     else
       render :index
     end
+  end
+
+  def destroy
+    @vegetable.destroy
+    redirect_to user_path(current_user), notice: '野菜が削除されました。'
   end
 
   def schedule
@@ -38,6 +45,10 @@ class VegetablesController < ApplicationController
   end
 
   private
+
+  def set_vegetable
+    @vegetable = Vegetable.find(params[:id])
+  end
 
   def vegetable_params
     params.require(:vegetable).permit(:name, :sowing_date)
