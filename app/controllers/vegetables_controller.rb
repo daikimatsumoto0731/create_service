@@ -6,7 +6,7 @@ class VegetablesController < ApplicationController
   end
 
   def create
-    @vegetable = Vegetable.new(vegetable_params)
+    @vegetable = current_user.vegetables.build(vegetable_params)
     if @vegetable.save
       redirect_to vegetables_path, notice: 'Vegetable was successfully created.'
     else
@@ -15,7 +15,7 @@ class VegetablesController < ApplicationController
   end
 
   def create_and_redirect
-    @vegetable = Vegetable.new(vegetable_params)
+    @vegetable = current_user.vegetables.build(vegetable_params)
     if @vegetable.save
       redirect_to event_path(id: @vegetable.id, selected_vegetable: @vegetable.name.downcase, sowing_date: @vegetable.sowing_date)
     else

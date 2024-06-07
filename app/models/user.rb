@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_one :user_setting, dependent: :destroy
   has_many :harvests, dependent: :destroy
   has_many :notifications, dependent: :destroy
+  has_many :vegetables
 
   # OmniAuth認証データからユーザーを検索または作成します
   def self.from_omniauth(auth)

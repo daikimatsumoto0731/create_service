@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_01_125020) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_07_050423) do
   create_table "events", force: :cascade do |t|
     t.string "name"
     t.date "start_date"
@@ -99,10 +99,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_01_125020) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "sowing_date"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_vegetables_on_user_id"
   end
 
   add_foreign_key "harvests", "users"
   add_foreign_key "line_notification_settings", "users"
   add_foreign_key "notifications", "users"
   add_foreign_key "user_settings", "users"
+  add_foreign_key "vegetables", "users"
 end

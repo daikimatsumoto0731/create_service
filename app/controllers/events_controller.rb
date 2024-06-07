@@ -7,12 +7,12 @@ class EventsController < ApplicationController
 
   def show
     @selected_vegetable = params[:selected_vegetable]
-    @selected_vegetable_id = Vegetable.find_by(name: @selected_vegetable).id
     @sowing_date = params[:sowing_date]
-    
+    @vegetable = Vegetable.find(params[:id])
+
     respond_to do |format|
       format.html
-      format.json { render json: Event.where(vegetable_id: @selected_vegetable_id) }
+      format.json { render json: Event.where(vegetable_id: @vegetable.id) }
     end
   end
   

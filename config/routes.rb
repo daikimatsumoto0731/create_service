@@ -39,8 +39,6 @@ Rails.application.routes.draw do
   end
 
   # 追加する必要があるルート
-  get 'events/show', to: 'events#show', as: 'event_show'
-
   patch '/events/update_sowing_date', to: 'events#update_sowing_date', as: 'update_sowing_date_events'
 
   post 'translate', to: 'translate#translate'
