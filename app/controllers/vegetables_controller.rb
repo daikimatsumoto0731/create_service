@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class VegetablesController < ApplicationController
+  before_action :set_vegetable, only: %i[destroy]
+
   def index
     @vegetable = Vegetable.new
   end
@@ -23,6 +25,11 @@ class VegetablesController < ApplicationController
     end
   end
 
+  def destroy
+    @vegetable.destroy
+    redirect_to user_path(current_user), notice: '野菜が削除されました。'
+  end
+
   def schedule
     selected_vegetable = params[:selected_vegetable]
     selected_date = params[:sowing_date] # 修正: 選択された日付を取得
@@ -38,6 +45,10 @@ class VegetablesController < ApplicationController
   end
 
   private
+
+  def set_vegetable
+    @vegetable = Vegetable.find(params[:id])
+  end
 
   def vegetable_params
     params.require(:vegetable).permit(:name, :sowing_date)

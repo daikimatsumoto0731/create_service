@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   post '/callback', to: 'line_bot#callback'
 
   # 野菜関連のルーティング
-  resources :vegetables, only: %i[index create] do
+  resources :vegetables, only: %i[index create destroy] do
     collection do
       get 'schedule', to: 'vegetables#schedule', as: :schedule
       post 'create_and_redirect', to: 'vegetables#create_and_redirect'
