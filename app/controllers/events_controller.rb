@@ -109,7 +109,7 @@ class EventsController < ApplicationController
 
   def determine_vegetable_status(labels)
     vegetable_status = {}
-
+  
     labels.each do |label|
       if label.downcase.include?('healthy')
         vegetable_status[:status] = '健康的な状態です'
@@ -141,21 +141,21 @@ class EventsController < ApplicationController
         vegetable_status[:status] = '過剰な水やりの影響が見られます。水はけを良くするために土を乾燥させましょう。'
       elsif label.downcase.include?('stunted growth') || label.downcase.include?('small size')
         vegetable_status[:status] = '成長が停滞しています。栄養不足や環境の問題が考えられます。'
-      elsif label downcase.include?('sunburn') || label.downcase.include?('burnt leaves')
+      elsif label.downcase.include?('sunburn') || label.downcase.include?('burnt leaves')
         vegetable_status[:status] = '日焼けが見られます。直射日光を避け、日陰に移動させましょう。'
-      elsif label downcase.include?('overgrown') || label.downcase.include?('too large')
+      elsif label.downcase.include?('overgrown') || label.downcase.include?('too large')
         vegetable_status[:status] = '過剰成長しています。間引きを行いましょう。'
-      elsif label downcase.include?('undergrown') || label.downcase.include?('too small')
+      elsif label.downcase.include?('undergrown') || label.downcase.include?('too small')
         vegetable_status[:status] = '成長が遅れています。十分な日光や栄養を与えましょう。'
-      elsif label downcase.include?('viral infection') || label.downcase.include?('virus')
+      elsif label.downcase.include?('viral infection') || label.downcase.include?('virus')
         vegetable_status[:status] = 'ウイルス感染の兆候が見られます。感染した植物を早めに隔離しましょう。'
-      elsif label downcase.include?('inappropriate temperature') || label.downcase.include?('temperature stress')
+      elsif label.downcase.include?('inappropriate temperature') || label.downcase.include?('temperature stress')
         vegetable_status[:status] = '温度が適切でない可能性があります。適切な温度設定を確認しましょう。'
       else
         vegetable_status[:status] = 'その他の状態です。詳細を確認してください。'
       end
     end
-
+  
     vegetable_status
   end
 end
