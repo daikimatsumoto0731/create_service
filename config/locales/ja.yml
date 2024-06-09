@@ -1,0 +1,13 @@
+ja:
+  activerecord:
+    errors:
+      models:
+        vegetable:
+          attributes:
+            name:
+              blank: "名前を入力してください"
+            sowing_date:
+              blank: "種まき日を入力してください"
+  errors:
+    messages:
+      blank: "を入力してください"

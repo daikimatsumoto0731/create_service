@@ -53,6 +53,7 @@ end
 
 group :test do
   gem 'capybara', '>= 2.15'
+  gem 'shoulda-matchers', '~> 5.0'
 end
 
 group :production do
