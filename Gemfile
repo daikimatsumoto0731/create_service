@@ -38,6 +38,8 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'rubocop-rails', require: false
   gem 'sqlite3', '~> 1.4'
+  gem 'rspec-rails', '~> 5.0'
+  gem 'factory_bot_rails'
 end
 
 group :development do
@@ -51,8 +53,6 @@ end
 
 group :test do
   gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
-  gem 'webdrivers', '~> 4.0'
 end
 
 group :production do
