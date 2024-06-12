@@ -6,8 +6,6 @@ on:
       - main
       - 'feature/*'
   pull_request:
-    branches:
-      - main
 
 jobs:
   build:
@@ -41,14 +39,6 @@ jobs:
           gem install bundler
           bundle install --jobs 4 --retry 3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '20.14.0'
-
-      - name: Install Node.js dependencies
-        run: npm install
-
       - name: Set up database
         run: |
           cp config/database.yml.ci config/database.yml
@@ -56,9 +46,10 @@ jobs:
           bin/rails db:schema:load
         env:
           RAILS_ENV: test
-
-      - name: Run RuboCop
-        run: bundle exec rubocop
+          DATABASE_URL: postgres://postgres:password@localhost:5432/vegetable_service_test
 
       - name: Run tests
         run: bundle exec rspec
+
+      - name: Run RuboCop
+        run: bundle exec rubocop
