@@ -44,44 +44,42 @@ class EventsController < ApplicationController
   def analyze_image
     image = params[:image]
     vegetable_name = params[:vegetable_name]
-
+  
     if image && vegetable_name.present?
       image_path = image.tempfile.path
       Rails.logger.info "Image path: #{image_path}"
-
+  
       translated_vegetable_name = translate_vegetable_name(vegetable_name)
       Rails.logger.info "Translated vegetable name: #{translated_vegetable_name}"
-
+  
       credentials = JSON.parse(ENV['GOOGLE_APPLICATION_CREDENTIALS_JSON'])
       vision = Google::Cloud::Vision.image_annotator do |config|
         config.credentials = credentials
       end
-
+  
       response = vision.label_detection image: image_path
       if response && response.responses && !response.responses.empty?
         labels = response.responses[0].label_annotations.map(&:description)
         Rails.logger.info "Labels detected: #{labels.join(', ')}"
-
+  
         @care_guide = PerenualApiClient.fetch_species_care_guide(translated_vegetable_name)
         @labels = labels
         @vegetable_status = determine_vegetable_status(labels)
+        render 'analyze_image'
       else
         Rails.logger.error "No labels were detected."
-        @labels = []
-        @care_guide = {}
-        @vegetable_status = nil
+        flash[:alert] = "画像の分析に失敗しました。ラベルが検出されませんでした。"
+        redirect_to new_analyze_image_path
       end
     else
       flash[:alert] = "画像または野菜の名前が提供されていません。"
       redirect_to new_analyze_image_path
     end
-
-    render 'analyze_image'
   rescue StandardError => e
     Rails.logger.error "Failed to analyze image: #{e.message}"
     flash[:alert] = "画像の分析に失敗しました。エラー: #{e.message}"
     redirect_to new_analyze_image_path
-  end
+  end    
 
   private
 
