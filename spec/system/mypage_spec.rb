@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'MyPage', type: :system do
   let(:user) { create(:user) }
-  let!(:vegetable) { create(:vegetable, user: user) }
+  let!(:vegetable) { create(:vegetable, user:) }
 
   before do
     driven_by(:rack_test)

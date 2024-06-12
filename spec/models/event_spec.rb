@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do
@@ -23,14 +25,14 @@ RSpec.describe Event, type: :model do
     end
 
     it 'is not valid if end_date is before start_date' do
-      event = build(:event, start_date: Date.today, end_date: Date.yesterday)
+      event = build(:event, start_date: Time.zone.today, end_date: Date.yesterday)
       expect(event).to_not be_valid
     end
   end
 
   describe '#duration_in_days' do
     it 'returns the correct duration in days' do
-      event = build(:event, start_date: Date.today, end_date: Date.today + 5.days)
+      event = build(:event, start_date: Time.zone.today, end_date: Time.zone.today + 5.days)
       expect(event.duration_in_days).to eq(5)
     end
   end

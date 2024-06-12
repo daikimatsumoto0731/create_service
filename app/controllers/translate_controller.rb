@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TranslateController < ApplicationController
   def translate
     text = params[:text]

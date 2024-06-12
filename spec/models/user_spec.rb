@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
@@ -31,7 +33,8 @@ RSpec.describe User, type: :model do
 
   context 'omniauth' do
     it 'creates a user from omniauth data' do
-      auth = OmniAuth::AuthHash.new(provider: 'line', uid: '12345', info: { email: 'test@example.com', name: 'LINE User' })
+      auth = OmniAuth::AuthHash.new(provider: 'line', uid: '12345',
+                                    info: { email: 'test@example.com', name: 'LINE User' })
       user = User.from_omniauth(auth)
       expect(user).to be_valid
       expect(user.provider).to eq('line')

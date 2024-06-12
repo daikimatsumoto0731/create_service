@@ -11,3 +11,8 @@ ja:
   errors:
     messages:
       blank: "を入力してください"
+  flash:
+    alerts:
+      image_or_name_missing: '画像または野菜の名前が提供されていません。'
+      image_analysis_error: '画像の分析に失敗しました。エラー: %{message}'
+      image_analysis_failed: '画像の分析に失敗しました。ラベルが検出されませんでした。'

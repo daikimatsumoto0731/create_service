@@ -45,7 +45,7 @@ module Users
     end
 
     def send_line_message(user)
-      return unless user.line_user_id.present?
+      return if user.line_user_id.blank?
 
       message = {
         type: 'text',

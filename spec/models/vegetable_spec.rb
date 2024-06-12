@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Vegetable, type: :model do
@@ -9,13 +11,13 @@ RSpec.describe Vegetable, type: :model do
     it 'is not valid without a name' do
       vegetable = build(:vegetable, name: nil)
       vegetable.valid?
-      expect(vegetable.errors[:name]).to include("名前を入力してください")
+      expect(vegetable.errors[:name]).to include('名前を入力してください')
     end
 
     it 'is not valid without a sowing_date' do
       vegetable = build(:vegetable, sowing_date: nil)
       vegetable.valid?
-      expect(vegetable.errors[:sowing_date]).to include("種まき日を入力してください")
+      expect(vegetable.errors[:sowing_date]).to include('種まき日を入力してください')
     end
   end
 

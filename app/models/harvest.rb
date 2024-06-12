@@ -7,7 +7,7 @@ class Harvest < ApplicationRecord
   belongs_to :user
 
   def self.aggregate_by_vegetable_type(user)
-    where(user: user)
+    where(user:)
       .group(:vegetable_type)
       .select('vegetable_type, SUM(amount) as total_amount, SUM(amount * price_per_kg) as total_savings')
   end
@@ -19,7 +19,7 @@ class Harvest < ApplicationRecord
                             "TO_CHAR(created_at, 'YYYY-MM')"
                           end
 
-    grouped_savings = where(user: user)
+    grouped_savings = where(user:)
                       .group(date_grouping_query)
                       .select("#{date_grouping_query} as month, SUM(amount * price_per_kg) as total_savings")
                       .order('total_savings DESC')
@@ -27,14 +27,15 @@ class Harvest < ApplicationRecord
 
     max_savings_info = { month: grouped_savings&.month, total_savings: grouped_savings&.total_savings }
 
-    grouped_harvests = where(user: user)
+    grouped_harvests = where(user:)
                        .group(:vegetable_type)
                        .select('vegetable_type, SUM(amount) as total_amount')
                        .order('total_amount DESC')
                        .first
 
-    max_harvest_info = { vegetable_type: grouped_harvests&.vegetable_type, total_amount: grouped_harvests&.total_amount }
+    max_harvest_info = { vegetable_type: grouped_harvests&.vegetable_type,
+                         total_amount: grouped_harvests&.total_amount }
 
-    { max_savings_info: max_savings_info, max_harvest_info: max_harvest_info }
+    { max_savings_info:, max_harvest_info: }
   end
 end

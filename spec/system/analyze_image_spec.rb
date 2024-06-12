@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'AnalyzeImage', type: :system do
@@ -6,7 +8,7 @@ RSpec.describe 'AnalyzeImage', type: :system do
   end
 
   let(:user) { create(:user) }
-  let(:vegetable) { create(:vegetable, name: 'トマト', user: user) }
+  let(:vegetable) { create(:vegetable, name: 'トマト', user:) }
 
   before do
     sign_in user
@@ -20,7 +22,7 @@ RSpec.describe 'AnalyzeImage', type: :system do
     attach_file '画像をアップロード', Rails.root.join('spec/fixtures/files/sample_vegetable.jpg')
 
     expect(page).to have_button('画像を分析する', disabled: false)
-    
+
     click_button '画像を分析する'
 
     expect(page).to have_content('画像分析結果 - トマト')
