@@ -44,6 +44,10 @@ module AnalyzeImageModule
     end
 
     response = vision.label_detection image: image_path
+    extract_labels(response, translated_vegetable_name)
+  end
+
+  def extract_labels(response, translated_vegetable_name)
     if response&.responses && !response.responses.empty?
       labels = response.responses[0].label_annotations.map(&:description)
       Rails.logger.info "Labels detected: #{labels.join(', ')}"

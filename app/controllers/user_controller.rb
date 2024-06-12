@@ -14,10 +14,8 @@ class UserController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      # サインアップ後、ユーザーをログインさせる(オプション)
       sign_in(@user)
-      # サインアップ後のリダイレクト先
-      redirect_to new_user_sessions_path, flash[:notice] = '登録されました'
+      redirect_to new_user_sessions_path, notice: I18n.t('flash.notices.user_registered')
     else
       render :new
     end

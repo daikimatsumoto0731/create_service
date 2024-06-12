@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class EventsController < ApplicationController
-  before_action :set_vegetable, only: %i[show update_sowing_date]
+  before_action :set_vegetable, only: %i[show]
   before_action :set_event, only: [:destroy]
 
   include AnalyzeImageModule
@@ -15,8 +15,6 @@ class EventsController < ApplicationController
   def show
     @selected_vegetable = params[:selected_vegetable]
     @sowing_date = params[:sowing_date]
-    @vegetable = Vegetable.find(params[:id])
-
     respond_to do |format|
       format.html
       format.json do
@@ -35,8 +33,7 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    event = Event.find(params[:id])
-    event.destroy
+    @event.destroy # @eventをインスタンス変数に修正
     head :no_content
   end
 
