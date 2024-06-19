@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# app/services/perenual_api_client.rb
-
 require 'net/http'
 require 'uri'
 require 'json'
@@ -25,53 +23,66 @@ class PerenualApiClient
   end
 
   def self.handle_response(response)
-    case response
-    when Net::HTTPSuccess
-      begin
-        care_guide = JSON.parse(response.body)
-        Rails.logger.info "Care guide fetched successfully: #{care_guide}"
-
-        if care_guide['data']
-          Rails.logger.info "Data present in care guide: #{care_guide['data']}"
-          first_watering = nil
-          first_sunlight = nil
-          first_pruning = nil
-
-          care_guide['data'].each do |guide|
-            guide['section']&.each do |section|
-              case section['type'].downcase
-              when 'watering'
-                first_watering ||= translate_section(section)
-              when 'sunlight'
-                first_sunlight ||= translate_section(section)
-              when 'pruning'
-                first_pruning ||= translate_section(section)
-              end
-
-              # If we have all three sections, break the loop
-              break if first_watering && first_sunlight && first_pruning
-            end
-            # If we have all three sections, break the loop
-            break if first_watering && first_sunlight && first_pruning
-          end
-
-          {
-            watering: first_watering,
-            sunlight: first_sunlight,
-            pruning: first_pruning
-          }
-        else
-          Rails.logger.error "No 'data' key in care_guide: #{care_guide}"
-          {}
-        end
-      rescue JSON::ParserError => e
-        log_error("JSON parsing error: #{e.message}")
-        {}
-      end
+    if response.is_a?(Net::HTTPSuccess)
+      parse_success_response(response)
     else
-      log_error("HTTP Error: #{response.code} - #{response.message}, Body: #{response.body}")
-      {}
+      handle_error_response(response)
     end
+  end
+
+  def self.parse_success_response(response)
+    care_guide = JSON.parse(response.body)
+    Rails.logger.info "Care guide fetched successfully: #{care_guide}"
+
+    if care_guide['data']
+      extract_care_guide_sections(care_guide['data'])
+    else
+      log_error_and_return_empty("No 'data' key in care_guide: #{care_guide}")
+    end
+  rescue JSON::ParserError => e
+    log_error_and_return_empty("JSON parsing error: #{e.message}")
+  end
+
+  def self.extract_care_guide_sections(data)
+    sections = initialize_sections
+
+    data.each do |guide|
+      guide['section']&.each do |section|
+        update_sections(sections, section)
+        break if all_sections_filled?(sections)
+      end
+      break if all_sections_filled?(sections)
+    end
+
+    sections
+  end
+
+  def self.update_sections(sections, section)
+    case section['type'].downcase
+    when 'watering'
+      sections[:watering] ||= translate_section(section)
+    when 'sunlight'
+      sections[:sunlight] ||= translate_section(section)
+    when 'pruning'
+      sections[:pruning] ||= translate_section(section)
+    end
+  end
+
+  def self.initialize_sections
+    {
+      watering: nil,
+      sunlight: nil,
+      pruning: nil
+    }
+  end
+
+  def self.all_sections_filled?(sections)
+    sections.values.all?
+  end
+
+  def self.handle_error_response(response)
+    log_error("HTTP Error: #{response.code} - #{response.message}, Body: #{response.body}")
+    {}
   end
 
   def self.translate_section(section)
@@ -82,5 +93,10 @@ class PerenualApiClient
 
   def self.log_error(message)
     Rails.logger.error message
+  end
+
+  def self.log_error_and_return_empty(message)
+    log_error(message)
+    {}
   end
 end

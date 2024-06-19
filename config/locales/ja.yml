@@ -4,6 +4,9 @@ ja:
       user_registered: '登録されました'
       settings_updated: '設定が更新されました。'
       login_success: 'ログインしました'
+      profile_updated: 'プロフィールが更新されました'
+      vegetable_created: '野菜が正常に作成されました'
+      vegetable_deleted: '野菜が削除されました'
     alerts:
       line_auth_failed: 'LINE認証に失敗しました'
       image_or_name_missing: '画像または野菜の名前が提供されていません。'

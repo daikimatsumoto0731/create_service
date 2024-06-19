@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to @user, notice: 'プロフィールが更新されました'
+      redirect_to @user, notice: I18n.t('flash.notices.profile_updated')
     else
       render :edit
     end

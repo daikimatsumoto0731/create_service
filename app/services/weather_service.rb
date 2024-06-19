@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# WeatherServiceクラス
 require 'net/http'
 require 'uri'
 require 'json'

@@ -23,24 +23,13 @@ class LineBotService
   end
 
   def self.determine_message(weather_data)
-    return '天気情報の取得に失敗しました。' unless weather_data && weather_data['weather']
+    return '天気情報の取得に失敗しました。' unless valid_weather_data?(weather_data)
 
     weather_main = weather_data.dig('weather', 0, 'main')
     description = weather_data.dig('weather', 0, 'description') || '情報なし'
     temp = weather_data.dig('main', 'temp')
 
-    case weather_main
-    when 'Rain'
-      "今日の天気は雨（#{description}）。気温は#{temp}度です。水やりは控えめにしてください。"
-    when 'Snow'
-      "今日の天気は雪（#{description}）。気温は#{temp}度です。注意してください。"
-    when 'Clear'
-      "今日の天気は晴れ（#{description}）。気温は#{temp}度です。水やりを忘れずに。"
-    when 'Clouds'
-      "今日の天気は曇り（#{description}）。気温は#{temp}度です。適宜水やりを調整してください。"
-    else
-      "今日の天気は#{description}。気温は#{temp}度です。"
-    end
+    generate_message(weather_main, description, temp)
   end
 
   def self.send_push_message(line_user_id, message_text)
@@ -67,4 +56,43 @@ class LineBotService
   rescue StandardError => e
     Rails.logger.error "Exception occurred while sending message to user ID: #{line_user_id}: #{e.message}"
   end
+
+  private
+
+  def self.valid_weather_data?(weather_data)
+    weather_data && weather_data['weather']
+  end
+
+  def self.generate_message(weather_main, description, temp)
+    send("#{weather_main.downcase}_message", description, temp)
+  rescue NoMethodError
+    default_message(description, temp)
+  end
+
+  def self.rain_message(description, temp)
+    format_message('雨', description, temp, '水やりは控えめにしてください。')
+  end
+
+  def self.snow_message(description, temp)
+    format_message('雪', description, temp, '注意してください。')
+  end
+
+  def self.clear_message(description, temp)
+    format_message('晴れ', description, temp, '水やりを忘れずに。')
+  end
+
+  def self.clouds_message(description, temp)
+    format_message('曇り', description, temp, '適宜水やりを調整してください。')
+  end
+
+  def self.default_message(description, temp)
+    format_message(description, description, temp)
+  end
+
+  def self.format_message(weather, description, temp, advice = '')
+    "今日の天気は#{weather}（#{description}）。気温は#{temp}度です。#{advice}"
+  end
+
+  private_class_method :valid_weather_data?, :generate_message
+  private_class_method :rain_message, :snow_message, :clear_message, :clouds_message, :default_message, :format_message
 end
