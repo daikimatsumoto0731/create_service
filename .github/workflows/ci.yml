@@ -49,14 +49,15 @@ jobs:
           DATABASE_URL: postgres://postgres:password@localhost:5432/vegetable_service_test
 
       - name: Set up environment variables
-        run: |
-          echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}" > google-credentials.json
+        run: echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}" > google-credentials.json
         env:
-          GOOGLE_APPLICATION_CREDENTIALS: google-credentials.json
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}
 
       - name: Run tests
         run: bundle exec rspec
         env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:password@localhost:5432/vegetable_service_test
           GOOGLE_APPLICATION_CREDENTIALS: google-credentials.json
 
       - name: Run RuboCop
