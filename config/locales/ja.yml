@@ -34,3 +34,20 @@ ja:
     viral_infection: 'ウイルス感染の兆候が見られます。感染した植物を早めに隔離しましょう。'
     inappropriate_temperature: '温度が適切でない可能性があります。適切な温度設定を確認しましょう。'
     other: 'その他の状態です。詳細を確認してください。'
+  activerecord:
+    models:
+      vegetable:
+        one: 野菜
+        other: 野菜
+    attributes:
+      vegetable:
+        name: 名前
+        sowing_date: 種まき日
+    errors:
+      models:
+        vegetable:
+          attributes:
+            name:
+              blank: "名前を入力してください"
+            sowing_date:
+              blank: "種まき日を入力してください"

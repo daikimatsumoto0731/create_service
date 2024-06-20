@@ -3,29 +3,27 @@
 require 'rails_helper'
 
 RSpec.describe 'AnalyzeImage', type: :system do
-  before do
-    driven_by(:rack_test)
-  end
-
   let(:user) { create(:user) }
   let(:vegetable) { create(:vegetable, name: 'トマト', user:) }
 
   before do
+    driven_by(:rack_test)
     sign_in user
     visit event_path(vegetable.id)
   end
 end
 
 RSpec.describe 'AnalyzeImage', type: :system do
-  context 'when uploading and analyzing an image' do
-    before do
-      driven_by(:rack_test)
-      let(:user) { create(:user) }
-      let(:vegetable) { create(:vegetable, name: 'トマト', user:) }
-      sign_in user
-      visit event_path(vegetable.id)
-    end
+  let(:user) { create(:user) }
+  let(:vegetable) { create(:vegetable, name: 'トマト', user:) }
 
+  before do
+    driven_by(:rack_test)
+    sign_in user
+    visit event_path(vegetable.id)
+  end
+
+  context 'when uploading and analyzing an image' do
     it 'uploads an image and analyzes it' do
       click_link '画像を分析する'
 
@@ -44,15 +42,16 @@ RSpec.describe 'AnalyzeImage', type: :system do
 end
 
 RSpec.describe 'AnalyzeImage', type: :system do
-  context 'when no image is uploaded' do
-    before do
-      driven_by(:rack_test)
-      let(:user) { create(:user) }
-      let(:vegetable) { create(:vegetable, name: 'トマト', user:) }
-      sign_in user
-      visit event_path(vegetable.id)
-    end
+  let(:user) { create(:user) }
+  let(:vegetable) { create(:vegetable, name: 'トマト', user:) }
 
+  before do
+    driven_by(:rack_test)
+    sign_in user
+    visit event_path(vegetable.id)
+  end
+
+  context 'when no image is uploaded' do
     it 'displays an error message when no image is uploaded' do
       click_link '画像を分析する'
 
@@ -66,15 +65,16 @@ RSpec.describe 'AnalyzeImage', type: :system do
 end
 
 RSpec.describe 'AnalyzeImage', type: :system do
-  context 'when no vegetable name is provided' do
-    before do
-      driven_by(:rack_test)
-      let(:user) { create(:user) }
-      let(:vegetable) { create(:vegetable, name: 'トマト', user:) }
-      sign_in user
-      visit event_path(vegetable.id)
-    end
+  let(:user) { create(:user) }
+  let(:vegetable) { create(:vegetable, name: 'トマト', user:) }
 
+  before do
+    driven_by(:rack_test)
+    sign_in user
+    visit event_path(vegetable.id)
+  end
+
+  context 'when no vegetable name is provided' do
     it 'displays an error message when no vegetable name is provided' do
       click_link '画像を分析する'
 

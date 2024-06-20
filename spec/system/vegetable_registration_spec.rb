@@ -15,7 +15,6 @@ RSpec.describe 'VegetableRegistration', type: :system do
     fill_in 'vegetable-name', with: 'トマト'
     fill_in 'sowing-date', with: '2024-06-01'
     click_button '登録'
-    # 以下の行を修正します
     expect(page).to have_content('野菜育成スケジュール') # 日本語のフラッシュメッセージを確認します
   end
 
