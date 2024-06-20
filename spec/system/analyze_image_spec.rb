@@ -23,6 +23,10 @@ RSpec.describe 'AnalyzeImage', type: :system do
 
       click_button '画像を分析する'
 
+      # エラーメッセージをキャプチャ
+      analysis_error_message = page.find('.error-message', text: /エラー/).text rescue nil
+      puts "Analysis error message: #{analysis_error_message}"
+
       expect(page).to have_content('画像分析結果 - トマト')
       expect(page).to have_content('野菜の状態')
       expect(page).to have_content('育て方のポイント')

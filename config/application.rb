@@ -19,11 +19,16 @@ module VegetableService
     config.autoload_paths += %W[#{config.root}/app/services]
     config.encoding = 'utf-8'
 
+    # Google Cloud credentialsを一時ファイルに書き込む設定
     if ENV['GOOGLE_APPLICATION_CREDENTIALS_JSON']
       temp_file = Tempfile.new('google_application_credentials')
       temp_file.write(ENV['GOOGLE_APPLICATION_CREDENTIALS_JSON'])
       temp_file.rewind
       ENV['GOOGLE_APPLICATION_CREDENTIALS'] = temp_file.path
+      # デバッグ用のログ出力
+      Rails.logger.debug("Google Application Credentials set at: #{ENV['GOOGLE_APPLICATION_CREDENTIALS']}")
+    else
+      Rails.logger.debug("GOOGLE_APPLICATION_CREDENTIALS_JSON is not set")
     end
   end
 end
