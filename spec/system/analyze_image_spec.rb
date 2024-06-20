@@ -14,39 +14,75 @@ RSpec.describe 'AnalyzeImage', type: :system do
     sign_in user
     visit event_path(vegetable.id)
   end
+end
 
-  it 'uploads an image and analyzes it' do
-    click_link '画像を分析する'
+RSpec.describe 'AnalyzeImage', type: :system do
+  context 'when uploading and analyzing an image' do
+    before do
+      driven_by(:rack_test)
+      let(:user) { create(:user) }
+      let(:vegetable) { create(:vegetable, name: 'トマト', user:) }
+      sign_in user
+      visit event_path(vegetable.id)
+    end
 
-    fill_in '野菜名を入力', with: vegetable.name
-    attach_file '画像をアップロード', Rails.root.join('spec/fixtures/files/sample_vegetable.jpg')
+    it 'uploads an image and analyzes it' do
+      click_link '画像を分析する'
 
-    expect(page).to have_button('画像を分析する', disabled: false)
+      fill_in '野菜名を入力', with: vegetable.name
+      attach_file '画像をアップロード', Rails.root.join('spec/fixtures/files/sample_vegetable.jpg')
 
-    click_button '画像を分析する'
+      expect(page).to have_button('画像を分析する', disabled: false)
 
-    expect(page).to have_content('画像分析結果 - トマト')
-    expect(page).to have_content('野菜の状態')
-    expect(page).to have_content('育て方のポイント')
+      click_button '画像を分析する'
+
+      expect(page).to have_content('画像分析結果 - トマト')
+      expect(page).to have_content('野菜の状態')
+      expect(page).to have_content('育て方のポイント')
+    end
   end
+end
 
-  it 'displays an error message when no image is uploaded' do
-    click_link '画像を分析する'
+RSpec.describe 'AnalyzeImage', type: :system do
+  context 'when no image is uploaded' do
+    before do
+      driven_by(:rack_test)
+      let(:user) { create(:user) }
+      let(:vegetable) { create(:vegetable, name: 'トマト', user:) }
+      sign_in user
+      visit event_path(vegetable.id)
+    end
 
-    fill_in '野菜名を入力', with: vegetable.name
-    click_button '画像を分析する'
+    it 'displays an error message when no image is uploaded' do
+      click_link '画像を分析する'
 
-    expect(page).to have_content('画像または野菜の名前が提供されていません。')
-    expect(page).to have_current_path(new_analyze_image_path)
+      fill_in '野菜名を入力', with: vegetable.name
+      click_button '画像を分析する'
+
+      expect(page).to have_content('画像または野菜の名前が提供されていません。')
+      expect(page).to have_current_path(new_analyze_image_path)
+    end
   end
+end
 
-  it 'displays an error message when no vegetable name is provided' do
-    click_link '画像を分析する'
+RSpec.describe 'AnalyzeImage', type: :system do
+  context 'when no vegetable name is provided' do
+    before do
+      driven_by(:rack_test)
+      let(:user) { create(:user) }
+      let(:vegetable) { create(:vegetable, name: 'トマト', user:) }
+      sign_in user
+      visit event_path(vegetable.id)
+    end
 
-    attach_file '画像をアップロード', Rails.root.join('spec/fixtures/files/sample_vegetable.jpg')
-    click_button '画像を分析する'
+    it 'displays an error message when no vegetable name is provided' do
+      click_link '画像を分析する'
 
-    expect(page).to have_content('画像または野菜の名前が提供されていません。')
-    expect(page).to have_current_path(new_analyze_image_path)
+      attach_file '画像をアップロード', Rails.root.join('spec/fixtures/files/sample_vegetable.jpg')
+      click_button '画像を分析する'
+
+      expect(page).to have_content('画像または野菜の名前が提供されていません。')
+      expect(page).to have_current_path(new_analyze_image_path)
+    end
   end
 end
