@@ -51,7 +51,12 @@ jobs:
       - name: Set up environment variables
         run: echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}" > google-credentials.json
         env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}
+          GOOGLE_APPLICATION_CREDENTIALS: google-credentials.json
+
+      - name: Debug environment variables
+        run: |
+          echo "GOOGLE_APPLICATION_CREDENTIALS:"
+          cat google-credentials.json
 
       - name: Run tests
         run: bundle exec rspec
