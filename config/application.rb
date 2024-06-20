@@ -25,10 +25,10 @@ module VegetableService
       temp_file.write(ENV['GOOGLE_APPLICATION_CREDENTIALS_JSON'])
       temp_file.rewind
       ENV['GOOGLE_APPLICATION_CREDENTIALS'] = temp_file.path
-      # デバッグ用のログ出力
-      Rails.logger.debug("Google Application Credentials set at: #{ENV['GOOGLE_APPLICATION_CREDENTIALS']}")
+      # デバッグ用の標準出力
+      puts "Google Application Credentials set at: #{ENV['GOOGLE_APPLICATION_CREDENTIALS']}"
     else
-      Rails.logger.debug("GOOGLE_APPLICATION_CREDENTIALS_JSON is not set")
+      puts "GOOGLE_APPLICATION_CREDENTIALS_JSON is not set"
     end
   end
 end
