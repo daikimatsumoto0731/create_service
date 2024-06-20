@@ -11,17 +11,6 @@ RSpec.describe 'AnalyzeImage', type: :system do
     sign_in user
     visit event_path(vegetable.id)
   end
-end
-
-RSpec.describe 'AnalyzeImage', type: :system do
-  let(:user) { create(:user) }
-  let(:vegetable) { create(:vegetable, name: 'トマト', user:) }
-
-  before do
-    driven_by(:rack_test)
-    sign_in user
-    visit event_path(vegetable.id)
-  end
 
   context 'when uploading and analyzing an image' do
     it 'uploads an image and analyzes it' do
@@ -41,7 +30,7 @@ RSpec.describe 'AnalyzeImage', type: :system do
   end
 end
 
-RSpec.describe 'AnalyzeImage', type: :system do
+RSpec.describe 'AnalyzeImageErrorHandling', type: :system do
   let(:user) { create(:user) }
   let(:vegetable) { create(:vegetable, name: 'トマト', user:) }
 
@@ -64,7 +53,7 @@ RSpec.describe 'AnalyzeImage', type: :system do
   end
 end
 
-RSpec.describe 'AnalyzeImage', type: :system do
+RSpec.describe 'AnalyzeImageErrorHandlingNoName', type: :system do
   let(:user) { create(:user) }
   let(:vegetable) { create(:vegetable, name: 'トマト', user:) }
 
