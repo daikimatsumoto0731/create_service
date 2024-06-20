@@ -49,9 +49,10 @@ jobs:
           DATABASE_URL: postgres://postgres:password@localhost:5432/vegetable_service_test
 
       - name: Set up environment variables
-        run: echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}" > $GOOGLE_APPLICATION_CREDENTIALS
+        run: |
+          echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}" > $GOOGLE_APPLICATION_CREDENTIALS
         env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_PATH }}
 
       - name: Run tests
         run: bundle exec rspec
