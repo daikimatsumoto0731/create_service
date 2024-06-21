@@ -51,6 +51,7 @@ jobs:
       - name: Set up environment variables
         run: |
           echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}" > google-credentials.json
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$(pwd)/google-credentials.json" >> $GITHUB_ENV
         env:
           GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}
 
@@ -59,14 +60,22 @@ jobs:
           echo "GOOGLE_APPLICATION_CREDENTIALS_JSON:"
           echo $GOOGLE_APPLICATION_CREDENTIALS_JSON
           echo "GOOGLE_APPLICATION_CREDENTIALS:"
-          echo $(pwd)/google-credentials.json
+          echo $GOOGLE_APPLICATIONS_CREDENTIALS
+
+      - name: Debug environment variables
+        run: |
+          echo "GOOGLE_APPLICATION_CREDENTIALS content:"
+          cat google-credentials.json
+          echo "GOOGLE_APPLICATION_CREDENTIALS:"
+          echo $GOOGLE_APPLICATIONS_CREDENTIALS
 
       - name: Run tests
-        run: bundle exec rspec
+        run: |
+          echo "Running tests with GOOGLE_APPLICATION_CREDENTIALS set to $GOOGLE_APPLICATIONS_CREDENTIALS"
+          bundle exec rspec
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:password@localhost:5432/vegetable_service_test
-          GOOGLE_APPLICATION_CREDENTIALS: $(pwd)/google-credentials.json
 
       - name: Run RuboCop
         run: bundle exec rubocop
