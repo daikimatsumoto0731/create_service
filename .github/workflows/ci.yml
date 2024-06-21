@@ -51,6 +51,7 @@ jobs:
       - name: Set up environment variables
         run: |
           echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}" > google-credentials.json
+          cat google-credentials.json
         env:
           GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}
 
@@ -66,7 +67,7 @@ jobs:
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:password@localhost:5432/vegetable_service_test
-          GOOGLE_APPLICATIONS_CREDENTIALS: google-credentials.json
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}
 
       - name: Run RuboCop
         run: bundle exec rubocop
