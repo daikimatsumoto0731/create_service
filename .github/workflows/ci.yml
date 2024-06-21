@@ -57,21 +57,21 @@ jobs:
 
       - name: Verify environment variables
         run: |
-          echo "GOOGLE_APPLICATION_CREDENTIALS_JSON:"
-          echo $GOOGLE_APPLICATION_CREDENTIALS_JSON
+          echo "GOOGLE_APPLICATION_CREDENTIALS_JSON length:"
+          echo ${#GOOGLE_APPLICATION_CREDENTIALS_JSON}
           echo "GOOGLE_APPLICATION_CREDENTIALS:"
-          echo $GOOGLE_APPLICATIONS_CREDENTIALS
+          echo $GOOGLE_APPLICATION_CREDENTIALS
 
       - name: Debug environment variables
         run: |
           echo "GOOGLE_APPLICATION_CREDENTIALS content:"
           cat google-credentials.json
           echo "GOOGLE_APPLICATION_CREDENTIALS:"
-          echo $GOOGLE_APPLICATIONS_CREDENTIALS
+          echo $GOOGLE_APPLICATION_CREDENTIALS
 
       - name: Run tests
         run: |
-          echo "Running tests with GOOGLE_APPLICATION_CREDENTIALS set to $GOOGLE_APPLICATIONS_CREDENTIALS"
+          echo "Running tests with GOOGLE_APPLICATION_CREDENTIALS set to $GOOGLE_APPLICATION_CREDENTIALS"
           bundle exec rspec
         env:
           RAILS_ENV: test
