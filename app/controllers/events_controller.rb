@@ -33,7 +33,7 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    @event.destroy # @eventをインスタンス変数に修正
+    @event.destroy
     head :no_content
   end
 

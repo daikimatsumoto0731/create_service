@@ -160,14 +160,17 @@ $(document).ready(function() {
   // モーダルを表示するボタンがクリックされたときの処理
   $('[data-toggle="modal"]').on('click', function() {
     var targetModal = $(this).data('target');
+    var vegetable = $(this).data('vegetable');
+    $(targetModal).data('vegetable', vegetable); // モーダルにデータ属性を設定
     $(targetModal).modal('show');
   });
 
   // 画像を分析するモーダル表示用のボタンがクリックされたときの処理
   $('#analyzeImageModal').on('show.bs.modal', function(event) {
-    var button = $(event.relatedTarget); // 適切なボタンを取得
     var modal = $(this);
-    modal.find('.modal-body input').val('');
+    var vegetableName = modal.data('vegetable'); // データ属性から野菜名を取得
+    console.log("Vegetable name from modal data: ", vegetableName); // デバッグ用ログ
+    modal.find('#vegetable_name').val(vegetableName); // 野菜名フィールドに値を設定
   });
 
   $('#analyze_image_form').on('submit', function(e) {
