@@ -191,4 +191,9 @@ $(document).ready(function() {
       }
     });
   });
+
+  // モーダルを閉じるリンクの処理
+  $(document).on('click', '[data-dismiss="modal"]', function() {
+    $('#analyzeImageModal').modal('hide');
+  });
 });

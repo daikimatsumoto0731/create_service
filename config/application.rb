@@ -7,7 +7,7 @@ require 'tempfile'
 
 Bundler.require(*Rails.groups)
 
-Dotenv::Railtie.load if defined?(Dotenv::Railtie)
+Dotenv::Rails.load if defined?(Dotenv::Rails)
 
 module VegetableService
   class Application < Rails::Application
@@ -20,15 +20,21 @@ module VegetableService
     config.encoding = 'utf-8'
 
     # Google Cloud credentialsを一時ファイルに書き込む設定
-    if ENV['GOOGLE_APPLICATION_CREDENTIALS_JSON']
-      temp_file = Tempfile.new('google_application_credentials')
-      temp_file.write(ENV['GOOGLE_APPLICATION_CREDENTIALS_JSON'])
-      temp_file.rewind
-      ENV['GOOGLE_APPLICATION_CREDENTIALS'] = temp_file.path
-      # デバッグ用の標準出力
-      puts "Google Application Credentials set at: #{ENV['GOOGLE_APPLICATION_CREDENTIALS']}"
-    else
-      puts "GOOGLE_APPLICATION_CREDENTIALS_JSON is not set"
+    config.before_initialize do
+      if ENV['GOOGLE_APPLICATION_CREDENTIALS_JSON']
+        temp_file = Tempfile.new('google_application_credentials')
+        temp_file.write(ENV['GOOGLE_APPLICATION_CREDENTIALS_JSON'])
+        temp_file.rewind
+        ENV['GOOGLE_APPLICATION_CREDENTIALS'] = temp_file.path
+      end
+    end
+
+    config.after_initialize do
+      if ENV['GOOGLE_APPLICATION_CREDENTIALS_JSON']
+        Rails.logger.info "Google Application Credentials set at: #{ENV.fetch('GOOGLE_APPLICATION_CREDENTIALS', nil)}"
+      else
+        Rails.logger.info 'GOOGLE_APPLICATION_CREDENTIALS_JSON is not set'
+      end
     end
   end
 end
