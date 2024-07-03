@@ -9,6 +9,7 @@ abort('The Rails environment is running in production mode!') if Rails.env.produ
 require 'rspec/rails'
 require 'factory_bot_rails'
 require 'shoulda/matchers'
+require 'webmock/rspec'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -90,3 +91,6 @@ Shoulda::Matchers.configure do |config|
     with.library :rails
   end
 end
+
+# WebMockを設定
+WebMock.disable_net_connect!(allow_localhost: true)
