@@ -30,7 +30,7 @@ jobs:
         run: |
           # Springを無効化
           export DISABLE_SPRING=true
-          cp config/database.yml.ci config/database.yml
+          cp config/database.yml config/database.yml
           bin/rails db:create db:schema:load
         env:
           RAILS_ENV: test
