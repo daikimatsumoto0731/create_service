@@ -7,26 +7,31 @@
 
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  <%= favicon_link_tag('favicon.ico') %>
+  <%= favicon_link_tag 'favicon.ico' %>
 
+  <!-- OGPメタタグの追加 -->
   <meta property="og:title" content="無NO薬〜野菜栽培〜">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="<%= root_url %>">
-  <meta property="og:image" content="<%= image_url('top-log.png') %>">
+  <meta property="og:url" content="https://www.homegarden-harvest.com/">
+  <meta property="og:image" content="<%= asset_path('top-log.png') %>">
   <meta property="og:description" content="自宅で簡単に始める無農薬野菜作り。スケジュール管理とアドバイスで、初心者でも安心。">
   <meta property="og:site_name" content="無NO薬〜野菜栽培〜">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="無NO薬〜野菜栽培〜">
   <meta name="twitter:description" content="自宅で簡単に始める無農薬野菜作り。スケジュール管理とアドバイスで、初心者でも安心。">
-  <meta name="twitter:image" content="<%= image_url('top-log.png') %>">
+  <meta name="twitter:image" content="<%= asset_path('top-vegetable.jpg') %>">
 </head>
 
 <body>
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0" nonce="your_nonce_value"></script>
+
   <% flash.each do |key, message| %>
     <div class="alert <%= 'alert-success' if key == 'notice' %> <%= 'alert-danger' if key == 'alert' %>"> <%= message %></div>
   <% end %>
   <%= yield %>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <%= javascript_include_tag 'top', 'data-turbolinks-track': 'reload' %>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </body>
 </html>

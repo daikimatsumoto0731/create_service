@@ -16,6 +16,7 @@
 //= require fullcalendar
 //= require bootstrap
 //= require custom
+//= require top
 //= vegetable_selection
 //= require harvest_chart
 //= mypage_toggle
