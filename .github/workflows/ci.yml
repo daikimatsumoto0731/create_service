@@ -28,9 +28,10 @@ jobs:
 
       - name: Set up database
         run: |
+          # Springを無効化
+          export DISABLE_SPRING=true
           cp config/database.yml.ci config/database.yml
-          bin/rails db:create
-          bin/rails db:schema:load
+          bin/rails db:create db:schema:load
         env:
           RAILS_ENV: test
 
@@ -40,12 +41,6 @@ jobs:
           echo "GOOGLE_APPLICATION_CREDENTIALS=$GITHUB_WORKSPACE/google-credentials.json" >> $GITHUB_ENV
 
       - name: Verify environment variables
-        run: |
-          echo "GOOGLE_APPLICATION_CREDENTIALS content:"
-          cat $GITHUB_WORKSPACE/google-credentials.json
-          echo "GOOGLE_APPLICATION_CREDENTIALS: $GOOGLE_APPLICATION_CREDENTIALS"
-
-      - name: Debug environment variables
         run: |
           echo "GOOGLE_APPLICATION_CREDENTIALS content:"
           cat $GITHUB_WORKSPACE/google-credentials.json
