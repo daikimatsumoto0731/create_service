@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - create_54
+  pull_request:
+    branches:
+      - create_54
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1.4
+
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+
+      - name: Set up database
+        run: |
+          # Springを無効化
+          export DISABLE_SPRING=true
+          bin/rails db:create db:schema:load
+        env:
+          RAILS_ENV: test
+
+      - name: Set up environment variables
+        run: |
+          echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" > $GITHUB_WORKSPACE/google-credentials.json
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$GITHUB_WORKSPACE/google-credentials.json" >> $GITHUB_ENV
+
+      - name: Verify environment variables
+        run: |
+          echo "GOOGLE_APPLICATION_CREDENTIALS content:"
+          cat $GITHUB_WORKSPACE/google-credentials.json
+          echo "GOOGLE_APPLICATION_CREDENTIALS: $GOOGLE_APPLICATION_CREDENTIALS"
+
+      - name: Run tests
+        run: |
+          echo "Running tests with GOOGLE_APPLICATION_CREDENTIALS set to $GOOGLE_APPLICATION_CREDENTIALS"
+          bundle exec rspec
+        env:
+          RAILS_ENV: test
