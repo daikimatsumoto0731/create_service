@@ -20,6 +20,7 @@ gem 'jquery-rails'
 gem 'json'
 gem 'line-bot-api'
 gem 'momentjs-rails'
+gem "meta-tags"
 gem 'net-http'
 gem 'omniauth-line', '<= 2.1.2'
 gem 'omniauth-rails_csrf_protection'
