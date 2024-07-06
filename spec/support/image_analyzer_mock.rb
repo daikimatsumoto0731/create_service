@@ -7,19 +7,14 @@ class ImageAnalyzerMock
   end
 
   def self.log_analysis(image_path, vegetable_name)
-    Rails.logger.info(
-      "Mocked ImageAnalyzer#analyze called with image_path: #{image_path}, vegetable_name: #{vegetable_name}"
-    )
+    Rails.logger.info("Mocked ImageAnalyzer#analyze called with image_path: #{image_path}, vegetable_name: #{vegetable_name}")
   end
 
   def self.analysis_result(vegetable_name)
+    Rails.logger.info("Returning mock analysis result for vegetable: #{vegetable_name}")
     {
-      status: 'success',
-      result: {
-        vegetable: vegetable_name,
-        status: '良好',
-        tips: '水やりを適度に行ってください。'
-      }
+      labels: ["Label 1", "Label 2", "Label 3"],
+      translated_vegetable_name: vegetable_name
     }
   end
 end
