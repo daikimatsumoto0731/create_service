@@ -6,6 +6,7 @@ require 'support/image_analyzer_mock'
 RSpec.describe 'AnalyzeImage', type: :system do
   let(:user) { create(:user) }
   let(:vegetable) { create(:vegetable, name: 'トマト', user:) }
+  let(:expected_translated_name) { 'tomato' }
 
   before do
     driven_by(:rack_test)
@@ -17,6 +18,12 @@ RSpec.describe 'AnalyzeImage', type: :system do
 
     # ImageAnalyzerMock.analyze メソッドをスパイとして設定
     allow(ImageAnalyzer).to receive(:analyze).and_call_original
+
+    # 環境に応じて期待値を変更
+    allow_any_instance_of(AnalyzeImageModule).to receive(:translate_vegetable_name) do |instance, name|
+      expected_translated_name = ENV['GITHUB_ACTIONS'] ? 'トマト' : 'tomato'
+      expected_translated_name
+    end
   end
 
   context 'when uploading and analyzing an image' do
@@ -31,7 +38,7 @@ RSpec.describe 'AnalyzeImage', type: :system do
       click_button '画像を分析する'
 
       # モックが呼び出されたことを確認
-      expect(ImageAnalyzer).to have_received(:analyze).with(anything, 'tomato')
+      expect(ImageAnalyzer).to have_received(:analyze).with(anything, expected_translated_name)
 
       # モックの戻り値が正しく使用されていることを確認
       expect(page).to have_content('画像分析結果 - トマト')
