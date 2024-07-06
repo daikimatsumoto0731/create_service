@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  build:
+ build:
     runs-on: ubuntu-latest
 
     steps:
@@ -37,17 +37,18 @@ jobs:
       - name: Set up environment variables
         run: |
           echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}" > $GITHUB_WORKSPACE/google-credentials.json
-          echo "GOOGLE_APPLICATION_CREDENTIALS_JSON=$GITHUB_WORKSPACE/google-credentials.json" >> $GITHUB_ENV
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$GITHUB_WORKSPACE/google-credentials.json" >> $GITHUB_ENV
 
       - name: Verify environment variables
         run: |
-          echo "GOOGLE_APPLICATION_CREDENTIALS_JSON content:"
+          echo "GOOGLE_APPLICATION_CREDENTIALS content:"
           cat $GITHUB_WORKSPACE/google-credentials.json
-          echo "GOOGLE_APPLICATION_CREDENTIALS_JSON: $GOOGLE_APPLICATION_CREDENTIALS_JSON"
+          echo "GOOGLE_APPLICATION_CREDENTIALS: $GOOGLE_APPLICATION_CREDENTIALS"
 
       - name: Run tests
         run: |
-          echo "Running tests with GOOGLE_APPLICATION_CREDENTIALS_JSON set to $GOOGLE_APPLICATION_CREDENTIALS_JSON"
+          echo "Running tests with GOOGLE_APPLICATION_CREDENTIALS set to $GOOGLE_APPLICATION_CREDENTIALS"
           bundle exec rspec
         env:
           RAILS_ENV: test
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}
