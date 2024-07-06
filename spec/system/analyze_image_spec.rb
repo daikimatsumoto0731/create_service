@@ -27,6 +27,8 @@ RSpec.describe 'AnalyzeImage', type: :system do
 
       click_button '画像を分析する'
 
+      Rails.logger.info "Page content: #{page.body}"  # ページ内容をログに出力
+
       expect(page).to have_content('画像分析結果 - トマト')
       expect(page).to have_content('野菜の状態')
       expect(page).to have_content('育て方のポイント')
