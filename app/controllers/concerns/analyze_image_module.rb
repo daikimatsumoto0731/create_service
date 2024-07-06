@@ -3,13 +3,7 @@
 module AnalyzeImageModule
   extend ActiveSupport::Concern
 
-  included do
-    require 'google/cloud/vision'
-  end
-
   def analyze_image
-    Rails.logger.info("Analyze image method called")
-
     image = params[:image]
     vegetable_name = params[:vegetable_name]
 
@@ -40,11 +34,24 @@ module AnalyzeImageModule
     translated_vegetable_name = translate_vegetable_name(vegetable_name)
     Rails.logger.info "Translated vegetable name: #{translated_vegetable_name}"
 
-    # Mockの呼び出しを確認するためのログ出力
-    Rails.logger.info "Analyzing image using ImageAnalyzer with image_path: #{image_path}, vegetable_name: #{translated_vegetable_name}"
+    credentials = JSON.parse(ENV.fetch('GOOGLE_APPLICATION_CREDENTIALS_JSON', nil))
+    vision = Google::Cloud::Vision.image_annotator do |config|
+      config.credentials = credentials
+    end
 
-    response = ImageAnalyzer.analyze(image_path, translated_vegetable_name)
-    [response[:labels], translated_vegetable_name]
+    response = vision.label_detection image: image_path
+    extract_labels(response, translated_vegetable_name)
+  end
+
+  def extract_labels(response, translated_vegetable_name)
+    if response&.responses && !response.responses.empty?
+      labels = response.responses[0].label_annotations.map(&:description)
+      Rails.logger.info "Labels detected: #{labels.join(', ')}"
+      [labels, translated_vegetable_name]
+    else
+      Rails.logger.error 'No labels were detected.'
+      nil
+    end
   end
 
   def process_analysis_results(labels, translated_vegetable_name)
