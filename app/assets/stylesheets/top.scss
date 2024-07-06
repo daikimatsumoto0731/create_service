@@ -9,7 +9,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px; // ヘッダーのパディングを小さくする
+    padding: 10px; // ヘッダーのパディングを小さくする
     position: fixed;
     top: 0;
     left: 0;
@@ -332,7 +332,7 @@
     padding-top: 80px; // デスクトップでは80pxの上部スペースを確保
 
     .header-top, .footer-top {
-      padding: 20px; // ヘッダーとフッターのパディングを最大に
+      padding: 15px; // ヘッダーとフッターのパディングを最大に
     }
 
     .login-form-container-top {
