@@ -5,15 +5,15 @@ require 'support/image_analyzer_mock'  # モックを読み込む
 
 RSpec.describe 'AnalyzeImage', type: :system do
   let(:user) { create(:user) }
-  let(:vegetable) { create(:vegetable, name: 'トマト', user:) }
+  let(:vegetable) { create(:vegetable, name: 'ニンジン', user:) }
 
   before do
     driven_by(:rack_test)
     sign_in user
     visit event_path(vegetable.id)
 
-    # テスト内でモックを使用
-    allow(ImageAnalyzerMock).to receive(:analyze).and_call_original
+    # モックを直接使用する
+    allow_any_instance_of(EventsController).to receive(:analyze_image).and_call_original
   end
 
   context 'when uploading and analyzing an image' do
@@ -27,7 +27,10 @@ RSpec.describe 'AnalyzeImage', type: :system do
 
       click_button '画像を分析する'
 
-      expect(page).to have_content('画像分析結果 - トマト')
+      # ここでログを確認する
+      puts "Current page content: #{page.text}"
+
+      expect(page).to have_content('画像分析結果 - ニンジン')
       expect(page).to have_content('野菜の状態')
       expect(page).to have_content('育て方のポイント')
     end

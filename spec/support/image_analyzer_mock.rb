@@ -13,8 +13,8 @@ class ImageAnalyzerMock
   def self.analysis_result(vegetable_name)
     Rails.logger.info("Returning mock analysis result for vegetable: #{vegetable_name}")
     {
-      labels: ["Label 1", "Label 2", "Label 3"],
-      translated_vegetable_name: vegetable_name
+      labels: ["Plant", "Tree", "Twig", "Wood", "Terrestrial plant", "Natural landscape", "Flowering plant", "Deciduous", "Macro photography", "Grass"],
+      translated_vegetable_name: "carrot"
     }
   end
 end

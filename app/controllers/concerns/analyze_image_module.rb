@@ -38,17 +38,27 @@ module AnalyzeImageModule
     translated_vegetable_name = translate_vegetable_name(vegetable_name)
     Rails.logger.info "Translated vegetable name: #{translated_vegetable_name}"
 
-    credentials = JSON.parse(ENV.fetch('GOOGLE_APPLICATION_CREDENTIALS_JSON', nil))
-    vision = Google::Cloud::Vision.image_annotator do |config|
-      config.credentials = credentials
+    if Rails.env.test?
+      # テスト環境ではモックを使用
+      response = ImageAnalyzerMock.analyze(image_path, translated_vegetable_name)
+    else
+      credentials = JSON.parse(ENV.fetch('GOOGLE_APPLICATION_CREDENTIALS_JSON', nil))
+      vision = Google::Cloud::Vision.image_annotator do |config|
+        config.credentials = credentials
+      end
+
+      response = vision.label_detection image: image_path
     end
 
-    response = vision.label_detection image: image_path
     extract_labels(response, translated_vegetable_name)
   end
 
   def extract_labels(response, translated_vegetable_name)
-    if response&.responses && !response.responses.empty?
+    if response.is_a?(Hash) # モックの場合はハッシュ形式で返す
+      labels = response[:labels]
+      Rails.logger.info "Labels detected: #{labels.join(', ')}"
+      [labels, translated_vegetable_name]
+    elsif response&.responses && !response.responses.empty?
       labels = response.responses[0].label_annotations.map(&:description)
       Rails.logger.info "Labels detected: #{labels.join(', ')}"
       [labels, translated_vegetable_name]

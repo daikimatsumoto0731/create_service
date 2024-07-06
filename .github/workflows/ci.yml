@@ -28,26 +28,14 @@ jobs:
 
       - name: Set up database
         run: |
-          # Springを無効化
           export DISABLE_SPRING=true
           bin/rails db:create db:schema:load
         env:
           RAILS_ENV: test
 
-      - name: Set up environment variables
-        run: |
-          echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" > $GITHUB_WORKSPACE/google-credentials.json
-          echo "GOOGLE_APPLICATION_CREDENTIALS=$GITHUB_WORKSPACE/google-credentials.json" >> $GITHUB_ENV
-
-      - name: Verify environment variables
-        run: |
-          echo "GOOGLE_APPLICATION_CREDENTIALS content:"
-          cat $GITHUB_WORKSPACE/google-credentials.json
-          echo "GOOGLE_APPLICATION_CREDENTIALS: $GOOGLE_APPLICATION_CREDENTIALS"
-
       - name: Run tests
         run: |
-          echo "Running tests with GOOGLE_APPLICATION_CREDENTIALS set to $GOOGLE_APPLICATION_CREDENTIALS"
+          echo "Running tests"
           bundle exec rspec
         env:
           RAILS_ENV: test
