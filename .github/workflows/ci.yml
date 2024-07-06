@@ -33,9 +33,23 @@ jobs:
         env:
           RAILS_ENV: test
 
+      - name: Set up environment variables
+        run: |
+          echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" > $GITHUB_WORKSPACE/google-credentials.json
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$GITHUB_WORKSPACE/google-credentials.json" >> $GITHUB_ENV
+          echo "PERENUAL_API_KEY=${{ secrets.PERENUAL_API_KEY }}" >> $GITHUB_ENV
+
+      - name: Verify environment variables
+        run: |
+          echo "GOOGLE_APPLICATION_CREDENTIALS content:"
+          cat $GITHUB_WORKSPACE/google-credentials.json
+          echo "GOOGLE_APPLICATION_CREDENTIALS: $GOOGLE_APPLICATION_CREDENTIALS"
+          echo "PERENUAL_API_KEY: $PERENUAL_API_KEY"
+
       - name: Run tests
         run: |
           echo "Running tests"
           bundle exec rspec
         env:
           RAILS_ENV: test
+          GOOGLE_APPLICATION_CREDENTIALS: $GITHUB_WORKSPACE/google-credentials.json
