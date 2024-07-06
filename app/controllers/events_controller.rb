@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class EventsController < ApplicationController
-  before_action :set_vegetable, only: %i[show analyze_image]
+  before_action :set_vegetable, only: %i[show]
   before_action :set_event, only: [:destroy]
 
   include AnalyzeImageModule
@@ -39,15 +39,6 @@ class EventsController < ApplicationController
 
   def new_analyze_image
     # ページの初期表示用
-  end
-
-  def analyze_image
-    Rails.logger.info "analyze_image action called with params: #{params.inspect}"
-    super
-  rescue StandardError => e
-    Rails.logger.error "Error in analyze_image: #{e.message}"
-    @error_message = "画像の分析に失敗しました。エラー: #{e.message}"
-    render 'analyze_image'
   end
 
   private

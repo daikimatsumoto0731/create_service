@@ -62,8 +62,6 @@ module AnalyzeImageModule
     @care_guide = PerenualApiClient.fetch_species_care_guide(translated_vegetable_name)
     @labels = labels
     @vegetable_status = determine_vegetable_status(labels)
-    Rails.logger.info "Care guide: #{@care_guide.inspect}"
-    Rails.logger.info "Vegetable status: #{@vegetable_status.inspect}"
     render 'analyze_image'
   end
 
