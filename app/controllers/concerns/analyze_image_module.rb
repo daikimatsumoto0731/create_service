@@ -3,6 +3,10 @@
 module AnalyzeImageModule
   extend ActiveSupport::Concern
 
+  included do
+    require 'google/cloud/vision'
+  end
+
   def analyze_image
     image = params[:image]
     vegetable_name = params[:vegetable_name]
