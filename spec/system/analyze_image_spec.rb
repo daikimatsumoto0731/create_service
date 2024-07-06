@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require 'support/image_analyzer_mock' # モックを読み込む
+require 'support/image_analyzer_mock'
 
 RSpec.describe 'AnalyzeImage', type: :system do
   let(:user) { create(:user) }
@@ -12,8 +12,8 @@ RSpec.describe 'AnalyzeImage', type: :system do
     sign_in user
     visit event_path(vegetable.id)
 
-    # テスト内でモックを使用
-    allow(ImageAnalyzerMock).to receive(:analyze).and_call_original
+    # ImageAnalyzerをモックに置き換える
+    stub_const("ImageAnalyzer", ImageAnalyzerMock)
   end
 
   context 'when uploading and analyzing an image' do
