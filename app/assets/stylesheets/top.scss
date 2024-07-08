@@ -9,7 +9,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px; // ヘッダーのパディングを小さくする
+    padding: 10px; // ヘッダーのパディングを小さくする
     position: fixed;
     top: 0;
     left: 0;
@@ -96,6 +96,35 @@
       p {
         font-size: 24px;
       }
+    }
+
+    /* シェアボタンのスタイル */
+    .share-buttons {
+      display: flex;
+      gap: 20px; /* ボタン間の間隔を広げる */
+      margin-top: 40px; /* シェアボタンの上部マージンを増やす */
+      justify-content: center; /* ボタンを中央揃えにする */
+    }
+
+    .share-buttons a {
+      display: inline-block;
+      text-decoration: none;
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+
+    .share-buttons img {
+      width: 64px; /* 画像の幅を大きくする */
+      height: 64px; /* 画像の高さを大きくする */
+      vertical-align: middle;
+    }
+
+    /* Twitterシェアボタンの大きさを調整 */
+    .twitter-share-button {
+      transform: scale(1.5); /* ボタンを1.5倍に拡大 */
+      transform-origin: center; /* 中央を基準に拡大 */
+      margin-right: 10px; /* LINEボタンとの間隔を確保 */
     }
   }
 
@@ -303,7 +332,7 @@
     padding-top: 80px; // デスクトップでは80pxの上部スペースを確保
 
     .header-top, .footer-top {
-      padding: 20px; // ヘッダーとフッターのパディングを最大に
+      padding: 15px; // ヘッダーとフッターのパディングを最大に
     }
 
     .login-form-container-top {

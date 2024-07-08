@@ -237,6 +237,8 @@ GEM
       net-smtp
     marcel (1.0.4)
     matrix (0.4.2)
+    meta-tags (2.21.0)
+      actionpack (>= 6.0.0, < 7.2)
     method_source (1.1.0)
     mini_mime (1.1.5)
     minitest (5.23.1)
@@ -480,6 +482,7 @@ DEPENDENCIES
   letter_opener
   line-bot-api
   listen (~> 3.5)
+  meta-tags
   momentjs-rails
   net-http
   omniauth-line (<= 2.1.2)

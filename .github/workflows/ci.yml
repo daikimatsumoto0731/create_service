@@ -3,10 +3,10 @@ name: CI
 on:
   push:
     branches:
-      - create_54
+      - main
   pull_request:
     branches:
-      - create_54
+      - main
 
 jobs:
   build:
@@ -28,7 +28,6 @@ jobs:
 
       - name: Set up database
         run: |
-          # Springを無効化
           export DISABLE_SPRING=true
           bin/rails db:create db:schema:load
         env:
@@ -38,16 +37,19 @@ jobs:
         run: |
           echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" > $GITHUB_WORKSPACE/google-credentials.json
           echo "GOOGLE_APPLICATION_CREDENTIALS=$GITHUB_WORKSPACE/google-credentials.json" >> $GITHUB_ENV
+          echo "PERENUAL_API_KEY=${{ secrets.PERENUAL_API_KEY }}" >> $GITHUB_ENV
 
       - name: Verify environment variables
         run: |
           echo "GOOGLE_APPLICATION_CREDENTIALS content:"
           cat $GITHUB_WORKSPACE/google-credentials.json
           echo "GOOGLE_APPLICATION_CREDENTIALS: $GOOGLE_APPLICATION_CREDENTIALS"
+          echo "PERENUAL_API_KEY: $PERENUAL_API_KEY"
 
       - name: Run tests
         run: |
-          echo "Running tests with GOOGLE_APPLICATION_CREDENTIALS set to $GOOGLE_APPLICATION_CREDENTIALS"
+          echo "Running tests"
           bundle exec rspec
         env:
           RAILS_ENV: test
+          GOOGLE_APPLICATION_CREDENTIALS: $GITHUB_WORKSPACE/google-credentials.json
