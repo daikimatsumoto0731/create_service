@@ -38,34 +38,35 @@ module AnalyzeImageModule
     translated_vegetable_name = translate_vegetable_name(vegetable_name)
     Rails.logger.info "Translated vegetable name: #{translated_vegetable_name}"
 
+    response = fetch_image_analysis_response(image_path, translated_vegetable_name)
+
+    extract_labels(response, translated_vegetable_name)
+  end
+
+  def fetch_image_analysis_response(image_path, translated_vegetable_name)
     if Rails.env.test?
-      # テスト環境ではモックを使用
-      response = ImageAnalyzerMock.analyze(image_path, translated_vegetable_name)
+      ImageAnalyzerMock.analyze(image_path, translated_vegetable_name)
     else
       credentials = JSON.parse(ENV.fetch('GOOGLE_APPLICATION_CREDENTIALS_JSON', nil))
       vision = Google::Cloud::Vision.image_annotator do |config|
         config.credentials = credentials
       end
 
-      response = vision.label_detection image: image_path
+      vision.label_detection image: image_path
     end
-
-    extract_labels(response, translated_vegetable_name)
   end
 
   def extract_labels(response, translated_vegetable_name)
-    if response.is_a?(Hash) # モックの場合はハッシュ形式で返す
-      labels = response[:labels]
-      Rails.logger.info "Labels detected: #{labels.join(', ')}"
-      [labels, translated_vegetable_name]
-    elsif response&.responses && !response.responses.empty?
-      labels = response.responses[0].label_annotations.map(&:description)
-      Rails.logger.info "Labels detected: #{labels.join(', ')}"
-      [labels, translated_vegetable_name]
-    else
-      Rails.logger.error 'No labels were detected.'
-      nil
-    end
+    labels = if response.is_a?(Hash) # モックの場合はハッシュ形式で返す
+               response[:labels]
+             elsif response&.responses && !response.responses.empty?
+               response.responses[0].label_annotations.map(&:description)
+             else
+               []
+             end
+
+    Rails.logger.info "Labels detected: #{labels.join(', ')}"
+    [labels, translated_vegetable_name]
   end
 
   def process_analysis_results(labels, translated_vegetable_name)
