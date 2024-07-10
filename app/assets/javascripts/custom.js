@@ -183,8 +183,9 @@ $(document).ready(function() {
       contentType: false,
       processData: false,
       success: function(data) {
-        $('#analyzeImageModal .modal-body').html(data);
-        $('#analyzeImageModal').modal('show');
+        $('#analyzeResultModal .modal-body').html(data);
+        $('#analyzeResultModal').modal('show');
+        $('#analyzeImageModal').modal('hide'); // アップロードモーダルを閉じる
       },
       error: function(jqXHR, textStatus, errorThrown) {
         alert('画像の分析に失敗しました: ' + textStatus);
@@ -194,6 +195,6 @@ $(document).ready(function() {
 
   // モーダルを閉じるリンクの処理
   $(document).on('click', '[data-dismiss="modal"]', function() {
-    $('#analyzeImageModal').modal('hide');
+    $(this).closest('.modal').modal('hide');
   });
 });

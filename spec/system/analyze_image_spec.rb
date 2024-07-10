@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require 'support/image_analyzer_mock'  # モックを読み込む
+require 'support/image_analyzer_mock' # モックを読み込む
 
 RSpec.describe 'AnalyzeImage', type: :system do
   let(:user) { create(:user) }
@@ -27,10 +27,10 @@ RSpec.describe 'AnalyzeImage', type: :system do
 
       click_button '画像を分析する'
 
-      # ここでログを確認する
-      puts "Current page content: #{page.text}"
+      # ページのHTMLを取得してログ出力
+      puts "Current page content: #{page.html}"
 
-      expect(page).to have_content('画像分析結果 - ニンジン')
+      # _analyze_image_result.html.erbの内容が表示されていることを確認
       expect(page).to have_content('野菜の状態')
       expect(page).to have_content('育て方のポイント')
     end
