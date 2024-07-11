@@ -1,3 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  background-image: url('mypage.jpg'); /* 背景画像を追加 */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
 .header-mypage {
   background-color: #09f409;
   display: flex;
@@ -5,6 +20,7 @@
   padding: 30px;
   border-bottom: 3px solid #09f409;
   justify-content: space-between;
+  width: 100%;
 }
 
 .header-mypage h1 {
@@ -29,7 +45,6 @@
   border-radius: 5px;
   text-decoration: none;
   font-weight: bold;
-  margin-left: 10px;
 }
 
 .back-to-top-link:hover, .logout-link:hover {
@@ -45,14 +60,14 @@
 .explanation-text {
   font-size: 18px;
   color: #333;
-  background-color: #e0ffe0;
+  background-color: rgba(255, 255, 255, 0.9); /* 背景を少し透明に */
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 10px;
   margin-bottom: 40px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ボックスシャドウを追加 */
   text-align: center;
-  line-height: 1.6;
-  font-family: 'Arial', sans-serif;
+  line-height: 1.8; /* 行間を広く */
+  font-family: 'Lato', sans-serif; /* フォントをLatoに変更 */
   font-weight: 500;
   max-width: 800px;
   margin-left: auto;
@@ -174,25 +189,6 @@
   text-decoration: underline;
 }
 
-/* LINE通知設定リンクのスタイル */
-.line-notification-link-mypage {
-  background-color: white;
-  border: none;
-  padding: 10px 15px;
-  color: black;
-  text-decoration: none;
-  text-align: center;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-  margin-right: auto;
-}
-
-.line-notification-link-mypage:hover {
-  background-color: #f0f0f0;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
-}
-
 /* プロフィール編集ボタンのスタイル */
 .profile-edit-link-mypage {
   background-color: white;
@@ -248,27 +244,296 @@
   font-size: 16px;
 }
 
+/* 天気情報のスタイル */
 .weather-info {
   margin-top: 20px;
   padding: 20px;
-  background-color: #f0f0f0;
-  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.9); /* 半透明の背景色 */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 軽いボックスシャドウ */
+  backdrop-filter: blur(10px); /* 背景をぼかす */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* 境界線を追加 */
+  font-family: 'Lato', sans-serif; /* フォントをLatoに変更 */
 }
 
 .weather-info h3 {
   color: #333;
+  font-size: 1.5em; /* フォントサイズを大きく */
+  margin-bottom: 15px;
+  text-align: center; /* 中央揃え */
 }
 
 .weather-details {
   display: flex;
   align-items: center;
+  justify-content: center; /* 中央揃え */
+  gap: 10px; /* アイコンとテキストの間にスペースを追加 */
+  font-size: 1.2em; /* フォントサイズを大きく */
 }
 
 .weather-details p {
-  margin-bottom: 10px;
+  margin: 0;
+  color: #555;
 }
 
 .weather-icon {
-  width: 40px;
+  width: 50px; /* アイコンの幅を調整 */
   height: auto;
+}
+
+.temperature-info {
+  font-size: 1.2em;
+  color: #555;
+  text-align: center; /* 中央揃え */
+  margin-top: 10px; /* 上にマージンを追加 */
+}
+
+.prefecture-missing {
+  font-size: 1.2em;
+  color: #d9534f; /* 赤色で注意を引く */
+  text-align: center; /* 中央揃え */
+}
+
+@media (max-width: 600px) {
+  html, body {
+    font-size: 0.75em; /* 基本フォントサイズをさらに小さく */
+  }
+
+  .header-mypage {
+    padding: 8px 10px; /* ヘッダーのパディングをさらに小さく */
+    flex-direction: row; /* ヘッダー内の要素を横並びに */
+    align-items: center; /* 中央揃えに */
+    justify-content: space-between; /* 要素間をスペースで分ける */
+    width: 100%; /* ヘッダーを全幅に */
+  }
+
+  .header-mypage h1 {
+    font-size: 1em; /* フォントサイズをさらに小さく */
+    margin: 0; /* マージンをなくす */
+    text-align: left; /* 左揃えに */
+    flex: 1; /* 残りのスペースを占める */
+  }
+
+  .header-links {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+  }
+
+  .back-to-top-link, .logout-link {
+    font-size: 0.75em; /* フォントサイズをさらに小さく */
+    padding: 6px 8px; /* ボタンのパディングをさらに小さく */
+  }
+
+  .content-wrapper {
+    padding: 15px 8px; /* パディングをさらに小さく */
+  }
+
+  .weather-info {
+    font-size: 0.75em; /* フォントサイズをさらに小さく */
+    padding: 10px; /* パディングを小さく */
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.8); /* 背景を少し透明に */
+  }
+
+  .weather-info h3 {
+    font-size: 1em; /* フォントサイズを小さく */
+    margin-bottom: 10px; /* マージンを小さく */
+  }
+
+  .weather-details p {
+    font-size: 0.75em; /* フォントサイズを小さく */
+    margin-bottom: 5px; /* マージンを小さく */
+  }
+
+  .weather-icon {
+    width: 30px; /* アイコンの幅を小さく */
+    height: auto; /* アスペクト比を維持 */
+    margin-left: 5px; /* アイコンとテキストの間にスペースを追加 */
+  }
+
+  .temperature-info, .prefecture-missing {
+    margin-top: 5px; /* マージンを追加 */
+  }
+
+  .button-container-mypage {
+    padding: 10px; /* パディングを小さく */
+  }
+
+  .explanation-text {
+    font-size: 0.75em; /* フォントサイズをさらに小さく */
+    padding: 10px; /* パディングをさらに小さく */
+    margin-bottom: 15px; /* マージンを小さく */
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.8); /* 背景を少し透明に */
+  }
+
+  .registered-vegetables {
+    padding: 10px; /* パディングをさらに小さく */
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.8); /* 背景を少し透明に */
+  }
+
+  .registered-vegetables h3 {
+    font-size: 1em; /* フォントサイズをさらに小さく */
+    margin-bottom: 10px; /* マージンを小さく */
+  }
+
+  .vegetable-item {
+    display: flex; /* アイテムを横並びに */
+    align-items: center; /* 中央揃えに */
+    justify-content: space-between; /* 要素間をスペースで分ける */
+    padding: 8px; /* パディングを調整 */
+    border-bottom: 1px solid #ddd;
+  }
+
+  .vegetable-item p {
+    font-size: 0.75em; /* フォントサイズをさらに小さく */
+    margin: 0 5px 0 0; /* 右マージンを追加 */
+    flex: 1; /* 残りのスペースを占める */
+  }
+
+  .vegetable-item .btn {
+    font-size: 0.75em; /* フォントサイズをさらに小さく */
+    padding: 6px 8px; /* パディングをさらに小さく */
+    margin-left: 2px; /* ボタン間のマージンをさらに狭く */
+  }
+
+  .btn-vegetable-mypage, .btn-toggle-graph {
+    font-size: 0.75em; /* フォントサイズをさらに小さく */
+    padding: 8px 10px; /* パディングを小さく */
+    margin-top: 10px; /* マージンを調整 */
+  }
+
+  .footer-mypage {
+    padding: 8px 10px; /* パディングを小さく */
+    font-size: 0.75em; /* フォントサイズを小さく */
+  }
+
+  .footer-mypage a {
+    margin: 0 5px; /* マージンを調整 */
+  }
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+  html, body {
+    font-size: 0.8em; /* 基本フォントサイズをさらに小さく */
+  }
+
+  .header-mypage {
+    padding: 10px 15px; /* ヘッダーのパディングをさらに小さく */
+  }
+
+  .header-mypage h1 {
+    font-size: 1em; /* フォントサイズをさらに小さく */
+    margin: 0; /* マージンをなくす */
+    text-align: left; /* 左揃えに */
+    flex: 1; /* 残りのスペースを占める */
+  }
+
+  .header-links {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+  }
+
+  .back-to-top-link, .logout-link {
+    font-size: 0.8em; /* フォントサイズをさらに小さく */
+    padding: 6px 8px; /* ボタンのパディングをさらに小さく */
+  }
+
+  .content-wrapper {
+    padding: 15px 8px; /* パディングをさらに小さく */
+  }
+
+  .weather-info {
+    font-size: 0.8em; /* フォントサイズをさらに小さく */
+    padding: 10px; /* パディングをさらに小さく */
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.8); /* 背景を少し透明に */
+  }
+
+  .weather-info h3 {
+    font-size: 1em; /* フォントサイズをさらに小さく */
+    margin-bottom: 10px; /* マージンを小さく */
+  }
+
+  .weather-details p {
+    font-size: 0.8em; /* フォントサイズをさらに小さく */
+    margin-bottom: 5px; /* マージンを小さく */
+  }
+
+  .weather-icon {
+    width: 30px; /* アイコンの幅をさらに小さく */
+    height: auto; /* アスペクト比を維持 */
+    margin-left: 5px; /* アイコンとテキストの間にスペースを追加 */
+  }
+
+  .temperature-info, .prefecture-missing {
+    margin-top: 5px; /* マージンを追加 */
+  }
+
+  .button-container-mypage {
+    padding: 10px; /* パディングをさらに小さく */
+  }
+
+  .explanation-text {
+    font-size: 0.8em; /* フォントサイズをさらに小さく */
+    padding: 10px; /* パディングをさらに小さく */
+    margin-bottom: 15px; /* マージンを小さく */
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.8); /* 背景を少し透明に */
+  }
+
+  .registered-vegetables {
+    padding: 10px; /* パディングをさらに小さく */
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.8); /* 背景を少し透明に */
+  }
+
+  .registered-vegetables h3 {
+    font-size: 1em; /* フォントサイズをさらに小さく */
+    margin-bottom: 10px; /* マージンを小さく */
+  }
+
+  .vegetable-item {
+    display: flex; /* アイテムを横並びに */
+    align-items: center; /* 中央揃えに */
+    justify-content: space-between; /* 要素間をスペースで分ける */
+    padding: 8px; /* パディングを調整 */
+    border-bottom: 1px solid #ddd;
+  }
+
+  .vegetable-item p {
+    font-size: 0.8em; /* フォントサイズをさらに小さく */
+    margin: 0 5px 0 0; /* 右マージンを追加 */
+    flex: 1; /* 残りのスペースを占める */
+  }
+
+  .vegetable-item .btn {
+    font-size: 0.8em; /* フォントサイズをさらに小さく */
+    padding: 6px 8px; /* パディングをさらに小さく */
+    margin-left: 3px; /* ボタン間のマージンをさらに狭く */
+  }
+
+  .btn-vegetable-mypage, .btn-toggle-graph {
+    font-size: 0.8em; /* フォントサイズをさらに小さく */
+    padding: 8px 10px; /* パディングをさらに小さく */
+    margin-top: 10px; /* マージンを調整 */
+  }
+
+  .footer-mypage {
+    padding: 8px 10px; /* パディングをさらに小さく */
+    font-size: 0.8em; /* フォントサイズをさらに小さく */
+  }
+
+  .footer-mypage a {
+    margin: 0 5px; /* マージンを調整 */
+  }
 }
