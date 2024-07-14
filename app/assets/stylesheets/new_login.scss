@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Noto+Sans+JP', sans-serif; // Google Fontsの適用
+  background-image: asset-url('new_login.jpg'); // 背景画像を設定
+  background-size: cover;
+  background-position: center;
+}
+
+.top-container-tops {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: 80px;
+
+  .header-top {
+    background-color: #09f409;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; // ロゴとサービス名の間を空ける
+    padding: 10px; // ヘッダーのパディングを小さくする
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+
+    .logo-circle-top {
+      height: 50px; // ロゴのサイズをさらに小さくする
+      width: 50px; // ロゴのサイズをさらに小さくする
+      border-radius: 50%;
+      background-image: asset-url('top-log.png');
+      background-size: cover;
+      margin-right: 20px; // ロゴとサービス名の間隔を広げる
+    }
+
+    .service-name-top {
+      font-size: 1.8rem; // サービス名のフォントサイズを小さくする
+      font-weight: bold;
+      color: white;
+      text-shadow: 2px 2px 4px black;
+      margin-right: auto;
+    }
+
+    .login-header-link .login-link {
+      font-size: 16px;
+      padding: 10px 15px;
+      background-color: yellow; // ログインボタンの背景色を黄色に変更
+      color: black;
+      text-decoration: none;
+      border-radius: 5px;
+
+      &:hover {
+        background-color: lighten(yellow, 10%);
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .login-form-container-top {
+    background-color: #ffffff; // 白の背景
+    padding: 1rem; // パディングを調整
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%; // フォームの幅を調整
+    max-width: 300px; // 最大幅を調整
+    height: auto; // 高さを自動調整
+    margin: 2rem auto; // 上下左右中央に
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h2 {
+      text-align: center;
+      color: #09f409;
+      margin-bottom: 10px;
+      font-size: 2rem; // フォントサイズを大きくする
+      font-weight: bold; // フォントを太くする
+    }
+
+    .field-top {
+      margin-bottom: 10px;
+
+      label, input, select {
+        display: block;
+        width: 100%;
+        margin-bottom: 0.5rem; // 余白を統一
+        font-size: 0.8rem; // フォントサイズを小さくする
+      }
+
+      input[type="email"], input[type="password"], input[type="text"], select {
+        padding: 6px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 0.8rem; // フォントサイズを小さくする
+      }
+    }
+
+    .actions-top {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px; // 要素間のギャップを設定
+      margin-top: 1rem;
+      text-align: center;
+
+      input[type="submit"] {
+        width: 100%; // 幅を100%に設定
+        padding: 8px;
+        font-size: 0.9rem; // フォントサイズを小さくする
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #09f409; // 会員登録ボタンの基本背景色を設定
+
+        &:hover {
+          background-color: darken(#09f409, 10%); // 会員登録ボタンのhover色を変更
+        }
+      }
+
+      .line-sign-up-button-top {
+        width: 100%; // 幅を100%に設定
+        padding: 8px;
+        font-size: 0.9rem; // フォントサイズを小さくする
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #09f409; // LINEボタンの基本背景色を設定
+        color: #ffffff; // LINEボタンの文字色を白に設定
+
+        &:hover {
+          background-color: darken(#09f409, 10%); // LINEボタンのhover色を変更
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .top-container-tops {
+    padding-top: 60px; // ヘッダーの高さに合わせて余白を調整
+
+    .header-top {
+      padding: 5px 10px; // 上下のパディングを狭くする
+      .logo-circle-top {
+        height: 40px; // ロゴのサイズを小さくする
+        width: 40px; // ロゴのサイズを小さくする
+        margin-right: 15px; // ロゴとサービス名の間隔を調整
+      }
+      .service-name-top {
+        font-size: 1rem; // サービス名のフォントサイズを小さくする
+      }
+      .login-header-link .login-link {
+        font-size: 0.8rem; // フォントサイズを小さくする
+        padding: 5px 10px; // パディングを小さくする
+      }
+    }
+
+    .login-form-container-top {
+      padding: 0.5rem; // パディングをさらに小さく調整
+      max-width: 85%; // 最大幅をさらに調整
+      margin: 1rem auto; // 上下左右中央に
+
+      h2 {
+        font-size: 1.2rem; // 見出しのフォントサイズをさらに小さくする
+      }
+
+      .field-top {
+        label, input, select {
+          font-size: 0.7rem; // フォントサイズをさらに小さくする
+        }
+        input[type="email"], input[type="password"], input[type="text"], select {
+          padding: 4px; // パディングをさらに小さくする
+        }
+      }
+
+      .actions-top {
+        gap: 8px; // 要素間のギャップをさらに調整
+        input[type="submit"], .line-sign-up-button-top {
+          padding: 6px; // パディングをさらに小さくする
+          font-size: 0.8rem; // フォントサイズをさらに小さくする
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+  .top-container-tops {
+    padding-top: 70px; // ヘッダーの高さに合わせて余白を調整
+
+    .header-top {
+      padding: 8px 16px; // ヘッダーのパディングを調整
+      .logo-circle-top {
+        height: 40px; // ロゴのサイズをさらに調整
+        width: 40px; // ロゴのサイズをさらに調整
+        margin-right: 20px; // ロゴとサービス名の間隔を調整
+      }
+      .service-name-top {
+        font-size: 1.2rem; // サービス名のフォントサイズをさらに調整
+      }
+      .login-header-link .login-link {
+        font-size: 0.8rem; // フォントサイズをさらに調整
+        padding: 6px 10px; // パディングをさらに調整
+      }
+    }
+
+    .login-form-container-top {
+      padding: 0.6rem; // パディングをさらに調整
+      max-width: 50%; // 最大幅をさらに調整
+      margin: 1.5rem auto; // 上下左右中央に
+
+      h2 {
+        font-size: 1.4rem; // 見出しのフォントサイズをさらに調整
+      }
+
+      .field-top {
+        label, input, select {
+          font-size: 0.7rem; // フォントサイズをさらに調整
+        }
+        input[type="email"], input[type="password"], input[type="text"], select {
+          padding: 4px; // パディングをさらに調整
+        }
+      }
+
+      .actions-top {
+        gap: 8px; // 要素間のギャップをさらに調整
+        input[type="submit"], .line-sign-up-button-top {
+          padding: 6px; // パディングをさらに調整
+          font-size: 0.8rem; // フォントサイズをさらに調整
+        }
+      }
+    }
+  }
+}
