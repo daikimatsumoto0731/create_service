@@ -49,5 +49,7 @@ ja:
           attributes:
             name:
               blank: "名前を入力してください"
+              too_short: "名前は%{count}文字以上で入力してください"
+              too_long: "名前は%{count}文字以下で入力してください"
             sowing_date:
               blank: "種まき日を入力してください"

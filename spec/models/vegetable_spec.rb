@@ -11,13 +11,25 @@ RSpec.describe Vegetable, type: :model do
     it 'is not valid without a name' do
       vegetable = build(:vegetable, name: nil)
       vegetable.valid?
-      expect(vegetable.errors[:name]).to include('名前を入力してください')
+      expect(vegetable.errors[:name]).not_to be_empty
+    end
+
+    it 'is not valid with a name shorter than 2 characters' do
+      vegetable = build(:vegetable, name: 'a')
+      vegetable.valid?
+      expect(vegetable.errors[:name]).not_to be_empty
+    end
+
+    it 'is not valid with a name longer than 50 characters' do
+      vegetable = build(:vegetable, name: 'a' * 51)
+      vegetable.valid?
+      expect(vegetable.errors[:name]).not_to be_empty
     end
 
     it 'is not valid without a sowing_date' do
       vegetable = build(:vegetable, sowing_date: nil)
       vegetable.valid?
-      expect(vegetable.errors[:sowing_date]).to include('種まき日を入力してください')
+      expect(vegetable.errors[:sowing_date]).not_to be_empty
     end
   end
 

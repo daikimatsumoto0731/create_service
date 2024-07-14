@@ -24,8 +24,14 @@
       <p>登録ボタンを押して次のステップに進んでください。</p>
     </div>
 
+    <!-- クライアントサイドのエラーメッセージコンテナ -->
+    <div id="client_error_explanation" class="error-messages" style="display: none;">
+      <ul></ul>
+    </div>
+
     <%= form_with(model: @vegetable, url: create_and_redirect_vegetables_path, method: :post, local: true, id: 'vegetable-form') do |form| %>
-      <% if @vegetable.errors.any? %>
+      <!-- サーバーサイドのエラーメッセージを非表示にする -->
+      <% if false && @vegetable.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@vegetable.errors.count, "error") %> prevented this vegetable from being saved:</h2>
           <ul>

@@ -67,9 +67,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 80vh;
-  padding-top: 150px; /* ヘッダーとの重なりを避けるために調整 */
+  justify-content: flex-start;
+  min-height: 80vh;
+  padding-top: 200px; /* ヘッダーとエラーメッセージとの重なりを避けるために調整 */
 }
 
 .main-heading {
@@ -141,6 +141,34 @@ body {
   outline: none;
 }
 
+/* エラーメッセージのスタイル */
+.error-messages {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  width: 80%; /* エラーメッセージの幅を調整 */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* ボックスシャドウを追加 */
+  font-size: 1.1em; /* フォントサイズを調整 */
+  line-height: 1.5; /* 行間を調整 */
+  text-align: left; /* テキストを左揃え */
+}
+
+.error-messages ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.error-messages li {
+  margin: 5px 0;
+  padding: 5px;
+  background-color: #f9f9f9; /* 各エラーメッセージに背景色を追加 */
+  border-left: 4px solid #721c24; /* 左側に強調線を追加 */
+}
+
 .actions {
   margin: 20px 0; /* 修正: ボタン間のスペースを確保 */
   width: 100%; /* 修正: 幅を統一 */
@@ -196,6 +224,7 @@ body {
   z-index: 1;
 }
 
+/* メディアクエリ */
 @media (max-width: 600px) {
   html, body {
     font-size: 0.8em; /* 基本フォントサイズを小さく */
@@ -219,7 +248,7 @@ body {
   }
 
   .form-container {
-    padding-top: 100px; /* ヘッダーとの重なりを避けるために調整 */
+    padding-top: 150px; /* ヘッダーとエラーメッセージとの重なりを避けるために調整 */
   }
 
   .form-container .main-heading {
@@ -301,7 +330,7 @@ body {
   }
 
   .form-container {
-    padding-top: 150px; /* ヘッダーとの重なりを避けるために調整 */
+    padding-top: 170px; /* ヘッダーとエラーメッセージとの重なりを避けるために調整 */
   }
 
   .form-container .main-heading {
@@ -357,5 +386,91 @@ body {
   .footer-vegetable {
     padding: 8px; /* フッターのパディングを小さく */
     font-size: 0.8em; /* フォントサイズを少し小さく */
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  html, body {
+    font-size: 1em; /* 基本フォントサイズを通常 */
+    height: 100%; /* ビューポート全体の高さを確保 */
+    overflow: hidden; /* 全体が表示されるようにオーバーフローを隠す */
+  }
+
+  .header-vegetable {
+    padding: 18px 25px; /* ヘッダーのパディングを調整 */
+  }
+
+  .header-vegetable .title-container h1 {
+    font-size: 1.6em; /* フォントサイズを少し小さく */
+    white-space: nowrap; /* テキストを1行に収める */
+    margin-right: 20px; /* ボタンとの間にスペースを追加 */
+  }
+
+  .header-vegetable .mypage-link {
+    font-size: 14px; /* フォントサイズを少し小さく */
+    padding: 8px 12px; /* ボタンのパディングを調整 */
+    white-space: nowrap; /* テキストを1行に収める */
+    margin-left: 20px; /* 文言との間にスペースを追加 */
+  }
+
+  .form-container {
+    padding-top: 140px; /* ヘッダーとエラーメッセージとの重なりを避けるために調整 */
+    height: calc(100% - 140px); /* フォームコンテナの高さを調整 */
+    overflow-y: auto; /* コンテンツがあふれる場合にスクロール */
+  }
+
+  .form-container .main-heading {
+    font-size: 2em; /* フォントサイズを調整 */
+    margin-bottom: 20px; /* 要素同士の間隔を広げる */
+  }
+
+  .form-container .sub-heading {
+    font-size: 1.3em; /* フォントサイズを調整 */
+    margin-bottom: 15px; /* 要素同士の間隔を広げる */
+  }
+
+  .form-container .description {
+    font-size: 1em; /* フォントサイズを調整 */
+    margin-bottom: 20px; /* 要素同士の間隔を広げる */
+    padding: 15px; /* 内側のパディングを調整 */
+    width: 90%; /* 幅を広げる */
+  }
+
+  .form-container .description p {
+    padding: 5px; /* 各段落の内側のパディングを調整 */
+    margin: 5px 0; /* 各段落の間隔を調整 */
+  }
+
+  .form-container .field {
+    margin-bottom: 20px; /* 要素同士の間隔を広げる */
+    width: 100%; /* 幅を広げる */
+  }
+
+  .form-container .field label {
+    font-size: 1.1em; /* フォントサイズを調整 */
+  }
+
+  .form-container .field input[type="text"],
+  .form-container .field input[type="date"] {
+    padding: 10px; /* 内側のパディングを調整 */
+    font-size: 1em; /* フォントサイズを調整 */
+  }
+
+  .form-container .actions {
+    margin-bottom: 20px; /* 要素同士の間隔を広げる */
+  }
+
+  .form-container .button {
+    padding: 12px 24px; /* ボタンの内側のパディングを調整 */
+    font-size: 1.1em; /* フォントサイズを調整 */
+  }
+
+  .form-container .actions .sub-heading {
+    margin-top: 20px; /* 登録ボタンと下部の小見出しの間隔を広げる */
+  }
+
+  .footer-vegetable {
+    padding: 8px; /* フッターのパディングを調整 */
+    font-size: 0.9em; /* フォントサイズを調整 */
   }
 }

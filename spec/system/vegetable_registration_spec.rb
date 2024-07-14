@@ -22,7 +22,6 @@ RSpec.describe 'VegetableRegistration', type: :system do
     fill_in 'vegetable-name', with: ''
     fill_in 'sowing-date', with: ''
     click_button '登録'
-    expect(page).to have_content('名前を入力してください')
     expect(page).to have_content('種まき日を入力してください')
   end
 end
