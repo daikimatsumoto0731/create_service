@@ -8,6 +8,7 @@ $(document).ready(function() {
 
     calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'dayGridMonth',
+      height: '400px',
       events: function(fetchInfo, successCallback, failureCallback) {
         $.ajax({
           url: '/events',
@@ -51,6 +52,7 @@ $(document).ready(function() {
 
         var title = document.createElement('div');
         title.innerHTML = arg.event.title;
+        title.style.color = 'black'; // タイトルの文字色を黒に設定
 
         var container = document.createElement('div');
         container.classList.add('event-container');
@@ -70,7 +72,16 @@ $(document).ready(function() {
     var today = new Date().toISOString().split('T')[0];
     var vegetableId = $('#calendar').data('selected-vegetable-id');
 
-    addStampToCalendar(stamp, today, vegetableId, color);
+    var stampTranslations = {
+      germination: '発芽',
+      growing: '成長中',
+      harvest: '収穫',
+      watering: '水やり'
+    };
+
+    var translatedStamp = stampTranslations[stamp];
+
+    addStampToCalendar(translatedStamp, today, vegetableId, color);
   });
 
   function addStampToCalendar(stamp, date, vegetableId, color) {
