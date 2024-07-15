@@ -86,23 +86,27 @@
         background-color: rgba(0, 0, 0, 0.2); // テキスト自体にも軽微な背景を追加して読みやすさをさらに向上
         padding: 8px 16px; // テキストのパディングを調整
         border-radius: 4px; // テキストの角を丸くする
+        font-family: 'Arial', sans-serif; // フォントを設定
       }
-
+      
       h2 {
         font-size: 36px;
         margin-bottom: 20px;
+        font-weight: bold; // 見出しのフォントを太字にする
+        text-transform: uppercase; // 見出しをすべて大文字にする
       }
-
+      
       p {
         font-size: 24px;
-      }
+        font-style: italic; // 小見出しを斜体にする
+      }  
     }
 
     /* シェアボタンのスタイル */
     .share-buttons {
       display: flex;
       gap: 20px; /* ボタン間の間隔を広げる */
-      margin-top: 40px; /* シェアボタンの上部マージンを増やす */
+      margin-top: 200px; /* シェアボタンの上部マージンを増やす */
       justify-content: center; /* ボタンを中央揃えにする */
     }
 
@@ -245,108 +249,232 @@
   }
 }
 
-
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .top-container-tops {
-    padding-top: 60px; // モバイルビューでのヘッダーのパディング調整
+    padding-top: 60px;
 
-    .header-top, .footer-top {
-      padding: 15px; // モバイルビューでのパディング調整
-    }
+    .header-top {
+      flex-direction: row;
+      align-items: center;
+      padding: 5px;
+      height: 60px; // ヘッダーの高さを狭くする
 
-    .login-form-container-top {
-      padding: 1rem; // モバイルビューでの内部パディング調整
-      margin: 1rem auto; // 上下のマージン調整、中央揃え
-      max-width: 95%; // モバイルビューでのフォームの幅調整
-    }
-
-    .actions-top {
-      gap: 20px; // モバイルビューでのボタン間のギャップ調整
-    }
-
-    // ボタンのホバー効果の変更を追加
-    input[type="submit"], .line-sign-up-button-top {
-      &:hover {
-        background-color: #fffa67; // ホバー時の背景色変更（例）
+      .logo-circle-top {
+        height: 30px; // ロゴのサイズをさらに小さくする
+        width: 30px;
+        margin-right: 5px; // ロゴとタイトルの間隔を調整
+        order: 1; // ヘッダーの左側に配置
       }
+
+      .service-name-top {
+        font-size: 0.9rem; // サービス名のフォントサイズをさらに小さくする
+        margin: 0 auto; // タイトルを中央に配置
+        text-align: center; // タイトルを中央に配置
+        order: 2; // 中央に配置
+        flex: 1;
+        white-space: nowrap; // タイトルを1行にする
+        overflow: hidden; // タイトルがあふれないようにする
+        text-overflow: ellipsis; // タイトルがあふれた場合に省略記号を表示
+      }
+
+      .auth-buttons-top {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        width: auto;
+        order: 3; // 右に配置
+        margin-left: auto; // ボタンを右に配置
+        gap: 5px; // ボタン間の間隔を調整
+
+        .signup-button, .login-button {
+          width: auto;
+          font-size: 0.7rem; // フォントサイズをさらに小さくする
+          padding: 5px; // パディングを小さくする
+        }
+      }
+    }
+
+    .main-content-top {
+      padding-top: 150px;
+      padding-bottom: 50px;
+      background-position: top;
+      
+      .visual-introduction {
+        padding: 10px;
+
+        h2 {
+          font-size: 16px; // 見出しのフォントサイズを小さくする
+          white-space: normal; // 見出しを複数行にする
+        }
+
+        p {
+          font-size: 12px; // 小見出しのフォントサイズを小さくする
+          white-space: normal; // 小見出しを複数行にする
+          overflow: visible; // テキストがあふれないようにする
+        }
+      }
+
+      .share-buttons {
+        gap: 10px;
+        margin-top: 20px; // シェアボタンの上部マージン
+        position: relative;
+        top: 80px; // シェアボタンの位置をさらに下に調整
+      }
+
+      .share-buttons img {
+        width: 48px;
+        height: 48px;
+      }
+
+      .twitter-share-button {
+        transform: scale(1.2);
+      }
+    }
+
+    .footer-top {
+      font-size: 16px;
+      padding: 15px;
+      text-align: center;
     }
 
     .line-sign-up-button-top {
-      &:hover {
-        background-color: #00C300; // LINEボタンのホバー時の背景色変更
+      font-size: 14px;
+      padding: 8px 16px;
+    }
+  }
+
+  .login-form-container-top {
+    padding: 1rem;
+    width: 90%;
+    max-width: 300px;
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    .actions-top {
+      gap: 30px;
+
+      input[type="submit"], .line-sign-up-button-top {
+        padding: 8px;
+        font-size: 0.9rem;
       }
     }
   }
 }
 
-@media (max-width: 600px) {
+@media (min-width: 600px) and (max-width: 768px) {
   .top-container-tops {
-    padding-top: 60px; // 画面の上部のスペースを調整
+    padding-top: 60px;
 
-    .header-top, .footer-top {
-      padding: 10px; // ヘッダーとフッターのパディングを小さくする
+    .header-top {
+      flex-direction: row;
+      align-items: center;
+      padding: 5px;
+      height: 60px; // ヘッダーの高さを狭くする
+
+      .logo-circle-top {
+        height: 60px; // ロゴのサイズを大きくする
+        width: 60px;
+        margin-right: 8px; // ロゴとタイトルの間隔を調整
+        order: 1; // ヘッダーの左側に配置
+      }
+
+      .service-name-top {
+        font-size: 1.8rem; // サービス名のフォントサイズを大きくする
+        margin: 0 auto; // タイトルを中央に配置
+        text-align: center; // タイトルを中央に配置
+        order: 2; // 中央に配置
+        flex: 1;
+        white-space: nowrap; // タイトルを1行にする
+        overflow: hidden; // タイトルがあふれないようにする
+        text-overflow: ellipsis; // タイトルがあふれた場合に省略記号を表示
+      }
+
+      .auth-buttons-top {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        width: auto;
+        order: 3; // 右に配置
+        margin-left: auto; // ボタンを右に配置
+        gap: 5px; // ボタン間の間隔を調整
+
+        .signup-button, .login-button {
+          width: auto;
+          font-size: 0.8rem; // フォントサイズを調整
+          padding: 6px; // パディングを調整
+        }
+      }
     }
 
-    .login-form-container-top {
-      padding: 1rem; // フォームの内部パディングを調整
-      margin: 1rem auto; // フォームを画面の中央に配置
-      max-width: 90%; // フォームの最大幅を画面幅の90%に設定
+    .main-content-top {
+      padding-top: 150px;
+      padding-bottom: 50px;
+      background-position: top;
+      
+      .visual-introduction {
+        padding: 10px;
+
+        h2 {
+          font-size: 22px; // 見出しのフォントサイズを調整
+          white-space: normal; // 見出しを複数行にする
+        }
+
+        p {
+          font-size: 18px; // 小見出しのフォントサイズを調整
+          white-space: normal; // 小見出しを複数行にする
+          overflow: visible; // テキストがあふれないようにする
+        }
+      }
+
+      .share-buttons {
+        gap: 10px;
+        margin-top: 20px; // シェアボタンの上部マージン
+        position: relative;
+        top: 80px; // シェアボタンの位置をさらに下に調整
+      }
+
+      .share-buttons img {
+        width: 48px;
+        height: 48px;
+      }
+
+      .twitter-share-button {
+        transform: scale(1.2);
+      }
     }
 
-    .actions-top {
-      gap: 20px; // ボタン間のスペースを20pxに設定
+    .footer-top {
+      font-size: 16px;
+      padding: 15px;
+      text-align: right; // 利用規約とプライバシーポリシーを右寄せ
     }
 
-    .service-name-top, h2 {
-      font-size: 1.2rem; // タイトルのフォントサイズを小さく調整
+    .line-sign-up-button-top {
+      font-size: 14px;
+      padding: 8px 16px;
     }
   }
-}
 
-@media (min-width: 601px) and (max-width: 1024px) {
-  .top-container-tops {
-    padding-top: 60px; // タブレットでは60pxの上部スペースを確保
+  .login-form-container-top {
+    padding: 1.5rem;
+    width: 90%;
+    max-width: 400px;
 
-    .header-top, .footer-top {
-      padding: 15px; // ヘッダーとフッターのパディングを少し大きく
-    }
-
-    .login-form-container-top {
-      padding: 1.5rem; // フォームの内部パディングをさらに増やす
-      margin: 2rem auto; // フォームの外部マージンを増やす
-      max-width: 85%; // フォームの最大幅を85%に設定
+    h2 {
+      font-size: 1.8rem;
     }
 
     .actions-top {
-      gap: 25px; // ボタン間のスペースを25pxに設定
-    }
+      gap: 40px;
 
-    .service-name-top, h2 {
-      font-size: 1.4rem; // タイトルのフォントサイズをさらに調整
-    }
-  }
-}
-
-@media (min-width: 1025px) {
-  .top-container-tops {
-    padding-top: 80px; // デスクトップでは80pxの上部スペースを確保
-
-    .header-top, .footer-top {
-      padding: 15px; // ヘッダーとフッターのパディングを最大に
-    }
-
-    .login-form-container-top {
-      padding: 2rem; // フォームの内部パディングを最大に設定
-      margin: 2rem auto; // フォームの外部マージンを最大に
-      max-width: 80%; // フォームの最大幅を80%に設定
-    }
-
-    .actions-top {
-      gap: 30px; // ボタン間のスペースを30pxに設定
-    }
-
-    .service-name-top, h2 {
-      font-size: 1.5rem; // タイトルのフォントサイズをデスクトップ向けに調整
+      input[type="submit"], .line-sign-up-button-top {
+        padding: 10px;
+        font-size: 1rem;
+      }
     }
   }
 }

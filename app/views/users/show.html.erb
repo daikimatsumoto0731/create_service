@@ -2,8 +2,10 @@
 <div class="content-wrapper">
   <div class="header-mypage">
     <h1>ようこそ<%= @user.username %>さん</h1>
-    <%= link_to 'トップページに戻る', root_path, class: 'back-to-top-link' %>
-    <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'logout-link' %>
+    <div class="header-links">
+      <%= link_to 'トップページに戻る', root_path, class: 'back-to-top-link' %>
+      <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'logout-link' %>
+    </div>
   </div>
 
   <div class="weather-info">
@@ -24,28 +26,28 @@
             <!-- その他の天気の場合はアイコンを表示しない -->
         <% end %>
       </div>
-      <p>気温: <%= @temperature_info %></p>
+      <p class="temperature-info">気温: <%= @temperature_info %></p>
     <% else %>
-      <p>都道府県が設定されていません。</p>
+      <p class="prefecture-missing">都道府県が設定されていません。</p>
     <% end %>
   </div>
 
-  <!-- 説明文 -->
-  <div class="button-container-mypage"> <!-- ボタンを中央に配置 -->
+  <div class="button-container-mypage">
     <p class="explanation-text">
       ここで野菜を育てると、毎日の成長を記録し、天気情報や収穫量を確認できます。<br>
       あなたの都道府県の天気情報も提供されるので、適切なタイミングで水やりや収穫が可能です。
       プロフィールを編集するとその地域の天気情報が表示されます。
     </p>
 
-    <!-- 登録した野菜とスケジュール管理画面へのリンク -->
     <div class="registered-vegetables">
       <h3>登録した野菜</h3>
       <% @vegetables.each do |vegetable| %>
         <div class="vegetable-item">
           <p><%= vegetable.name %> (種まき日: <%= vegetable.sowing_date %>)</p>
-          <%= link_to 'スケジュール画面へ', event_path(id: vegetable.id, selected_vegetable: vegetable.name.downcase, sowing_date: vegetable.sowing_date), class: 'btn btn-primary' %>
-          <%= link_to '削除', vegetable_path(vegetable), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+          <div>
+            <%= link_to 'スケジュール画面へ', event_path(id: vegetable.id, selected_vegetable: vegetable.name.downcase, sowing_date: vegetable.sowing_date), class: 'btn btn-primary' %>
+            <%= link_to '削除', vegetable_path(vegetable), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+          </div>
         </div>
       <% end %>
     </div>

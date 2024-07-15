@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: 'Noto Sans JP', sans-serif; // Google Fontsの適用
 }
 
 .content-wrapper {
@@ -23,6 +25,9 @@ body {
 .title-container h1 {
   font-size: 24px;
   margin: 0;
+  color: #ffffff; // フォントの色を白に変更
+  font-weight: bold; // フォントの太さを太字に変更
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); // テキストシャドウを追加して見やすくする
 }
 
 .button-container {
@@ -150,4 +155,321 @@ body {
 
 .modal-footer .btn-success:hover {
   background-color: #218838;
+}
+
+@media (max-width: 320px) {
+  .content-wrapper {
+    margin: 5px;
+    padding: 10px;
+    border: none;
+    background-color: rgba(240, 224, 224, 0.7);
+    flex-grow: 1; /* コンテンツを画面全体に広げる */
+  }
+
+  .header {
+    flex-direction: row !important; /* フレックスボックスの方向を横並びにする */
+    align-items: center !important; /* アイテムを中央揃えにする */
+    justify-content: space-between !important; /* アイテム間のスペースを均等にする */
+    padding: 5px;
+    width: 100%; /* ヘッダーを画面いっぱいに広げる */
+  }
+
+  .title-container {
+    flex-grow: 1; /* タイトルコンテナが余分なスペースを占めるようにする */
+    white-space: nowrap; /* テキストを1行で表示 */
+    overflow: hidden; /* 溢れたテキストを隠す */
+    text-overflow: ellipsis; /* 省略記号を表示 */
+  }
+
+  .title-container h1 {
+    font-size: 14px; /* フォントサイズを小さくする */
+    margin-bottom: 0; /* タイトルの下部余白を削除 */
+  }
+
+  .button-container {
+    display: flex;
+    gap: 5px !important; /* ボタン間の間隔を調整 */
+    justify-content: flex-end !important; /* ボタンを右寄せ */
+  }
+
+  .btn {
+    font-size: 7px !important; /* ボタンのフォントサイズを小さくする */
+    padding: 2px 4px !important; /* ボタンのパディングを小さくする */
+  }
+
+  .page-content {
+    flex-grow: 1; /* コンテンツを画面全体に広げる */
+    padding-bottom: 40px; /* 余白を追加してフッターのスペースを確保 */
+  }
+
+  .page-content p {
+    font-size: 14px;
+  }
+
+  .stamp-selection {
+    margin-top: 15px;
+    display: flex; /* 横並びにする */
+    justify-content: space-between; /* スタンプ間の間隔を広げる */
+    flex-wrap: wrap; /* スタンプが収まりきらない場合に折り返す */
+  }
+
+  .stamp-selection h3 {
+    font-size: 16px;
+    width: 100%; /* ヘッダーをスタンプの上に配置 */
+    margin-bottom: 10px;
+  }
+
+  .stamp-button {
+    padding: 4px 6px; /* スタンプボタンのパディングを調整 */
+    margin-right: 3px;
+    flex: 1; /* スタンプを均等に配置 */
+    text-align: center;
+    margin-bottom: 8px; /* 折り返し時の間隔を調整 */
+  }
+
+  #calendar {
+    margin-top: 15px;
+    font-size: 12px; /* カレンダーのフォントサイズを少し大きくする */
+    height: auto; /* 高さを自動調整 */
+  }
+
+  .delete-button {
+    font-size: 10px; /* ボタンのフォントサイズを小さくする */
+    padding: 2px 5px; /* ボタンのパディングを小さくする */
+  }
+
+  .event-container {
+    display: flex;
+    flex-direction: column; /* イベントタイトルと削除ボタンを縦並びにする */
+    align-items: flex-start;
+  }
+
+  .modal-header {
+    padding: 8px;
+  }
+
+  .modal-title {
+    font-size: 14px;
+  }
+
+  .modal-body {
+    padding: 8px;
+  }
+
+  .modal-body input[type="text"],
+  .modal-body input[type="file"] {
+    padding: 5px;
+    margin-top: 3px;
+    margin-bottom: 8px;
+  }
+
+  .modal-footer .btn-success {
+    padding: 6px 10px;
+  }
+}
+
+@media (min-width: 321px) and (max-width: 600px) {
+  .content-wrapper {
+    margin: 10px;
+    padding: 15px;
+    border: none;
+    background-color: rgba(240, 224, 224, 0.7);
+  }
+
+  .header {
+    flex-direction: row !important; /* フレックスボックスの方向を横並びにする */
+    align-items: center !important; /* アイテムを中央揃えにする */
+    justify-content: space-between !important; /* アイテム間のスペースを均等にする */
+    padding: 5px;
+  }
+
+  .title-container {
+    flex-grow: 1; /* タイトルコンテナが余分なスペースを占めるようにする */
+    white-space: nowrap; /* テキストを1行で表示 */
+    overflow: hidden; /* 溢れたテキストを隠す */
+    text-overflow: ellipsis; /* 省略記号を表示 */
+  }
+
+  .title-container h1 {
+    font-size: 16px; /* フォントサイズを小さくする */
+    margin-bottom: 0; /* タイトルの下部余白を削除 */
+  }
+
+  .button-container {
+    display: flex;
+    gap: 5px !important; /* ボタン間の間隔を調整 */
+    justify-content: flex-end !important; /* ボタンを右寄せ */
+  }
+
+  .btn {
+    font-size: 8px !important; /* ボタンのフォントサイズをさらに小さくする */
+    padding: 3px 5px !important; /* ボタンのパディングをさらに小さくする */
+  }
+
+  .page-content p {
+    font-size: 16px;
+  }
+
+  .stamp-selection {
+    margin-top: 20px;
+    display: flex; /* 横並びにする */
+    justify-content: space-between; /* スタンプ間の間隔を広げる */
+    flex-wrap: wrap; /* スタンプが収まりきらない場合に折り返す */
+  }
+
+  .stamp-selection h3 {
+    font-size: 18px;
+    width: 100%; /* ヘッダーをスタンプの上に配置 */
+    margin-bottom: 10px;
+  }
+
+  .stamp-button {
+    padding: 8px 10px;
+    margin-right: 5px;
+    flex: 1; /* スタンプを均等に配置 */
+    text-align: center;
+    margin-bottom: 10px; /* 折り返し時の間隔を調整 */
+  }
+
+  #calendar {
+    margin-top: 20px;
+    font-size: 15px; /* カレンダーのフォントサイズを小さくする */
+    width: 100%; /* カレンダーの幅を100%に設定 */
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .delete-button {
+    font-size: 12px; /* ボタンのフォントサイズを小さくする */
+    padding: 3px 7px; /* ボタンのパディングを小さくする */
+  }
+
+  .event-container {
+    display: flex;
+    flex-direction: column; /* イベントタイトルと削除ボタンを縦並びにする */
+    align-items: flex-start;
+  }
+
+  .modal-header {
+    padding: 10px;
+  }
+
+  .modal-title {
+    font-size: 16px;
+  }
+
+  .modal-body {
+    padding: 10px;
+  }
+
+  .modal-body input[type="text"],
+  .modal-body input[type="file"] {
+    padding: 6px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+
+  .modal-footer .btn-success {
+    padding: 8px 15px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+  .content-wrapper {
+    margin: 15px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: rgba(240, 224, 224, 0.7);
+    flex-grow: 1; /* コンテンツを画面全体に広げる */
+  }
+
+  .header {
+    flex-direction: row; /* フレックスボックスの方向を横並びにする */
+    align-items: center; /* アイテムを中央揃えにする */
+    justify-content: space-between; /* アイテム間のスペースを均等にする */
+    padding: 10px;
+    width: 100%; /* ヘッダーを画面いっぱいに広げる */
+  }
+
+  .title-container {
+    flex-grow: 1; /* タイトルコンテナが余分なスペースを占めるようにする */
+    white-space: nowrap; /* テキストを1行で表示 */
+    overflow: hidden; /* 溢れたテキストを隠す */
+    text-overflow: ellipsis; /* 省略記号を表示 */
+  }
+
+  .title-container h1 {
+    font-size: 18px; /* フォントサイズを調整 */
+    margin-bottom: 0; /* タイトルの下部余白を削除 */
+  }
+
+  .button-container {
+    display: flex;
+    gap: 10px; /* ボタン間の間隔を調整 */
+    justify-content: flex-end; /* ボタンを右寄せ */
+  }
+
+  .btn {
+    font-size: 10px; /* ボタンのフォントサイズを調整 */
+    padding: 5px 10px; /* ボタンのパディングを調整 */
+  }
+
+  .page-content {
+    flex-grow: 1; /* コンテンツを画面全体に広げる */
+    padding-bottom: 50px; /* 余白を追加してフッターのスペースを確保 */
+  }
+
+  .page-content p {
+    font-size: 16px; /* フォントサイズを調整 */
+  }
+
+  .stamp-selection {
+    margin-top: 20px;
+    display: flex; /* 横並びにする */
+    justify-content: space-between; /* スタンプ間の間隔を広げる */
+    flex-wrap: wrap; /* スタンプが収まりきらない場合に折り返す */
+  }
+
+  .stamp-selection h3 {
+    font-size: 18px; /* フォントサイズを調整 */
+    width: 100%; /* ヘッダーをスタンプの上に配置 */
+    margin-bottom: 10px;
+  }
+
+  .stamp-button {
+    padding: 6px 8px; /* スタンプボタンのパディングを調整 */
+    margin-right: 5px;
+    flex: 1; /* スタンプを均等に配置 */
+    text-align: center;
+    margin-bottom: 10px; /* 折り返し時の間隔を調整 */
+  }
+
+  #calendar {
+    margin-top: 20px;
+    font-size: 14px; /* カレンダーのフォントサイズを調整 */
+    height: auto; /* 高さを自動調整 */
+  }
+
+  .modal-header {
+    padding: 10px;
+  }
+
+  .modal-title {
+    font-size: 16px; /* フォントサイズを調整 */
+  }
+
+  .modal-body {
+    padding: 10px;
+  }
+
+  .modal-body input[type="text"],
+  .modal-body input[type="file"] {
+    padding: 6px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+
+  .modal-footer .btn-success {
+    padding: 8px 15px;
+  }
 }

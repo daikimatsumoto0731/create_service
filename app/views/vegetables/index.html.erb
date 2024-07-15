@@ -16,13 +16,22 @@
   </header>
 
   <div class="form-container">
+    <h2 class="main-heading">スタート</h2>
+    <h3 class="sub-heading">Select Vegetable to Grow</h3>
+
     <div class="description">
       <p>下記のフォームに育てる野菜の名前と種まき日を入力してください。</p>
       <p>登録ボタンを押して次のステップに進んでください。</p>
     </div>
 
+    <!-- クライアントサイドのエラーメッセージコンテナ -->
+    <div id="client_error_explanation" class="error-messages" style="display: none;">
+      <ul></ul>
+    </div>
+
     <%= form_with(model: @vegetable, url: create_and_redirect_vegetables_path, method: :post, local: true, id: 'vegetable-form') do |form| %>
-      <% if @vegetable.errors.any? %>
+      <!-- サーバーサイドのエラーメッセージを非表示にする -->
+      <% if false && @vegetable.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@vegetable.errors.count, "error") %> prevented this vegetable from being saved:</h2>
           <ul>
@@ -45,12 +54,12 @@
 
       <div class="actions">
         <%= form.submit "登録", id: 'register-vegetable-button', class: 'button register-button' %>
+        <h3 class="sub-heading">VEGETABLE SERVICE</h3>
       </div>
     <% end %>
   </div>
 
   <footer class="footer-vegetable">
-    <p>Copyright &copy; 2024 Vegetable Service</p>
   </footer>
 </body>
 </html>

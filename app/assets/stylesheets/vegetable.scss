@@ -1,8 +1,19 @@
-/* フォントのインポート */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
 
 body {
-  font-family: 'Roboto', sans-serif;
+  background-image: asset-url('vegetable-select.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* 背景画像がスクロールに連動しないように固定 */
 }
 
 .header-vegetable {
@@ -56,27 +67,46 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 80vh;
-  padding-top: 150px; /* ヘッダーとの重なりを避けるために調整 */
+  justify-content: flex-start;
+  min-height: 80vh;
+  padding-top: 200px; /* ヘッダーとエラーメッセージとの重なりを避けるために調整 */
+}
+
+.main-heading {
+  font-size: 2.5em;
+  color: white;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  margin-bottom: 0.5em;
+  font-family: 'Noto Sans JP', sans-serif; /* フォントをNoto Sans JPに変更 */
+}
+
+.sub-heading {
+  font-size: 1.5em;
+  color: white;
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7);
+  margin-bottom: 1em;
 }
 
 .description {
-  background-color: #f9f9f9;
+  background-color: #ffffff; /* 背景色を白に変更 */
   border: 1px solid #ddd;
   border-radius: 10px;
   padding: 20px;
   margin-bottom: 20px;
   text-align: center;
   width: 80%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* ボックスシャドウを強調 */
   font-family: 'Roboto', sans-serif; /* おしゃれなフォントを適用 */
   font-size: 1.1em;
   line-height: 1.5;
 }
 
 .description p {
-  margin: 0;
+  margin: 0 0 10px 0; /* 各段落の間隔を広げる */
+  padding: 5px;
+  background-color: #f9f9f9; /* 各段落の背景色を追加 */
+  border-left: 4px solid #28a745; /* 段落の左に強調線を追加 */
+  text-align: left; /* テキストを左揃え */
 }
 
 .field {
@@ -89,6 +119,8 @@ body {
   display: block;
   font-size: 1.2em;
   margin-bottom: 5px;
+  font-weight: bold; /* 文字を太字に */
+  color: white;
 }
 
 .field input[type="text"],
@@ -109,10 +141,46 @@ body {
   outline: none;
 }
 
+/* エラーメッセージのスタイル */
+.error-messages {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  width: 80%; /* エラーメッセージの幅を調整 */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* ボックスシャドウを追加 */
+  font-size: 1.1em; /* フォントサイズを調整 */
+  line-height: 1.5; /* 行間を調整 */
+  text-align: left; /* テキストを左揃え */
+}
+
+.error-messages ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.error-messages li {
+  margin: 5px 0;
+  padding: 5px;
+  background-color: #f9f9f9; /* 各エラーメッセージに背景色を追加 */
+  border-left: 4px solid #721c24; /* 左側に強調線を追加 */
+}
+
 .actions {
   margin: 20px 0; /* 修正: ボタン間のスペースを確保 */
   width: 100%; /* 修正: 幅を統一 */
   text-align: center; /* 修正: 中央揃え */
+}
+
+.actions .register-button {
+  margin-bottom: 20px; /* ボタンの下にスペースを追加 */
+}
+
+.actions .sub-heading {
+  margin-top: 20px; /* 「VEGETABLE SERVICE」の上にスペースを追加 */
 }
 
 .button {
@@ -148,8 +216,7 @@ body {
 .footer-vegetable {
   background-color: limegreen;
   padding: 10px;
-  text-align: center;
-  color: white;
+  text-align: center; /* テキストを中央揃え */
   position: fixed;
   bottom: 0;
   left: 0;
@@ -157,101 +224,253 @@ body {
   z-index: 1;
 }
 
-/* スマートフォン向けスタイル */
+/* メディアクエリ */
 @media (max-width: 600px) {
+  html, body {
+    font-size: 0.8em; /* 基本フォントサイズを小さく */
+  }
+
   .header-vegetable {
-    padding: 15px 20px;
+    padding: 10px 15px; /* ヘッダーのパディングを小さく */
   }
 
   .header-vegetable .title-container h1 {
+    font-size: 1em; /* フォントサイズを小さく */
+    white-space: nowrap; /* テキストを1行に収める */
+    margin-right: 10px; /* ボタンとの間にスペースを追加 */
+  }
+
+  .header-vegetable .mypage-link {
+    font-size: 10px; /* フォントサイズを小さく */
+    padding: 5px 8px; /* ボタンのパディングを小さく */
+    white-space: nowrap; /* テキストを1行に収める */
+    margin-left: 10px; /* 文言との間にスペースを追加 */
+  }
+
+  .form-container {
+    padding-top: 150px; /* ヘッダーとエラーメッセージとの重なりを避けるために調整 */
+  }
+
+  .form-container .main-heading {
     font-size: 1.5em; /* フォントサイズを小さく */
+    margin-bottom: 15px; /* 要素同士の間隔を狭く */
   }
 
-  .header-vegetable .mypage-link {
-    padding: 8px 12px; /* ボタンのサイズを小さく */
-    font-size: 14px; /* フォントサイズを小さく */
+  .form-container .sub-heading {
+    font-size: 1em; /* フォントサイズを小さく */
+    margin-bottom: 10px; /* 要素同士の間隔を狭く */
   }
 
-  .form-container {
-    padding-top: 150px; /* ヘッダーとの間隔を調整 */
+  .form-container .description {
+    font-size: 0.8em; /* フォントサイズを小さく */
+    margin-bottom: 10px; /* 要素同士の間隔を狭く */
+    padding: 10px; /* 内側のパディングを狭く */
+    width: 100%; /* 幅を広げる */
   }
 
-  .description {
-    font-size: 1em;
-    width: 90%;
+  .form-container .description p {
+    padding: 3px; /* 各段落の内側のパディングを狭く */
+    margin: 5px 0; /* 各段落の間隔を狭く */
   }
 
-  .field {
-    width: 250px;
+  .form-container .field {
+    margin-bottom: 15px; /* 要素同士の間隔を狭く */
+    width: 100%; /* 幅を広げる */
   }
 
-  .actions .button {
-    padding: 12px 24px; /* ボタンサイズを調整 */
-  }
-}
-
-/* タブレット向けスタイル */
-@media (min-width: 601px) and (max-width: 1024px) {
-  .header-vegetable {
-    padding: 20px 25px;
+  .form-container .field label {
+    font-size: 1em; /* フォントサイズを小さく */
   }
 
-  .header-vegetable .title-container h1 {
-    font-size: 1.75em;
+  .form-container .field input[type="text"],
+  .form-container .field input[type="date"] {
+    padding: 8px; /* 内側のパディングを狭く */
+    font-size: 0.9em; /* フォントサイズを小さく */
   }
 
-  .header-vegetable .mypage-link {
-    padding: 9px 14px;
-    font-size: 15px;
+  .form-container .actions {
+    margin-bottom: 15px; /* 要素同士の間隔を狭く */
   }
 
-  .form-container {
-    padding-top: 200px;
+  .form-container .button {
+    padding: 10px 20px; /* ボタンの内側のパディングを狭く */
+    font-size: 1em; /* フォントサイズを小さく */
   }
 
-  .description {
-    font-size: 1.1em;
-    width: 85%;
+  .form-container .actions .sub-heading {
+    margin-top: 15px; /* 登録ボタンと下部の小見出しの間隔を狭く */
   }
 
-  .field {
-    width: 280px;
-  }
-
-  .actions .button {
-    padding: 15px 30px;
+  .footer-vegetable {
+    padding: 5px; /* フッターのパディングを小さく */
+    font-size: 0.8em; /* フォントサイズを小さく */
   }
 }
 
-/* デスクトップ向けスタイル */
-@media (min-width: 1025px) {
+@media (min-width: 601px) and (max-width: 768px) {
+  html, body {
+    font-size: 0.9em; /* 基本フォントサイズを少し小さく */
+  }
+
   .header-vegetable {
-    padding: 20px 30px;
+    padding: 15px 20px; /* ヘッダーのパディングを小さく */
   }
 
   .header-vegetable .title-container h1 {
-    font-size: 2em;
+    font-size: 1.4em; /* フォントサイズを少し小さく */
+    white-space: nowrap; /* テキストを1行に収める */
+    margin-right: 15px; /* ボタンとの間にスペースを追加 */
   }
 
   .header-vegetable .mypage-link {
-    padding: 10px 15px;
-    font-size: 16px;
+    font-size: 12px; /* フォントサイズを小さく */
+    padding: 8px 12px; /* ボタンのパディングを小さく */
+    white-space: nowrap; /* テキストを1行に収める */
+    margin-left: 15px; /* 文言との間にスペースを追加 */
   }
 
   .form-container {
-    padding-top: 100px;
+    padding-top: 170px; /* ヘッダーとエラーメッセージとの重なりを避けるために調整 */
   }
 
-  .description {
-    font-size: 1.2em;
-    width: 80%;
+  .form-container .main-heading {
+    font-size: 1.8em; /* フォントサイズを少し小さく */
+    margin-bottom: 20px; /* 要素同士の間隔を広げる */
   }
 
-  .field {
-    width: 300px;
+  .form-container .sub-heading {
+    font-size: 1.1em; /* フォントサイズを少し小さく */
+    margin-bottom: 15px; /* 要素同士の間隔を広げる */
   }
 
-  .actions .button {
-    padding: 15px 30px;
+  .form-container .description {
+    font-size: 0.9em; /* フォントサイズを少し小さく */
+    margin-bottom: 20px; /* 要素同士の間隔を広げる */
+    padding: 15px; /* 内側のパディングを狭く */
+    width: 90%; /* 幅を広げる */
+  }
+
+  .form-container .description p {
+    padding: 5px; /* 各段落の内側のパディングを狭く */
+    margin: 5px 0; /* 各段落の間隔を狭く */
+  }
+
+  .form-container .field {
+    margin-bottom: 20px; /* 要素同士の間隔を広げる */
+    width: 100%; /* 幅を広げる */
+  }
+
+  .form-container .field label {
+    font-size: 1em; /* フォントサイズを小さく */
+  }
+
+  .form-container .field input[type="text"],
+  .form-container .field input[type="date"] {
+    padding: 10px; /* 内側のパディングを狭く */
+    font-size: 0.9em; /* フォントサイズを少し小さく */
+  }
+
+  .form-container .actions {
+    margin-bottom: 20px; /* 要素同士の間隔を広げる */
+  }
+
+  .form-container .button {
+    padding: 12px 24px; /* ボタンの内側のパディングを狭く */
+    font-size: 1em; /* フォントサイズを少し小さく */
+  }
+
+  .form-container .actions .sub-heading {
+    margin-top: 20px; /* 登録ボタンと下部の小見出しの間隔を広げる */
+  }
+
+  .footer-vegetable {
+    padding: 8px; /* フッターのパディングを小さく */
+    font-size: 0.8em; /* フォントサイズを少し小さく */
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  html, body {
+    font-size: 1em; /* 基本フォントサイズを通常 */
+    height: 100%; /* ビューポート全体の高さを確保 */
+    overflow: hidden; /* 全体が表示されるようにオーバーフローを隠す */
+  }
+
+  .header-vegetable {
+    padding: 18px 25px; /* ヘッダーのパディングを調整 */
+  }
+
+  .header-vegetable .title-container h1 {
+    font-size: 1.6em; /* フォントサイズを少し小さく */
+    white-space: nowrap; /* テキストを1行に収める */
+    margin-right: 20px; /* ボタンとの間にスペースを追加 */
+  }
+
+  .header-vegetable .mypage-link {
+    font-size: 14px; /* フォントサイズを少し小さく */
+    padding: 8px 12px; /* ボタンのパディングを調整 */
+    white-space: nowrap; /* テキストを1行に収める */
+    margin-left: 20px; /* 文言との間にスペースを追加 */
+  }
+
+  .form-container {
+    padding-top: 140px; /* ヘッダーとエラーメッセージとの重なりを避けるために調整 */
+    height: calc(100% - 140px); /* フォームコンテナの高さを調整 */
+    overflow-y: auto; /* コンテンツがあふれる場合にスクロール */
+  }
+
+  .form-container .main-heading {
+    font-size: 2em; /* フォントサイズを調整 */
+    margin-bottom: 20px; /* 要素同士の間隔を広げる */
+  }
+
+  .form-container .sub-heading {
+    font-size: 1.3em; /* フォントサイズを調整 */
+    margin-bottom: 15px; /* 要素同士の間隔を広げる */
+  }
+
+  .form-container .description {
+    font-size: 1em; /* フォントサイズを調整 */
+    margin-bottom: 20px; /* 要素同士の間隔を広げる */
+    padding: 15px; /* 内側のパディングを調整 */
+    width: 90%; /* 幅を広げる */
+  }
+
+  .form-container .description p {
+    padding: 5px; /* 各段落の内側のパディングを調整 */
+    margin: 5px 0; /* 各段落の間隔を調整 */
+  }
+
+  .form-container .field {
+    margin-bottom: 20px; /* 要素同士の間隔を広げる */
+    width: 100%; /* 幅を広げる */
+  }
+
+  .form-container .field label {
+    font-size: 1.1em; /* フォントサイズを調整 */
+  }
+
+  .form-container .field input[type="text"],
+  .form-container .field input[type="date"] {
+    padding: 10px; /* 内側のパディングを調整 */
+    font-size: 1em; /* フォントサイズを調整 */
+  }
+
+  .form-container .actions {
+    margin-bottom: 20px; /* 要素同士の間隔を広げる */
+  }
+
+  .form-container .button {
+    padding: 12px 24px; /* ボタンの内側のパディングを調整 */
+    font-size: 1.1em; /* フォントサイズを調整 */
+  }
+
+  .form-container .actions .sub-heading {
+    margin-top: 20px; /* 登録ボタンと下部の小見出しの間隔を広げる */
+  }
+
+  .footer-vegetable {
+    padding: 8px; /* フッターのパディングを調整 */
+    font-size: 0.9em; /* フォントサイズを調整 */
   }
 }

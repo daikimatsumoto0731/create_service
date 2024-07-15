@@ -1,19 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header-login {
+  background-color: #09f409;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 5px 20px;
+  width: 100%;
+  position: relative;
+
+  .welcome-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    font-family: 'Noto Sans JP', sans-serif; // Google Fontsの適用
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .header-button {
+    background-color: #e4f409;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px; // ボタン間の余白を調整
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+
+    &:hover {
+      background-color: darken(#e4f409, 10%);
+      text-decoration: underline;
+    }
+  }
+}
+
+.footer-login {
+  font-size: 20px;
+  background-color: #09f409;
+  padding: 20px;
+  text-align: right;
+  width: 100%;
+  margin-top: auto; // フッターを画面下部に固定
+  
+  a {
+    color: black;
+    margin-right: 10px;
+    text-decoration: none;
+  
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.login-background {
+  background-image: asset-url('login.jpg');
+  background-size: cover;
+  background-position: center;
+  flex: 1; // 背景をヘッダーとフッターの間に拡張
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .login-form-container-login {
   text-align: center;
+  width: 100%;
   max-width: 400px;
   margin: 0 auto;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0,0,0,.1);
   border-radius: 8px;
-  background-color: #FFFFFF;
-  position: relative;
-  top: 50px;
-  margin-bottom: 60px;
+  background-color: transparent; // 背景色を削除
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 h2 {
   color: #09f409;
   margin-bottom: 20px;
+  font-size: 2.5rem; // フォントサイズを大きく
+  font-family: 'Noto Sans JP', sans-serif; // Google Fontsの適用
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); // テキストシャドウを追加
 }
     
 .field-login {
@@ -26,17 +105,17 @@ h2 {
   }
   
   input[type="email"], input[type="password"] {
-    width: calc(100% - 20px);
+    width: 100%; // 幅を100%に統一
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    }
+  }
 }
   
 .actions-login {
   text-align: center;
   input[type="submit"] {
-    width: calc(100% - 20px);
+    width: 100%; // 幅を100%に統一
     font-size: 20px;
     padding: 10px 20px;
     background-color: #09f409;
@@ -47,52 +126,6 @@ h2 {
   
     &:hover {
       background-color: darken(#09f409, 10%);
-    }
-  }
-}
-  
-// ヘッダーとフッターのスタイルはログインフォームの外に配置
-.header-login {
-  background-color: #09f409;
-  display: flex;
-  justify-content: flex-end; //ボタンを右寄せ
-  align-items: center;
-  padding: 30px;
-    
-  // 会員登録ボタンとパスワードリセットボタンのスタイル
-  a {
-    font-size: 16px;
-    padding: 10px 15px;
-    margin-left: 10px;
-    background-color: yellow;
-    color: black;
-    text-decoration: none;
-    border-radius: 5px;
-  
-    &:hover {
-      background-color: lighten(white, 10%);
-      text-decoration: underline;
-    }
-  }
-}
-
-.footer-login {
-  font-size: 20px;
-  background-color: #09f409;
-  padding: 30px;
-  text-align: right;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  
-  a {
-    color: white;
-    margin-right: 10px;
-    text-decoration: none;
-  
-     &:hover {
-      text-decoration: underline;
     }
   }
 }
@@ -110,7 +143,7 @@ h2 {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  width: calc(100% - 40px);
+  width: 100%; // 幅を100%に統一
   cursor: pointer;
   display: block;
   margin: 20px auto 0;
@@ -120,6 +153,232 @@ h2 {
   }
 }
 
-.line-add-friend{
+.line-add-friend {
   margin-top: 20px;
+  display: flex;
+  justify-content: center;
+
+  a img {
+    width: 100px; // 友だち追加ボタンの幅を統一
+  }
+}
+
+@media (max-width: 320px) {
+  .header-login {
+    padding: 3px 8px; // 上下のパディングをさらに狭くする
+    position: relative;
+
+    .welcome-text {
+      font-size: 1rem; // 文言のサイズをさらに小さくする
+      white-space: nowrap; // テキストを1行で表示
+      overflow: hidden; // オーバーフローしたテキストを隠す
+      position: absolute;
+      left: 42%;
+      transform: translateX(-50%);
+    }
+
+    .header-button {
+      padding: 3px 5px; // ボタンのパディングをさらに小さくする
+      font-size: 0.5rem; // ボタンのフォントサイズをさらに小さくする
+      position: relative;
+      z-index: 1; // ボタンを文言の上に配置
+      margin-right: 0;
+    }
+  }
+
+  .footer-login {
+    display: flex;
+    justify-content: center; // リンクを中央に配置
+    font-size: 14px; // フッターのフォントサイズを小さくする
+    padding: 8px; // フッターのパディングを小さくする
+    text-align: center; // テキストを中央揃えにする
+
+    a {
+      margin: 0 5px; // リンク間の余白を調整
+    }
+  }
+
+  .login-form-container-login {
+    padding: 10px; // フォームのパディングを小さくする
+    max-width: 95%; // 最大幅を調整
+    box-shadow: 0 1px 3px rgba(0,0,0,.1);
+  }
+
+  h2 {
+    font-size: 1.8rem; // 見出しのフォントサイズを小さくする
+  }
+
+  .field-login label {
+    font-size: 0.8rem; // ラベルのフォントサイズを小さくする
+  }
+
+  .field-login input[type="email"], 
+  .field-login input[type="password"] {
+    padding: 6px; // 入力フィールドのパディングを小さくする
+    font-size: 0.8rem; // 入力フィールドのフォントサイズを小さくする
+  }
+
+  .actions-login input[type="submit"] {
+    font-size: 0.9rem; // ボタンのフォントサイズを小さくする
+    padding: 6px 12px; // ボタンのパディングを小さくする
+  }
+
+  .line-login-button-login {
+    font-size: 0.9rem; // LINEボタンのフォントサイズを小さくする
+    padding: 6px 12px; // LINEボタンのパディングを小さくする
+  }
+
+  .line-add-friend a img {
+    width: 100px; // 友だち追加ボタンの幅を長くする
+  }
+}
+
+@media (min-width: 321px) and (max-width: 600px) {
+  .header-login {
+    padding: 5px 10px; // 上下のパディングを狭くする
+    position: relative;
+
+    .welcome-text {
+      font-size: 1rem; // 文言のサイズを小さくする
+      white-space: nowrap; // テキストを1行で表示
+      overflow: hidden; // オーバーフローしたテキストを隠す
+      text-overflow: ellipsis; // 省略記号を表示
+      position: absolute;
+      left: 40%;
+      transform: translateX(-50%);
+    }
+
+    .header-button {
+      padding: 5px 10px;
+      font-size: 0.8rem; // ボタンのフォントサイズを小さくする
+      position: relative;
+      z-index: 1; // ボタンを文言の上に配置
+    }
+  }
+
+  .footer-login {
+    display: flex;
+    justify-content: center; // リンクを中央に配置
+    font-size: 16px; // フッターのフォントサイズ
+    padding: 10px; // フッターのパディング
+    text-align: center; // テキストを中央揃えにする
+
+    a {
+      margin: 0 5px; // リンク間の余白を調整
+    }
+  }
+
+  .login-form-container-login {
+    padding: 15px;
+    max-width: 90%;
+    box-shadow: 0 1px 3px rgba(0,0,0,.1);
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  .field-login label {
+    font-size: 0.9rem;
+  }
+
+  .field-login input[type="email"], 
+  .field-login input[type="password"] {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+
+  .actions-login input[type="submit"] {
+    font-size: 1rem;
+    padding: 8px 15px;
+  }
+
+  .line-login-button-login {
+    font-size: 1rem;
+    padding: 8px 15px;
+  }
+
+  .line-add-friend a img {
+    width: 80px; // 友だち追加ボタンの幅を小さく
+  }
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+  .header-login {
+    padding: 10px 20px; // 上下のパディングを広くする
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .welcome-text {
+      font-size: 1.5rem; // 文言のサイズを調整
+      white-space: nowrap; // テキストを1行で表示
+      overflow: hidden; // オーバーフローしたテキストを隠す
+      text-overflow: ellipsis; // 省略記号を表示
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .header-button {
+      padding: 8px 16px; // ボタンのパディングを調整
+      font-size: 0.9rem; // ボタンのフォントサイズを調整
+      position: relative;
+      z-index: 1; // ボタンを文言の上に配置
+      margin-left: auto; // ボタンを右に寄せる
+    }
+  }
+
+  .footer-login {
+    display: flex;
+    justify-content: flex-end; // リンクを右寄せに配置
+    font-size: 18px; // フッターのフォントサイズ
+    padding: 15px; // フッターのパディング
+    text-align: right; // テキストを右揃えにする
+
+    a {
+      margin: 0 10px; // リンク間の余白を調整
+    }
+  }
+
+  .login-form-container-login {
+    padding: 20px;
+    max-width: 80%;
+    box-shadow: 0 1px 3px rgba(0,0,0,.1);
+  }
+
+  h2 {
+    font-size: 2.2rem;
+  }
+
+  .field-login label {
+    font-size: 1rem;
+  }
+
+  .field-login input[type="email"], 
+  .field-login input[type="password"] {
+    padding: 10px;
+    font-size: 1rem;
+  }
+
+  .actions-login input[type="submit"] {
+    font-size: 1.1rem;
+    padding: 10px 20px;
+  }
+
+  .line-login-button-login {
+    font-size: 1.1rem;
+    padding: 10px 20px;
+  }
+
+  .line-add-friend {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+
+    a img {
+      width: 120px; // 友だち追加ボタンの幅を広くする
+    }
+  }
 }
