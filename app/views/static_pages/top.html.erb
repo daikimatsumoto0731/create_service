@@ -2,17 +2,24 @@
 <div class="top-container-tops">
   <div class="header-top">
     <div class="logo-circle-top"></div>
-    <div class="service-name-top">無NO薬〜野菜栽培〜</div>
-    <div class="auth-buttons-top">
-      <%= link_to '会員登録', new_user_registration_path, class: 'signup-button' %>
-      <%= link_to 'ログイン', new_user_session_path, class: 'login-button' %>
+    <div class="service-name-top">〜無NO薬〜野菜栽培〜</div>
+    <div class="hamburger-menu">
+      <input type="checkbox" id="menu-toggle">
+      <label for="menu-toggle" class="menu-icon"><span></span></label>
+      <div class="menu">
+        <%= link_to '会員登録', new_user_registration_path, class: 'menu-link' %>
+        <%= link_to 'ログイン', new_user_session_path, class: 'menu-link' %>
+        <%= link_to '利用規約', terms_path, class: 'menu-link' %>
+        <%= link_to 'プライバシーポリシー', privacy_policy_path, class: 'menu-link' %>
+        <%= link_to '使い方を見る', guide_path, class: 'menu-link' %>
+      </div>
     </div>
   </div>
 
   <div class="main-content-top">
     <div class="visual-introduction">
-      <h2>自宅で簡単に始める無農薬野菜作り</h2>
-      <p>スケジュール管理とアドバイスで初心者でも安心!</p>
+      <h2>無NO薬〜野菜栽培〜のご紹介</h2>
+      <p>自宅で簡単に無農薬野菜を育てるためのサービスです。スケジュール管理とアドバイスで初心者でも安心して栽培を楽しめます</p>
     </div>
 
     <div class="share-buttons">
@@ -26,10 +33,5 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/LINE_logo.svg" alt="LINEでシェア">
       </a>
     </div>
-  </div>
-
-  <div class="footer-top">
-    <%= link_to '利用規約', terms_path %>
-    <%= link_to 'プライバシーポリシー', privacy_policy_path %>
   </div>
 </div>

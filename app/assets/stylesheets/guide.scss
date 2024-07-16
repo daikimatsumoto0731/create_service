@@ -1,0 +1,264 @@
+/* 全体のスタイル */
+body {
+  font-family: 'Arial', sans-serif;
+  background-image: url('/assets/guide-vegetable.jpg'); /* 背景画像 */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  color: #333; /* 文字色 */
+}
+
+.guide-container {
+  background-color: rgba(255, 255, 255, 0.8); /* 背景の白色 */
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 800px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 影を追加 */
+}
+
+/* ヘッダーのスタイル */
+.header-guide {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+}
+
+.hamburger-menu {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#menu-toggle {
+  display: none; /* チェックボックスを非表示 */
+}
+
+.menu-icon {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  width: 35px;
+  height: 25px;
+}
+
+.menu-icon span,
+.menu-icon span::before,
+.menu-icon span::after {
+  display: block;
+  position: absolute;
+  height: 4px;
+  width: 100%;
+  background-color: black; /* 三本線の色を青に変更 */
+  border-radius: 2px;
+  transition: all 0.3s;
+  content: '';
+}
+
+.menu-icon span::before {
+  top: -10px;
+}
+
+.menu-icon span::after {
+  top: 10px;
+}
+
+#menu-toggle:checked + .menu-icon span {
+  background-color: transparent;
+}
+
+#menu-toggle:checked + .menu-icon span::before {
+  transform: translateY(10px) rotate(45deg);
+}
+
+#menu-toggle:checked + .menu-icon span::after {
+  transform: translateY(-10px) rotate(-45deg);
+}
+
+.menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  z-index: 1000;
+  flex-direction: column; /* 縦に並べる */
+  text-align: left;
+}
+
+#menu-toggle:checked ~ .menu {
+  display: flex;
+}
+
+.menu-link {
+  display: block;
+  padding: 10px 15px;
+  color: #333;
+  text-decoration: none;
+  white-space: nowrap; /* 横文字にする */
+}
+
+.menu-link:hover {
+  background-color: #f0f0f0;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #009688;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* 特徴セクションのスタイル */
+.features {
+  margin-bottom: 20px;
+}
+
+.feature-item {
+  background-color: #f9f9f9;
+  border-left: 5px solid #009688;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.feature-item h3 {
+  font-family: 'Georgia', serif;
+  font-size: 1.5rem;
+  color: #00796b;
+  margin-bottom: 10px;
+}
+
+.feature-item p {
+  font-family: 'Verdana', sans-serif;
+  font-size: 1rem;
+  color: #555;
+}
+
+.how-to-use {
+  padding: 10px 20px;
+}
+
+.step-by-step {
+  background-color: #f9f9f9;
+  border-left: 5px solid #009688;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.step-by-step h3 {
+  font-size: 1.5rem;
+  color: #00796b;
+  margin-bottom: 10px;
+}
+
+.step-by-step p {
+  font-size: 1rem;
+  color: #555;
+}
+
+@media (max-width: 600px) {
+  .guide-container {
+    padding: 6px; /* 上下のパディングを2px狭める */
+    margin: 6px auto; /* 上下のマージンを2px狭める */
+    max-width: 95%;
+  }
+
+  .guide-container h1 {
+    font-size: 1.2rem;
+    margin-bottom: 6px; /* h1の下のマージンを2px狭める */
+  }
+
+  .guide-container h2 {
+    font-size: 1.1rem;
+    margin-bottom: 4px; /* h2の下のマージンを2px狭める */
+  }
+
+  .guide-container h3 {
+    font-size: 1rem;
+    margin-bottom: 2px; /* h3の下のマージンを2px狭める */
+  }
+
+  .guide-container p {
+    font-size: 0.9rem;
+  }
+
+  .features, .how-to-use {
+    padding: 4px; /* featuresとhow-to-useの上下のパディングを2px狭める */
+    margin-bottom: 6px; /* featuresとhow-to-useの下のマージンを2px狭める */
+  }
+
+  .feature-item, .step-by-step {
+    padding: 4px; /* feature-itemとstep-by-stepの上下のパディングを2px狭める */
+    margin-bottom: 6px; /* feature-itemとstep-by-stepの下のマージンを2px狭める */
+  }
+
+  .feature-item h3, .step-by-step h3 {
+    font-size: 1rem;
+    margin-bottom: 2px; /* feature-itemとstep-by-step内のh3の下のマージンを2px狭める */
+  }
+
+  .feature-item p, .step-by-step p {
+    font-size: 0.9rem;
+  }
+
+  .hamburger-menu {
+    top: 26px; /* ハンバーガーメニューの位置を2px上に配置 */
+  }
+}
+
+@media (min-width: 600px) and (max-width: 768px) {
+  .guide-container {
+    padding: 6px; /* 上下のパディングを6pxに設定 */
+    margin: 6px auto; /* 上下のマージンを6pxに設定 */
+    max-width: 90%;
+  }
+
+  .guide-container h1 {
+    font-size: 1.5rem;
+    margin-bottom: 6px; /* h1の下のマージンを6pxに設定 */
+  }
+
+  .guide-container h2 {
+    font-size: 1.3rem;
+    margin-bottom: 4px; /* h2の下のマージンを4pxに設定 */
+  }
+
+  .guide-container h3 {
+    font-size: 1.2rem;
+    margin-bottom: 4px; /* h3の下のマージンを4pxに設定 */
+  }
+
+  .guide-container p {
+    font-size: 1rem;
+  }
+
+  .features, .how-to-use {
+    padding: 4px; /* featuresとhow-to-useの上下のパディングを4pxに設定 */
+    margin-bottom: 6px; /* featuresとhow-to-useの下のマージンを6pxに設定 */
+  }
+
+  .feature-item, .step-by-step {
+    padding: 4px; /* feature-itemとstep-by-stepの上下のパディングを4pxに設定 */
+    margin-bottom: 6px; /* feature-itemとstep-by-stepの下のマージンを6pxに設定 */
+  }
+
+  .feature-item h3, .step-by-step h3 {
+    font-size: 1.1rem;
+    margin-bottom: 4px; /* feature-itemとstep-by-step内のh3の下のマージンを4pxに設定 */
+  }
+
+  .feature-item p, .step-by-step p {
+    font-size: 1rem;
+  }
+
+  .hamburger-menu {
+    top: 25px; /* ハンバーガーメニューの位置を25pxに設定 */
+  }
+}
