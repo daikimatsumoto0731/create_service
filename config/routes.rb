@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   root 'static_pages#top'
   get 'terms', to: 'static_pages#terms', as: :terms
   get 'privacy_policy', to: 'static_pages#privacy_policy', as: :privacy_policy
-  get 'guide', to: 'static_pages#guide', as: :guide  # ここを追加
+  get 'guide', to: 'static_pages#guide', as: :guide # ここを追加
 
   # LINE通知設定へのルーティング
   get 'line_notification_settings', to: 'line_notifications#edit', as: 'line_notification_settings'
