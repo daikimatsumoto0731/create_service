@@ -22,3 +22,10 @@ Style/Documentation:
 # IfUnlessModifier Copを無効にする: 条件式が1行の場合に修飾子を使用することを強制するかどうか
 Style/IfUnlessModifier:
   Enabled: false
+
+# BlockLengthの設定: 特定のルーティングファイルに対して例外を設定
+Metrics/BlockLength:
+  Exclude:
+    - 'config/routes.rb'
+    - 'spec/models/vegetable_spec.rb'
+    - 'spec/system/mypage_spec.rb'

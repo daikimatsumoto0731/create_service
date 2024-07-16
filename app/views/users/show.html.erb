@@ -1,9 +1,8 @@
 <%= stylesheet_link_tag 'mypage', media: 'all', 'data-turbolinks-track': 'reload' %>
 <div class="content-wrapper">
   <div class="header-mypage">
-    <h1>ようこそ<%= @user.username %>さん</h1>
+    <h1><%= @user.username %>さん</h1>
     <div class="header-links">
-      <%= link_to 'トップページに戻る', root_path, class: 'back-to-top-link' %>
       <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'logout-link' %>
     </div>
   </div>
