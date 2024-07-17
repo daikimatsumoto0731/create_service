@@ -1,37 +1,262 @@
-.header-terms {
-  background-color: #09f409; /* ヘッダーの背景色を適切に設定 */
-  padding: 10px 0; /* 適切な余白を設定 */
-  
-  .container-terms {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  background: url('/assets/terms.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #333;
+}
+
+h1, h2 {
+  color: #0056b3;
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 0.5em;
+}
+
+h2 {
+  font-size: 1.8em;
+  margin-top: 1.5em;
+}
+
+/* ハンバーガーメニューのスタイル */
+.menu-wrap {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  z-index: 1;
+}
+
+.menu-wrap .toggler {
+  display: none;
+}
+
+.menu-wrap .hamburger {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.menu-wrap .hamburger > div {
+  background-color: #fff;
+  width: 60px;
+  height: 6px;
+  position: relative;
+  transition: all 0.4s;
+}
+
+.menu-wrap .hamburger > div::before,
+.menu-wrap .hamburger > div::after {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 6px;
+  background-color: #fff;
+  transition: all 0.4s;
+}
+
+.menu-wrap .hamburger > div::before {
+  top: -20px;
+}
+
+.menu-wrap .hamburger > div::after {
+  top: 20px;
+}
+
+body.menu-open .menu {
+  opacity: 1;
+  visibility: visible;
+}
+
+.menu {
+  position: fixed;
+  top: 90px; /* ハンバーガーメニューの下に表示 */
+  right: 30px;
+  background: rgba(255, 255, 255, 0.9); /* 黒い背景を削除 */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s;
+  z-index: 1;
+}
+
+.menu > div {
+  text-align: left;
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu ul li {
+  padding: 10px 0;
+}
+
+.menu ul li a {
+  color: #333;
+  text-decoration: none;
+  font-size: 1.5rem;
+  transition: color 0.4s;
+}
+
+.menu ul li a:hover {
+  color: #0056b3;
+}
+
+/* メインコンテンツのスタイル */
+.terms-content {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 10px; /* 上下の余白を狭める */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 10px auto; /* 上下の余白を狭める */
+  border-radius: 10px;
+  max-width: 800px;
+  height: 90vh; /* スクロールせずに表示するための高さ設定 */
+  overflow: auto; /* コンテンツが多い場合にスクロール可能にする */
+}
+
+section {
+  margin-bottom: 10px; /* 上下の余白を狭める */
+}
+
+p {
+  margin: 0.5em 0;
+}
+
+/* モバイルサイズのデザイン */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 1.8em;
   }
-    
-  .header-buttons-terms {
-    margin-right: 20px; /* ボタンを右側に余白を設定 */
+
+  h2 {
+    font-size: 1.4em;
   }
-    
-  .header-text-terms {
-    text-align: center;
-    font-weight: bold; /* ヘッダーテキストを中央揃えにする */
+
+  .menu-wrap .hamburger {
+    top: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
   }
-    
-  .back-button-terms {
-    /* バックボタンのスタイル */
-    padding: 8px 16px; /* 適切なパディングを設定 */
-    background-color: #5260f4; /* ボタンの背景色を適切に設定 */
-    color: #060606; /* ボタンのテキスト色を適切に設定 */
-    border: none; /* ボーダーをなしに設定 */
-    border-radius: 4px; /* ボタンの角丸を設定 */
-    text-decoration: none;
-    font-weight: bold;
-    cursor: pointer; /* カーソルをポインターに設定 */
-    transition: background-color 0.3s, color 0.3s; /* ホバー時のトランジションを設定 */
-  
-    &:hover {
-      background-color: #0cc0e4; /* ホバー時の背景色を設定 */
-      color: #ffffff; /* ホバー時のテキスト色を設定 */
-    }
+
+  .menu-wrap .hamburger > div {
+    width: 40px;
+    height: 4px;
+  }
+
+  .menu-wrap .hamburger > div::before,
+  .menu-wrap .hamburger > div::after {
+    width: 40px;
+    height: 4px;
+    top: -12px;
+  }
+
+  .menu-wrap .hamburger > div::after {
+    top: 12px;
+  }
+
+  .menu {
+    top: 60px; /* ハンバーガーメニューの下に表示 */
+    right: 15px;
+    padding: 5px;
+  }
+
+  .menu ul li {
+    padding: 5px 0;
+  }
+
+  .menu ul li a {
+    font-size: 1.2rem;
+  }
+
+  .terms-content {
+    padding: 10px; /* 上下の余白を狭める */
+    margin: 50px 10px 10px; /* 上部の余白を増やし、下部の余白を狭める */
+    height: calc(100vh - 70px); /* ハンバーガーメニューを避けるために高さを調整 */
+    overflow: auto; /* コンテンツが多い場合にスクロール可能にする */
+    width: 90%;
+  }
+
+  section {
+    margin-bottom: 10px; /* 上下の余白を狭める */
+  }
+
+  p {
+    margin: 0.5em 0;
+  }
+}
+
+/* タブレットサイズのデザイン */
+@media (min-width: 601px) and (max-width: 768px) {
+  h1 {
+    font-size: 2em;
+  }
+
+  h2 {
+    font-size: 1.6em;
+  }
+
+  .menu-wrap .hamburger {
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .menu-wrap .hamburger > div {
+    width: 50px;
+    height: 5px;
+  }
+
+  .menu-wrap .hamburger > div::before,
+  .menu-wrap .hamburger > div::after {
+    width: 50px;
+    height: 5px;
+    top: -15px;
+  }
+
+  .menu-wrap .hamburger > div::after {
+    top: 15px;
+  }
+
+  .menu {
+    top: 70px; /* ハンバーガーメニューの下に表示 */
+    right: 20px;
+    padding: 8px;
+  }
+
+  .menu ul li {
+    padding: 8px 0;
+  }
+
+  .menu ul li a {
+    font-size: 1.3rem;
+  }
+
+  .terms-content {
+    padding: 15px; /* 上下の余白を狭める */
+    margin: 60px 15px 15px; /* 上部の余白を増やし、下部の余白を狭める */
+    height: calc(100vh - 75px); /* ハンバーガーメニューを避けるために高さを調整 */
+    overflow: auto; /* コンテンツが多い場合にスクロール可能にする */
+  }
+
+  section {
+    margin-bottom: 15px; /* 上下の余白を狭める */
+  }
+
+  p {
+    margin: 0.5em 0;
   }
 }

@@ -17,6 +17,7 @@
 //= require bootstrap
 //= require custom
 //= require top
+//= require terms
 //= vegetable_selection
 //= require harvest_chart
 //= mypage_toggle
