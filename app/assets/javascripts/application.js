@@ -18,6 +18,7 @@
 //= require custom
 //= require top
 //= require terms
+//= require login
 //= vegetable_selection
 //= require harvest_chart
 //= mypage_toggle

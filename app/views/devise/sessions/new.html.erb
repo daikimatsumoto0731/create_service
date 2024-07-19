@@ -1,38 +1,53 @@
 <%= stylesheet_link_tag 'login', media: 'all', 'data-turbolinks-track': 'reload' %>
-<div class="header-login">
-  <span class="welcome-text">Welcome back! Log in to continue</span>
-  <%= link_to '会員登録', new_registration_path(resource_name), class: 'header-button' %>
-  <!--#パスワード再設定画面は出来次第表示<%= link_to 'パスワードをお忘れの方はこちら', new_password_path(resource_name), class: 'header-button' %> -->
+<div class="header-auth">
+  <div class="logo-circle-auth"></div>
+  <div class="service-name-auth">Log in to continue</div>
+
+  <!-- ハンバーガーメニュー -->
+  <div class="menu-wrap-auth">
+    <input type="checkbox" id="menu-toggle-auth" class="toggler-auth">
+    <label class="hamburger-auth" for="menu-toggle-auth">
+      <div></div>
+      <div></div>
+      <div></div>
+    </label>
+    <div class="menu-auth">
+      <div>
+        <ul>
+          <li><%= link_to 'トップページ', root_path %></li>
+          <li><%= link_to '会員登録', new_registration_path(resource_name) %></li>
+          <li><%= link_to '利用規約', terms_path %></li>
+          <li><%= link_to 'プライバシーポリシー', privacy_policy_path %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="login-background">
-  <div class="login-form-container-login">
+<div class="login-background-auth">
+  <div class="login-form-container-auth">
     <h2>ログイン</h2>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="field-login">
+      <div class="field-auth">
         <%= f.label :email, "メールアドレス" %>
         <%= f.email_field :email, autofocus: true, class: 'form-control' %>
       </div>
 
-      <div class="field-login">
+      <div class="field-auth">
         <%= f.label :password, "パスワード" %>
         <%= f.password_field :password, autocomplete: "current-password", class: 'form-control' %>
       </div>
 
-      <div class="actions-login">
-        <%= f.submit "ログイン", class: "login-button" %>
+      <div class="actions-auth">
+        <%= f.submit "ログイン", class: "login-button-auth" %>
       </div>
     <% end %>
-    <%= link_to "LINEログイン", user_line_omniauth_authorize_path, method: :post, class: "line-login-button-login" %>
+    <%= link_to "LINEログイン", user_line_omniauth_authorize_path, method: :post, class: "line-login-button-auth" %>
     <!-- LINE友達追加ボタンを追加 -->
-    <div class="line-add-friend">
+    <div class="line-add-friend-auth">
       <a href="https://lin.ee/Gk2q7hS"><img src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png" alt="友だち追加" height="36" border="0"></a>
     </div>
   </div>
 </div>
 
-<div class="footer-login">
-  <%= link_to '利用規約', terms_path, class: 'footer-link' %>
-  <%= link_to 'プライバシーポリシー', privacy_policy_path, class: 'footer-link' %>
-</div>
