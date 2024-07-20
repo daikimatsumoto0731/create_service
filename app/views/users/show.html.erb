@@ -4,6 +4,7 @@
     <h1><%= @user.username %>さん</h1>
     <div class="header-links">
       <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'logout-link' %>
+      <%= link_to '使い方を見る', guide_path, class: 'logout-link' %>
     </div>
   </div>
 

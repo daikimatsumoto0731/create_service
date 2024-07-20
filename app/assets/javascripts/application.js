@@ -20,6 +20,5 @@
 //= require terms
 //= require login
 //= vegetable_selection
-//= require harvest_chart
 //= mypage_toggle
 //= require_tree .

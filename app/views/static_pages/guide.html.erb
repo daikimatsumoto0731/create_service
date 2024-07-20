@@ -10,6 +10,9 @@
         <%= link_to 'ログイン', new_user_session_path, class: 'menu-link' %>
         <%= link_to '利用規約', terms_path, class: 'menu-link' %>
         <%= link_to 'プライバシーポリシー', privacy_policy_path, class: 'menu-link' %>
+        <% if user_signed_in? %>
+          <%= link_to 'マイページ', user_path(current_user), class: 'menu-link' %>
+        <% end %>
       </div>
     </div>
   </div>
