@@ -1,0 +1,51 @@
+<%= stylesheet_link_tag 'guide', media: 'all', 'data-turbolinks-track': 'reload' %>
+<div class="guide-container">
+  <div class="header-guide">
+    <div class="hamburger-menu">
+      <input type="checkbox" id="menu-toggle">
+      <label for="menu-toggle" class="menu-icon"><span></span></label>
+      <div class="menu">
+        <%= link_to 'トップページ', root_path, class: 'menu-link' %>
+        <%= link_to '会員登録', new_user_registration_path, class: 'menu-link' %>
+        <%= link_to 'ログイン', new_user_session_path, class: 'menu-link' %>
+        <%= link_to '利用規約', terms_path, class: 'menu-link' %>
+        <%= link_to 'プライバシーポリシー', privacy_policy_path, class: 'menu-link' %>
+        <% if user_signed_in? %>
+          <%= link_to 'マイページ', user_path(current_user), class: 'menu-link' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  
+  <h1>サービスの使い方</h1>
+  <div class="features">
+    <h2>主な機能</h2>
+    <div class="feature-item">
+      <h3>スケジュール管理</h3>
+      <p>野菜の成長段階に合わせたスケジュール管理ができます。水やりや肥料のタイミングを通知します。</p>
+    </div>
+    <div class="feature-item">
+      <h3>画像分析とアドバイス</h3>
+      <p>育て方に迷った時は、画像分析機能を使って育ててる野菜の状態と育て方のアドバイスをもらえます。</p>
+    </div>
+    <div class="feature-item">
+      <h3>収穫記録</h3>
+      <p>収穫した野菜の記録を残し、成長の成果を振り返ることができます。</p>
+    </div>
+  </div>
+  <div class="how-to-use">
+    <h2>利用方法</h2>
+    <div class="step-by-step">
+      <h3>ステップ1: 会員登録</h3>
+      <p>まずは会員登録を行いましょう。</p>
+    </div>
+    <div class="step-by-step">
+      <h3>ステップ2: 野菜を選ぶ</h3>
+      <p>育てたい野菜を選んで、スケジュールを設定します。</p>
+    </div>
+    <div class="step-by-step">
+      <h3>ステップ3: 育てる</h3>
+      <p>スケジュールを使って野菜を育てましょう。必要なタイミングで画像分析を使い、アドバイスをもらいましょう。</p>
+    </div>
+  </div>
+</div>

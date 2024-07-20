@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  # Devise関連のルーティング
   devise_for :users, controllers: {
     sessions: 'user_sessions',
     passwords: 'users/passwords',
@@ -10,12 +11,12 @@ Rails.application.routes.draw do
   resources :users, only: %i[show edit update]
   resource :user_setting, only: %i[edit update]
 
+  # Static pages
   root 'static_pages#top'
   get 'terms', to: 'static_pages#terms', as: :terms
   get 'privacy_policy', to: 'static_pages#privacy_policy', as: :privacy_policy
-end
+  get 'guide', to: 'static_pages#guide', as: :guide # ここを追加
 
-Rails.application.routes.draw do
   # LINE通知設定へのルーティング
   get 'line_notification_settings', to: 'line_notifications#edit', as: 'line_notification_settings'
   patch 'line_notification_settings', to: 'line_notifications#update'
@@ -23,9 +24,7 @@ Rails.application.routes.draw do
 
   # LINE Bot Webhook URL
   post '/callback', to: 'line_bot#callback'
-end
 
-Rails.application.routes.draw do
   # 野菜関連のルーティング
   resources :vegetables, only: %i[index create destroy] do
     collection do
@@ -46,9 +45,7 @@ Rails.application.routes.draw do
   patch '/events/update_sowing_date', to: 'events#update_sowing_date', as: 'update_sowing_date_events'
 
   post 'translate', to: 'translate#translate'
-end
 
-Rails.application.routes.draw do
   # 画像分析のアクションへのルート
   get 'analyze_image/new', to: 'events#new_analyze_image', as: 'new_analyze_image'
   post 'analyze_image', to: 'events#analyze_image', as: 'analyze_image'

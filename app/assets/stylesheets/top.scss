@@ -1,3 +1,13 @@
+body {
+  background-image: url('/assets/top-vegetable.png'); /* 背景画像のパスを指定 */
+  background-size: cover; /* 背景画像を全画面表示 */
+  background-position: center; /* 画像を中央に配置 */
+  background-repeat: no-repeat; /* 画像の繰り返しを無効化 */
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
 .top-container-tops {
   display: flex;
   flex-direction: column;
@@ -5,11 +15,11 @@
   padding-top: 80px;
 
   .header-top {
-    background-color: #09f409;
+    background-color: transparent; /* 背景色を透明に変更 */
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 10px; // ヘッダーのパディングを小さくする
+    justify-content: space-between; /* 右寄せにするために変更 */
+    padding: 10px; /* ヘッダーのパディングを小さくする */
     position: fixed;
     top: 0;
     left: 0;
@@ -17,8 +27,8 @@
     z-index: 10;
 
     .logo-circle-top {
-      height: 150px; // ロゴのサイズを小さくする
-      width: 150px; // ロゴのサイズを小さくする
+      height: 150px; /* ロゴのサイズを小さくする */
+      width: 150px; /* ロゴのサイズを小さくする */
       border-radius: 50%;
       margin-right: 10px;
       background-image: asset-url('top-log.png');
@@ -26,79 +36,125 @@
     }
 
     .service-name-top {
-      font-size: 1.5rem; // サービス名のフォントサイズを小さくする
+      font-size: 1.8rem; /* サービス名のフォントサイズを小さくする */
       font-weight: bold;
       color: white;
       text-shadow: 2px 2px 4px black;
-      margin-right: auto;
     }
 
-    .login-header-link .login-link {
-      font-size: 16px;
+    .hamburger-menu {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    #menu-toggle {
+      display: none;
+    }
+
+    .menu-icon {
+      display: inline-block;
+      cursor: pointer;
+      position: relative;
+      width: 35px; /* 幅を広くする */
+      height: 25px; /* 高さを広くする */
+      margin-left: auto;
+    }
+
+    .menu-icon span,
+    .menu-icon span::before,
+    .menu-icon span::after {
+      display: block;
+      position: absolute;
+      height: 4px; /* 高さを広くする */
+      width: 100%;
+      background-color: #333;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .menu-icon span::before {
+      content: '';
+      top: -10px; /* 間隔を広くする */
+    }
+
+    .menu-icon span::after {
+      content: '';
+      top: 10px; /* 間隔を広くする */
+    }
+
+    #menu-toggle:checked + .menu-icon span {
+      background-color: transparent;
+    }
+
+    #menu-toggle:checked + .menu-icon span::before {
+      transform: translateY(10px) rotate(45deg);
+    }
+
+    #menu-toggle:checked + .menu-icon span::after {
+      transform: translateY(-10px) rotate(-45deg);
+    }
+
+    .menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: white;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+      z-index: 1000;
+      flex-direction: column; /* 縦に並べる */
+      text-align: left;
+    }
+
+    #menu-toggle:checked ~ .menu {
+      display: flex;
+    }
+
+    .menu-link {
+      display: block;
       padding: 10px 15px;
-      margin-left: 10px;
-      background-color: #fffa67;
-      color: black;
+      color: #333;
       text-decoration: none;
-      border-radius: 5px;
-
-      &:hover {
-        background-color: lighten(white, 10%);
-        text-decoration: underline;
-      }
+      white-space: nowrap; /* 横文字にする */
     }
 
-    .auth-buttons-top {
-      .signup-button, .login-button {
-        font-size: 24px; // ボタンのフォントサイズを小さくする
-        padding: 8px 16px; // ボタンのパディングを小さくする
-        margin-left: 10px;
-        background-color: yellow;
-        color: black;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-
-        &:hover {
-          background-color: darken(yellow, 10%);
-        }
-      }
+    .menu-link:hover {
+      background-color: #f0f0f0;
     }
   }
 
   .main-content-top {
     flex-grow: 1;
-    padding-top: 200px; // ヘッダーの高さに合わせて上部の余白を調整
-    padding-bottom: 100px; // フッターの高さに合わせて下部の余白を調整
-    background-image: asset-url('top-vegetable.jpg');
-    background-size: cover;
-    background-position: center;
+    padding-top: 200px; /* ヘッダーの高さに合わせて上部の余白を調整 */
+    padding-bottom: 100px; /* フッターの高さに合わせて下部の余白を調整 */
 
     .visual-introduction {
       color: white;
       text-align: center;
       padding: 20px;
-      background-color: rgba(0, 0, 0, 0.6); // オーバーレイの透明度を調整してテキストの読みやすさを向上
-      border-radius: 8px; // 角丸のデザインを追加
+      background-color: rgba(0, 0, 0, 0.6); /* オーバーレイの透明度を調整してテキストの読みやすさを向上 */
+      border-radius: 8px; /* 角丸のデザインを追加 */
 
       h2, p {
-        background-color: rgba(0, 0, 0, 0.2); // テキスト自体にも軽微な背景を追加して読みやすさをさらに向上
-        padding: 8px 16px; // テキストのパディングを調整
-        border-radius: 4px; // テキストの角を丸くする
-        font-family: 'Arial', sans-serif; // フォントを設定
+        background-color: rgba(0, 0, 0, 0.2); /* テキスト自体にも軽微な背景を追加して読みやすさをさらに向上 */
+        padding: 8px 16px; /* テキストのパディングを調整 */
+        border-radius: 4px; /* テキストの角を丸くする */
+        font-family: 'Arial', sans-serif; /* フォントを設定 */
       }
       
       h2 {
         font-size: 36px;
         margin-bottom: 20px;
-        font-weight: bold; // 見出しのフォントを太字にする
-        text-transform: uppercase; // 見出しをすべて大文字にする
+        font-weight: bold; /* 見出しのフォントを太字にする */
+        text-transform: uppercase; /* 見出しをすべて大文字にする */
       }
       
       p {
         font-size: 24px;
-        font-style: italic; // 小見出しを斜体にする
+        font-style: italic; /* 小見出しを斜体にする */
       }  
     }
 
@@ -133,19 +189,13 @@
   }
 
   .footer-top {
-    font-size: 20px;
-    background-color: #09f409;
+    background-color: transparent; /* 背景色を透明に変更 */
     padding: 30px;
     text-align: right;
     position: fixed;
     bottom: 0;
     width: 100%;
     z-index: 10;
-    a {
-      margin: 0 5px;
-      color: black;
-      text-decoration: none;
-    }
   }
 
   .line-sign-up-button-top {
@@ -166,13 +216,13 @@
 }
 
 .login-form-container-top {
-  background-color: #ffffff; // 白の背景
-  padding: 2rem; // パディングを少し減らす
+  background-color: #ffffff; /* 白の背景 */
+  padding: 2rem; /* パディングを少し減らす */
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 100%; // フォームの幅を調整
-  max-width: 400px; // 最大幅を小さくする
-  margin: 2rem auto; // 上下左右中央に
+  width: 100%; /* フォームの幅を調整 */
+  max-width: 400px; /* 最大幅を小さくする */
+  margin: 2rem auto; /* 上下左右中央に */
   position: relative;
   top: 0;
   transform: none;
@@ -189,7 +239,7 @@
     label, input, select {
       display: block;
       width: 100%;
-      margin-bottom: 0.5rem; // 余白を統一
+      margin-bottom: 0.5rem; /* 余白を統一 */
     }
 
     input[type="email"], input[type="password"], input[type="text"], select {
@@ -203,50 +253,129 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 50px; // 要素間のギャップを設定
+    gap: 50px; /* 要素間のギャップを設定 */
     margin-top: 2rem;
     text-align: center;
   
     input[type="submit"] {
-      width: 100%; // 幅を100%に設定
+      width: 100%; /* 幅を100%に設定 */
       padding: 10px;
       font-size: 1rem;
       border-radius: 5px;
       cursor: pointer;
-      background-color: #fffa67; // 会員登録ボタンの基本背景色を設定
+      background-color: #fffa67; /* 会員登録ボタンの基本背景色を設定 */
   
       &:hover {
-        background-color: darken(#fffa67, 10%); // 会員登録ボタンのhover色を変更
+        background-color: darken(#fffa67, 10%); /* 会員登録ボタンのhover色を変更 */
       }
     }
   
     .line-sign-up-button-top {
-      width: 100%; // 幅を100%に設定
+      width: 100%; /* 幅を100%に設定 */
       padding: 10px;
       font-size: 1rem;
       border-radius: 5px;
       cursor: pointer;
-      background-color: #00C300; // LINEボタンの基本背景色を設定
+      background-color: #00C300; /* LINEボタンの基本背景色を設定 */
   
       &:hover {
-        background-color: darken(#00C300, 10%); // LINEボタンのhover色を変更
+        background-color: darken(#00C300, 10%); /* LINEボタンのhover色を変更 */
       }
     }
   }  
 }
 
-// SCSSファイルに追加
+/* SCSSファイルに追加 */
 .devise-registrations-new .header-top {
-  padding: 5px; // ヘッダーのパディングをさらに小さくする
+  padding: 5px; /* ヘッダーのパディングをさらに小さくする */
   .logo-circle-top {
-    height: 50px; // ロゴのサイズをさらに小さくする
-    width: 50px; // ロゴのサイズをさらに小さくする
+    height: 50px; /* ロゴのサイズをさらに小さくする */
+    width: 50px; /* ロゴのサイズをさらに小さくする */
     background-image: asset-url('top-log.png');
     background-size: cover;
   }
   .service-name-top {
-    font-size: 40px; // サービス名のフォントサイズをさらに小さくする
+    font-size: 40px; /* サービス名のフォントサイズをさらに小さくする */
   }
+}
+
+/* ハンバーガーメニューのスタイル */
+.hamburger-menu {
+  position: relative;
+}
+
+#menu-toggle {
+  display: none;
+}
+
+.menu-icon {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  width: 35px; /* 幅を広くする */
+  height: 25px; /* 高さを広くする */
+}
+
+.menu-icon span,
+.menu-icon span::before,
+.menu-icon span::after {
+  display: block;
+  position: absolute;
+  height: 4px; /* 高さを広くする */
+  width: 100%;
+  background-color: black; /* 三本線の色を青に変更する */
+  border-radius: 2px;
+  transition: all 0.3s;
+  content: '';
+}
+
+.menu-icon span::before {
+  top: -10px; /* 間隔を広くする */
+}
+
+.menu-icon span::after {
+  top: 10px; /* 間隔を広くする */
+}
+
+#menu-toggle:checked + .menu-icon span {
+  background-color: transparent;
+}
+
+#menu-toggle:checked + .menu-icon span::before {
+  transform: translateY(10px) rotate(45deg);
+}
+
+#menu-toggle:checked + .menu-icon span::after {
+  transform: translateY(-10px) rotate(-45deg);
+}
+
+.menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  z-index: 1000;
+  flex-direction: column; /* 縦に並べる */
+  text-align: left;
+}
+
+#menu-toggle:checked ~ .menu {
+  display: flex;
+}
+
+.menu-link {
+  display: block;
+  padding: 10px 15px;
+  color: #333;
+  text-decoration: none;
+  white-space: nowrap; /* 横文字にする */
+}
+
+.menu-link:hover {
+  background-color: #6cf550;
 }
 
 @media (max-width: 600px) {
@@ -257,41 +386,28 @@
       flex-direction: row;
       align-items: center;
       padding: 5px;
-      height: 60px; // ヘッダーの高さを狭くする
+      height: 60px; /* ヘッダーの高さを狭くする */
 
       .logo-circle-top {
-        height: 30px; // ロゴのサイズをさらに小さくする
+        height: 30px; /* ロゴのサイズをさらに小さくする */
         width: 30px;
-        margin-right: 5px; // ロゴとタイトルの間隔を調整
-        order: 1; // ヘッダーの左側に配置
+        margin-right: 5px; /* ロゴとタイトルの間隔を調整 */
+        order: 1; /* ヘッダーの左側に配置 */
       }
 
       .service-name-top {
-        font-size: 0.9rem; // サービス名のフォントサイズをさらに小さくする
-        margin: 0 auto; // タイトルを中央に配置
-        text-align: center; // タイトルを中央に配置
-        order: 2; // 中央に配置
+        font-size: 0.9rem; /* サービス名のフォントサイズをさらに小さくする */
+        margin: 0 auto; /* タイトルを中央に配置 */
+        text-align: center; /* タイトルを中央に配置 */
+        order: 2; /* 中央に配置 */
         flex: 1;
-        white-space: nowrap; // タイトルを1行にする
-        overflow: hidden; // タイトルがあふれないようにする
-        text-overflow: ellipsis; // タイトルがあふれた場合に省略記号を表示
+        white-space: nowrap; /* タイトルを1行にする */
+        overflow: hidden; /* タイトルがあふれないようにする */
+        text-overflow: ellipsis; /* タイトルがあふれた場合に省略記号を表示 */
       }
 
-      .auth-buttons-top {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-end;
-        width: auto;
-        order: 3; // 右に配置
-        margin-left: auto; // ボタンを右に配置
-        gap: 5px; // ボタン間の間隔を調整
-
-        .signup-button, .login-button {
-          width: auto;
-          font-size: 0.7rem; // フォントサイズをさらに小さくする
-          padding: 5px; // パディングを小さくする
-        }
+      .hamburger-menu {
+        order: 3; /* 右に配置 */
       }
     }
 
@@ -304,22 +420,22 @@
         padding: 10px;
 
         h2 {
-          font-size: 16px; // 見出しのフォントサイズを小さくする
-          white-space: normal; // 見出しを複数行にする
+          font-size: 16px; /* 見出しのフォントサイズを小さくする */
+          white-space: normal; /* 見出しを複数行にする */
         }
 
         p {
-          font-size: 12px; // 小見出しのフォントサイズを小さくする
-          white-space: normal; // 小見出しを複数行にする
-          overflow: visible; // テキストがあふれないようにする
+          font-size: 12px; /* 小見出しのフォントサイズを小さくする */
+          white-space: normal; /* 小見出しを複数行にする */
+          overflow: visible; /* テキストがあふれないようにする */
         }
       }
 
       .share-buttons {
         gap: 10px;
-        margin-top: 20px; // シェアボタンの上部マージン
+        margin-top: 20px; /* シェアボタンの上部マージン */
         position: relative;
-        top: 80px; // シェアボタンの位置をさらに下に調整
+        top: 80px; /* シェアボタンの位置をさらに下に調整 */
       }
 
       .share-buttons img {
@@ -362,6 +478,17 @@
       }
     }
   }
+
+  /* ハンバーガーメニューのドロップダウン部分のサイズを小さくする */
+  .header-top .menu {
+    width: 120px; /* ドロップダウンメニューの幅を小さくする */
+    padding: 5px; /* ドロップダウンメニューのパディングを小さくする */
+  }
+
+  .header-top .menu-link {
+    font-size: 0.6rem; /* メニューリンクのフォントサイズを小さくする */
+    padding: 5px; /* メニューリンクのパディングを小さくする */
+  }
 }
 
 @media (min-width: 600px) and (max-width: 768px) {
@@ -372,41 +499,28 @@
       flex-direction: row;
       align-items: center;
       padding: 5px;
-      height: 60px; // ヘッダーの高さを狭くする
+      height: 60px; /* ヘッダーの高さを狭くする */
 
       .logo-circle-top {
-        height: 60px; // ロゴのサイズを大きくする
+        height: 60px; /* ロゴのサイズを大きくする */
         width: 60px;
-        margin-right: 8px; // ロゴとタイトルの間隔を調整
-        order: 1; // ヘッダーの左側に配置
+        margin-right: 8px; /* ロゴとタイトルの間隔を調整 */
+        order: 1; /* ヘッダーの左側に配置 */
       }
 
       .service-name-top {
-        font-size: 1.8rem; // サービス名のフォントサイズを大きくする
-        margin: 0 auto; // タイトルを中央に配置
-        text-align: center; // タイトルを中央に配置
-        order: 2; // 中央に配置
+        font-size: 1.8rem; /* サービス名のフォントサイズを大きくする */
+        margin: 0 auto; /* タイトルを中央に配置 */
+        text-align: center; /* タイトルを中央に配置 */
+        order: 2; /* 中央に配置 */
         flex: 1;
-        white-space: nowrap; // タイトルを1行にする
-        overflow: hidden; // タイトルがあふれないようにする
-        text-overflow: ellipsis; // タイトルがあふれた場合に省略記号を表示
+        white-space: nowrap; /* タイトルを1行にする */
+        overflow: hidden; /* タイトルがあふれないようにする */
+        text-overflow: ellipsis; /* タイトルがあふれた場合に省略記号を表示 */
       }
 
-      .auth-buttons-top {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-end;
-        width: auto;
-        order: 3; // 右に配置
-        margin-left: auto; // ボタンを右に配置
-        gap: 5px; // ボタン間の間隔を調整
-
-        .signup-button, .login-button {
-          width: auto;
-          font-size: 0.8rem; // フォントサイズを調整
-          padding: 6px; // パディングを調整
-        }
+      .hamburger-menu {
+        order: 3; /* 右に配置 */
       }
     }
 
@@ -419,22 +533,22 @@
         padding: 10px;
 
         h2 {
-          font-size: 22px; // 見出しのフォントサイズを調整
-          white-space: normal; // 見出しを複数行にする
+          font-size: 22px; /* 見出しのフォントサイズを調整 */
+          white-space: normal; /* 見出しを複数行にする */
         }
 
         p {
-          font-size: 18px; // 小見出しのフォントサイズを調整
-          white-space: normal; // 小見出しを複数行にする
-          overflow: visible; // テキストがあふれないようにする
+          font-size: 18px; /* 小見出しのフォントサイズを調整 */
+          white-space: normal; /* 小見出しを複数行にする */
+          overflow: visible; /* テキストがあふれないようにする */
         }
       }
 
       .share-buttons {
         gap: 10px;
-        margin-top: 20px; // シェアボタンの上部マージン
+        margin-top: 20px; /* シェアボタンの上部マージン */
         position: relative;
-        top: 80px; // シェアボタンの位置をさらに下に調整
+        top: 80px; /* シェアボタンの位置をさらに下に調整 */
       }
 
       .share-buttons img {
@@ -450,7 +564,7 @@
     .footer-top {
       font-size: 16px;
       padding: 15px;
-      text-align: right; // 利用規約とプライバシーポリシーを右寄せ
+      text-align: right; /* 利用規約とプライバシーポリシーを右寄せ */
     }
 
     .line-sign-up-button-top {

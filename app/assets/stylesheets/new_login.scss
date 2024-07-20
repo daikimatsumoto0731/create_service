@@ -4,8 +4,8 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  font-family: 'Noto+Sans+JP', sans-serif; // Google Fontsの適用
-  background-image: asset-url('new_login.jpg'); // 背景画像を設定
+  font-family: 'Noto Sans JP', sans-serif;
+  background-image: asset-url('new_login.jpg');
   background-size: cover;
   background-position: center;
 }
@@ -17,11 +17,10 @@ body {
   padding-top: 80px;
 
   .header-top {
-    background-color: #09f409;
     display: flex;
     align-items: center;
-    justify-content: space-between; // ロゴとサービス名の間を空ける
-    padding: 10px; // ヘッダーのパディングを小さくする
+    justify-content: space-between;
+    padding: 10px;
     position: fixed;
     top: 0;
     left: 0;
@@ -29,46 +28,38 @@ body {
     z-index: 10;
 
     .logo-circle-top {
-      height: 50px; // ロゴのサイズをさらに小さくする
-      width: 50px; // ロゴのサイズをさらに小さくする
+      height: 80px; /* ロゴのサイズを大きく */
+      width: 80px; /* ロゴのサイズを大きく */
       border-radius: 50%;
       background-image: asset-url('top-log.png');
       background-size: cover;
-      margin-right: 20px; // ロゴとサービス名の間隔を広げる
     }
 
     .service-name-top {
-      font-size: 1.8rem; // サービス名のフォントサイズを小さくする
+      font-size: 2.5rem; /* フォントサイズを大きく */
       font-weight: bold;
-      color: white;
-      text-shadow: 2px 2px 4px black;
-      margin-right: auto;
+      color: #000; /* 背景が白メインなので文字色を黒に */
+      text-shadow: 2px 2px 4px #fff; /* 白い背景に対する影の効果 */
+      margin: auto;
+      margin-right: 50px;
     }
 
-    .login-header-link .login-link {
-      font-size: 16px;
-      padding: 10px 15px;
-      background-color: yellow; // ログインボタンの背景色を黄色に変更
-      color: black;
-      text-decoration: none;
-      border-radius: 5px;
-
-      &:hover {
-        background-color: lighten(yellow, 10%);
-        text-decoration: underline;
-      }
+    .menu-wrap {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
     }
   }
 
   .login-form-container-top {
-    background-color: #ffffff; // 白の背景
-    padding: 1rem; // パディングを調整
+    background-color: rgba(255, 255, 255, 0.8); /* 背景色を半透明に変更 */
+    padding: 1rem;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 100%; // フォームの幅を調整
-    max-width: 300px; // 最大幅を調整
-    height: auto; // 高さを自動調整
-    margin: 2rem auto; // 上下左右中央に
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin: 2rem auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -77,8 +68,8 @@ body {
       text-align: center;
       color: #09f409;
       margin-bottom: 10px;
-      font-size: 2rem; // フォントサイズを大きくする
-      font-weight: bold; // フォントを太くする
+      font-size: 2rem;
+      font-weight: bold;
     }
 
     .field-top {
@@ -87,15 +78,15 @@ body {
       label, input, select {
         display: block;
         width: 100%;
-        margin-bottom: 0.5rem; // 余白を統一
-        font-size: 0.8rem; // フォントサイズを小さくする
+        margin-bottom: 0.5rem;
+        font-size: 0.8rem;
       }
 
       input[type="email"], input[type="password"], input[type="text"], select {
         padding: 6px;
         border: 1px solid #ddd;
         border-radius: 4px;
-        font-size: 0.8rem; // フォントサイズを小さくする
+        font-size: 0.8rem;
       }
     }
 
@@ -103,83 +94,238 @@ body {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 15px; // 要素間のギャップを設定
+      gap: 15px;
       margin-top: 1rem;
       text-align: center;
 
       input[type="submit"] {
-        width: 100%; // 幅を100%に設定
+        width: 100%;
         padding: 8px;
-        font-size: 0.9rem; // フォントサイズを小さくする
+        font-size: 0.9rem;
         border-radius: 5px;
         cursor: pointer;
-        background-color: #09f409; // 会員登録ボタンの基本背景色を設定
+        background-color: #09f409;
 
         &:hover {
-          background-color: darken(#09f409, 10%); // 会員登録ボタンのhover色を変更
+          background-color: darken(#09f409, 10%);
         }
       }
 
       .line-sign-up-button-top {
-        width: 100%; // 幅を100%に設定
+        width: 100%;
         padding: 8px;
-        font-size: 0.9rem; // フォントサイズを小さくする
+        font-size: 0.9rem;
         border-radius: 5px;
         cursor: pointer;
-        background-color: #09f409; // LINEボタンの基本背景色を設定
-        color: #ffffff; // LINEボタンの文字色を白に設定
+        background-color: #09f409;
+        color: #ffffff;
 
         &:hover {
-          background-color: darken(#09f409, 10%); // LINEボタンのhover色を変更
+          background-color: darken(#09f409, 10%);
         }
       }
     }
   }
 }
 
-@media (max-width: 600px) {
+/* ハンバーガーメニューのスタイル */
+.menu-wrap {
+  position: relative;
+}
+
+.menu-wrap .toggler {
+  display: none;
+}
+
+.menu-wrap .hamburger {
+  width: 40px;
+  height: 30px;
+  cursor: pointer;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.menu-wrap .hamburger > div {
+  background-color: #000; /* ボタンの色を黒に変更 */
+  width: 100%;
+  height: 4px;
+  transition: all 0.4s;
+}
+
+body.menu-open .menu {
+  opacity: 1;
+  visibility: visible;
+}
+
+.menu {
+  position: fixed;
+  top: 60px; /* ハンバーガーメニューの下に表示 */
+  right: 10px; /* 右寄せ */
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s;
+  z-index: 1;
+}
+
+.menu > div {
+  text-align: left;
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu ul li {
+  padding: 10px 0;
+}
+
+.menu ul li a {
+  color: #333;
+  text-decoration: none;
+  font-size: 1.5rem;
+  transition: color 0.4s;
+}
+
+.menu ul li a:hover {
+  color: #0056b3;
+}
+
+@media (max-width: 320px) {
   .top-container-tops {
-    padding-top: 60px; // ヘッダーの高さに合わせて余白を調整
+    padding-top: 60px; /* ヘッダーの高さに合わせて余白を調整 */
 
     .header-top {
-      padding: 5px 10px; // 上下のパディングを狭くする
+      padding: 5px 10px; /* 上下のパディングを狭くする */
       .logo-circle-top {
-        height: 40px; // ロゴのサイズを小さくする
-        width: 40px; // ロゴのサイズを小さくする
-        margin-right: 15px; // ロゴとサービス名の間隔を調整
+        height: 30px; /* ロゴのサイズをさらに小さく */
+        width: 30px; /* ロゴのサイズをさらに小さく */
+        margin-right: 10px; /* ロゴとサービス名の間隔を調整 */
       }
       .service-name-top {
-        font-size: 1rem; // サービス名のフォントサイズを小さくする
+        font-size: 1rem; /* サービス名のフォントサイズをさらに小さく */
+        margin-left: 5px; /* 左に余白を追加 */
+        margin-right: 5px; /* 右に余白を追加 */
+        white-space: nowrap; /* テキストを1行に収める */
       }
-      .login-header-link .login-link {
-        font-size: 0.8rem; // フォントサイズを小さくする
-        padding: 5px 10px; // パディングを小さくする
+      .menu-wrap .hamburger > div {
+        background-color: #000; /* ボタンの色を黒に変更 */
+        width: 28px; /* ハンバーガーメニューアイコンの幅 */
+        height: 2px; /* ハンバーガーメニューアイコンの高さ */
       }
     }
 
+    .menu {
+      top: 50px; /* ハンバーガーメニューの位置を調整 */
+      right: 5px; /* ハンバーガーメニューの右位置を調整 */
+      padding: 5px; /* メニューのパディングを調整 */
+    }
+
+    .menu ul li {
+      padding: 5px 0; /* リストアイテムのパディングを調整 */
+    }
+
+    .menu ul li a {
+      font-size: 1rem; /* リストアイテムのフォントサイズを調整 */
+    }
+
     .login-form-container-top {
-      padding: 0.5rem; // パディングをさらに小さく調整
-      max-width: 85%; // 最大幅をさらに調整
-      margin: 1rem auto; // 上下左右中央に
+      padding: 0.5rem; /* パディングをさらに小さく調整 */
+      max-width: 90%; /* 最大幅をさらに調整 */
+      margin: 1rem auto; /* 上下左右中央に */
 
       h2 {
-        font-size: 1.2rem; // 見出しのフォントサイズをさらに小さくする
+        font-size: 1rem; /* 見出しのフォントサイズをさらに小さく */
       }
 
       .field-top {
         label, input, select {
-          font-size: 0.7rem; // フォントサイズをさらに小さくする
+          font-size: 0.6rem; /* フォントサイズをさらに小さく */
         }
         input[type="email"], input[type="password"], input[type="text"], select {
-          padding: 4px; // パディングをさらに小さくする
+          padding: 3px; /* パディングをさらに小さく */
         }
       }
 
       .actions-top {
-        gap: 8px; // 要素間のギャップをさらに調整
+        gap: 5px; /* 要素間のギャップをさらに調整 */
         input[type="submit"], .line-sign-up-button-top {
-          padding: 6px; // パディングをさらに小さくする
-          font-size: 0.8rem; // フォントサイズをさらに小さくする
+          padding: 5px; /* パディングをさらに小さく */
+          font-size: 0.7rem; /* フォントサイズをさらに小さく */
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 321px) and (max-width: 600px) {
+  .top-container-tops {
+    padding-top: 60px; /* ヘッダーの高さに合わせて余白を調整 */
+
+    .header-top {
+      padding: 5px 10px; /* 上下のパディングを狭くする */
+      .logo-circle-top {
+        height: 40px; /* ロゴのサイズを小さくする */
+        width: 40px; /* ロゴのサイズを小さくする */
+        margin-right: 15px; /* ロゴとサービス名の間隔を調整 */
+      }
+      .service-name-top {
+        font-size: 1.2rem; /* サービス名のフォントサイズをさらに小さくする */
+        margin-left: 10px; /* 左に余白を追加 */
+        margin-right: 10px; /* 右に余白を追加 */
+        white-space: nowrap; /* テキストを1行に収める */
+      }
+      .menu-wrap .hamburger > div {
+        background-color: #000; /* ボタンの色を黒に変更 */
+        width: 30px; /* ハンバーガーメニューアイコンの幅 */
+        height: 3px; /* ハンバーガーメニューアイコンの高さ */
+      }
+    }
+
+    .menu {
+      top: 60px; /* ハンバーガーメニューの位置を調整 */
+      right: 10px; /* ハンバーガーメニューの右位置を調整 */
+      padding: 10px; /* メニューのパディングを調整 */
+    }
+
+    .menu ul li {
+      padding: 10px 0; /* リストアイテムのパディングを調整 */
+    }
+
+    .menu ul li a {
+      font-size: 1.2rem; /* リストアイテムのフォントサイズを調整 */
+    }
+
+    .login-form-container-top {
+      padding: 0.5rem; /* パディングをさらに小さく調整 */
+      max-width: 85%; /* 最大幅をさらに調整 */
+      margin: 1rem auto; /* 上下左右中央に */
+
+      h2 {
+        font-size: 1.2rem; /* 見出しのフォントサイズをさらに小さくする */
+      }
+
+      .field-top {
+        label, input, select {
+          font-size: 0.7rem; /* フォントサイズをさらに小さくする */
+        }
+        input[type="email"], input[type="password"], input[type="text"], select {
+          padding: 4px; /* パディングをさらに小さくする */
+        }
+      }
+
+      .actions-top {
+        gap: 8px; /* 要素間のギャップをさらに調整 */
+        input[type="submit"], .line-sign-up-button-top {
+          padding: 6px; /* パディングをさらに小さくする */
+          font-size: 0.8rem; /* フォントサイズをさらに小さくする */
         }
       }
     }
@@ -188,47 +334,65 @@ body {
 
 @media (min-width: 601px) and (max-width: 768px) {
   .top-container-tops {
-    padding-top: 70px; // ヘッダーの高さに合わせて余白を調整
+    padding-top: 70px; /* ヘッダーの高さに合わせて余白を調整 */
 
     .header-top {
-      padding: 8px 16px; // ヘッダーのパディングを調整
+      padding: 10px 20px; /* 上下のパディングを少し広げる */
       .logo-circle-top {
-        height: 40px; // ロゴのサイズをさらに調整
-        width: 40px; // ロゴのサイズをさらに調整
-        margin-right: 20px; // ロゴとサービス名の間隔を調整
+        height: 50px; /* ロゴのサイズを適度に大きく */
+        width: 50px; /* ロゴのサイズを適度に大きく */
+        margin-right: 20px; /* ロゴとサービス名の間隔を調整 */
       }
       .service-name-top {
-        font-size: 1.2rem; // サービス名のフォントサイズをさらに調整
+        font-size: 1.8rem; /* サービス名のフォントサイズを適度に */
+        margin-left: 15px; /* 左に余白を追加 */
+        margin-right: 15px; /* 右に余白を追加 */
+        white-space: nowrap; /* テキストを1行に収める */
       }
-      .login-header-link .login-link {
-        font-size: 0.8rem; // フォントサイズをさらに調整
-        padding: 6px 10px; // パディングをさらに調整
+      .menu-wrap .hamburger > div {
+        background-color: #000; /* ボタンの色を黒に変更 */
+        width: 35px; /* ハンバーガーメニューアイコンの幅 */
+        height: 4px; /* ハンバーガーメニューアイコンの高さ */
       }
     }
 
+    .menu {
+      top: 70px; /* ハンバーガーメニューの位置を調整 */
+      right: 15px; /* ハンバーガーメニューの右位置を調整 */
+      padding: 10px; /* メニューのパディングを調整 */
+    }
+
+    .menu ul li {
+      padding: 10px 0; /* リストアイテムのパディングを調整 */
+    }
+
+    .menu ul li a {
+      font-size: 1.4rem; /* リストアイテムのフォントサイズを調整 */
+    }
+
     .login-form-container-top {
-      padding: 0.6rem; // パディングをさらに調整
-      max-width: 50%; // 最大幅をさらに調整
-      margin: 1.5rem auto; // 上下左右中央に
+      padding: 0.8rem; /* パディングを少し狭める */
+      max-width: 80%; /* 最大幅を調整 */
+      margin: 1.3rem auto; /* 上下左右中央に */
 
       h2 {
-        font-size: 1.4rem; // 見出しのフォントサイズをさらに調整
+        font-size: 1.5rem; /* 見出しのフォントサイズを調整 */
       }
 
       .field-top {
         label, input, select {
-          font-size: 0.7rem; // フォントサイズをさらに調整
+          font-size: 0.8rem; /* フォントサイズを適度に */
         }
         input[type="email"], input[type="password"], input[type="text"], select {
-          padding: 4px; // パディングをさらに調整
+          padding: 5px; /* パディングを調整 */
         }
       }
 
       .actions-top {
-        gap: 8px; // 要素間のギャップをさらに調整
+        gap: 10px; /* 要素間のギャップを調整 */
         input[type="submit"], .line-sign-up-button-top {
-          padding: 6px; // パディングをさらに調整
-          font-size: 0.8rem; // フォントサイズをさらに調整
+          padding: 8px; /* パディングを調整 */
+          font-size: 1rem; /* フォントサイズを調整 */
         }
       }
     }

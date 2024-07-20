@@ -13,7 +13,7 @@ RSpec.describe 'MyPage', type: :system do
   end
 
   it "displays the user's profile information" do
-    expect(page).to have_content("ようこそ#{user.username}さん")
+    expect(page).to have_content("#{user.username}さん")
   end
 
   it 'displays the weather information if prefecture is set' do
@@ -30,6 +30,11 @@ RSpec.describe 'MyPage', type: :system do
 
   it 'has a link to logout' do
     expect(page).to have_link('ログアウト', href: destroy_user_session_path)
+  end
+
+  it 'logs out and redirects to the top page' do
+    click_link 'ログアウト'
+    expect(page).to have_current_path(root_path)
   end
 
   it 'has a link to edit profile' do

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class UserSessionsController < Devise::SessionsController
-  # ユーザーのログイン処理
   def create
     self.resource = warden.authenticate!(auth_options)
     if resource
@@ -14,5 +13,9 @@ class UserSessionsController < Devise::SessionsController
     end
   end
 
-  # ユーザーのログアウト処理
+  protected
+
+  def after_sign_out_path_for(_resource_or_scope)
+    root_path
+  end
 end
