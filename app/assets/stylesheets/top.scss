@@ -1,5 +1,5 @@
 body {
-  background-image: url('/assets/top-vegetable.png'); /* 背景画像のパスを指定 */
+  background-image: asset-url('top-vegetable.png'); /* 背景画像のパスを指定 */
   background-size: cover; /* 背景画像を全画面表示 */
   background-position: center; /* 画像を中央に配置 */
   background-repeat: no-repeat; /* 画像の繰り返しを無効化 */
