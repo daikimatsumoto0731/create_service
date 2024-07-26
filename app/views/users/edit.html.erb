@@ -1,6 +1,7 @@
 <!-- ヘッダー -->
 <div class="header-profile">
   <h1>プロフィール編集</h1>
+  <%= link_to 'マイページ', user_path(current_user), class: 'profile-page-link' if user_signed_in? %>
 </div>
 
 <!-- プロフィール編集フォーム -->

@@ -1,6 +1,7 @@
 // 基本の色設定
 $primary-color: #09f409; // ヘッダーとフッターの色
 $accent-color: #f4a409; // アクセントカラー
+$button-color: #d4e009; // 「マイページ」ボタンの色
 $light-grey: #f5f5f5; // 背景色などに使う軽いグレー
 $dark-grey: #333; // テキストのデフォルトカラー
 
@@ -8,6 +9,9 @@ $dark-grey: #333; // テキストのデフォルトカラー
 body {
   font-family: 'Helvetica', 'Arial', sans-serif;
   color: $dark-grey;
+  background-image: url('/assets/login.jpg'); // 背景画像の設定
+  background-size: cover;
+  background-position: center;
 }
 
 // ヘッダーのスタイル
@@ -17,10 +21,26 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative; // リンクボタンの絶対配置用
 
   h1 {
     color: white;
     margin: 0;
+  }
+
+  .profile-page-link {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    background-color: $button-color; // ボタンの色を変更
+    color: black; // テキスト色を変更
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    &:hover {
+      background-color: darken($button-color, 10%); // ホバー時に色を暗くする
+    }
   }
 }
 
@@ -39,7 +59,7 @@ body {
     color: white;
     text-decoration: none;
     &:hover {
-      text-decoration: underline;
+      text-decoration: underline; // ホバー時に下線を表示
     }
   }
 }
@@ -78,15 +98,164 @@ body {
       cursor: pointer;
       font-size: 16px;
       &:hover {
-        background-color: darken($accent-color, 10%);
+        background-color: darken($accent-color, 10%); // ホバー時に色を暗くする
       }
     }
   }
 }
 
-// レスポンシブデザインのためのブレークポイント
-@media (max-width: 768px) {
+// スマホ（375px〜428px）のスタイル
+@media screen and (min-width: 375px) and (max-width: 430px) {
+  body {
+    background-size: cover;
+    background-position: center;
+  }
+
+  .header-profile {
+    padding: 10px 15px; // 上下の幅を狭く設定
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    h1 {
+      margin: 0;
+    }
+
+    .profile-page-link {
+      position: relative;
+      right: 0; // 右端に配置
+      top: 0;   // 上下位置調整
+      background-color: $button-color;
+      color: black;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 14px;
+      &:hover {
+        background-color: darken($button-color, 10%);
+      }
+    }
+  }
+
+  .footer-profile {
+    padding: 15px;
+    .footer-profile a {
+      font-size: 14px;
+    }
+  }
+
   .edit-profile-form-profile {
     padding: 20px;
+    max-width: 90%;
+    margin: 80px auto; // フォームをさらに下に下げる
+
+    .field-profile, .actions-profile {
+      margin-bottom: 25px; // フィールドのマージンを調整して下げる
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid $dark-grey;
+        border-radius: 4px;
+      }
+
+      button, input[type="submit"] {
+        background-color: $accent-color;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        &:hover {
+          background-color: darken($accent-color, 10%);
+        }
+      }
+    }
+  }
+}
+
+// タブレット（768px〜960px）のスタイル
+@media screen and (min-width: 768px) and (max-width: 960px) {
+  body {
+    background-size: cover;
+    background-position: center;
+  }
+
+  .header-profile {
+    padding: 15px 30px; // ヘッダーの上下の幅を狭く設定
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    h1 {
+      margin: 0;
+    }
+
+    .profile-page-link {
+      position: relative;
+      right: 0; // 右端に配置
+      top: 0;   // 上下位置調整
+      background-color: $button-color;
+      color: black;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-size: 16px;
+      &:hover {
+        background-color: darken($button-color, 10%);
+      }
+    }
+  }
+
+  .footer-profile {
+    padding: 20px;
+    .footer-profile a {
+      font-size: 16px;
+    }
+  }
+
+  .edit-profile-form-profile {
+    padding: 30px;
+    max-width: 80%;
+    margin: 60px auto; // フォームをさらに下に下げる
+
+    .field-profile, .actions-profile {
+      margin-bottom: 30px; // フィールドのマージンを調整して下げる
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid $dark-grey;
+        border-radius: 4px;
+      }
+
+      button, input[type="submit"] {
+        background-color: $accent-color;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        &:hover {
+          background-color: darken($accent-color, 10%);
+        }
+      }
+    }
   }
 }
