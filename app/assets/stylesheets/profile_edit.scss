@@ -9,7 +9,7 @@ $dark-grey: #333; // テキストのデフォルトカラー
 body {
   font-family: 'Helvetica', 'Arial', sans-serif;
   color: $dark-grey;
-  background-image: url('/assets/login.jpg'); // 背景画像の設定
+  background-image: asset-url('login.jpg'); // 背景画像の設定
   background-size: cover;
   background-position: center;
 }

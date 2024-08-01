@@ -1,7 +1,7 @@
 /* 全体のスタイル */
 body {
   font-family: 'Arial', sans-serif;
-  background-image: url('/assets/guide-vegetable.jpg'); /* 背景画像 */
+  background-image: asset-url('guide-vegetable.jpg'); /* 背景画像 */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
