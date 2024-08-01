@@ -26,22 +26,22 @@
 
 |ログイン画面|サービスの使い方画面|
 |:-:|:-:|
-|[![Image from Gyazo](https://i.gyazo.com/86c3e3b0bf9b0857a803422370c2da0d.jpg)](https://gyazo.com/86c3e3b0bf9b0857a803422370c2da0d)|[![Image from Gyazo](https://i.gyazo.com/64c3ccbd80758e2f04ddda20f0a7164e.gif)](https://gyazo.com/64c3ccbd80758e2f04ddda20f0a7164e)|
+|[![Image from Gyazo](https://i.gyazo.com/86c3e3b0bf9b0857a803422370c2da0d.jpg)](https://gyazo.com/86c3e3b0bf9b0857a803422370c2da0d)|[![Image from Gyazo](https://i.gyazo.com/28cf43122b0697845b21033ed7176328.gif)](https://gyazo.com/28cf43122b0697845b21033ed7176328)|
 |メールアドレスとパスワードを入力するか、LINEでもログインをすることができます。|このサービスの使い方と主な機能の紹介を見ることができます。|
 
 |マイページ画面|プロフィール編集画面|
 |:-:|:-:|
-|[![Image from Gyazo](https://i.gyazo.com/2b2524f9f546be82bf39c04a62de9c5b.gif)](https://gyazo.com/2b2524f9f546be82bf39c04a62de9c5b)|[![Image from Gyazo](https://i.gyazo.com/e5f28c79302c8e93d26726491d3b056e.jpg)](https://gyazo.com/e5f28c79302c8e93d26726491d3b056e)|
+|[![Image from Gyazo](https://i.gyazo.com/94d6c5db036575964be8d0d1e87c5d88.gif)](https://gyazo.com/94d6c5db036575964be8d0d1e87c5d88)|[![Image from Gyazo](https://i.gyazo.com/e5f28c79302c8e93d26726491d3b056e.jpg)](https://gyazo.com/e5f28c79302c8e93d26726491d3b056e)|
 |会員登録時に登録した都道府県の天気情報や生育状況をSNSに上げることができます。|名前、メールアドレス、都道府県を編集することができます。|
 
 |育成野菜登録画面|スケジュール画面|
 |:-:|:-:|
-|[![Image from Gyazo](https://i.gyazo.com/ee3d70de88641ef01fe43875744a807b.jpg)](https://gyazo.com/ee3d70de88641ef01fe43875744a807b)|[![Image from Gyazo](https://i.gyazo.com/c28c0837e25c0668f258fd95321cca54.gif)](https://gyazo.com/c28c0837e25c0668f258fd95321cca54)|
+|[![Image from Gyazo](https://i.gyazo.com/ee3d70de88641ef01fe43875744a807b.jpg)](https://gyazo.com/ee3d70de88641ef01fe43875744a807b)|[![Image from Gyazo](https://i.gyazo.com/2dfec5a563ac3f77fc5bde1dec0dba45.gif)](https://gyazo.com/2dfec5a563ac3f77fc5bde1dec0dba45)|
 |育てる野菜と種まき日を入力して登録ボタンを押すとスケジュールが登録されます。|登録した野菜のスケジュール画面が表示され、今日何をしたかをボタンで選択してスケジュールに反映させることができます。|
 
 |画像分析画面|画像分析結果|
 |:-:|:-:|
-|[![Image from Gyazo](https://i.gyazo.com/180bd1bfb623dd071426bd6ddf31c107.gif)](https://gyazo.com/180bd1bfb623dd071426bd6ddf31c107)|[![Image from Gyazo](https://i.gyazo.com/7dcc9aa281bafd533562c6a7fa4223e5.gif)](https://gyazo.com/7dcc9aa281bafd533562c6a7fa4223e5)|
+|[![Image from Gyazo](https://i.gyazo.com/cd4abc737f2221682a20955bccc39fad.gif)](https://gyazo.com/cd4abc737f2221682a20955bccc39fad)|[![Image from Gyazo](https://i.gyazo.com/bd4cc7417c17135ac4be4e1e10aaf0cf.gif)](https://gyazo.com/bd4cc7417c17135ac4be4e1e10aaf0cf)|
 |スケジュール画面の右上にあるボタンをクリックして野菜名と画像を選択すると画像分析をすることができます。|画像分析ボタンを押したら画像分析の結果とアドバイスが表示されます。|
 
 ## 使用技術
