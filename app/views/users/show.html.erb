@@ -3,8 +3,15 @@
   <div class="header-mypage">
     <h1><%= @user.username %>さん</h1>
     <div class="header-links">
-      <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'logout-link' %>
-      <%= link_to '使い方を見る', guide_path, class: 'logout-link' %>
+      <div class="hamburger-menu">
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" class="menu-icon"><span></span></label>
+        <div class="menu">
+          <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'menu-link' %>
+          <%= link_to '使い方を見る', guide_path, class: 'menu-link' %>
+          <%= link_to 'プロフィールを編集', edit_user_path(@user), class: 'menu-link' %>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -12,21 +19,45 @@
     <h3>天気情報</h3>
     <% if @user.prefecture.present? %>
       <div class="weather-details">
-        <p><%= @user.prefecture %>の現在の天気: <%= @weather_info %></p>
-        <% case @weather_info %>
-          <% when /晴れ/ %>
-            <%= image_tag('sunny.png', alt: '晴れ', class: 'weather-icon') %>
-          <% when /曇り/ %>
-            <%= image_tag('cloudy.png', alt: '曇り', class: 'weather-icon') %>
-          <% when /雨/ %>
-            <%= image_tag('rain.png', alt: '雨', class: 'weather-icon') %>
-          <% when /雪/ %>
-            <%= image_tag('snow.png', alt: '雪', class: 'weather-icon') %>
-          <% else %>
-            <!-- その他の天気の場合はアイコンを表示しない -->
-        <% end %>
+        <div class="weather-left">
+          <p><%= @user.prefecture %>の現在の天気: <%= @weather_info %></p>
+          <% case @weather_info %>
+            <% when /晴れ/ %>
+              <%= image_tag('sunny.png', alt: '晴れ', class: 'weather-icon') %>
+            <% when /曇り/ %>
+              <%= image_tag('cloudy.png', alt: '曇り', class: 'weather-icon') %>
+            <% when /雨/ %>
+              <%= image_tag('rain.png', alt: '雨', class: 'weather-icon') %>
+            <% when /雪/ %>
+              <%= image_tag('snow.png', alt: '雪', class: 'weather-icon') %>
+            <% else %>
+              <!-- その他の天気の場合はアイコンを表示しない -->
+          <% end %>
+          <p class="temperature-info">気温: <%= @temperature_info %></p>
+        </div>
+
+        <div class="share-right">
+          <p class="share-instruction">以下のボタンをクリックして、現在の生育情報をSNSで共有しましょう!</p>
+          <div class="share-buttons">
+            <!-- Twitterシェアボタン -->
+            <a href="https://twitter.com/share" class="twitter-share-button"
+              data-url="https://www.homegarden-harvest.com/"
+              data-text="今日の生育情報をチェックしてみてください！"
+              data-hashtags="無農薬,野菜栽培">Tweet</a>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+            <!-- Facebookシェアボタン -->
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.homegarden-harvest.com/" target="_blank">
+              <img src="https://www.facebook.com/images/fb_icon_325x325.png" alt="Facebookで共有" class="sns-icon">
+            </a>
+
+            <!-- LINEシェアボタン -->
+            <a href="https://social-plugins.line.me/lineit/share?url=https://www.homegarden-harvest.com/" target="_blank" class="line-share-button">
+              <img src="https://scdn.line-apps.com/n/line_add_friends/btn/en.png" alt="LINEで共有" class="sns-icon line-icon">
+            </a>
+          </div>
+        </div>
       </div>
-      <p class="temperature-info">気温: <%= @temperature_info %></p>
     <% else %>
       <p class="prefecture-missing">都道府県が設定されていません。</p>
     <% end %>
@@ -56,7 +87,3 @@
     <%= link_to '野菜を育てる', vegetables_path, class: 'btn-vegetable-mypage' %>
   </div>
 </div>
-
-<footer class="footer-mypage">
-  <%= link_to 'プロフィールを編集', edit_user_path(@user), class: 'profile-edit-link-mypage' %>
-</footer>

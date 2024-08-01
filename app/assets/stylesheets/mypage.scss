@@ -6,7 +6,7 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
-  background-image: url('mypage.jpg'); /* 背景画像を追加 */
+  background-image: asset-url('mypage.jpg'); /* 背景画像を追加 */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -14,11 +14,10 @@ html, body {
 }
 
 .header-mypage {
-  background-color: #09f409;
+  background-color: transparent; /* 背景色を透明に */
   display: flex;
   align-items: center;
   padding: 30px;
-  border-bottom: 3px solid #09f409;
   justify-content: space-between;
   width: 100%;
 }
@@ -36,20 +35,6 @@ html, body {
   display: flex;
   align-items: center;
   margin-left: auto;
-}
-
-.back-to-top-link, .logout-link {
-  background-color: #e4f409;
-  color: black;
-  padding: 10px 15px;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.back-to-top-link:hover, .logout-link:hover {
-  background-color: #d4e009;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
 }
 
 .content-wrapper {
@@ -164,114 +149,43 @@ html, body {
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
 }
 
-/* フッターのスタイル */
-.footer-mypage {
-  background-color: #09f409;
-  display: flex;
-  align-items: center;
-  padding: 20px;
-  border-top: 3px solid #09f409;
-  justify-content: flex-end;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-}
-
-.footer-mypage a, .header-mypage a {
-  color: black;
-  text-decoration: none;
-  margin: 0 10px;
-}
-
-.footer-mypage a:hover, .header-mypage a:hover {
-  text-decoration: underline;
-}
-
-/* プロフィール編集ボタンのスタイル */
-.profile-edit-link-mypage {
-  background-color: white;
-  color: black;
-  padding: 10px 20px;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: bold;
-  cursor: pointer;
-  margin-left: auto;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.profile-edit-link-mypage:hover {
-  background-color: #f0f0f0;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
-}
-
-.harvest-chart-container,
-.savings-chart-container {
-  display: flex;
-  justify-content: space-around;
-  max-width: 100%;
-  margin: 20px auto;
-}
-
-.harvest-chart-container canvas,
-.savings-chart-container canvas {
-  max-width: calc(50% - 20px);
-  height: auto;
-}
-
-.key-data-highlights {
-  display: flex;
-  justify-content: space-around;
-  margin: 20px 0;
-}
-
-.highlight-card {
-  width: 300px;
-  margin: 10px;
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-}
-
-.highlight-card .card-title {
-  font-size: 20px;
-  margin-bottom: 15px;
-}
-
-.highlight-card .card-text {
-  font-size: 16px;
-}
-
 /* 天気情報のスタイル */
 .weather-info {
   margin-top: 20px;
   padding: 20px;
+  width: 90%;
   background-color: rgba(255, 255, 255, 0.9); /* 半透明の背景色 */
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 軽いボックスシャドウ */
   backdrop-filter: blur(10px); /* 背景をぼかす */
   border: 1px solid rgba(255, 255, 255, 0.3); /* 境界線を追加 */
   font-family: 'Lato', sans-serif; /* フォントをLatoに変更 */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .weather-info h3 {
   color: #333;
   font-size: 1.5em; /* フォントサイズを大きく */
   margin-bottom: 15px;
-  text-align: center; /* 中央揃え */
+  text-align: left; /* 左揃え */
 }
 
 .weather-details {
   display: flex;
-  align-items: center;
-  justify-content: center; /* 中央揃え */
-  gap: 10px; /* アイコンとテキストの間にスペースを追加 */
-  font-size: 1.2em; /* フォントサイズを大きく */
+  align-items: flex-start; /* 上揃え */
+  justify-content: space-between; /* 左右に配置 */
+  gap: 20px; /* 間隔を追加 */
 }
 
-.weather-details p {
+.weather-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.weather-left p {
   margin: 0;
   color: #555;
 }
@@ -284,7 +198,6 @@ html, body {
 .temperature-info {
   font-size: 1.2em;
   color: #555;
-  text-align: center; /* 中央揃え */
   margin-top: 10px; /* 上にマージンを追加 */
 }
 
@@ -294,246 +207,337 @@ html, body {
   text-align: center; /* 中央揃え */
 }
 
-@media (max-width: 600px) {
-  html, body {
-    font-size: 0.75em; /* 基本フォントサイズをさらに小さく */
-  }
+.share-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -20px; /* 全体的に上に移動 */
+}
 
+.share-instruction {
+  font-size: 1.2em;
+  color: #333;
+  margin-bottom: 10px; /* 下にマージンを追加 */
+  text-align: center; /* 中央揃え */
+  font-family: 'Roboto', sans-serif; /* フォントを変更 */
+  font-weight: bold; /* 太字にする */
+  background-color: rgba(0, 123, 255, 0.1); /* 背景色を追加 */
+  padding: 10px;
+  border-radius: 5px; /* 角を丸くする */
+}
+
+.share-buttons {
+  display: flex;
+  justify-content: center; /* 中央揃え */
+  gap: 20px; /* ボタン間のスペースを広げる */
+  margin-top: 10px; /* 上にマージンを追加 */
+}
+
+.sns-icon {
+  width: 60px; /* アイコンのサイズを調整 */
+  height: 60px;
+  border-radius: 10%; /* アイコンを丸くする */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 軽いボックスシャドウを追加 */
+  transition: transform 0.2s; /* ホバー時のアニメーション */
+}
+
+.sns-icon:hover {
+  transform: scale(1.1); /* ホバー時に拡大 */
+}
+
+.line-icon {
+  width: 140px; /* LINEアイコンの幅を広げる */
+  height: 60px; /* LINEアイコンの高さを調整 */
+}
+
+/* ハンバーガーメニューのスタイル */
+.hamburger-menu {
+  position: relative;
+}
+
+.menu-icon {
+  display: block;
+  cursor: pointer;
+  width: 40px; /* 幅を大きくする */
+  height: 35px; /* 高さを大きくする */
+  position: relative;
+  top: 10px;
+}
+
+.menu-icon span, .menu-icon span:before, .menu-icon span:after {
+  display: block;
+  content: '';
+  width: 100%;
+  height: 5px; /* 線を太くする */
+  background: #333;
+  position: absolute;
+}
+
+.menu-icon span:before {
+  top: -10px; /* 上の線の位置を調整 */
+}
+
+.menu-icon span:after {
+  bottom: -10px; /* 下の線の位置を調整 */
+}
+
+#menu-toggle {
+  display: none;
+}
+
+.menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: white;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  width: 200px; /* 幅を広げる */
+  z-index: 1000;
+}
+
+#menu-toggle:checked + .menu-icon + .menu {
+  display: block;
+}
+
+.menu-link {
+  display: block;
+  padding: 10px 20px;
+  color: #333;
+  text-decoration: none;
+}
+
+.menu-link:hover {
+  background: #f5f5f5;
+}
+
+@media (max-width: 600px) {
   .header-mypage {
-    padding: 8px 10px; /* ヘッダーのパディングをさらに小さく */
-    flex-direction: row; /* ヘッダー内の要素を横並びに */
-    align-items: center; /* 中央揃えに */
-    justify-content: space-between; /* 要素間をスペースで分ける */
-    width: 100%; /* ヘッダーを全幅に */
+    padding: 10px; /* ヘッダーのパディングを調整 */
+    justify-content: center; /* ヘッダーの内容を中央に配置 */
+    position: relative; /* 相対位置を使用 */
+    margin-bottom: 15px; /* ヘッダーの下にスペースを追加 */
   }
 
   .header-mypage h1 {
-    font-size: 1em; /* フォントサイズをさらに小さく */
-    margin: 0; /* マージンをなくす */
-    text-align: left; /* 左揃えに */
-    flex: 1; /* 残りのスペースを占める */
+    font-size: 1.2em; /* ヘッダーのフォントサイズを小さく */
+    flex: 1;
+    text-align: center;
   }
 
-  .header-links {
-    display: flex;
-    align-items: center;
-    margin-left: auto;
+  .menu-icon {
+    width: 30px; /* 幅を広げる */
+    height: 10px; /* 高さを調整 */
+    top: 0px; /* 位置をさらに下に下げる */
+    position: absolute; /* 絶対位置を使用 */
+    right: 10px; /* 右に配置 */
+    z-index: 1001; /* ボタンがフィールドに隠れないように調整 */
   }
 
-  .back-to-top-link, .logout-link {
-    font-size: 0.75em; /* フォントサイズをさらに小さく */
-    padding: 6px 8px; /* ボタンのパディングをさらに小さく */
+  .menu-icon span, .menu-icon span:before, .menu-icon span:after {
+    height: 2px; /* 線を細くする */
   }
 
-  .content-wrapper {
-    padding: 15px 8px; /* パディングをさらに小さく */
+  .menu {
+    width: 100px; /* 幅を狭くする */
+    font-size: 0.5em; /* フィールド内の文字を小さく */
+    top: 25px; /* メニューをボタンの下に表示 */
+    z-index: 1000; /* ボタンがフィールドに隠れないように調整 */
   }
 
-  .weather-info {
-    font-size: 0.75em; /* フォントサイズをさらに小さく */
-    padding: 10px; /* パディングを小さく */
-    border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-    background-color: rgba(255, 255, 255, 0.8); /* 背景を少し透明に */
-  }
-
-  .weather-info h3 {
-    font-size: 1em; /* フォントサイズを小さく */
-    margin-bottom: 10px; /* マージンを小さく */
-  }
-
-  .weather-details p {
-    font-size: 0.75em; /* フォントサイズを小さく */
-    margin-bottom: 5px; /* マージンを小さく */
-  }
-
-  .weather-icon {
-    width: 30px; /* アイコンの幅を小さく */
-    height: auto; /* アスペクト比を維持 */
-    margin-left: 5px; /* アイコンとテキストの間にスペースを追加 */
-  }
-
-  .temperature-info, .prefecture-missing {
-    margin-top: 5px; /* マージンを追加 */
-  }
-
-  .button-container-mypage {
-    padding: 10px; /* パディングを小さく */
+  .menu-link {
+    padding: 5px 10px; /* メニューリンクのパディングを小さく */
   }
 
   .explanation-text {
-    font-size: 0.75em; /* フォントサイズをさらに小さく */
-    padding: 10px; /* パディングをさらに小さく */
-    margin-bottom: 15px; /* マージンを小さく */
-    border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-    background-color: rgba(255, 255, 255, 0.8); /* 背景を少し透明に */
+    font-size: 10px; /* 説明文のフォントサイズを小さく */
+    padding: 10px; /* 説明文のパディングを調整 */
+    max-width: 90%; /* 説明文の幅を狭める */
+    margin: 20px auto; /* 上下の間隔を調整 */
   }
 
   .registered-vegetables {
-    padding: 10px; /* パディングをさらに小さく */
-    border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-    background-color: rgba(255, 255, 255, 0.8); /* 背景を少し透明に */
+    padding: 10px; /* 野菜登録のパディングを調整 */
+    margin: 20px auto; /* 上下の間隔を調整 */
   }
 
   .registered-vegetables h3 {
-    font-size: 1em; /* フォントサイズをさらに小さく */
-    margin-bottom: 10px; /* マージンを小さく */
-  }
-
-  .vegetable-item {
-    display: flex; /* アイテムを横並びに */
-    align-items: center; /* 中央揃えに */
-    justify-content: space-between; /* 要素間をスペースで分ける */
-    padding: 8px; /* パディングを調整 */
-    border-bottom: 1px solid #ddd;
+    font-size: 12px; /* 登録した野菜の見出しのフォントサイズを小さく */
   }
 
   .vegetable-item p {
-    font-size: 0.75em; /* フォントサイズをさらに小さく */
-    margin: 0 5px 0 0; /* 右マージンを追加 */
-    flex: 1; /* 残りのスペースを占める */
+    font-size: 8px; /* 野菜項目のフォントサイズを小さく */
   }
 
   .vegetable-item .btn {
-    font-size: 0.75em; /* フォントサイズをさらに小さく */
-    padding: 6px 8px; /* パディングをさらに小さく */
-    margin-left: 2px; /* ボタン間のマージンをさらに狭く */
+    font-size: 8px; /* ボタンのフォントサイズを小さく */
+    padding: 3px 5px; /* ボタンのパディングを調整 */
   }
 
-  .btn-vegetable-mypage, .btn-toggle-graph {
-    font-size: 0.75em; /* フォントサイズをさらに小さく */
-    padding: 8px 10px; /* パディングを小さく */
-    margin-top: 10px; /* マージンを調整 */
+  .btn-vegetable-mypage {
+    padding: 5px 10px; /* ボタンのパディングを調整 */
+    font-size: 8px; /* ボタンのフォントサイズを小さく */
+    margin: 20px auto; /* 上下の間隔を調整 */
   }
 
-  .footer-mypage {
-    padding: 8px 10px; /* パディングを小さく */
-    font-size: 0.75em; /* フォントサイズを小さく */
+  .weather-info {
+    padding: 5px; /* 天気情報のパディングを調整 */
+    width: 95%; /* 天気情報のフィールドの横幅を狭く */
+    margin-top: 50px; /* 天気情報のフィールドを下に下げる */
+    margin-left: auto; /* 中央揃え */
+    margin-right: auto; /* 中央揃え */
   }
 
-  .footer-mypage a {
-    margin: 0 5px; /* マージンを調整 */
+  .weather-info h3 {
+    font-size: 0.6em; /* 天気情報の見出しのフォントサイズを小さく */
+  }
+
+  .weather-details p {
+    font-size: 0.6em; /* 天気情報の詳細のフォントサイズを小さく */
+  }
+
+  .weather-icon {
+    width: 20px; /* アイコンの幅を小さく */
+  }
+
+  .temperature-info {
+    font-size: 0.6em; /* 温度情報のフォントサイズを小さく */
+  }
+
+  .prefecture-missing {
+    font-size: 0.6em; /* 都道府県未設定のメッセージのフォントサイズを小さく */
+  }
+
+  .share-instruction {
+    font-size: 0.5em; /* 共有指示のフォントサイズを小さく */
+    padding: 2px; /* 共有指示のパディングを調整 */
+  }
+
+  .sns-icon {
+    width: 20px; /* SNSアイコンのサイズを小さく */
+    height: 20px;
+  }
+
+  .line-icon {
+    width: 60px; /* LINEアイコンの幅を小さく */
+    height: 25px; /* LINEアイコンの高さを調整 */
   }
 }
 
 @media (min-width: 601px) and (max-width: 768px) {
-  html, body {
-    font-size: 0.8em; /* 基本フォントサイズをさらに小さく */
-  }
-
   .header-mypage {
-    padding: 10px 15px; /* ヘッダーのパディングをさらに小さく */
+    padding: 20px;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 25px; /* ヘッダーの下にスペースを追加 */
   }
 
   .header-mypage h1 {
-    font-size: 1em; /* フォントサイズをさらに小さく */
-    margin: 0; /* マージンをなくす */
-    text-align: left; /* 左揃えに */
-    flex: 1; /* 残りのスペースを占める */
+    font-size: 2.5em; /* フォントサイズを大きく */
+    top: 10px;
+    flex: none; /* 中央揃えのためにフレックスプロパティを無効に */
+    text-align: center; /* テキストを中央に揃える */
+    position: absolute; /* 絶対位置を使用 */
+    left: 50%;
+    transform: translateX(-50%); /* 中央揃えのために変換を使用 */
   }
 
-  .header-links {
-    display: flex;
-    align-items: center;
-    margin-left: auto;
+  .menu-icon {
+    width: 40px; /* ボタンサイズを大きく */
+    height: 30px; /* 高さを調整 */
+    top: 15px;
+    position: absolute;
+    right: 10px;
+    z-index: 1001;
   }
 
-  .back-to-top-link, .logout-link {
-    font-size: 0.8em; /* フォントサイズをさらに小さく */
-    padding: 6px 8px; /* ボタンのパディングをさらに小さく */
+  .menu-icon span, .menu-icon span:before, .menu-icon span:after {
+    height: 4px; /* 線を太くする */
   }
 
-  .content-wrapper {
-    padding: 15px 8px; /* パディングをさらに小さく */
+  .menu {
+    width: 150px; /* 幅を広げる */
+    font-size: 0.7em; /* フィールド内の文字を大きく */
+    top: 55px;
+    z-index: 1000;
   }
 
-  .weather-info {
-    font-size: 0.8em; /* フォントサイズをさらに小さく */
-    padding: 10px; /* パディングをさらに小さく */
-    border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-    background-color: rgba(255, 255, 255, 0.8); /* 背景を少し透明に */
-  }
-
-  .weather-info h3 {
-    font-size: 1em; /* フォントサイズをさらに小さく */
-    margin-bottom: 10px; /* マージンを小さく */
-  }
-
-  .weather-details p {
-    font-size: 0.8em; /* フォントサイズをさらに小さく */
-    margin-bottom: 5px; /* マージンを小さく */
-  }
-
-  .weather-icon {
-    width: 30px; /* アイコンの幅をさらに小さく */
-    height: auto; /* アスペクト比を維持 */
-    margin-left: 5px; /* アイコンとテキストの間にスペースを追加 */
-  }
-
-  .temperature-info, .prefecture-missing {
-    margin-top: 5px; /* マージンを追加 */
-  }
-
-  .button-container-mypage {
-    padding: 10px; /* パディングをさらに小さく */
+  .menu-link {
+    padding: 10px 20px; /* メニューリンクのパディングを調整 */
   }
 
   .explanation-text {
-    font-size: 0.8em; /* フォントサイズをさらに小さく */
-    padding: 10px; /* パディングをさらに小さく */
-    margin-bottom: 15px; /* マージンを小さく */
-    border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-    background-color: rgba(255, 255, 255, 0.8); /* 背景を少し透明に */
+    font-size: 16px; /* 説明文のフォントサイズを大きく */
+    padding: 15px; /* 説明文のパディングを調整 */
+    max-width: 90%;
+    margin: 20px auto; /* 上下の間隔を広げる */
   }
 
   .registered-vegetables {
-    padding: 10px; /* パディングをさらに小さく */
-    border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-    background-color: rgba(255, 255, 255, 0.8); /* 背景を少し透明に */
+    padding: 15px; /* 野菜登録のパディングを調整 */
+    margin: 30px auto; /* 上下の間隔を広げる */
   }
 
   .registered-vegetables h3 {
-    font-size: 1em; /* フォントサイズをさらに小さく */
-    margin-bottom: 10px; /* マージンを小さく */
-  }
-
-  .vegetable-item {
-    display: flex; /* アイテムを横並びに */
-    align-items: center; /* 中央揃えに */
-    justify-content: space-between; /* 要素間をスペースで分ける */
-    padding: 8px; /* パディングを調整 */
-    border-bottom: 1px solid #ddd;
+    font-size: 18px; /* フォントサイズを大きく */
   }
 
   .vegetable-item p {
-    font-size: 0.8em; /* フォントサイズをさらに小さく */
-    margin: 0 5px 0 0; /* 右マージンを追加 */
-    flex: 1; /* 残りのスペースを占める */
+    font-size: 14px; /* フォントサイズを大きく */
   }
 
   .vegetable-item .btn {
-    font-size: 0.8em; /* フォントサイズをさらに小さく */
-    padding: 6px 8px; /* パディングをさらに小さく */
-    margin-left: 3px; /* ボタン間のマージンをさらに狭く */
+    font-size: 14px; /* ボタンのフォントサイズを大きく */
+    padding: 6px 10px; /* ボタンのパディングを調整 */
   }
 
-  .btn-vegetable-mypage, .btn-toggle-graph {
-    font-size: 0.8em; /* フォントサイズをさらに小さく */
-    padding: 8px 10px; /* パディングをさらに小さく */
-    margin-top: 10px; /* マージンを調整 */
+  .btn-vegetable-mypage {
+    padding: 8px 12px; /* ボタンのパディングを調整 */
+    font-size: 14px; /* ボタンのフォントサイズを大きく */
+    margin: 20px auto;
   }
 
-  .footer-mypage {
-    padding: 8px 10px; /* パディングをさらに小さく */
-    font-size: 0.8em; /* フォントサイズをさらに小さく */
+  .weather-info {
+    padding: 15px; /* 天気情報のパディングを調整 */
+    width: 90%;
+    margin-top: 100px; /* 天気情報のフィールドをさらに下に下げる */
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  .footer-mypage a {
-    margin: 0 5px; /* マージンを調整 */
+  .weather-info h3 {
+    font-size: 1.2em; /* フォントサイズを大きく */
+  }
+
+  .weather-details p {
+    font-size: 1.2em; /* フォントサイズを大きく */
+  }
+
+  .weather-icon {
+    width: 35px; /* アイコンのサイズを大きく */
+  }
+
+  .temperature-info {
+    font-size: 1.2em; /* フォントサイズを大きく */
+  }
+
+  .prefecture-missing {
+    font-size: 1.2em; /* フォントサイズを大きく */
+  }
+
+  .share-instruction {
+    font-size: 1em; /* フォントサイズを大きく */
+    padding: 5px;
+  }
+
+  .sns-icon {
+    width: 40px; /* アイコンのサイズを大きく */
+    height: 40px;
+  }
+
+  .line-icon {
+    width: 80px; /* LINEアイコンの幅を大きく */
+    height: 35px; /* LINEアイコンの高さを調整 */
   }
 }

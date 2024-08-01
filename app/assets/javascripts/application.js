@@ -19,6 +19,7 @@
 //= require top
 //= require terms
 //= require login
-//= vegetable_selection
+//= require vegetable_selection
+//= require mypage
 //= mypage_toggle
 //= require_tree .
