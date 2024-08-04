@@ -1,4 +1,12 @@
-$(document).ready(function() {
+document.addEventListener('DOMContentLoaded', function() {
+  const menuToggle = document.getElementById('menu-toggle');
+  const body = document.body;
+  let selectedDate = null;
+
+  menuToggle.addEventListener('click', function() {
+    body.classList.toggle('menu-open');
+  });
+
   // カレンダーの設定
   var calendarEl = document.getElementById('calendar');
   var calendar;
@@ -37,6 +45,10 @@ $(document).ready(function() {
         });
       },
       editable: true,
+      dateClick: function(info) {
+        selectedDate = info.dateStr;
+        alert('Selected date: ' + selectedDate); // デバッグ用アラート
+      },
       eventDrop: function(info) {
         updateEvent(info.event);
       },
@@ -69,7 +81,7 @@ $(document).ready(function() {
   $('.stamp-button').on('click', function() {
     var stamp = $(this).data('stamp');
     var color = $(this).css('background-color'); // ボタンの背景色を取得
-    var today = new Date().toISOString().split('T')[0];
+    var date = selectedDate || new Date().toISOString().split('T')[0];
     var vegetableId = $('#calendar').data('selected-vegetable-id');
 
     var stampTranslations = {
@@ -81,7 +93,7 @@ $(document).ready(function() {
 
     var translatedStamp = stampTranslations[stamp];
 
-    addStampToCalendar(translatedStamp, today, vegetableId, color);
+    addStampToCalendar(translatedStamp, date, vegetableId, color);
   });
 
   function addStampToCalendar(stamp, date, vegetableId, color) {

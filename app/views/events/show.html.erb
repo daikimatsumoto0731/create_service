@@ -8,9 +8,16 @@
     <div class="title-container">
       <h1>野菜育成スケジュール</h1>
     </div>
-    <div class="button-container">
-      <%= link_to 'マイページに戻る', user_path(current_user), class: 'btn btn-primary analyze-button' %>
-      <%= link_to '画像を分析する', '#', class: 'btn btn-primary analyze-button', data: { toggle: 'modal', target: '#analyzeImageModal', vegetable: @selected_vegetable } %>
+    <div class="hamburger-menu">
+      <div class="menu-icon" id="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="menu">
+        <%= link_to 'マイページに戻る', user_path(current_user), class: 'menu-link' %>
+        <%= link_to '画像を分析する', '#', class: 'menu-link', data: { toggle: 'modal', target: '#analyzeImageModal', vegetable: @selected_vegetable } %>
+      </div>
     </div>
   </div>
 

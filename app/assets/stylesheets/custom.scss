@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
 
 body {
-  font-family: 'Noto Sans JP', sans-serif; // Google Fontsの適用
+  font-family: 'Noto Sans JP', sans-serif; /* Google Fontsの適用 */
 }
 
 .content-wrapper {
@@ -25,40 +25,55 @@ body {
 .title-container h1 {
   font-size: 24px;
   margin: 0;
-  color: #ffffff; // フォントの色を白に変更
-  font-weight: bold; // フォントの太さを太字に変更
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); // テキストシャドウを追加して見やすくする
+  color: #ffffff; /* フォントの色を白に変更 */
+  font-weight: bold; /* フォントの太さを太字に変更 */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* テキストシャドウを追加して見やすくする */
 }
 
-.button-container {
+.hamburger-menu {
+  position: relative;
+}
+
+.menu-icon {
+  cursor: pointer;
+  display: inline-block;
+  width: 24px;
+  height: 18px;
+  position: relative;
+}
+
+.menu-icon span {
+  display: block;
+  background-color: white;
+  height: 3px;
+  width: 100%;
+  margin: 3px 0;
+  transition: 0.3s;
+}
+
+.menu {
+  display: none;
+  flex-direction: column;
+  background-color: white; /* フィールドの背景色を白に変更 */
+  border-radius: 5px;
+  position: absolute;
+  top: 30px;
+  right: 0;
+  padding: 10px;
+  z-index: 1000;
+  width: max-content; /* コンテンツに合わせた幅に調整 */
+}
+
+.menu-open .menu {
   display: flex;
-  gap: 10px;
 }
 
-.mypage-link {
-  background-color: #007bff;
-  color: white;
+.menu-link {
   padding: 10px 20px;
-  border-radius: 5px;
+  color: black; /* テキストの色を黒に変更 */
   text-decoration: none;
-}
-
-.mypage-link:hover {
-  background-color: #0056b3;
-  color: white;
-}
-
-.analyze-button {
-  background-color: #28a745;
-  color: white;
-  padding: 10px 20px;
   border-radius: 5px;
-  text-decoration: none;
-}
-
-.analyze-button:hover {
-  background-color: #218838;
-  color: white;
+  white-space: nowrap; /* テキストが改行されないようにする */
 }
 
 /* Page Content Styles */
@@ -268,6 +283,129 @@ body {
   }
 }
 
+@media (max-width: 320px) {
+  .content-wrapper {
+    margin: 5px;
+    padding: 10px;
+    border: none;
+    background-color: rgba(240, 224, 224, 0.7);
+    flex-grow: 1; /* コンテンツを画面全体に広げる */
+  }
+
+  .header {
+    flex-direction: row !important; /* フレックスボックスの方向を横並びにする */
+    align-items: center !important; /* アイテムを中央揃えにする */
+    justify-content: space-between !important; /* アイテム間のスペースを均等にする */
+    padding: 5px;
+    width: 100%; /* ヘッダーを画面いっぱいに広げる */
+  }
+
+  .title-container {
+    flex-grow: 1; /* タイトルコンテナが余分なスペースを占めるようにする */
+    white-space: nowrap; /* テキストを1行で表示 */
+    overflow: hidden; /* 溢れたテキストを隠す */
+    text-overflow: ellipsis; /* 省略記号を表示 */
+  }
+
+  .title-container h1 {
+    font-size: 14px; /* フォントサイズを小さくする */
+    margin-bottom: 0; /* タイトルの下部余白を削除 */
+  }
+
+  .hamburger-menu {
+    flex-grow: 0;
+  }
+
+  .menu-icon {
+    width: 18px; /* メニューアイコンのサイズを小さくする */
+    height: 14px;
+  }
+
+  .menu-icon span {
+    height: 2px; /* メニューアイコンの線の高さを小さくする */
+    margin: 2px 0;
+  }
+
+  .menu {
+    padding: 5px;
+  }
+
+  .menu-link {
+    font-size: 10px; /* メニューリンクのフォントサイズをさらに小さくする */
+    padding: 3px 5px; /* メニューリンクのパディングをさらに小さくする */
+  }
+
+  .page-content {
+    flex-grow: 1; /* コンテンツを画面全体に広げる */
+    padding-bottom: 40px; /* 余白を追加してフッターのスペースを確保 */
+  }
+
+  .page-content p {
+    font-size: 14px;
+  }
+
+  .stamp-selection {
+    margin-top: 15px;
+    display: flex; /* 横並びにする */
+    justify-content: space-between; /* スタンプ間の間隔を広げる */
+    flex-wrap: wrap; /* スタンプが収まりきらない場合に折り返す */
+  }
+
+  .stamp-selection h3 {
+    font-size: 16px;
+    width: 100%; /* ヘッダーをスタンプの上に配置 */
+    margin-bottom: 10px;
+  }
+
+  .stamp-button {
+    padding: 4px 6px; /* スタンプボタンのパディングを調整 */
+    margin-right: 3px;
+    flex: 1; /* スタンプを均等に配置 */
+    text-align: center;
+    margin-bottom: 8px; /* 折り返し時の間隔を調整 */
+  }
+
+  #calendar {
+    margin-top: 15px;
+    font-size: 12px; /* カレンダーのフォントサイズを少し大きくする */
+    height: auto; /* 高さを自動調整 */
+  }
+
+  .delete-button {
+    font-size: 10px; /* ボタンのフォントサイズを小さくする */
+    padding: 2px 5px; /* ボタンのパディングを小さくする */
+  }
+
+  .event-container {
+    display: flex;
+    flex-direction: column; /* イベントタイトルと削除ボタンを縦並びにする */
+    align-items: flex-start;
+  }
+
+  .modal-header {
+    padding: 8px;
+  }
+
+  .modal-title {
+    font-size: 14px;
+  }
+
+  .modal-body {
+    padding: 8px;
+  }
+
+  .modal-body input[type="text"],
+  .modal-body input[type="file"] {
+    padding: 5px;
+    margin-top: 3px;
+    margin-bottom: 8px;
+  }
+
+  .modal-footer .btn-success {
+    padding: 6px 10px;
+  }
+}
+
 @media (min-width: 321px) and (max-width: 600px) {
   .content-wrapper {
     margin: 10px;
@@ -295,15 +433,27 @@ body {
     margin-bottom: 0; /* タイトルの下部余白を削除 */
   }
 
-  .button-container {
-    display: flex;
-    gap: 5px !important; /* ボタン間の間隔を調整 */
-    justify-content: flex-end !important; /* ボタンを右寄せ */
+  .hamburger-menu {
+    flex-grow: 0;
   }
 
-  .btn {
-    font-size: 8px !important; /* ボタンのフォントサイズをさらに小さくする */
-    padding: 3px 5px !important; /* ボタンのパディングをさらに小さくする */
+  .menu-icon {
+    width: 18px; /* メニューアイコンのサイズを調整 */
+    height: 14px;
+  }
+
+  .menu-icon span {
+    height: 2px; /* メニューアイコンの線の高さを調整 */
+    margin: 2px 0;
+  }
+
+  .menu {
+    padding: 5px;
+  }
+
+  .menu-link {
+    font-size: 12px; /* メニューリンクのフォントサイズを調整 */
+    padding: 3px 5px; /* メニューリンクのパディングをさらに小さくする */
   }
 
   .page-content p {
@@ -324,24 +474,24 @@ body {
   }
 
   .stamp-button {
-    padding: 8px 10px;
-    margin-right: 5px;
+    padding: 6px 8px; /* スタンプボタンのパディングを調整 */
+    margin-right: 3px;
     flex: 1; /* スタンプを均等に配置 */
     text-align: center;
-    margin-bottom: 10px; /* 折り返し時の間隔を調整 */
+    margin-bottom: 8px; /* 折り返し時の間隔を調整 */
   }
 
   #calendar {
     margin-top: 20px;
-    font-size: 15px; /* カレンダーのフォントサイズを小さくする */
+    font-size: 14px; /* カレンダーのフォントサイズを少し小さくする */
     width: 100%; /* カレンダーの幅を100%に設定 */
     margin-left: auto;
     margin-right: auto;
   }
 
   .delete-button {
-    font-size: 12px; /* ボタンのフォントサイズを小さくする */
-    padding: 3px 7px; /* ボタンのパディングを小さくする */
+    font-size: 10px; /* ボタンのフォントサイズを小さくする */
+    padding: 2px 5px; /* ボタンのパディングを小さくする */
   }
 
   .event-container {
@@ -355,7 +505,7 @@ body {
   }
 
   .modal-title {
-    font-size: 16px;
+    font-size: 14px; /* フォントサイズを調整 */
   }
 
   .modal-body {
@@ -364,7 +514,7 @@ body {
 
   .modal-body input[type="text"],
   .modal-body input[type="file"] {
-    padding: 6px;
+    padding: 5px;
     margin-top: 5px;
     margin-bottom: 10px;
   }
@@ -403,15 +553,27 @@ body {
     margin-bottom: 0; /* タイトルの下部余白を削除 */
   }
 
-  .button-container {
-    display: flex;
-    gap: 10px; /* ボタン間の間隔を調整 */
-    justify-content: flex-end; /* ボタンを右寄せ */
+  .hamburger-menu {
+    flex-grow: 0;
   }
 
-  .btn {
-    font-size: 10px; /* ボタンのフォントサイズを調整 */
-    padding: 5px 10px; /* ボタンのパディングを調整 */
+  .menu-icon {
+    width: 24px; /* メニューアイコンのサイズを調整 */
+    height: 18px;
+  }
+
+  .menu-icon span {
+    height: 3px; /* メニューアイコンの線の高さを調整 */
+    margin: 3px 0;
+  }
+
+  .menu {
+    padding: 10px;
+  }
+
+  .menu-link {
+    font-size: 16px; /* メニューリンクのフォントサイズを調整 */
+    padding: 10px 20px;
   }
 
   .page-content {
@@ -448,6 +610,17 @@ body {
     margin-top: 20px;
     font-size: 14px; /* カレンダーのフォントサイズを調整 */
     height: auto; /* 高さを自動調整 */
+  }
+
+  .delete-button {
+    font-size: 12px; /* ボタンのフォントサイズを小さくする */
+    padding: 3px 7px; /* ボタンのパディングを小さくする */
+  }
+
+  .event-container {
+    display: flex;
+    flex-direction: column; /* イベントタイトルと削除ボタンを縦並びにする */
+    align-items: flex-start;
   }
 
   .modal-header {
