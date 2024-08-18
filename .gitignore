@@ -40,4 +40,6 @@ yarn-debug.log*
 /.env
 .env
 .env
+
+# Ignore .zshrc file
 .zshrc
